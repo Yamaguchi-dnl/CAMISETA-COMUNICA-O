@@ -19,7 +19,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'O clássico indispensável para o ministério.',
     fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor preta. Tecido premium de alta durabilidade e conforto.',
     price: 78.00,
-    image: 'https://picsum.photos/seed/iap-black/800/1000',
+    image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg',
     sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
     color: 'preta'
   },
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Leveza e modernidade para o dia a dia.',
     fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor branca. Visual clean e elegante.',
     price: 78.00,
-    image: 'https://picsum.photos/seed/iap-white/800/1000',
+    image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg',
     sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
     color: 'branca'
   },
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     fullDescription: 'Leve duas unidades e garanta 10% de desconto. Identidade e unidade para todo o time.',
     price: 140.40,
     oldPrice: 156.00,
-    image: 'https://picsum.photos/seed/iap-kit/800/1000',
+    image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg',
     sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']
   }
 ];
