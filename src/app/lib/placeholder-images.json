@@ -1,0 +1,17 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "camiseta-modelo-1",
+      "description": "T-shirt model 1 for Communication Ministry",
+      "imageUrl": "https://picsum.photos/seed/iap1/800/1000",
+      "imageHint": "black t-shirt"
+    },
+    {
+      "id": "camiseta-modelo-2",
+      "description": "T-shirt model 2 for Communication Ministry",
+      "imageUrl": "https://picsum.photos/seed/iap2/800/1000",
+      "imageHint": "modern t-shirt"
+    }
+  ]
+}
