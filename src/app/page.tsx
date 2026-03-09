@@ -74,9 +74,9 @@ export default function Home() {
 
                 {/* The Image Frame */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700">
-                  <div className="bg-white p-0 shadow-[0_40px_80px_rgba(0,0,0,0.15)] 
+                  <div className="bg-white p-0 shadow-[0_50px_100px_rgba(0,0,0,0.2)] 
                     w-[75vw] h-[55vw] lg:w-[820px] lg:h-[620px] xl:w-[960px] xl:h-[720px] 
-                    max-w-[1000px] relative overflow-hidden rounded-none">
+                    max-w-[1000px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -91,13 +91,13 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image */}
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-10px] xl:mt-[-15px] 
+                mt-[10px] xl:mt-[15px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
 
               {/* CTA Area */}
-              <div className="relative z-[5] mt-10 xl:mt-12">
+              <div className="relative z-[5] mt-12 xl:mt-16">
                 <Button asChild className="pill-button bg-black text-white font-bold 
                   px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 
                   hover:bg-accent transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
@@ -113,8 +113,8 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              <div className="relative z-[3] transform rotate-[-3deg] mt-2 mb-0">
-                <div className="bg-white p-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)] w-[750px] h-[600px] relative overflow-hidden max-w-[85vw] max-h-[65vw] rounded-none">
+              <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0">
+                <div className="bg-white p-0 shadow-[0_40px_80px_rgba(0,0,0,0.18)] w-[750px] h-[600px] relative overflow-hidden max-w-[85vw] max-h-[65vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -127,7 +127,7 @@ export default function Home() {
               </div>
 
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-15px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[10px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -157,7 +157,7 @@ export default function Home() {
 
               {/* Image Block Inclined */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
-                <div className="bg-white p-0 shadow-[0_20px_40px_rgba(0,0,0,0.12)] w-[320px] h-[450px] relative overflow-hidden rounded-none">
+                <div className="bg-white p-0 shadow-[0_30px_60px_rgba(0,0,0,0.15)] w-[320px] h-[450px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -171,7 +171,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image */}
               <h2 
-                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-15px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
