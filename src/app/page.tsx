@@ -75,7 +75,7 @@ export default function Home() {
                 {/* The Image Frame - Decreased size more */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[60vw] h-[45vw] lg:w-[650px] lg:h-[480px] xl:w-[750px] xl:h-[560px] 
+                    w-[50vw] h-[37vw] lg:w-[550px] lg:h-[410px] xl:w-[630px] xl:h-[470px] 
                     max-w-[1100px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -115,7 +115,7 @@ export default function Home() {
 
               {/* Image Block - Decreased size more */}
               <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[480px] h-[360px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-none border-none">
+                <div className="bg-white p-0 w-[420px] h-[315px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -129,7 +129,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-30px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[-5px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -159,7 +159,7 @@ export default function Home() {
 
               {/* Image Block Inclined - Decreased size more */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[220px] h-[320px] relative overflow-hidden rounded-none border-none">
+                <div className="bg-white p-0 w-[190px] h-[275px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -173,7 +173,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image from BEHIND */}
               <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-28px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-10px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
