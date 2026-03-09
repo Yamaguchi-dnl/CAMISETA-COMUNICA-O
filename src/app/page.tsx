@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -59,10 +60,10 @@ export default function Home() {
               
               {/* Left Text Block (Desktop Only) */}
               <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
-                <h2 className="font-headline text-[clamp(30px,2.4vw,44px)] leading-[1] tracking-[-0.02em] text-black uppercase mb-4">
-                  COMUNICAR É MISSÃO.
-                </h2>
                 <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
+                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.02em] text-black uppercase mr-2 inline-block">
+                    COMUNICAR É MISSÃO.
+                  </span>
                   Uma camiseta para quem serve anunciando a mensagem.
                 </p>
                 <div className="w-[112px] h-[4px] bg-[#111111]" />
@@ -90,10 +91,10 @@ export default function Home() {
 
             {/* Left Text Block (Mobile Version) */}
             <div className="lg:hidden text-center mt-8 px-4">
-              <h2 className="font-headline text-2xl leading-tight text-black uppercase mb-3">
-                COMUNICAR É MISSÃO.
-              </h2>
               <p className="font-body text-base text-[#111111]">
+                <span className="font-headline text-xl text-black uppercase mr-2 inline-block">
+                  COMUNICAR É MISSÃO.
+                </span>
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
