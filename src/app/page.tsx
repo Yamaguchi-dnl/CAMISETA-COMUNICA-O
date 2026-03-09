@@ -73,7 +73,7 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-[#111111]" />
                 </div>
 
-                {/* The Image Frame - AUMENTADO */}
+                {/* The Image Frame */}
                 <div className="relative z-[3] transform rotate-[-3deg] xl:rotate-[-2deg] transition-transform duration-700">
                   <div className="bg-white p-0 border-[12px] md:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
                     w-[82vw] h-[62vw] md:w-[700px] md:h-[530px] xl:w-[780px] xl:h-[560px] 
@@ -90,9 +90,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Large Wording - Overlays Image - REPOSICIONADO PARA BAIXO */}
+              {/* Bottom Large Wording - Overlays Image */}
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] 
-                mt-[-10px] xl:mt-[-20px] 
+                mt-[-5px] xl:mt-[-15px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -109,7 +109,7 @@ export default function Home() {
               </div>
 
               {/* CTA Area */}
-              <div className="relative z-[5] mt-0 xl:mt-10">
+              <div className="relative z-[5] mt-8 xl:mt-10">
                 <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold 
                   px-10 py-5 text-[16px] md:px-12 md:py-6 md:text-[18px] xl:px-14 xl:py-8 
                   hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
@@ -127,7 +127,7 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined - AUMENTADO */}
+              {/* Image Block Inclined */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
                 <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[260px] h-[360px] relative overflow-hidden">
                   <Image
@@ -141,7 +141,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Text Overlapping Image - REPOSICIONADO PARA BAIXO */}
+              {/* Bottom Text Overlapping Image */}
               <h2 
                 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
@@ -154,7 +154,7 @@ export default function Home() {
                   COMUNICAR É MISSÃO.
                 </h3>
                 <p className="font-body text-[#111111] text-sm leading-[1.4] mt-2.5 max-w-[340px]">
-                  Uma camiseta para quem serve anunciando a <br /> mensagem.
+                  Uma camiseta para quem serve anunciando a mensagem.
                 </p>
               </div>
 
