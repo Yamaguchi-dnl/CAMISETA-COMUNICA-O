@@ -208,16 +208,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* INTRO SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="mb-8 text-black">Muito mais que uma camiseta!</h2>
-            <p className="text-lg lg:text-xl text-black font-normal leading-relaxed">
-              As camisetas da Comunicação IAP Barreirinha unem identidade, qualidade e propósito.
-            </p>
-          </div>
-        </section>
-
         {/* BENEFITS SECTION */}
         <section className="py-24 bg-white border-t border-[#f0f0f0]">
           <div className="container mx-auto px-6 lg:px-12">
