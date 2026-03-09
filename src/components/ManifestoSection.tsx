@@ -4,134 +4,69 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 export function ManifestoSection() {
-  const phrases = [
-    { id: '01', text: 'ANUNCIAR BOAS NOVAS', ref: 'Isaías 52:7', style: 'secondary' },
-    { id: '02', text: 'IDE POR TODO O MUNDO', ref: 'Marcos 16:15', style: 'secondary' },
-    { id: '03', text: 'COMUNICAR É MISSÃO', ref: 'Romanos 10:14', style: 'primary' },
-    { id: '04', text: 'QUE A PALAVRA SEJA OUVIDA', ref: 'Romanos 10:17', style: 'secondary' },
-    { id: '05', text: 'FORMOSOS SÃO OS PÉS', ref: 'Romanos 10:15', style: 'secondary' },
-    { id: '06', text: 'LUZ PARA O MUNDO', ref: 'Mateus 5:14', style: 'secondary' },
-  ];
+  const secondaryPhraseClasses = "font-headline uppercase leading-[0.95] tracking-tighter text-[#c9c9c9] transition-all duration-300 hover:text-[#111111] hover:-translate-y-0.5 cursor-default text-center block";
+  const imageClasses = "relative overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] bg-white";
 
   return (
-    <section className="relative bg-[#efefef] py-24 lg:py-40 overflow-hidden">
-      <div className="container mx-auto px-6 relative">
-        
-        {/* DESKTOP/TABLET COLLAGE (Hidden on Mobile) */}
-        <div className="hidden md:block relative h-[600px] lg:h-[800px] w-full">
+    <section className="relative bg-[#efefef] py-20 lg:py-32 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-[1400px]">
+        <div className="flex flex-col items-center">
           
-          {/* Background Phrases (Secondary) */}
-          <div className="absolute top-[5%] left-[10%] opacity-40 transform -rotate-2">
-            <span className="text-[12px] font-bold mr-2 text-[#8f8f8f] font-body">(01)</span>
-            <h4 className="inline font-headline text-[clamp(40px,5vw,80px)] text-[#8f8f8f] uppercase leading-none tracking-tighter">
-              {phrases[0].text}
+          {/* TOP PHRASES */}
+          <div className="w-full flex flex-col items-center gap-1 lg:gap-2 mb-8 lg:mb-12">
+            <h4 className={cn(secondaryPhraseClasses, "text-[clamp(28px,8vw,100px)]")}>
+              ANUNCIAR BOAS NOVAS
+            </h4>
+            <h4 className={cn(secondaryPhraseClasses, "text-[clamp(30px,8.5vw,108px)]")}>
+              IDE POR TODO O MUNDO
             </h4>
           </div>
 
-          <div className="absolute top-[18%] right-[5%] opacity-40 transform rotate-1">
-            <h4 className="inline font-headline text-[clamp(40px,5vw,80px)] text-[#8f8f8f] uppercase leading-none tracking-tighter">
-              {phrases[1].text}
-            </h4>
-            <span className="text-[12px] font-bold ml-2 text-[#8f8f8f] font-body">(02)</span>
-          </div>
-
-          <div className="absolute top-[40%] left-[0%] opacity-40 transform rotate-[-1deg]">
-            <span className="text-[12px] font-bold mr-2 text-[#8f8f8f] font-body">(04)</span>
-            <h4 className="inline font-headline text-[clamp(35px,4vw,70px)] text-[#8f8f8f] uppercase leading-none tracking-tighter">
-              {phrases[3].text}
-            </h4>
-          </div>
-
-          {/* MAIN HIGHLIGHT (Primary) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full text-center">
-             <h3 className="font-headline text-[clamp(60px,8vw,140px)] text-[#111111] uppercase leading-[0.85] tracking-[-0.05em] drop-shadow-sm">
-               {phrases[2].text}
-             </h3>
-             <span className="text-[14px] font-bold text-black font-body mt-4 block uppercase tracking-widest">
-               {phrases[2].ref}
-             </span>
-          </div>
-
-          <div className="absolute bottom-[20%] left-[20%] opacity-40 transform rotate-2">
-            <span className="text-[12px] font-bold mr-2 text-[#8f8f8f] font-body">(05)</span>
-            <h4 className="inline font-headline text-[clamp(40px,5vw,80px)] text-[#8f8f8f] uppercase leading-none tracking-tighter">
-              {phrases[4].text}
-            </h4>
-          </div>
-
-          <div className="absolute bottom-[5%] right-[15%] opacity-40 transform -rotate-1">
-            <h4 className="inline font-headline text-[clamp(40px,5vw,80px)] text-[#8f8f8f] uppercase leading-none tracking-tighter">
-              {phrases[5].text}
-            </h4>
-            <span className="text-[12px] font-bold ml-2 text-[#8f8f8f] font-body">(06)</span>
-          </div>
-
-          {/* EDITORIAL IMAGES IN COLLAGE */}
-          <div className="absolute left-[15%] top-[45%] z-[5] transform -translate-y-1/2 -rotate-3 shadow-2xl">
-            <div className="relative w-[200px] lg:w-[300px] aspect-square overflow-hidden bg-white">
+          {/* CENTER COMPOSITION (Desktop/Tablet Grid, Mobile Stack) */}
+          <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            
+            {/* Image 1 - Visible on Mobile and as start of Grid on Desktop */}
+            <div className={cn(imageClasses, "w-full max-w-[300px] aspect-square order-2 lg:order-1")}>
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg" 
-                alt="Editorial Communication" 
+                alt="Editorial IAP 1" 
                 fill 
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover"
+                data-ai-hint="fashion editorial"
               />
             </div>
-          </div>
 
-          <div className="absolute right-[10%] top-[30%] z-[5] transform rotate-6 shadow-2xl">
-            <div className="relative w-[180px] lg:w-[280px] aspect-[3/4] overflow-hidden bg-white">
+            {/* MAIN PHRASE */}
+            <div className="text-center order-1 lg:order-2 px-4">
+              <h3 className="font-headline text-[clamp(34px,11vw,150px)] text-[#111111] uppercase leading-[0.88] tracking-[-0.04em] transition-all duration-300 hover:text-accent hover:scale-[1.01] cursor-default">
+                COMUNICAR É MISSÃO
+              </h3>
+              <span className="font-body text-[11px] lg:text-[12px] font-bold text-[#111111] uppercase tracking-[0.12em] block mt-4 lg:mt-6">
+                ROMANOS 10:14
+              </span>
+            </div>
+
+            {/* Image 2 - Visible on Mobile and as end of Grid on Desktop */}
+            <div className={cn(imageClasses, "w-full max-w-[300px] aspect-[3/4] order-3")}>
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
-                alt="Editorial Costas" 
+                alt="Editorial IAP 2" 
                 fill 
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover"
+                data-ai-hint="fashion editorial"
               />
             </div>
+
           </div>
+
+          {/* BOTTOM PHRASES */}
+          <div className="w-full flex flex-col items-center gap-1 lg:gap-2 mt-8 lg:mt-12">
+            <h4 className={cn(secondaryPhraseClasses, "text-[clamp(26px,7vw,92px)]")}>
+              FORMOSOS SÃO OS PÉS
+            </h4>
+          </div>
+
         </div>
-
-        {/* MOBILE STACK (Visible only on Mobile) */}
-        <div className="md:hidden flex flex-col items-center gap-12">
-          <div className="text-center space-y-8">
-            {phrases.map((phrase) => (
-              <div key={phrase.id} className={cn(
-                "flex flex-col items-center",
-                phrase.style === 'primary' ? "opacity-100 scale-110 my-8" : "opacity-40"
-              )}>
-                <span className="text-[10px] font-bold text-black/50 mb-1">({phrase.id})</span>
-                <h4 className={cn(
-                  "font-headline uppercase leading-none tracking-tighter text-center",
-                  phrase.style === 'primary' ? "text-3xl text-black" : "text-xl text-[#8f8f8f]"
-                )}>
-                  {phrase.text}
-                </h4>
-                {phrase.style === 'primary' && (
-                   <span className="text-[10px] font-bold mt-2 uppercase tracking-widest">{phrase.ref}</span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 w-full px-4">
-             <div className="relative aspect-square shadow-lg rotate-[-3deg]">
-                <Image 
-                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg" 
-                  alt="Mobile Editorial 1" 
-                  fill 
-                  className="object-cover grayscale"
-                />
-             </div>
-             <div className="relative aspect-square shadow-lg rotate-[3deg] translate-y-4">
-                <Image 
-                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
-                  alt="Mobile Editorial 2" 
-                  fill 
-                  className="object-cover grayscale"
-                />
-             </div>
-          </div>
-        </div>
-
       </div>
     </section>
   );
