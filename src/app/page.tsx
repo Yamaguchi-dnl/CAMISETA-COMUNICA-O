@@ -167,9 +167,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined with Shadow */}
+              {/* Image Block Inclined with Shadow - Size increased from 180x240 to 260x340 */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[180px] h-[240px] relative overflow-hidden rounded-none border-none">
+                <div className="bg-white p-0 w-[260px] h-[340px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
