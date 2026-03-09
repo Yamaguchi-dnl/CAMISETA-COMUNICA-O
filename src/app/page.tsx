@@ -55,7 +55,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-40 lg:pt-32 lg:pb-40 min-h-[920px]">
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-16 lg:pt-32 lg:pb-24">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
@@ -73,7 +73,7 @@ export default function Home() {
                 
                 {/* Left Text Block - Desktop Only (xl and above) */}
                 <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
-                  <p className="font-body text-[17px] leading-[1.4] text-black mb-6">
+                  <p className="font-body text-black text-[17px] leading-[1.4] text-black mb-6">
                     <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
                       COMUNICAR É MISSÃO.
                     </span>
@@ -85,7 +85,7 @@ export default function Home() {
                 {/* The Image Frame - Smaller Size with Shadow */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[35vw] h-[45vw] lg:w-[380px] lg:h-[510px] xl:w-[420px] xl:h-[560px] 
+                    w-[30vw] h-[38vw] lg:w-[320px] lg:h-[430px] xl:w-[360px] xl:h-[480px] 
                     max-w-[1100px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -125,7 +125,7 @@ export default function Home() {
 
               {/* Image Block with Shadow */}
               <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[340px] h-[450px] relative overflow-hidden max-w-[82vw] rounded-none border-none">
+                <div className="bg-white p-0 w-[280px] h-[370px] relative overflow-hidden max-w-[82vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -139,7 +139,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-10px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[-5px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -169,7 +169,7 @@ export default function Home() {
 
               {/* Image Block Inclined with Shadow */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[220px] h-[290px] relative overflow-hidden rounded-none border-none">
+                <div className="bg-white p-0 w-[180px] h-[240px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -183,7 +183,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image from BEHIND */}
               <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-10px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
@@ -257,7 +257,7 @@ export default function Home() {
             
             {/* Countdown */}
             <div className="flex flex-col items-center gap-6">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60">Condição especial por tempo limitado</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black">Condição especial por tempo limitado</span>
               <div className="flex gap-4">
                 {[
                   { label: 'horas', val: timeLeft.h },
@@ -292,7 +292,7 @@ export default function Home() {
                     <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -319,7 +319,7 @@ export default function Home() {
                   </div>
                   <span className="text-xs text-black font-semibold font-body">R$ 70,20 por unidade</span>
                 </div>
-                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
@@ -398,7 +398,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="border-t border-black/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 font-body">
+          <div className="border-t border-black/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-black font-body opacity-40">
             © {new Date().getFullYear()} Igreja Adventista da Promessa Barreirinha. Ministério de Comunicação.
           </div>
         </div>
