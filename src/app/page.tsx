@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Instagram, Send, Calculator } from 'lucide-react';
+import { CheckCircle2, Instagram, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -73,11 +73,11 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-[#111111]" />
                 </div>
 
-                {/* The Image Frame */}
+                {/* The Image Frame - AUMENTADO */}
                 <div className="relative z-[3] transform rotate-[-3deg] xl:rotate-[-2deg] transition-transform duration-700">
                   <div className="bg-white p-0 border-[12px] md:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
-                    w-[82vw] h-[62vw] md:w-[620px] md:h-[470px] xl:w-[640px] xl:h-[460px] 
-                    max-w-[700px] relative overflow-hidden">
+                    w-[82vw] h-[62vw] md:w-[700px] md:h-[530px] xl:w-[780px] xl:h-[560px] 
+                    max-w-[850px] relative overflow-hidden">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -90,9 +90,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Large Wording - Overlays Image */}
+              {/* Bottom Large Wording - Overlays Image - AJUSTADO OVERLAP */}
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] 
-                mt-[-44px] xl:mt-[-54px] 
+                mt-[-64px] xl:mt-[-94px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -127,9 +127,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined */}
+              {/* Image Block Inclined - AUMENTADO */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
-                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[215px] h-[300px] relative overflow-hidden">
+                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[260px] h-[360px] relative overflow-hidden">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -141,9 +141,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Text Overlapping Image */}
+              {/* Bottom Text Overlapping Image - AJUSTADO OVERLAP */}
               <h2 
-                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-34px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-48px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
