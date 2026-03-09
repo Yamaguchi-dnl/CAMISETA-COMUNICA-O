@@ -47,7 +47,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* EDITORIAL HERO SECTION */}
-        <section className="relative min-h-[760px] h-[90vh] bg-[#f5f5f5] overflow-hidden flex items-center justify-center pt-16">
+        <section className="relative min-h-[760px] h-[90vh] bg-[#f5f5f5] overflow-hidden flex items-center justify-center pt-[72px] lg:pt-[88px]">
           {/* Background Typography Layer */}
           <div className="absolute inset-0 z-[1] flex flex-col items-center justify-between pointer-events-none select-none py-[2%]">
             <h2 className="font-headline font-bold uppercase tracking-tighter leading-[0.82] text-[#111111] opacity-95 text-[clamp(72px,22vw,132px)] lg:text-[clamp(140px,18vw,320px)] animate-fade-in">
@@ -60,7 +60,7 @@ export default function Home() {
 
           {/* Foreground Content Container */}
           <div className="container relative z-[3] max-w-[1400px] px-10 flex flex-col items-center justify-center">
-            {/* Supporting Text (Desktop only - positioned like reference) */}
+            {/* Supporting Text (Desktop only) */}
             <div className="hidden lg:block absolute left-[7%] top-[48%] -translate-y-1/2 z-[4] space-y-4 max-w-[220px]">
               <p className="font-body font-medium text-lg leading-tight text-[#111111]">
                 Camiseta oficial da Comunicação
@@ -74,7 +74,7 @@ export default function Home() {
             <div className="relative group animate-fade-in delay-300">
               <div className="bg-[#e8e1da] p-4 border-[10px] border-white/65 shadow-[0_20px_60px_rgba(0,0,0,0.08)] w-[78vw] h-[96vw] lg:w-[420px] lg:h-[520px] relative overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
-                  src="https://picsum.photos/seed/iap-black/800/1000"
+                  src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
                   alt="camiseta da Comunicação IAP Barreirinha"
                   fill
                   className="object-cover grayscale-[0.2]"
@@ -89,7 +89,7 @@ export default function Home() {
 
             {/* CTA Area */}
             <div className="mt-12 z-[5] animate-fade-in delay-500">
-              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-base hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl">
+              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-base hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl border-none">
                 <a href="#ofertas">Comprar agora</a>
               </Button>
             </div>
@@ -166,7 +166,7 @@ export default function Home() {
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
                 <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                   <Image
-                    src="https://picsum.photos/seed/iap-black-white/800/1000"
+                    src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
                     alt="Camiseta Individual"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
@@ -177,11 +177,11 @@ export default function Home() {
                 <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">Escolha preta ou branca</p>
                 <div className="flex flex-col items-center gap-1 mb-8">
                   <span className="text-4xl font-extrabold tracking-tighter text-primary">R$ 78,00</span>
-                  <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-tighter">
+                  <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
                     <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm border-none">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -208,7 +208,7 @@ export default function Home() {
                   </div>
                   <span className="text-xs text-[#777777] font-semibold">R$ 70,20 por unidade</span>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm border-none">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
@@ -217,7 +217,7 @@ export default function Home() {
         </section>
 
         {/* ORDER FORM SECTION */}
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-white" id="produtos">
           <div className="container mx-auto px-6">
             <OrderForm />
           </div>
