@@ -64,7 +64,7 @@ export default function Home() {
                   <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.02em] text-black uppercase block mb-3">
                     COMUNICAR É MISSÃO.
                   </span>
-                  Uma camiseta para quem serve anunciando a mensagem.
+                  Uma camiseta para quem serve <br /> anunciando a mensagem.
                 </p>
                 <div className="w-[112px] h-[4px] bg-[#111111]" />
               </div>
@@ -95,7 +95,7 @@ export default function Home() {
                 <span className="font-headline text-xl text-black uppercase block mb-2">
                   COMUNICAR É MISSÃO.
                 </span>
-                Uma camiseta para quem serve anunciando a mensagem.
+                Uma camiseta para quem serve <br /> anunciando a mensagem.
               </p>
             </div>
 
