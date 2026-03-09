@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -52,15 +53,17 @@ export default function Home() {
             {/* DESKTOP & TABLET HERO VERSION (md and above) */}
             <div className="hidden md:flex flex-col items-center w-full">
               {/* Top Large Wording */}
-              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] mb-[-26px] text-[clamp(86px,8.6vw,180px)]">
+              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] 
+                mb-[-10px] md:mb-[-20px] xl:mb-[-26px] 
+                text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
                 LET CREATIVITY
               </h1>
 
               {/* Center Visual Block */}
-              <div className="relative w-full flex items-center justify-center z-[3]">
+              <div className="relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
                 
-                {/* Left Text Block */}
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
+                {/* Left Text Block - Desktop Only (xl and above) */}
+                <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
                   <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
                     <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
                       COMUNICAR É MISSÃO.
@@ -71,8 +74,10 @@ export default function Home() {
                 </div>
 
                 {/* The Image Frame */}
-                <div className="relative z-[3] transform rotate-[-2deg] transition-transform duration-700">
-                  <div className="bg-white p-0 border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] w-[640px] h-[460px] max-w-[700px] relative overflow-hidden">
+                <div className="relative z-[3] transform rotate-[-3deg] xl:rotate-[-2deg] transition-transform duration-700">
+                  <div className="bg-white p-0 border-[12px] md:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
+                    w-[82vw] h-[62vw] md:w-[620px] md:h-[470px] xl:w-[640px] xl:h-[460px] 
+                    max-w-[700px] relative overflow-hidden">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -86,13 +91,28 @@ export default function Home() {
               </div>
 
               {/* Bottom Large Wording - Overlays Image */}
-              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] mt-[-54px] text-[clamp(110px,10vw,250px)]">
+              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] 
+                mt-[-44px] xl:mt-[-54px] 
+                text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
 
+              {/* Tablet Support Block - Visible on Tablet (md to xl) */}
+              <div className="hidden md:flex xl:hidden flex-col items-center text-center mt-4 mb-7">
+                <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
+                  COMUNICAR É MISSÃO.
+                </h3>
+                <p className="font-body text-[#111111] text-[clamp(18px,2vw,22px)] leading-[1.45] mt-2.5 max-w-[520px]">
+                  Uma camiseta para quem serve anunciando a mensagem.
+                </p>
+                <div className="w-[110px] h-[4px] bg-[#111111] mt-[18px] mx-auto" />
+              </div>
+
               {/* CTA Area */}
-              <div className="relative z-[5] mt-8 lg:mt-10">
-                <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold px-14 py-8 text-[18px] hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none">
+              <div className="relative z-[5] mt-0 xl:mt-10">
+                <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold 
+                  px-10 py-5 text-[16px] md:px-12 md:py-6 md:text-[18px] xl:px-14 xl:py-8 
+                  hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
                   <a href="#ofertas">COMPRAR AGORA</a>
                 </Button>
               </div>
