@@ -46,53 +46,62 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* EDITORIAL HERO SECTION */}
-        <section className="relative min-h-[760px] h-[90vh] bg-[#f5f5f5] overflow-hidden flex items-center justify-center pt-[72px] lg:pt-[88px]">
-          {/* Background Typography Layer */}
-          <div className="absolute inset-0 z-[1] flex flex-col items-center justify-between pointer-events-none select-none py-[2%]">
-            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(72px, 22vw, 132px)] lg:text-[clamp(140px, 18vw, 320px)] animate-fade-in">
-              IAP
-            </h2>
-            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(42px, 12vw, 88px)] lg:text-[clamp(80px, 11vw, 220px)] animate-fade-in delay-150">
-              BARREIRINHA
-            </h2>
+        {/* EDITORIAL HERO SECTION - REFINED LAYOUT */}
+        <section className="relative min-h-[860px] lg:h-screen bg-[#f5f5f5] overflow-hidden flex flex-col items-center justify-start pt-[120px] lg:pt-[140px] pb-14 lg:pb-[110px]">
+          
+          {/* Background Typography Layer - BE STILL, LET'S CREATIVE SPEAK */}
+          <div className="absolute inset-0 z-[1] flex flex-col items-center pointer-events-none select-none pt-[150px] lg:pt-[160px] px-4">
+            <div className="w-full max-w-[1180px] text-center space-y-1 lg:space-y-4">
+              <h2 className="font-headline font-normal uppercase leading-[0.92] text-[#111111] tracking-[-0.03em] text-[clamp(28px,8vw,42px)] lg:text-[clamp(56px,7vw,120px)] animate-fade-in opacity-100">
+                BE STILL,
+              </h2>
+              <h2 className="font-headline font-normal uppercase leading-[0.95] lg:leading-[0.9] text-[#111111] tracking-[-0.02em] lg:tracking-[-0.035em] text-[clamp(26px,7.2vw,38px)] lg:text-[clamp(54px,6.8vw,114px)] animate-fade-in delay-150 opacity-100">
+                LET&apos;S CREATIVE
+              </h2>
+              <h2 className="font-headline font-normal uppercase leading-[0.94] lg:leading-[0.9] text-[#111111] tracking-[-0.03em] lg:tracking-[-0.04em] text-[clamp(34px,10vw,52px)] lg:text-[clamp(74px,9.4vw,170px)] animate-fade-in delay-300 opacity-100">
+                SPEAK
+              </h2>
+            </div>
           </div>
 
-          {/* Foreground Content Container */}
-          <div className="container relative z-[3] max-w-[1400px] px-10 flex flex-col items-center justify-center">
-            {/* Supporting Text (Desktop only) */}
-            <div className="hidden lg:block absolute left-[7%] top-[48%] -translate-y-1/2 z-[4] space-y-4 max-w-[220px]">
-              <p className="font-body font-medium text-lg leading-tight text-[#111111]">
+          {/* Composition Container */}
+          <div className="container relative z-[3] max-w-[1380px] px-4 lg:px-8 flex flex-col lg:flex-row items-center justify-center lg:gap-12 flex-1">
+            
+            {/* Left Content Zone (Text Block) */}
+            <div className="w-full lg:max-w-[320px] lg:mt-10 lg:pl-6 order-2 lg:order-1 text-center lg:text-left mt-8 lg:mt-0 animate-fade-in delay-500">
+              <h1 className="font-headline font-normal text-[28px] lg:text-[clamp(24px,2.2vw,34px)] leading-[1.05] text-[#111111] uppercase">
                 Camiseta oficial da Comunicação
-              </p>
-              <p className="font-body text-sm text-[#666666] leading-relaxed">
+              </h1>
+              <p className="font-body font-normal text-[15px] lg:text-[16px] leading-relaxed text-[#666666] mt-4 max-w-[280px] mx-auto lg:mx-0">
                 Preta e branca para o time da IAP Barreirinha
               </p>
             </div>
 
-            {/* Central Image Block */}
-            <div className="relative group animate-fade-in delay-300">
-              <div className="bg-[#e8e1da] p-4 border-[10px] border-white/65 shadow-[0_20px_60px_rgba(0,0,0,0.08)] w-[78vw] h-[96vw] lg:w-[420px] lg:h-[520px] relative overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
+            {/* Center Image Block */}
+            <div className="relative order-1 lg:order-2 animate-fade-in delay-300 mt-4 lg:mt-5">
+              <div className="bg-[#e9e4dc] p-[10px] border-[10px] border-white/72 shadow-[0_18px_48px_rgba(0,0,0,0.08)] w-[82vw] h-[98vw] lg:w-[420px] lg:h-[520px] max-w-[460px] max-height-[560px] relative overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
                 <Image
                   src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
                   alt="camiseta da Comunicação IAP Barreirinha"
                   fill
-                  className="object-cover grayscale-[0.2]"
+                  className="object-cover"
                   priority
                   data-ai-hint="black t-shirt"
                 />
               </div>
-              
-              {/* Decorative Bar */}
-              <div className="hidden lg:block absolute -right-24 bottom-12 w-16 h-[2px] bg-[#111111] z-[4]" />
             </div>
 
-            {/* CTA Area */}
-            <div className="mt-12 z-[5] animate-fade-in delay-500">
-              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-[14px] hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl border-none uppercase tracking-[0.05em]">
-                <a href="#ofertas">Comprar agora</a>
-              </Button>
+            {/* Right Detail Bar (Desktop Only) */}
+            <div className="hidden lg:flex w-full lg:max-w-[100px] justify-center order-3 animate-fade-in delay-700 mt-28">
+              <div className="w-[72px] h-[2px] bg-[#111111] opacity-90" />
             </div>
+          </div>
+
+          {/* CTA Area - Positioned below to prevent overlap */}
+          <div className="relative z-[5] mt-10 lg:mt-14 animate-fade-in delay-1000 px-4">
+            <Button asChild className="rounded-full bg-[#d93025] text-white font-bold px-8 lg:px-12 py-7 lg:py-8 text-[14px] lg:text-[16px] hover:bg-[#111111] transition-all shadow-[0_10px_24px_rgba(0,0,0,0.12)] hover:shadow-2xl border-none uppercase tracking-[0.04em]">
+              <a href="#ofertas">COMPRAR AGORA</a>
+            </Button>
           </div>
         </section>
 

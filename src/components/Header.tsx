@@ -42,7 +42,7 @@ export function Header() {
             <Link 
               key={item.label} 
               href={item.href} 
-              className="text-[14px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
+              className="text-[13px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
             >
               {item.label}
             </Link>
@@ -54,7 +54,7 @@ export function Header() {
           href="/" 
           className="flex flex-1 lg:flex-none justify-center items-center gap-1.5"
         >
-          <span className="font-headline text-[18px] lg:text-[20px] font-normal tracking-wider text-[#111111] uppercase">
+          <span className="font-headline text-[18px] lg:text-[20px] font-normal tracking-wider text-[#111111] uppercase leading-none">
             IAP <span className="text-accent">CAMISETAS</span>
           </span>
         </Link>
@@ -63,7 +63,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end gap-6">
           <Link 
             href="#reserva" 
-            className="flex items-center gap-2 text-[14px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-[13px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
           >
             <ShoppingBag className="h-4 w-4" />
             <span className="hidden sm:inline">Carrinho <span className="text-accent font-bold">0</span></span>
@@ -85,7 +85,7 @@ export function Header() {
                         key={item.label} 
                         href={item.href} 
                         onClick={() => setIsOpen(false)}
-                        className="text-lg font-semibold tracking-tight text-[#111111] border-b border-black/5 pb-4 hover:text-accent transition-colors"
+                        className="text-lg font-semibold tracking-tight text-[#111111] border-b border-black/5 pb-4 hover:text-accent transition-colors font-body"
                       >
                         {item.label}
                       </Link>
@@ -93,7 +93,7 @@ export function Header() {
                     <Link 
                       href="#reserva" 
                       onClick={() => setIsOpen(false)}
-                      className="text-lg font-semibold tracking-tight text-[#111111] flex items-center justify-between border-b border-black/5 pb-4"
+                      className="text-lg font-semibold tracking-tight text-[#111111] flex items-center justify-between border-b border-black/5 pb-4 font-body"
                     >
                       <span>Carrinho</span>
                       <div className="flex items-center gap-2">
