@@ -23,12 +23,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      {/* Header removed as requested */}
-      
       <main className="flex-1 container mx-auto px-4 py-8 pt-12 lg:pt-16">
         <Link 
           href="/" 
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-black hover:text-accent mb-6 transition-colors"
         >
           <ChevronLeft className="h-4 w-4" />
           Voltar para a vitrine
@@ -52,13 +50,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {/* Product Info & Form */}
           <div className="flex flex-col">
             <div className="mb-6">
-              <h1 className="font-headline text-3xl font-black mb-2 leading-tight uppercase">
+              <h1 className="font-headline text-3xl font-black mb-2 leading-tight uppercase text-black">
                 {product.name}
               </h1>
               <div className="flex flex-col gap-1 mb-6">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-sm text-muted-foreground font-medium">Preço Base:</span>
-                  <span className="font-headline text-3xl font-black text-foreground">R$ {basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                  <span className="text-sm text-black font-medium">Preço Base:</span>
+                  <span className="font-headline text-3xl font-black text-black">R$ {basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
                   <BadgePercent className="h-4 w-4" /> R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} no Pix (10% OFF)
@@ -67,10 +65,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
               <div className="p-4 rounded-xl bg-accent/5 border border-accent/10 mb-8">
                 <p className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Promoção Ativa</p>
-                <p className="text-sm text-primary font-medium">Na compra de 2 ou mais camisetas, ganhe 10% OFF automaticamente no seu pedido!</p>
+                <p className="text-sm text-black font-medium">Na compra de 2 ou mais camisetas, ganhe 10% OFF automaticamente no seu pedido!</p>
               </div>
 
-              <p className="text-muted-foreground leading-relaxed mb-6 font-light">
+              <p className="text-black leading-relaxed mb-6 font-light">
                 {product.fullDescription}
               </p>
               
@@ -87,9 +85,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </main>
 
-      <footer className="border-t bg-background py-12 mt-12">
+      <footer className="border-t bg-white py-12 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-black">
             © {new Date().getFullYear()} Igreja Adventista Promessa da Barreirinha. <br className="sm:hidden" /> 
             Qualidade e Identidade em cada peça.
           </p>

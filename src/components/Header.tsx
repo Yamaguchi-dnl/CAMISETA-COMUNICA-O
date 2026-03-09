@@ -40,7 +40,7 @@ export function Header() {
         <div className="lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <button className="p-2 text-[#111111] hover:text-accent transition-colors">
+              <button className="p-2 text-black hover:text-accent transition-colors">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Abrir menu</span>
               </button>
@@ -53,7 +53,7 @@ export function Header() {
                     key={item.label} 
                     href={item.href} 
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-headline text-[#111111] uppercase tracking-wider hover:text-accent transition-colors"
+                    className="text-2xl font-headline text-black uppercase tracking-wider hover:text-accent transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -71,7 +71,7 @@ export function Header() {
               href={item.href} 
               className={cn(
                 "text-[14px] font-medium tracking-[0.02em] transition-all uppercase font-body relative group",
-                "text-[#111111]"
+                "text-black"
               )}
             >
               {item.label}
@@ -83,7 +83,7 @@ export function Header() {
         {/* Cart Button - Visible on all screens */}
         <Link 
           href="#reserva" 
-          className="flex items-center gap-2 text-[#111111] hover:text-accent transition-colors"
+          className="flex items-center gap-2 text-black hover:text-accent transition-colors"
         >
           <ShoppingBag className="h-6 w-6 lg:h-4 lg:w-4" />
           <span className="hidden lg:inline text-[14px] font-medium uppercase tracking-[0.02em]">Carrinho 0</span>

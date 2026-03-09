@@ -153,8 +153,8 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
   return (
     <div id="reserva" className="bg-white p-8 lg:p-12 rounded-[2rem] border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
       <div className="text-center mb-10">
-        <h3 className="font-headline text-2xl lg:text-3xl font-normal mb-2 uppercase tracking-tight">Finalize sua reserva</h3>
-        <p className="text-muted-foreground text-sm font-medium">O desconto de 10% será aplicado automaticamente se você escolher Pix ou levar 2+ unidades.</p>
+        <h3 className="font-headline text-2xl lg:text-3xl font-normal mb-2 uppercase tracking-tight text-black">Finalize sua reserva</h3>
+        <p className="text-black text-sm font-medium">O desconto de 10% será aplicado automaticamente se você escolher Pix ou levar 2+ unidades.</p>
       </div>
       
       <Form {...form}>
@@ -164,9 +164,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="nome"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Nome completo</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-black">Nome completo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Como podemos te chamar?" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
+                  <Input placeholder="Como podemos te chamar?" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -179,9 +179,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="whatsapp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">WhatsApp</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-black">WhatsApp</FormLabel>
                   <FormControl>
-                    <Input placeholder="(00) 00000-0000" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
+                    <Input placeholder="(00) 00000-0000" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -192,10 +192,10 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="produto"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Produto</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-black">Produto</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body text-black">
                         <SelectValue placeholder="Selecione o modelo" />
                       </SelectTrigger>
                     </FormControl>
@@ -217,10 +217,10 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="tamanho"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Tamanho</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-black">Tamanho</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body text-black">
                         <SelectValue placeholder="Seu tamanho" />
                       </SelectTrigger>
                     </FormControl>
@@ -239,9 +239,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="quantidade"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Quantidade</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-black">Quantidade</FormLabel>
                   <FormControl>
-                    <Input type="number" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
+                    <Input type="number" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -254,7 +254,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="pagamento"
             render={({ field }) => (
               <FormItem className="space-y-4">
-                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Forma de Pagamento</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-black">Forma de Pagamento</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -265,13 +265,13 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                       <FormControl>
                         <RadioGroupItem value="Pix" />
                       </FormControl>
-                      <FormLabel className="font-semibold text-sm cursor-pointer">Pix (10% OFF)</FormLabel>
+                      <FormLabel className="font-semibold text-sm cursor-pointer text-black">Pix (10% OFF)</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="Parcelado" />
                       </FormControl>
-                      <FormLabel className="font-semibold text-sm cursor-pointer">Parcelamento</FormLabel>
+                      <FormLabel className="font-semibold text-sm cursor-pointer text-black">Parcelamento</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -282,11 +282,11 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           {/* ORDER SUMMARY */}
           <div className="bg-[#f9f9f9] rounded-2xl p-6 border border-[#eeeeee] space-y-3 font-body">
-            <div className="flex items-center gap-2 mb-2 text-primary font-bold text-xs uppercase tracking-widest">
+            <div className="flex items-center gap-2 mb-2 text-black font-bold text-xs uppercase tracking-widest">
               <Calculator className="h-4 w-4" /> Resumo do Pedido
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-[#777777]">Preço Base (R$ 78,00 x {summary.quantity})</span>
+            <div className="flex justify-between text-sm text-black">
+              <span>Preço Base (R$ 78,00 x {summary.quantity})</span>
               <span>R$ {summary.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
             {summary.discountAmount > 0 && (
@@ -296,7 +296,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               </div>
             )}
             <Separator className="bg-[#dddddd]" />
-            <div className="flex justify-between font-bold text-lg">
+            <div className="flex justify-between font-bold text-lg text-black">
               <span>TOTAL FINAL</span>
               <span>R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
@@ -307,11 +307,11 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="observacoes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Observações (Opcional)</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-black">Observações (Opcional)</FormLabel>
                 <FormControl>
                   <Textarea 
                     placeholder="Algum detalhe específico?" 
-                    className="resize-none rounded-xl border-[#dddddd] min-h-[100px] font-body" 
+                    className="resize-none rounded-xl border-[#dddddd] min-h-[100px] font-body text-black" 
                     {...field} 
                   />
                 </FormControl>
@@ -322,14 +322,14 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           <Button 
             type="submit" 
-            className="w-full h-14 bg-primary hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-[14px] shadow-lg transition-all font-semibold uppercase tracking-[0.04em]"
+            className="w-full h-14 bg-black hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-[14px] shadow-lg transition-all font-semibold uppercase tracking-[0.04em]"
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />
             {isSubmitting ? 'REGISTRANDO...' : 'IR PARA O WHATSAPP'}
           </Button>
           
-          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-xl text-[12px] text-blue-700 font-medium border border-blue-100">
+          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-xl text-[12px] text-blue-800 font-medium border border-blue-100">
             <Info className="h-4 w-4 shrink-0" />
             <span>O desconto será calculado automaticamente conforme a forma de pagamento ou quantidade escolhida.</span>
           </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -50,11 +49,11 @@ export default function Home() {
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
-            {/* DESKTOP & TABLET HERO VERSION (md and above) */}
-            <div className="hidden md:flex flex-col items-center w-full">
+            {/* DESKTOP HERO VERSION (lg and above) */}
+            <div className="hidden lg:flex flex-col items-center w-full">
               {/* Top Large Wording */}
-              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] 
-                mb-[-10px] md:mb-[-20px] xl:mb-[-26px] 
+              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
+                mb-[-10px] lg:mb-[-15px] xl:mb-[-20px] 
                 text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
                 LET CREATIVITY
               </h1>
@@ -64,19 +63,19 @@ export default function Home() {
                 
                 {/* Left Text Block - Desktop Only (xl and above) */}
                 <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
-                  <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
-                    <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
+                  <p className="font-body text-[17px] leading-[1.4] text-black mb-6">
+                    <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
                       COMUNICAR É MISSÃO.
                     </span>
                     Uma camiseta para quem serve <br /> anunciando a mensagem.
                   </p>
-                  <div className="w-[112px] h-[4px] bg-[#111111]" />
+                  <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
                 {/* The Image Frame */}
-                <div className="relative z-[3] transform rotate-[-3deg] xl:rotate-[-2deg] transition-transform duration-700">
-                  <div className="bg-white p-0 border-[12px] md:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
-                    w-[82vw] h-[62vw] md:w-[700px] md:h-[530px] xl:w-[780px] xl:h-[560px] 
+                <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700">
+                  <div className="bg-white p-0 border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
+                    w-[72vw] h-[52vw] lg:w-[680px] lg:h-[480px] xl:w-[820px] xl:h-[580px] 
                     max-w-[850px] relative overflow-hidden">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -91,38 +90,67 @@ export default function Home() {
               </div>
 
               {/* Bottom Large Wording - Overlays Image */}
-              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] 
-                mt-[-5px] xl:mt-[-15px] 
+              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
+                mt-[-35px] xl:mt-[-45px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
 
-              {/* Tablet Support Block - Visible on Tablet (md to xl) */}
-              <div className="hidden md:flex xl:hidden flex-col items-center text-center mt-4 mb-7">
-                <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
-                  COMUNICAR É MISSÃO.
-                </h3>
-                <p className="font-body text-[#111111] text-[clamp(18px,2vw,22px)] leading-[1.45] mt-2.5 max-w-[520px]">
-                  Uma camiseta para quem serve anunciando a mensagem.
-                </p>
-                <div className="w-[110px] h-[4px] bg-[#111111] mt-[18px] mx-auto" />
-              </div>
-
               {/* CTA Area */}
-              <div className="relative z-[5] mt-8 xl:mt-10">
+              <div className="relative z-[5] mt-10 xl:mt-12">
                 <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold 
-                  px-10 py-5 text-[16px] md:px-12 md:py-6 md:text-[18px] xl:px-14 xl:py-8 
+                  px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 
                   hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
                   <a href="#ofertas">COMPRAR AGORA</a>
                 </Button>
               </div>
             </div>
 
+            {/* TABLET ONLY LAYOUT (md to lg) */}
+            <div className="hidden md:flex lg:hidden flex-col items-center w-full">
+               <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
+                mb-[-10px] text-[clamp(62px,8vw,108px)]">
+                LET CREATIVITY
+              </h1>
+
+              <div className="relative z-[3] transform rotate-[-3deg] mt-2 mb-0">
+                <div className="bg-white p-0 border-[12px] border-[#ff1f17] shadow-[0_12px_28px_rgba(0,0,0,0.08)] w-[620px] h-[470px] relative overflow-hidden max-w-[82vw] max-h-[62vw]">
+                  <Image
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                    alt="IAP Camisetas Campaign"
+                    fill
+                    className="object-cover"
+                    priority
+                    data-ai-hint="fashion models"
+                  />
+                </div>
+              </div>
+
+              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
+                mt-[-44px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                SPEAK
+              </h2>
+
+              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4">
+                <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
+                  COMUNICAR É MISSÃO.
+                </h3>
+                <p className="font-body text-black text-[clamp(18px,2vw,22px)] leading-[1.45] mt-2.5 max-w-[520px]">
+                  Uma camiseta para quem serve anunciando a mensagem.
+                </p>
+                <div className="w-[110px] h-[4px] bg-black mt-4 mx-auto" />
+              </div>
+
+              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
+                <a href="#ofertas">COMPRAR AGORA</a>
+              </Button>
+            </div>
+
             {/* MOBILE ONLY HERO VERSION (below md) */}
             <div className="flex md:hidden flex-col items-center w-full pt-10">
               {/* Top Text */}
               <h1 
-                className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px,9.4vw,56px)] z-[1]"
+                className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]"
               >
                 LET CREATIVITY
               </h1>
@@ -143,7 +171,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image */}
               <h2 
-                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-34px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
@@ -153,7 +181,7 @@ export default function Home() {
                 <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
-                <p className="font-body text-[#111111] text-sm leading-[1.4] mt-2.5 max-w-[340px]">
+                <p className="font-body text-black text-sm leading-[1.4] mt-2.5 max-w-[340px]">
                   Uma camiseta para quem serve anunciando a mensagem.
                 </p>
               </div>
@@ -170,8 +198,8 @@ export default function Home() {
         {/* INTRO SECTION */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="mb-8">Muito mais que uma camiseta!</h2>
-            <p className="text-lg lg:text-xl text-[#333333] font-normal leading-relaxed">
+            <h2 className="mb-8 text-black">Muito mais que uma camiseta!</h2>
+            <p className="text-lg lg:text-xl text-black font-normal leading-relaxed">
               As camisetas da Comunicação IAP Barreirinha unem identidade, qualidade e propósito.
             </p>
           </div>
@@ -194,12 +222,12 @@ export default function Home() {
                 {benefits.map((benefit, i) => (
                   <div key={i} className="flex gap-8 group">
                     <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-primary ring-4 ring-primary/10 group-hover:scale-125 transition-transform" />
-                      {i !== benefits.length - 1 && <div className="w-px h-full bg-primary/20 mt-4" />}
+                      <div className="w-4 h-4 rounded-full bg-black ring-4 ring-black/10 group-hover:scale-125 transition-transform" />
+                      {i !== benefits.length - 1 && <div className="w-px h-full bg-black/20 mt-4" />}
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold uppercase mb-3 tracking-wide font-headline">{benefit.title}</h4>
-                      <p className="text-[#333333] font-normal leading-relaxed">{benefit.text}</p>
+                      <h4 className="text-xl font-bold uppercase mb-3 tracking-wide font-headline text-black">{benefit.title}</h4>
+                      <p className="text-black font-normal leading-relaxed">{benefit.text}</p>
                     </div>
                   </div>
                 ))}
@@ -211,13 +239,13 @@ export default function Home() {
         {/* OFFER HIGHLIGHT */}
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="mb-4">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-[#333333] mb-2 font-medium">Cada camiseta por R$ 78,00</p>
-            <p className="text-[#333333] mb-12 font-bold uppercase text-xs tracking-[0.1em]">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
+            <h3 className="mb-4 text-black">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <p className="text-black mb-2 font-medium">Cada camiseta por R$ 78,00</p>
+            <p className="text-black mb-12 font-bold uppercase text-xs tracking-[0.1em]">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
             
             {/* Countdown */}
             <div className="flex flex-col items-center gap-6">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#777777]">Condição especial por tempo limitado</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/60">Condição especial por tempo limitado</span>
               <div className="flex gap-4">
                 {[
                   { label: 'horas', val: timeLeft.h },
@@ -225,8 +253,8 @@ export default function Home() {
                   { label: 'segundos', val: timeLeft.s }
                 ].map(box => (
                   <div key={box.label} className="bg-white border border-[#dddddd] w-20 h-24 flex flex-col items-center justify-center rounded-2xl shadow-sm">
-                    <span className="text-2xl font-bold">{String(box.val).padStart(2, '0')}</span>
-                    <span className="text-[10px] uppercase text-[#777777] font-bold">{box.label}</span>
+                    <span className="text-2xl font-bold text-black">{String(box.val).padStart(2, '0')}</span>
+                    <span className="text-[10px] uppercase text-black font-bold">{box.label}</span>
                   </div>
                 ))}
               </div>
@@ -244,15 +272,15 @@ export default function Home() {
                     data-ai-hint="t-shirts"
                   />
                 </div>
-                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline">LEVE 1 - Camiseta IAP</h4>
-                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
+                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
+                <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
                 <div className="flex flex-col items-center gap-1 mb-8">
-                  <span className="text-4xl font-normal tracking-tighter text-primary font-headline">R$ 78,00</span>
+                  <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 78,00</span>
                   <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter font-body">
                     <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -270,16 +298,16 @@ export default function Home() {
                     Melhor Oferta
                   </div>
                 </div>
-                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline">LEVE 2 - Promoção Especial</h4>
-                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
+                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção Especial</h4>
+                <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
                 <div className="flex flex-col items-center gap-1 mb-8">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-[#777777] line-through font-body">R$ 156,00</span>
-                    <span className="text-4xl font-normal tracking-tighter text-primary font-headline">R$ 140,40</span>
+                    <span className="text-sm text-black/60 line-through font-body">R$ 156,00</span>
+                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
                   </div>
-                  <span className="text-xs text-[#777777] font-semibold font-body">R$ 70,20 por unidade</span>
+                  <span className="text-xs text-black font-semibold font-body">R$ 70,20 por unidade</span>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
@@ -290,7 +318,7 @@ export default function Home() {
         {/* ORDER FORM SECTION */}
         <section className="py-24 bg-white" id="produtos">
           <div className="container mx-auto px-6 text-center mb-12">
-            <h3 className="uppercase">Reserva Online</h3>
+            <h3 className="uppercase text-black">Reserva Online</h3>
           </div>
           <div className="container mx-auto px-6">
             <OrderForm />
@@ -317,14 +345,14 @@ export default function Home() {
         {/* FAQ SECTION */}
         <section id="faq" className="py-24 bg-white scroll-mt-20">
           <div className="container mx-auto px-6 max-w-2xl">
-            <h3 className="mb-12 text-center">Perguntas Frequentes</h3>
+            <h3 className="mb-12 text-center text-black">Perguntas Frequentes</h3>
             <Accordion type="single" collapsible className="w-full space-y-4">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border rounded-2xl px-6 py-1 bg-white">
-                  <AccordionTrigger className="text-left font-medium uppercase text-[14px] tracking-widest hover:no-underline font-body">
+                  <AccordionTrigger className="text-left font-medium uppercase text-[14px] tracking-widest hover:no-underline font-body text-black">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-[#333333] font-normal text-base leading-relaxed font-body">
+                  <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -335,7 +363,7 @@ export default function Home() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-[#2f2f2f] text-[#f5f5f5] py-24">
+      <footer className="bg-white text-black py-24 border-t">
         <div className="container mx-auto px-6 text-center">
           <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase">
             <span>IAP</span><span className="text-accent">CAMISETAS</span>
@@ -343,22 +371,22 @@ export default function Home() {
           
           <nav className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-16">
             {['Meus pedidos', 'Rastrear pedido', 'Falar com a equipe', 'Trocas e devoluções', 'Política de privacidade'].map(link => (
-              <Link key={link} href="#" className="text-[14px] font-medium uppercase tracking-[0.02em] hover:text-accent transition-colors font-body">
+              <Link key={link} href="#" className="text-[14px] font-medium uppercase tracking-[0.02em] hover:text-accent transition-colors font-body text-black">
                 {link}
               </Link>
             ))}
           </nav>
 
           <div className="flex justify-center gap-8 mb-16">
-            <Link href="#" className="p-3 bg-white/5 rounded-full hover:bg-accent transition-colors">
-              <Instagram className="h-5 w-5" />
+            <Link href="#" className="p-3 bg-black/5 rounded-full hover:bg-accent transition-colors">
+              <Instagram className="h-5 w-5 text-black" />
             </Link>
-            <Link href="#" className="p-3 bg-white/5 rounded-full hover:bg-accent transition-colors">
-              <Send className="h-5 w-5" />
+            <Link href="#" className="p-3 bg-black/5 rounded-full hover:bg-accent transition-colors">
+              <Send className="h-5 w-5 text-black" />
             </Link>
           </div>
 
-          <div className="border-t border-white/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 font-body">
+          <div className="border-t border-black/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40 font-body">
             © {new Date().getFullYear()} Igreja Adventista da Promessa Barreirinha. Ministério de Comunicação.
           </div>
         </div>
