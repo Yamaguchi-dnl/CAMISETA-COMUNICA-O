@@ -45,7 +45,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* EXACT REFERENCE HERO SECTION */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-8 pb-14 lg:pt-12 lg:pb-24 min-h-[760px] lg:min-h-[920px]">
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-24 pb-14 lg:pt-32 lg:pb-24 min-h-[760px] lg:min-h-[920px]">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
@@ -57,7 +57,7 @@ export default function Home() {
             {/* Center Visual Block */}
             <div className="relative w-full flex flex-col lg:flex-row items-center justify-center z-[3]">
               
-              {/* Left Text Block (Desktop Only - positioned absolutely relative to this flex center) */}
+              {/* Left Text Block (Desktop Only) */}
               <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
                 <h2 className="font-headline text-[clamp(30px,2.4vw,44px)] leading-[1] tracking-[-0.02em] text-black uppercase mb-4">
                   COMUNICAR É MISSÃO.

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase';
+import { Header } from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'IAP Camisetas - Ministério de Comunicação',
@@ -21,6 +22,7 @@ export default function RootLayout({
       </head>
       <body className="font-body selection:bg-accent selection:text-white">
         <FirebaseClientProvider>
+          <Header />
           {children}
         </FirebaseClientProvider>
       </body>
