@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Instagram, Send } from 'lucide-react';
+import { CheckCircle2, Instagram, Send, Maximize2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ h: 2, m: 45, s: 12 });
@@ -82,7 +83,7 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - Shadow behind, no border, no rounding - 4:3 HORIZONTAL */}
+                {/* The Image Frame - 4:3 HORIZONTAL */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
                     w-[560px] h-[420px] xl:w-[720px] xl:h-[540px] 
@@ -345,15 +346,36 @@ export default function Home() {
         <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden">
           <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6">
             {galleryImages.map((src, i) => (
-              <div key={i} className="relative min-w-[300px] lg:min-w-[350px] aspect-square rounded-2xl overflow-hidden group snap-center">
-                <Image
-                  src={src}
-                  alt={`Galeria ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  data-ai-hint="lifestyle photo"
-                />
-              </div>
+              <Dialog key={i}>
+                <DialogTrigger asChild>
+                  <div className="relative min-w-[300px] lg:min-w-[350px] aspect-square rounded-2xl overflow-hidden group snap-center cursor-pointer">
+                    <Image
+                      src={src}
+                      alt={`Galeria ${i + 1}`}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      data-ai-hint="lifestyle photo"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                       <div className="flex flex-col items-center gap-2">
+                          <Maximize2 className="text-white h-8 w-8" />
+                          <span className="text-white text-[10px] font-bold uppercase tracking-widest">Abrir foto</span>
+                       </div>
+                    </div>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl p-0 border-none bg-transparent shadow-none flex items-center justify-center">
+                  <DialogTitle className="sr-only">Foto da Galeria {i + 1}</DialogTitle>
+                  <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
+                    <Image
+                      src={src}
+                      alt={`Galeria Full ${i + 1}`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
         </section>
