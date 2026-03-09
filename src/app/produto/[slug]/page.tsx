@@ -1,11 +1,10 @@
-
 import { Header } from '@/components/Header';
 import { OrderForm } from '@/components/OrderForm';
 import { getProductBySlug } from '@/lib/products';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft, Info } from 'lucide-react';
+import { ChevronLeft, Info, BadgePercent } from 'lucide-react';
 import { Toaster } from '@/components/ui/toaster';
 
 interface ProductPageProps {
@@ -20,11 +19,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  const basePrice = 78.00;
+  const pixPrice = 70.20;
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-8 pt-24">
         <Link 
           href="/" 
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
@@ -46,31 +48,30 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 data-ai-hint="t-shirt product main image"
               />
             </div>
-            <div className="grid grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="relative aspect-square rounded-lg overflow-hidden border bg-muted cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
-                  <Image
-                    src={`https://picsum.photos/seed/thumb${i}${product.id}/200/200`}
-                    alt={`${product.name} thumb ${i}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Product Info & Form */}
           <div className="flex flex-col">
             <div className="mb-6">
-              <h1 className="font-headline text-3xl font-black mb-2 leading-tight">
+              <h1 className="font-headline text-3xl font-black mb-2 leading-tight uppercase">
                 {product.name}
               </h1>
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-sm text-muted-foreground font-medium">A partir de</span>
-                <span className="font-headline text-4xl font-black text-foreground">R$ {product.price}</span>
+              <div className="flex flex-col gap-1 mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-muted-foreground font-medium">Preço Base:</span>
+                  <span className="font-headline text-3xl font-black text-foreground">R$ {basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                </div>
+                <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
+                  <BadgePercent className="h-4 w-4" /> R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} no Pix (10% OFF)
+                </div>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
+
+              <div className="p-4 rounded-xl bg-accent/5 border border-accent/10 mb-8">
+                <p className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Promoção Ativa</p>
+                <p className="text-sm text-primary font-medium">Na compra de 2 ou mais camisetas, ganhe 10% OFF automaticamente no seu pedido!</p>
+              </div>
+
+              <p className="text-muted-foreground leading-relaxed mb-6 font-light">
                 {product.fullDescription}
               </p>
               
@@ -82,12 +83,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </div>
             </div>
 
-            <OrderForm product={product} />
+            <OrderForm />
           </div>
         </div>
       </main>
 
-      <footer className="border-t bg-background py-8 mt-12">
+      <footer className="border-t bg-background py-12 mt-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Igreja Adventista Promessa da Barreirinha. <br className="sm:hidden" /> 

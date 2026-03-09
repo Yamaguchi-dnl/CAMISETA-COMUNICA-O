@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -8,7 +7,7 @@ import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { PRODUCTS } from '@/lib/products';
-import { ArrowRight, ChevronRight, Clock, Instagram, Send } from 'lucide-react';
+import { ArrowRight, ChevronRight, Clock, Instagram, Send, CheckCircle2, BadgePercent } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -32,12 +31,14 @@ export default function Home() {
     { q: "Quais tamanhos estarão disponíveis?", a: "Disponibilizamos do PP ao XGG, atendendo a todos os perfis com modelagem moderna." },
     { q: "O pagamento é feito no site?", a: "Não. Você inicia o pedido aqui e finaliza o pagamento via WhatsApp com nossa equipe." },
     { q: "Como funciona a opção parcelada?", a: "Ao escolher parcelamento, te direcionamos para o WhatsApp para alinhar as parcelas." },
+    { q: "Posso pedir mais de uma unidade?", a: "Sim. O formulário permite escolher a quantidade desejada e aplica 10% de desconto para 2 ou mais unidades." },
+    { q: "Como saberei se meu pedido foi registrado?", a: "Antes do redirecionamento ao WhatsApp, os dados do pedido são salvos em nosso banco de dados seguro." },
   ];
 
   const benefits = [
-    { title: "Visual alinhado e representativo", text: "Transmita unidade e cuidado visual em todas as escalas." },
-    { title: "Conforto para cultos e eventos", text: "Modelagem pensada para o uso prolongado com total liberdade." },
-    { title: "Duas opções de cor", text: "Preta ou Branca: escolha a que melhor expressa seu estilo." },
+    { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade, cuidado visual e identidade do Ministério de Comunicação." },
+    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especiais." },
+    { title: "Duas opções de cor", text: "Disponível nas versões preta e branca, para que cada pessoa escolha a opção que melhor combina com seu estilo." },
   ];
 
   return (
@@ -55,8 +56,18 @@ export default function Home() {
                   A camiseta da Comunicação que você precisa
                 </h1>
                 <p className="text-lg lg:text-xl text-[#777777] mb-8 font-light">
-                  Escolha entre a version preta ou branca e faça sua reserva de forma simples e rápida. Conforto e identidade para o ministério.
+                  Camisetas oficiais da Comunicação por R$ 78,00 cada, com condições especiais no Pix e na compra de 2 ou mais.
                 </p>
+                <div className="flex flex-wrap gap-4 mb-10">
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-[#dddddd] shadow-sm">
+                    <BadgePercent className="h-4 w-4 text-accent" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">10% OFF no Pix</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-[#dddddd] shadow-sm">
+                    <BadgePercent className="h-4 w-4 text-accent" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">10% OFF em 2+ camisetas</span>
+                  </div>
+                </div>
                 <Button asChild className="pill-button bg-primary text-white hover:bg-accent h-14">
                   <a href="#ofertas">Ver ofertas <ArrowRight className="ml-2 h-4 w-4" /></a>
                 </Button>
@@ -68,7 +79,7 @@ export default function Home() {
               </div>
               <div className="relative aspect-square lg:aspect-[1.2/1] w-full transform hover:scale-[1.02] transition-transform duration-700">
                 <Image
-                  src="https://picsum.photos/seed/iap-hero-main/1200/1000"
+                  src="https://picsum.photos/seed/iap-black-hero/1200/1000"
                   alt="Destaque Camiseta Preta"
                   fill
                   className="object-cover rounded-3xl"
@@ -123,10 +134,11 @@ export default function Home() {
         </section>
 
         {/* OFFER HIGHLIGHT */}
-        <section id="ofertas" className="py-24 bg-[#f2f2f2] scroll-mt-20">
+        <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="text-2xl lg:text-4xl font-extrabold mb-4 uppercase tracking-tight">Escolha a melhor opção pra você</h3>
-            <p className="text-[#777777] mb-12">Garanta agora sua unidade ou aproveite o kit promocional.</p>
+            <h3 className="text-2xl lg:text-4xl font-extrabold mb-4 uppercase tracking-tight">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <p className="text-[#777777] mb-4">Cada camiseta por R$ 78,00</p>
+            <p className="text-[#777777] mb-12 font-bold uppercase text-xs tracking-widest">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
             
             {/* Countdown */}
             <div className="flex flex-col items-center gap-6">
@@ -147,27 +159,58 @@ export default function Home() {
 
             {/* Purchase Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto">
-              {PRODUCTS.filter(p => p.id !== 'camiseta-branca').map((product) => (
-                <div key={product.id} className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
-                  <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+              {/* Individual Card */}
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
+                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden">
+                  <Image
+                    src="https://picsum.photos/seed/iap-black/800/1000"
+                    alt="Camisetas"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
+                    Destaque
                   </div>
-                  <h4 className="text-lg font-bold uppercase tracking-widest mb-2">{product.id === 'kit-promocional' ? 'LEVE 2 - KIT PROMOCIONAL' : 'LEVE 1 - CAMISETA IAP'}</h4>
-                  <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">{product.shortDescription}</p>
-                  <div className="flex items-baseline gap-2 mb-8">
-                    {product.oldPrice && <span className="text-sm text-[#777777] line-through">R$ {product.oldPrice}</span>}
-                    <span className="text-4xl font-extrabold tracking-tighter">R$ {product.price}</span>
-                  </div>
-                  <Button asChild className="w-full pill-button bg-primary text-white hover:bg-accent h-14">
-                    <a href="#reserva">COMPRAR AGORA</a>
-                  </Button>
                 </div>
-              ))}
+                <h4 className="text-lg font-bold uppercase tracking-widest mb-2">LEVE 1 - Camiseta IAP</h4>
+                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">Escolha preta ou branca</p>
+                <div className="flex flex-col items-center gap-1 mb-8">
+                  <span className="text-4xl font-extrabold tracking-tighter text-primary">R$ 78,00</span>
+                  <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-tighter">
+                    <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
+                  </div>
+                </div>
+                <Button asChild className="w-full pill-button bg-primary text-white hover:bg-accent h-14">
+                  <a href="#reserva">COMPRAR AGORA</a>
+                </Button>
+              </div>
+
+              {/* Promo Card */}
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group ring-2 ring-accent/20">
+                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden">
+                  <Image
+                    src="https://picsum.photos/seed/iap-kit/800/1000"
+                    alt="Kit Promo"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
+                    Melhor Oferta
+                  </div>
+                </div>
+                <h4 className="text-lg font-bold uppercase tracking-widest mb-2">LEVE 2 - Promoção Especial</h4>
+                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">10% OFF comprando 2 camisetas</p>
+                <div className="flex flex-col items-center gap-1 mb-8">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-[#777777] line-through">R$ 156,00</span>
+                    <span className="text-4xl font-extrabold tracking-tighter text-primary">R$ 140,40</span>
+                  </div>
+                  <span className="text-xs text-[#777777] font-semibold">R$ 70,20 por unidade</span>
+                </div>
+                <Button asChild className="w-full pill-button bg-primary text-white hover:bg-accent h-14">
+                  <a href="#reserva">APROVEITAR KIT</a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
