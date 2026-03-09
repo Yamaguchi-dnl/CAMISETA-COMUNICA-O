@@ -35,7 +35,7 @@ export default function Home() {
 
   const benefits = [
     { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade, cuidado visual e identidade do Ministério de Comunicação." },
-    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especiais." },
+    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especial.)" },
     { title: "Duas opções de cor", text: "Disponível nas versões preta e branca, para que cada pessoa escolha a opção que melhor combina com seu estilo." },
   ];
 
@@ -100,10 +100,9 @@ export default function Home() {
 
             {/* MOBILE ONLY HERO VERSION (below md) */}
             <div className="flex md:hidden flex-col items-center w-full pt-10">
-              {/* Top Text with subtle shadow */}
+              {/* Top Text */}
               <h1 
                 className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px,9.4vw,56px)] z-[1]"
-                style={{ textShadow: '-2px 0 #1e3a8a' }}
               >
                 LET CREATIVITY
               </h1>
@@ -125,7 +124,6 @@ export default function Home() {
               {/* Bottom Text Overlapping Image */}
               <h2 
                 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-34px] mb-[18px] text-[clamp(54px,16vw,86px)]"
-                style={{ textShadow: '-2px 0 #1e3a8a' }}
               >
                 SPEAK
               </h2>
