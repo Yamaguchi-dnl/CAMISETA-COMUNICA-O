@@ -34,82 +34,64 @@ export function Header() {
           : "bg-transparent py-6 lg:py-8"
       )}
     >
-      <div className="container mx-auto max-w-[1500px] flex items-center justify-between px-6 lg:px-10">
+      <div className="container mx-auto max-w-[1500px] flex items-center justify-center px-6 lg:px-10 relative">
         
-        {/* Desktop Left Nav */}
-        <nav className="hidden lg:flex flex-1 items-center gap-10">
-          {menuItems.slice(0, 2).map((item) => (
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden lg:flex items-center gap-12">
+          {menuItems.map((item) => (
             <Link 
               key={item.label} 
               href={item.href} 
-              className="text-[12px] font-semibold tracking-[0.1em] text-[#000000] hover:text-[#ff1f17] transition-colors uppercase font-body"
+              className="text-[12px] font-semibold tracking-[0.15em] text-[#000000] hover:text-[#ff1f17] transition-all uppercase font-body relative group"
             >
               {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Logo - Centered */}
-        <Link 
-          href="/" 
-          className="flex flex-1 lg:flex-none justify-center items-center"
-        >
-          <span className="font-headline text-[18px] lg:text-[22px] font-normal tracking-[0.15em] text-[#000000] uppercase leading-none">
-            IAP <span className="text-[#ff1f17]">CAMISETAS</span>
-          </span>
-        </Link>
-
-        {/* Desktop Right Nav / Cart */}
-        <div className="hidden lg:flex flex-1 items-center justify-end gap-10">
-          {menuItems.slice(2).map((item) => (
-            <Link 
-              key={item.label} 
-              href={item.href} 
-              className="text-[12px] font-semibold tracking-[0.1em] text-[#000000] hover:text-[#ff1f17] transition-colors uppercase font-body"
-            >
-              {item.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#ff1f17] transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
           <Link 
             href="#reserva" 
-            className="flex items-center gap-2 text-[#000000] hover:text-[#ff1f17] transition-colors"
+            className="flex items-center gap-2 text-[#000000] hover:text-[#ff1f17] transition-colors ml-4"
           >
-            <ShoppingBag className="h-5 w-5" />
+            <ShoppingBag className="h-4 w-4" />
           </Link>
-        </div>
+        </nav>
 
         {/* Mobile Menu Trigger */}
-        <div className="lg:hidden flex items-center gap-4">
-           <Link 
-            href="#reserva" 
-            className="p-2 text-[#000000]"
-          >
-            <ShoppingBag className="h-5 w-5" />
-          </Link>
+        <div className="lg:hidden flex items-center justify-between w-full">
+          <div className="w-10"></div> {/* Spacer to keep menu centered if needed, or just standard layout */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <button className="p-2 text-[#000000]">
-                <Menu className="h-6 w-6" />
+              <button className="flex items-center gap-2 text-[12px] font-bold tracking-[0.2em] uppercase text-[#000000]">
+                <Menu className="h-5 w-5" />
+                <span>Menu</span>
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85vw] p-0 bg-white border-l-0">
-              <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
-              <div className="flex flex-col h-full pt-20 px-10">
-                <nav className="flex flex-col gap-10">
+            <SheetContent side="top" className="w-full h-auto p-0 bg-white border-b border-black/5">
+              <SheetTitle className="sr-only">Navegação</SheetTitle>
+              <div className="flex flex-col items-center py-12 px-10">
+                <nav className="flex flex-col items-center gap-8 w-full">
                   {menuItems.map((item) => (
                     <Link 
                       key={item.label} 
                       href={item.href} 
                       onClick={() => setIsOpen(false)}
-                      className="text-2xl font-headline tracking-tight text-[#000000] border-b border-black/5 pb-5 hover:text-[#ff1f17] transition-colors uppercase"
+                      className="text-xl font-headline tracking-tight text-[#000000] hover:text-[#ff1f17] transition-colors uppercase"
                     >
                       {item.label}
                     </Link>
                   ))}
+                  <Link 
+                    href="#reserva" 
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm pt-4"
+                  >
+                    <ShoppingBag className="h-5 w-5" /> Reservar
+                  </Link>
                 </nav>
               </div>
             </SheetContent>
           </Sheet>
+          <div className="w-10"></div>
         </div>
       </div>
     </header>
