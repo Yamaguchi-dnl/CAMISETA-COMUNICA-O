@@ -55,7 +55,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-16 lg:pt-32 lg:pb-24">
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
@@ -73,7 +73,7 @@ export default function Home() {
                 
                 {/* Left Text Block - Desktop Only (xl and above) */}
                 <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
-                  <p className="font-body text-black text-[17px] leading-[1.4] text-black mb-6">
+                  <p className="font-body text-black text-[17px] leading-[1.4] mb-6">
                     <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
                       COMUNICAR É MISSÃO.
                     </span>
@@ -82,11 +82,11 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - Smaller Size with Shadow */}
+                {/* The Image Frame - Shadow behind, no border, no rounding */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[30vw] h-[38vw] lg:w-[320px] lg:h-[430px] xl:w-[360px] xl:h-[480px] 
-                    max-w-[1100px] relative overflow-hidden rounded-none border-none">
+                    w-[320px] h-[430px] xl:w-[360px] xl:h-[480px] 
+                    relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -139,7 +139,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-5px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[10px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -183,7 +183,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image from BEHIND */}
               <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[10px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
