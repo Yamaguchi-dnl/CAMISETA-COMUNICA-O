@@ -9,6 +9,7 @@ import { CheckCircle2, Instagram, Send, Maximize2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
+import { ManifestoSection } from '@/components/ManifestoSection';
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ h: 2, m: 45, s: 12 });
@@ -207,6 +208,9 @@ export default function Home() {
 
           </div>
         </section>
+
+        {/* MANIFESTO SECTION */}
+        <ManifestoSection />
 
         {/* BENEFITS SECTION */}
         <section className="py-24 bg-white border-t border-[#f0f0f0]">
