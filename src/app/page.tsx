@@ -44,13 +44,13 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* HERO SECTION - REFINED EDITORIAL LAYOUT */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-24 pb-40 lg:pt-32 lg:pb-40 min-h-[920px]">
+        {/* HERO SECTION */}
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-40 lg:pt-32 lg:pb-40 min-h-[920px]">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
-            {/* DESKTOP HERO VERSION */}
-            <div className="hidden lg:flex flex-col items-center w-full">
+            {/* DESKTOP & TABLET HERO VERSION (md and above) */}
+            <div className="hidden md:flex flex-col items-center w-full">
               {/* Top Large Wording */}
               <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] mb-[-26px] text-[clamp(86px,8.6vw,180px)]">
                 LET CREATIVITY
@@ -98,8 +98,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* MOBILE HERO VERSION - EXACT MATCH TO REFERENCE */}
-            <div className="flex lg:hidden flex-col items-center w-full pt-6">
+            {/* MOBILE ONLY HERO VERSION (below md) */}
+            <div className="flex md:hidden flex-col items-center w-full pt-10">
               {/* Top Text with subtle shadow */}
               <h1 
                 className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px,9.4vw,56px)] z-[1]"

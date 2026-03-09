@@ -28,37 +28,66 @@ export function Header() {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 z-[100] w-full transition-all duration-300 ease-in-out hidden lg:block",
+        "fixed top-0 left-0 z-[100] w-full transition-all duration-300 ease-in-out",
         isScrolled 
           ? "bg-white/90 backdrop-blur-md border-b border-black/5 py-3 shadow-sm" 
-          : "bg-transparent py-6 lg:py-8"
+          : "bg-transparent py-4 lg:py-8"
       )}
     >
-      <div className="container mx-auto max-w-[1400px] flex items-center justify-center px-6 lg:px-10 relative">
+      <div className="container mx-auto max-w-[1400px] flex items-center justify-between px-6 lg:px-10 relative">
         
+        {/* Mobile Menu Trigger - Visible on small screens */}
+        <div className="lg:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <button className="p-2 text-[#111111] hover:text-accent transition-colors">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Abrir menu</span>
+              </button>
+            </SheetTrigger>
+            <SheetContent side="top" className="w-full bg-white/95 backdrop-blur-lg pt-24 pb-12 border-none">
+              <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
+              <nav className="flex flex-col items-center gap-8">
+                {menuItems.map((item) => (
+                  <Link 
+                    key={item.label} 
+                    href={item.href} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-2xl font-headline text-[#111111] uppercase tracking-wider hover:text-accent transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+
         {/* Desktop Navigation - Centered (Logo removed as requested) */}
-        <nav className="flex items-center gap-12">
+        <nav className="hidden lg:flex items-center gap-12 mx-auto">
           {menuItems.map((item) => (
             <Link 
               key={item.label} 
               href={item.href} 
               className={cn(
                 "text-[14px] font-medium tracking-[0.02em] transition-all uppercase font-body relative group",
-                isScrolled ? "text-[#111111]" : "text-[#111111]"
+                "text-[#111111]"
               )}
             >
               {item.label}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
-          <Link 
-            href="#reserva" 
-            className="flex items-center gap-2 text-[#111111] hover:text-accent transition-colors ml-4"
-          >
-            <ShoppingBag className="h-4 w-4" />
-            <span className="text-[14px] font-medium uppercase tracking-[0.02em]">Carrinho 0</span>
-          </Link>
         </nav>
+
+        {/* Cart Button - Visible on all screens */}
+        <Link 
+          href="#reserva" 
+          className="flex items-center gap-2 text-[#111111] hover:text-accent transition-colors"
+        >
+          <ShoppingBag className="h-6 w-6 lg:h-4 lg:w-4" />
+          <span className="hidden lg:inline text-[14px] font-medium uppercase tracking-[0.02em]">Carrinho 0</span>
+        </Link>
       </div>
     </header>
   );
