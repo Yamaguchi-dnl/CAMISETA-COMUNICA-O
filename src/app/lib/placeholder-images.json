@@ -2,16 +2,28 @@
 {
   "placeholderImages": [
     {
-      "id": "camiseta-modelo-1",
-      "description": "T-shirt model 1 for Communication Ministry",
-      "imageUrl": "https://picsum.photos/seed/iap1/800/1000",
+      "id": "camiseta-preta-hero",
+      "description": "Black t-shirt front and back split view",
+      "imageUrl": "https://picsum.photos/seed/iap-black-hero/1200/1000",
       "imageHint": "black t-shirt"
     },
     {
-      "id": "camiseta-modelo-2",
-      "description": "T-shirt model 2 for Communication Ministry",
-      "imageUrl": "https://picsum.photos/seed/iap2/800/1000",
-      "imageHint": "modern t-shirt"
+      "id": "camiseta-preta",
+      "description": "Black t-shirt Communication Ministry",
+      "imageUrl": "https://picsum.photos/seed/iap-black/800/1000",
+      "imageHint": "black t-shirt"
+    },
+    {
+      "id": "camiseta-branca",
+      "description": "White t-shirt Communication Ministry",
+      "imageUrl": "https://picsum.photos/seed/iap-white/800/1000",
+      "imageHint": "white t-shirt"
+    },
+    {
+      "id": "kit-promocional",
+      "description": "Promotional kit with two t-shirts",
+      "imageUrl": "https://picsum.photos/seed/iap-kit/800/1000",
+      "imageHint": "t-shirts kit"
     }
   ]
 }

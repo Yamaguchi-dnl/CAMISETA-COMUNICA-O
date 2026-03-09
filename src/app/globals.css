@@ -5,26 +5,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 96%;
+    --background: 0 0% 100%;
     --foreground: 0 0% 7%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 7%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
     --primary: 0 0% 7%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 100%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 95%;
     --secondary-foreground: 0 0% 7%;
-    --muted: 0 0% 92%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 142 70% 49%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 47%;
+    --accent: 0 66% 46%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
+    --border: 0 0% 87%;
+    --input: 0 0% 87%;
     --ring: 0 0% 7%;
-    --radius: 0.75rem;
+    --radius: 2rem;
   }
 }
 
@@ -33,6 +33,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+@layer utilities {
+  .section-alt {
+    @apply bg-[#f2f2f2];
+  }
+  .pill-button {
+    @apply rounded-full px-8 py-4 transition-all duration-300 font-semibold uppercase tracking-wider text-sm;
   }
 }

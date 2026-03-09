@@ -6,29 +6,44 @@ export interface Product {
   shortDescription: string;
   fullDescription: string;
   price: string;
+  oldPrice?: string;
   image: string;
   sizes: string[];
+  color?: string;
 }
 
 export const PRODUCTS: Product[] = [
   {
-    id: 'camiseta-modelo-1',
-    slug: 'camiseta-modelo-1',
-    name: 'Camiseta Comunicação - Versão 01',
-    shortDescription: 'O modelo clássico do Ministério de Comunicação.',
-    fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha. Desenvolvida com tecido de alta qualidade, garantindo conforto para o dia a dia e eventos da igreja. Estampa moderna e minimalista que representa nossa identidade.',
-    price: '45,00',
-    image: 'https://picsum.photos/seed/iap1/800/1000',
-    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']
+    id: 'camiseta-preta',
+    slug: 'camiseta-preta',
+    name: 'Camiseta Comunicação Preta',
+    shortDescription: 'O clássico indispensável para o ministério.',
+    fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor preta. Tecido premium de alta durabilidade e conforto.',
+    price: '59,90',
+    image: 'https://picsum.photos/seed/iap-black/800/1000',
+    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
+    color: 'preta'
   },
   {
-    id: 'camiseta-modelo-2',
-    slug: 'camiseta-modelo-2',
-    name: 'Camiseta Comunicação - Versão 02',
-    shortDescription: 'Design alternativo com foco em identidade visual.',
-    fullDescription: 'Uma opção diferenciada para a equipe de Comunicação. Este modelo traz elementos gráficos que destacam o papel da mídia na igreja. Perfeita para quem busca um visual moderno e impactante.',
-    price: '50,00',
-    image: 'https://picsum.photos/seed/iap2/800/1000',
+    id: 'camiseta-branca',
+    slug: 'camiseta-branca',
+    name: 'Camiseta Comunicação Branca',
+    shortDescription: 'Leveza e modernidade para o dia a dia.',
+    fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor branca. Visual clean e elegante.',
+    price: '59,90',
+    image: 'https://picsum.photos/seed/iap-white/800/1000',
+    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
+    color: 'branca'
+  },
+  {
+    id: 'kit-promocional',
+    slug: 'kit-promocional',
+    name: 'Kit Promocional (2 Peças)',
+    shortDescription: 'O melhor custo-benefício para sua equipe.',
+    fullDescription: 'Leve duas unidades e garanta um desconto especial. Você pode escolher as cores no momento da reserva.',
+    price: '109,90',
+    oldPrice: '119,80',
+    image: 'https://picsum.photos/seed/iap-kit/800/1000',
     sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']
   }
 ];
