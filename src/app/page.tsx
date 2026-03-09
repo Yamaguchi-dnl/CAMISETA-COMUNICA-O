@@ -41,65 +41,69 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
-      {/* Header removed as requested */}
       <Toaster />
 
       <main className="flex-1">
-        {/* EDITORIAL CENTRALIZED HERO SECTION */}
-        <section className="relative bg-[#f5f5f5] overflow-hidden flex flex-col items-center pt-[60px] lg:pt-[80px] pb-[120px] lg:pb-[160px] min-h-[760px] lg:min-h-[900px]">
+        {/* EXACT REFERENCE HERO SECTION */}
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-8 pb-14 lg:pt-12 lg:pb-24 min-h-[760px] lg:min-h-[920px]">
           
-          {/* Main Editorial Stack */}
-          <div className="container relative z-[3] max-w-[1400px] px-4 lg:px-8 flex flex-col items-center justify-center">
+          <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
-            {/* Top Graphic Text */}
-            <div className="relative z-[2] -mb-4 lg:-mb-10 pointer-events-none select-none">
-              <h2 className="font-headline font-normal uppercase leading-[0.9] text-[#111111] tracking-[-0.04em] text-center text-[clamp(42px,12vw,70px)] lg:text-[clamp(90px,10vw,180px)]">
-                BE STILL
-              </h2>
-            </div>
+            {/* Top Large Wording */}
+            <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] mb-[-26px] lg:mb-[-40px] text-[clamp(40px,11vw,72px)] lg:text-[clamp(86px,8.6vw,180px)]">
+              LET CREATIVITY
+            </h1>
 
-            {/* Center Image Block */}
-            <div className="relative z-[3] animate-fade-in">
-              <div className="bg-[#e7e1d9] p-[10px] border-[10px] border-white/72 shadow-[0_18px_42px_rgba(0,0,0,0.08)] w-[82vw] h-[98vw] lg:w-[420px] lg:h-[520px] max-w-[460px] max-height-[560px] relative overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
-                <Image
-                  src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
-                  alt="camiseta da Comunicação IAP Barreirinha"
-                  fill
-                  className="object-cover"
-                  priority
-                  data-ai-hint="black t-shirt"
-                />
+            {/* Center Visual Block */}
+            <div className="relative w-full flex flex-col lg:flex-row items-center justify-center z-[3]">
+              
+              {/* Left Text Block (Desktop Only - positioned absolutely relative to this flex center) */}
+              <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
+                <h2 className="font-headline text-[clamp(30px,2.4vw,44px)] leading-[1] tracking-[-0.02em] text-black uppercase mb-4">
+                  COMUNICAR É MISSÃO.
+                </h2>
+                <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
+                  Uma camiseta para quem serve anunciando a mensagem.
+                </p>
+                <div className="w-[112px] h-[4px] bg-[#111111]" />
+              </div>
+
+              {/* The Image Frame */}
+              <div className="relative z-[3] transform rotate-[-1deg] lg:rotate-[-2deg] transition-transform duration-700">
+                <div className="bg-white p-0 border-[10px] lg:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] w-[86vw] h-[60vw] lg:w-[640px] lg:h-[460px] max-w-[700px] max-height-[520px] relative overflow-hidden">
+                  <Image
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                    alt="IAP Camisetas Campaign"
+                    fill
+                    className="object-cover"
+                    priority
+                    data-ai-hint="fashion models"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Bottom Graphic Text - Overlays Image */}
-            <div className="relative z-[4] -mt-10 lg:-mt-20 pointer-events-none select-none">
-              <h2 className="font-headline font-normal uppercase leading-[0.86] text-[#111111] tracking-[-0.05em] text-center text-[clamp(50px,14vw,90px)] lg:text-[clamp(110px,12vw,220px)]">
-                LET CREATIVE SPEAK
-              </h2>
-            </div>
+            {/* Bottom Large Wording - Overlays Image */}
+            <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] mt-[-18px] lg:mt-[-54px] text-[clamp(52px,15vw,98px)] lg:text-[clamp(110px,10vw,250px)]">
+              SPEAK
+            </h2>
 
-            {/* Discreet Support Text - Absolute on Desktop */}
-            <div className="w-full lg:max-w-[240px] text-center lg:text-left mt-8 lg:mt-0 lg:absolute lg:left-[10%] lg:top-[46%] z-[4]">
-              <h3 className="font-body font-semibold text-[18px] leading-[1.2] text-[#111111] mb-3">
-                Camiseta oficial da Comunicação
-              </h3>
-              <p className="font-body font-normal text-[15px] leading-relaxed text-[#666666]">
-                Preta e branca para o time da IAP Barreirinha
+            {/* Left Text Block (Mobile Version) */}
+            <div className="lg:hidden text-center mt-8 px-4">
+              <h2 className="font-headline text-2xl leading-tight text-black uppercase mb-3">
+                COMUNICAR É MISSÃO.
+              </h2>
+              <p className="font-body text-base text-[#111111]">
+                Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
 
-            {/* Right Decorative Detail (Desktop Only) */}
-            <div className="hidden lg:block absolute right-[12%] top-[62%] z-[4]">
-              <div className="w-[72px] h-[2px] bg-[#111111] opacity-90" />
+            {/* CTA Area */}
+            <div className="relative z-[5] mt-8 lg:mt-10">
+              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold px-10 lg:px-14 py-7 lg:py-8 text-[16px] lg:text-[18px] hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none">
+                <a href="#ofertas">COMPRAR AGORA</a>
+              </Button>
             </div>
-          </div>
-
-          {/* CTA Area */}
-          <div className="relative z-[5] mt-12 lg:mt-16 animate-fade-in delay-200 px-4">
-            <Button asChild className="rounded-full bg-[#d93025] text-white font-bold px-10 lg:px-14 py-7 lg:py-8 text-[14px] lg:text-[16px] hover:bg-[#111111] transition-all shadow-[0_10px_24px_rgba(0,0,0,0.12)] hover:shadow-2xl border-none uppercase tracking-[0.04em]">
-              <a href="#ofertas">COMPRAR AGORA</a>
-            </Button>
           </div>
         </section>
 
@@ -173,7 +177,7 @@ export default function Home() {
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
                 <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                   <Image
-                    src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="Camiseta Individual"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
