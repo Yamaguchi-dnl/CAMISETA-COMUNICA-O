@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -51,7 +50,7 @@ export default function Home() {
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
             {/* Top Large Wording */}
-            <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] mb-[-26px] lg:mb-[-40px] text-[clamp(40px,11vw,72px)] lg:text-[clamp(86px,8.6vw,180px)]">
+            <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.01em] mb-[-26px] lg:mb-[-40px] text-[clamp(40px,11vw,72px)] lg:text-[clamp(86px,8.6vw,180px)]">
               LET CREATIVITY
             </h1>
 
@@ -61,7 +60,7 @@ export default function Home() {
               {/* Left Text Block (Desktop Only) */}
               <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
                 <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
-                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.02em] text-black uppercase block mb-3">
+                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-normal text-black uppercase block mb-3">
                     COMUNICAR É MISSÃO.
                   </span>
                   Uma camiseta para quem serve <br /> anunciando a mensagem.
@@ -85,7 +84,7 @@ export default function Home() {
             </div>
 
             {/* Bottom Large Wording - Overlays Image */}
-            <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] mt-[-18px] lg:mt-[-54px] text-[clamp(52px,15vw,98px)] lg:text-[clamp(110px,10vw,250px)]">
+            <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.02em] mt-[-18px] lg:mt-[-54px] text-[clamp(52px,15vw,98px)] lg:text-[clamp(110px,10vw,250px)]">
               SPEAK
             </h2>
 
