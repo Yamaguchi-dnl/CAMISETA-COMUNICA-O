@@ -72,10 +72,10 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - Decreased size a bit */}
+                {/* The Image Frame - Decreased size more */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[70vw] h-[52vw] lg:w-[850px] lg:h-[650px] xl:w-[1000px] xl:h-[750px] 
+                    w-[60vw] h-[45vw] lg:w-[650px] lg:h-[480px] xl:w-[750px] xl:h-[560px] 
                     max-w-[1100px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -113,9 +113,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block - Decreased size a bit */}
+              {/* Image Block - Decreased size more */}
               <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[680px] h-[540px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-none border-none">
+                <div className="bg-white p-0 w-[480px] h-[360px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -157,9 +157,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined - Decreased size a bit */}
+              {/* Image Block Inclined - Decreased size more */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[300px] h-[440px] relative overflow-hidden rounded-none border-none">
+                <div className="bg-white p-0 w-[220px] h-[320px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
