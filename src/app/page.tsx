@@ -90,9 +90,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Large Wording - Overlays Image - AJUSTADO OVERLAP */}
+              {/* Bottom Large Wording - Overlays Image - REPOSICIONADO PARA BAIXO */}
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] 
-                mt-[-64px] xl:mt-[-94px] 
+                mt-[-10px] xl:mt-[-20px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -141,9 +141,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Text Overlapping Image - AJUSTADO OVERLAP */}
+              {/* Bottom Text Overlapping Image - REPOSICIONADO PARA BAIXO */}
               <h2 
-                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-48px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-5px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
