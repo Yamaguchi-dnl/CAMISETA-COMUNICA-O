@@ -76,7 +76,7 @@ export default function Home() {
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700">
                   <div className="bg-white p-0 border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
                     w-[75vw] h-[55vw] lg:w-[720px] lg:h-[520px] xl:w-[860px] xl:h-[620px] 
-                    max-w-[900px] relative overflow-hidden rounded-[2.5rem]">
+                    max-w-[900px] relative overflow-hidden rounded-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -114,7 +114,7 @@ export default function Home() {
               </h1>
 
               <div className="relative z-[3] transform rotate-[-3deg] mt-2 mb-0">
-                <div className="bg-white p-0 border-[12px] border-[#ff1f17] shadow-[0_12px_28px_rgba(0,0,0,0.08)] w-[650px] h-[500px] relative overflow-hidden max-w-[85vw] max-h-[65vw] rounded-[2rem]">
+                <div className="bg-white p-0 border-[12px] border-[#ff1f17] shadow-[0_12px_28px_rgba(0,0,0,0.08)] w-[650px] h-[500px] relative overflow-hidden max-w-[85vw] max-h-[65vw] rounded-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -157,7 +157,7 @@ export default function Home() {
 
               {/* Image Block Inclined */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
-                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[280px] h-[380px] relative overflow-hidden rounded-[1.5rem]">
+                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[280px] h-[380px] relative overflow-hidden rounded-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -209,7 +209,7 @@ export default function Home() {
         <section className="py-24 bg-white border-t border-[#f0f0f0]">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
                 <Image
                   src="https://picsum.photos/seed/iap-white/800/1000"
                   alt="Camiseta Branca em Destaque"
