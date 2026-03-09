@@ -26,7 +26,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Send, Calculator, Info } from 'lucide-react';
 import { addDoc, collection } from 'firebase/firestore';
-import { useFirestore } from '@/firebase';
+import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
@@ -74,15 +74,12 @@ export function OrderForm() {
     const qty = Number(watchedValues.quantidade) || 0;
     const isPix = watchedValues.pagamento === 'Pix';
     const isBulk = qty >= 2;
-    const isKit = watchedValues.produto === 'Kit Promocional';
 
-    let baseTotal = unitPrice * qty;
-    if (isKit) baseTotal = 156.00; // Legacy logic if kit is selected directly
+    const baseTotal = unitPrice * qty;
 
     let discountPercent = 0;
     let label = 'Sem desconto';
 
-    // Non-cumulative discount logic
     if (isPix) {
       discountPercent = 0.10;
       label = '10% OFF no Pix';
@@ -106,19 +103,26 @@ export function OrderForm() {
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     
-    try {
-      const orderData = {
-        ...values,
-        summary,
-        createdAt: new Date().toISOString(),
-        status: 'Pendente WhatsApp'
-      };
+    const orderData = {
+      ...values,
+      summary,
+      createdAt: new Date().toISOString(),
+      status: 'Pendente WhatsApp'
+    };
 
-      await addDoc(collection(db, "pedidos_iap_camisetas"), orderData);
+    // Non-blocking write to Firestore
+    addDoc(collection(db, "pedidos_iap_camisetas"), orderData)
+      .catch(async (error) => {
+        errorEmitter.emit('permission-error', new FirestorePermissionError({
+          path: 'pedidos_iap_camisetas',
+          operation: 'create',
+          requestResourceData: orderData
+        }));
+      });
 
-      const phoneNumber = '5541999999999';
-      
-      const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
+    const phoneNumber = '5541999999999'; // Substituir pelo número real
+    
+    const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
 
 *Dados do Pedido:*
 - *Nome:* ${values.nome}
@@ -133,24 +137,19 @@ export function OrderForm() {
 
 ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'Desejo conversar sobre parcelamento.'}`;
 
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-      toast({
-        title: "Dados Registrados!",
-        description: "Redirecionando para o WhatsApp...",
-      });
+    toast({
+      title: "Dados Registrados!",
+      description: "Redirecionando para o WhatsApp...",
+    });
 
+    // Short delay to allow the toast to be seen before redirect
+    setTimeout(() => {
       window.location.href = whatsappUrl;
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Erro ao processar",
-        description: "Não foi possível registrar seu pedido.",
-      });
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 1500);
   }
 
   return (
@@ -205,7 +204,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                     <SelectContent>
                       <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
                       <SelectItem value="Camiseta Comunicação Branca">Camiseta Branca</SelectItem>
-                      <SelectItem value="Kit Promocional">Promoção Especial (2 Peças)</SelectItem>
+                      <SelectItem value="Kit Promocional (2 Peças)">Promoção Especial (2 Peças)</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -325,7 +324,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           <Button 
             type="submit" 
-            className="w-full h-14 bg-primary hover:bg-accent text-white pill-button flex items-center justify-center gap-3 text-base shadow-lg shadow-primary/20"
+            className="w-full h-14 bg-primary hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-base shadow-lg transition-all font-semibold uppercase tracking-wider"
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />
