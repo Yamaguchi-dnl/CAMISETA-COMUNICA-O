@@ -1,29 +1,52 @@
-
 {
   "placeholderImages": [
     {
       "id": "camiseta-preta-hero",
-      "description": "Black t-shirt front and back split view",
-      "imageUrl": "https://picsum.photos/seed/iap-black-hero/1200/1000",
+      "description": "Black t-shirt campaign photo",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
       "imageHint": "black t-shirt"
     },
     {
-      "id": "camiseta-preta",
-      "description": "Black t-shirt Communication Ministry",
-      "imageUrl": "https://picsum.photos/seed/iap-black/800/1000",
-      "imageHint": "black t-shirt"
+      "id": "galeria-1",
+      "description": "Ministry lifestyle photo 1",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
+      "imageHint": "ministry photo"
     },
     {
-      "id": "camiseta-branca",
-      "description": "White t-shirt Communication Ministry",
-      "imageUrl": "https://picsum.photos/seed/iap-white/800/1000",
-      "imageHint": "white t-shirt"
+      "id": "galeria-2",
+      "description": "Ministry lifestyle photo 2",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
+      "imageHint": "ministry photo"
     },
     {
-      "id": "kit-promocional",
-      "description": "Promotional kit with two t-shirts",
-      "imageUrl": "https://picsum.photos/seed/iap-kit/800/1000",
-      "imageHint": "t-shirts kit"
+      "id": "galeria-3",
+      "description": "Ministry lifestyle photo 3",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
+      "imageHint": "ministry photo"
+    },
+    {
+      "id": "galeria-4",
+      "description": "Ministry lifestyle photo 4",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
+      "imageHint": "ministry photo"
+    },
+    {
+      "id": "galeria-5",
+      "description": "Ministry lifestyle photo 5",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
+      "imageHint": "ministry photo"
+    },
+    {
+      "id": "galeria-6",
+      "description": "Ministry lifestyle photo 6",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
+      "imageHint": "ministry photo"
+    },
+    {
+      "id": "galeria-7",
+      "description": "Ministry lifestyle photo 7",
+      "imageUrl": "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
+      "imageHint": "ministry photo"
     }
   ]
 }

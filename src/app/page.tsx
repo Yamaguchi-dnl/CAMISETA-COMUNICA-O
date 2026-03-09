@@ -39,6 +39,16 @@ export default function Home() {
     { title: "Duas opções de cor", text: "Disponível nas versões preta e branca, para que cada pessoa escolha a opção que melhor combina com seu estilo." },
   ];
 
+  const galleryImages = [
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
+    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
+  ];
+
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Toaster />
@@ -72,10 +82,10 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - Decreased size more */}
+                {/* The Image Frame - Smaller Size */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[50vw] h-[37vw] lg:w-[550px] lg:h-[410px] xl:w-[630px] xl:h-[470px] 
+                    w-[35vw] h-[45vw] lg:w-[420px] lg:h-[560px] xl:w-[480px] xl:h-[640px] 
                     max-w-[1100px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -91,7 +101,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[10px] xl:mt-[15px] 
+                mt-[-60px] xl:mt-[-80px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -113,9 +123,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block - Decreased size more */}
+              {/* Image Block */}
               <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[420px] h-[315px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-none border-none">
+                <div className="bg-white p-0 w-[380px] h-[500px] relative overflow-hidden max-w-[82vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -129,7 +139,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-5px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[-40px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -157,9 +167,9 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined - Decreased size more */}
+              {/* Image Block Inclined */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[190px] h-[275px] relative overflow-hidden rounded-none border-none">
+                <div className="bg-white p-0 w-[240px] h-[320px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -173,7 +183,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image from BEHIND */}
               <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-10px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-30px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
@@ -188,7 +198,7 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* CTA Button Pill Shaped */}
+              {/* CTA Button */}
               <Button asChild className="rounded-full bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
                 <a href="#reserva">COMPRAR AGORA</a>
               </Button>
@@ -213,11 +223,11 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
                 <Image
-                  src="https://picsum.photos/seed/iap-white/800/1000"
-                  alt="Camiseta Branca em Destaque"
+                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg"
+                  alt="Camiseta em Destaque"
                   fill
                   className="object-cover"
-                  data-ai-hint="white t-shirt"
+                  data-ai-hint="t-shirt lifestyle"
                 />
               </div>
               <div className="space-y-12">
@@ -290,7 +300,7 @@ export default function Home() {
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group ring-2 ring-accent/20">
                 <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                   <Image
-                    src="https://picsum.photos/seed/iap-kit-bundle/800/1000"
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                     alt="Kit Promocional"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
@@ -330,11 +340,11 @@ export default function Home() {
         {/* GALLERY SECTION */}
         <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden">
           <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6">
-            {[1, 2, 3, 4, 5, 6].map(i => (
+            {galleryImages.map((src, i) => (
               <div key={i} className="relative min-w-[300px] lg:min-w-[350px] aspect-square rounded-2xl overflow-hidden group snap-center">
                 <Image
-                  src={`https://picsum.photos/seed/iap-galeria-${i}/800/800`}
-                  alt={`Galeria ${i}`}
+                  src={src}
+                  alt={`Galeria ${i + 1}`}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                   data-ai-hint="lifestyle photo"
