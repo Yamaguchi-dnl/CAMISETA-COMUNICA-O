@@ -82,10 +82,10 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - Shadow behind, no border, no rounding - ADJUSTED TO 4:3 HORIZONTAL */}
+                {/* The Image Frame - Shadow behind, no border, no rounding - 4:3 HORIZONTAL */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[440px] h-[330px] xl:w-[520px] xl:h-[390px] 
+                    w-[560px] h-[420px] xl:w-[720px] xl:h-[540px] 
                     relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -123,7 +123,7 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block with Shadow - ADJUSTED TO 4:3 HORIZONTAL */}
+              {/* Image Block with Shadow - 4:3 HORIZONTAL */}
               <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
                 <div className="bg-white p-0 w-[400px] h-[300px] relative overflow-hidden max-w-[90vw] rounded-none border-none">
                   <Image
@@ -167,7 +167,7 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined with Shadow - ADJUSTED TO 4:3 HORIZONTAL */}
+              {/* Image Block Inclined with Shadow - 4:3 HORIZONTAL */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
                 <div className="bg-white p-0 w-[300px] h-[225px] relative overflow-hidden rounded-none border-none">
                   <Image
