@@ -35,7 +35,7 @@ export default function Home() {
 
   const benefits = [
     { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade, cuidado visual e identidade do Ministério de Comunicação." },
-    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especial.)" },
+    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especial." },
     { title: "Duas opções de cor", text: "Disponível nas versões preta e branca, para que cada pessoa escolha a opção que melhor combina com seu estilo." },
   ];
 
@@ -75,8 +75,8 @@ export default function Home() {
                 {/* The Image Frame */}
                 <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700">
                   <div className="bg-white p-0 border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] 
-                    w-[72vw] h-[52vw] lg:w-[680px] lg:h-[480px] xl:w-[820px] xl:h-[580px] 
-                    max-w-[850px] relative overflow-hidden rounded-[2.5rem]">
+                    w-[75vw] h-[55vw] lg:w-[720px] lg:h-[520px] xl:w-[860px] xl:h-[620px] 
+                    max-w-[900px] relative overflow-hidden rounded-[2.5rem]">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
@@ -91,14 +91,14 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image */}
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-25px] xl:mt-[-35px] 
+                mt-[-15px] xl:mt-[-20px] 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
 
               {/* CTA Area */}
               <div className="relative z-[5] mt-10 xl:mt-12">
-                <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold 
+                <Button asChild className="rounded-full bg-[#ff1f17] text-white font-bold 
                   px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 
                   hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
                   <a href="#ofertas">COMPRAR AGORA</a>
@@ -114,7 +114,7 @@ export default function Home() {
               </h1>
 
               <div className="relative z-[3] transform rotate-[-3deg] mt-2 mb-0">
-                <div className="bg-white p-0 border-[12px] border-[#ff1f17] shadow-[0_12px_28px_rgba(0,0,0,0.08)] w-[620px] h-[470px] relative overflow-hidden max-w-[82vw] max-h-[62vw] rounded-[2rem]">
+                <div className="bg-white p-0 border-[12px] border-[#ff1f17] shadow-[0_12px_28px_rgba(0,0,0,0.08)] w-[650px] h-[500px] relative overflow-hidden max-w-[85vw] max-h-[65vw] rounded-[2rem]">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -127,7 +127,7 @@ export default function Home() {
               </div>
 
               <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-34px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-[-25px] mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -141,7 +141,7 @@ export default function Home() {
                 <div className="w-[110px] h-[4px] bg-black mt-4 mx-auto" />
               </div>
 
-              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
+              <Button asChild className="rounded-full bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
                 <a href="#ofertas">COMPRAR AGORA</a>
               </Button>
             </div>
@@ -157,7 +157,7 @@ export default function Home() {
 
               {/* Image Block Inclined */}
               <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
-                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[260px] h-[360px] relative overflow-hidden rounded-[1.5rem]">
+                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[280px] h-[380px] relative overflow-hidden rounded-[1.5rem]">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                     alt="Carol costas camiseta IAP"
@@ -171,7 +171,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image */}
               <h2 
-                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-24px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-30px] mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
@@ -186,9 +186,9 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* CTA Button Rectangular */}
-              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
-                <a href="#ofertas">COMPRAR AGORA</a>
+              {/* CTA Button Rounded */}
+              <Button asChild className="rounded-full bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
+                <a href="#reserva">COMPRAR AGORA</a>
               </Button>
             </div>
 
@@ -365,7 +365,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="bg-white text-black py-24 border-t">
         <div className="container mx-auto px-6 text-center">
-          <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase">
+          <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase text-black">
             <span>IAP</span><span className="text-accent">CAMISETAS</span>
           </div>
           
