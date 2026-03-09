@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         body: ['Montserrat', 'sans-serif'],
-        headline: ['"Dela Gothic One"', 'cursive'],
+        headline: ['BorisBlackBloxx', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {

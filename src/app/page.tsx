@@ -50,10 +50,10 @@ export default function Home() {
         <section className="relative min-h-[760px] h-[90vh] bg-[#f5f5f5] overflow-hidden flex items-center justify-center pt-[72px] lg:pt-[88px]">
           {/* Background Typography Layer */}
           <div className="absolute inset-0 z-[1] flex flex-col items-center justify-between pointer-events-none select-none py-[2%]">
-            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(72px,22vw,132px)] lg:text-[clamp(140px,18vw,320px)] animate-fade-in">
+            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(72px, 22vw, 132px)] lg:text-[clamp(140px, 18vw, 320px)] animate-fade-in">
               IAP
             </h2>
-            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(42px,12vw,88px)] lg:text-[clamp(80px,11vw,220px)] animate-fade-in delay-150">
+            <h2 className="font-headline font-normal uppercase leading-[0.82] text-[#111111] opacity-95 text-[clamp(42px, 12vw, 88px)] lg:text-[clamp(80px, 11vw, 220px)] animate-fade-in delay-150">
               BARREIRINHA
             </h2>
           </div>
@@ -89,7 +89,7 @@ export default function Home() {
 
             {/* CTA Area */}
             <div className="mt-12 z-[5] animate-fade-in delay-500">
-              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-[14px] hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl border-none uppercase tracking-[0.04em]">
+              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-[14px] hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl border-none uppercase tracking-[0.05em]">
                 <a href="#ofertas">Comprar agora</a>
               </Button>
             </div>
@@ -142,7 +142,7 @@ export default function Home() {
           <div className="container mx-auto px-6 text-center">
             <h3 className="mb-4">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
             <p className="text-[#333333] mb-2 font-medium">Cada camiseta por R$ 78,00</p>
-            <p className="text-[#333333] mb-12 font-bold uppercase text-xs tracking-widest">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
+            <p className="text-[#333333] mb-12 font-bold uppercase text-xs tracking-[0.1em]">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
             
             {/* Countdown */}
             <div className="flex flex-col items-center gap-6">
@@ -174,14 +174,14 @@ export default function Home() {
                   />
                 </div>
                 <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline">LEVE 1 - Camiseta IAP</h4>
-                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">Escolha preta ou branca</p>
+                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
                 <div className="flex flex-col items-center gap-1 mb-8">
                   <span className="text-4xl font-normal tracking-tighter text-primary font-headline">R$ 78,00</span>
-                  <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
+                  <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter font-body">
                     <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.04em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -195,20 +195,20 @@ export default function Home() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                     data-ai-hint="t-shirts bundle"
                   />
-                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
+                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest font-body">
                     Melhor Oferta
                   </div>
                 </div>
                 <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline">LEVE 2 - Promoção Especial</h4>
-                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">10% OFF comprando 2 camisetas</p>
+                <p className="text-xs text-[#777777] uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
                 <div className="flex flex-col items-center gap-1 mb-8">
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-[#777777] line-through font-body">R$ 156,00</span>
                     <span className="text-4xl font-normal tracking-tighter text-primary font-headline">R$ 140,40</span>
                   </div>
-                  <span className="text-xs text-[#777777] font-semibold">R$ 70,20 por unidade</span>
+                  <span className="text-xs text-[#777777] font-semibold font-body">R$ 70,20 por unidade</span>
                 </div>
-                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.04em] text-[14px] border-none">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-[0.05em] text-[14px] border-none">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
