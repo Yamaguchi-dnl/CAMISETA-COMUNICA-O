@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Instagram, Send } from 'lucide-react';
+import { CheckCircle2, Instagram, Send, Calculator } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -44,66 +44,108 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* EXACT REFERENCE HERO SECTION */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-24 pb-14 lg:pt-32 lg:pb-24 min-h-[760px] lg:min-h-[920px]">
+        {/* HERO SECTION - REFINED EDITORIAL LAYOUT */}
+        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-24 pb-40 lg:pt-32 lg:pb-40 min-h-[920px]">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
-            {/* Top Large Wording */}
-            <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.01em] mb-[-26px] lg:mb-[-40px] text-[clamp(40px,11vw,72px)] lg:text-[clamp(86px,8.6vw,180px)]">
-              LET CREATIVITY
-            </h1>
+            {/* DESKTOP HERO VERSION */}
+            <div className="hidden lg:flex flex-col items-center w-full">
+              {/* Top Large Wording */}
+              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.045em] mb-[-26px] text-[clamp(86px,8.6vw,180px)]">
+                LET CREATIVITY
+              </h1>
 
-            {/* Center Visual Block */}
-            <div className="relative w-full flex flex-col lg:flex-row items-center justify-center z-[3]">
-              
-              {/* Left Text Block (Desktop Only) */}
-              <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
-                <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
-                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-normal text-black uppercase block mb-3">
-                    COMUNICAR É MISSÃO.
-                  </span>
-                  Uma camiseta para quem serve <br /> anunciando a mensagem.
-                </p>
-                <div className="w-[112px] h-[4px] bg-[#111111]" />
+              {/* Center Visual Block */}
+              <div className="relative w-full flex items-center justify-center z-[3]">
+                
+                {/* Left Text Block */}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
+                  <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
+                    <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
+                      COMUNICAR É MISSÃO.
+                    </span>
+                    Uma camiseta para quem serve <br /> anunciando a mensagem.
+                  </p>
+                  <div className="w-[112px] h-[4px] bg-[#111111]" />
+                </div>
+
+                {/* The Image Frame */}
+                <div className="relative z-[3] transform rotate-[-2deg] transition-transform duration-700">
+                  <div className="bg-white p-0 border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] w-[640px] h-[460px] max-w-[700px] relative overflow-hidden">
+                    <Image
+                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                      alt="IAP Camisetas Campaign"
+                      fill
+                      className="object-cover"
+                      priority
+                      data-ai-hint="fashion models"
+                    />
+                  </div>
+                </div>
               </div>
 
-              {/* The Image Frame */}
-              <div className="relative z-[3] transform rotate-[-1deg] lg:rotate-[-2deg] transition-transform duration-700">
-                <div className="bg-white p-0 border-[10px] lg:border-[16px] border-[#ff1f17] shadow-[0_16px_40px_rgba(0,0,0,0.12)] w-[86vw] h-[60vw] lg:w-[640px] lg:h-[460px] max-w-[700px] max-height-[520px] relative overflow-hidden">
+              {/* Bottom Large Wording - Overlays Image */}
+              <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.055em] mt-[-54px] text-[clamp(110px,10vw,250px)]">
+                SPEAK
+              </h2>
+
+              {/* CTA Area */}
+              <div className="relative z-[5] mt-8 lg:mt-10">
+                <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold px-14 py-8 text-[18px] hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none">
+                  <a href="#ofertas">COMPRAR AGORA</a>
+                </Button>
+              </div>
+            </div>
+
+            {/* MOBILE HERO VERSION - EXACT MATCH TO REFERENCE */}
+            <div className="flex lg:hidden flex-col items-center w-full pt-6">
+              {/* Top Text with subtle shadow */}
+              <h1 
+                className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px,9.4vw,56px)] z-[1]"
+                style={{ textShadow: '-2px 0 #1e3a8a' }}
+              >
+                LET CREATIVITY
+              </h1>
+
+              {/* Image Block Inclined */}
+              <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0">
+                <div className="bg-white p-0 border-[8px] border-[#ff1f17] shadow-[0_8px_22px_rgba(0,0,0,0.08)] w-[215px] h-[300px] relative overflow-hidden">
                   <Image
-                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                    alt="IAP Camisetas Campaign"
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
+                    alt="Carol costas camiseta IAP"
                     fill
                     className="object-cover"
                     priority
-                    data-ai-hint="fashion models"
+                    data-ai-hint="t-shirt model"
                   />
                 </div>
               </div>
-            </div>
 
-            {/* Bottom Large Wording - Overlays Image */}
-            <h2 className="relative z-[4] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.02em] mt-[-18px] lg:mt-[-54px] text-[clamp(52px,15vw,98px)] lg:text-[clamp(110px,10vw,250px)]">
-              SPEAK
-            </h2>
+              {/* Bottom Text Overlapping Image */}
+              <h2 
+                className="relative z-[4] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-34px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                style={{ textShadow: '-2px 0 #1e3a8a' }}
+              >
+                SPEAK
+              </h2>
 
-            {/* Left Text Block (Mobile Version) */}
-            <div className="lg:hidden text-center mt-8 px-4">
-              <p className="font-body text-base text-[#111111]">
-                <span className="font-headline text-xl text-black uppercase block mb-2">
+              {/* Support Text Block */}
+              <div className="flex flex-col items-center text-center px-4 mb-10 mt-1">
+                <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
-                </span>
-                Uma camiseta para quem serve <br /> anunciando a mensagem.
-              </p>
-            </div>
+                </h3>
+                <p className="font-body text-[#111111] text-sm leading-[1.4] mt-2.5 max-w-[340px]">
+                  Uma camiseta para quem serve anunciando a <br /> mensagem.
+                </p>
+              </div>
 
-            {/* CTA Area */}
-            <div className="relative z-[5] mt-8 lg:mt-10">
-              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-bold px-10 lg:px-14 py-7 lg:py-8 text-[16px] lg:text-[18px] hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none">
+              {/* CTA Button Rectangular */}
+              <Button asChild className="rounded-none bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
                 <a href="#ofertas">COMPRAR AGORA</a>
               </Button>
             </div>
+
           </div>
         </section>
 
