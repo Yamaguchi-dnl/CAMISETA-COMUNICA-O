@@ -6,8 +6,7 @@ import { Header } from '@/components/Header';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { PRODUCTS } from '@/lib/products';
-import { ArrowRight, ChevronRight, Clock, Instagram, Send, CheckCircle2, BadgePercent } from 'lucide-react';
+import { ArrowRight, CheckCircle2, BadgePercent, Instagram, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -27,12 +26,12 @@ export default function Home() {
   }, []);
 
   const faqItems = [
-    { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
-    { q: "Quais tamanhos estarão disponíveis?", a: "Disponibilizamos do PP ao XGG, atendendo a todos os perfis com modelagem moderna." },
-    { q: "O pagamento é feito no site?", a: "Não. Você inicia o pedido aqui e finaliza o pagamento via WhatsApp com nossa equipe." },
-    { q: "Como funciona a opção parcelada?", a: "Ao escolher parcelamento, te direcionamos para o WhatsApp para alinhar as parcelas." },
-    { q: "Posso pedir mais de uma unidade?", a: "Sim. O formulário permite escolher a quantidade desejada e aplica 10% de desconto para 2 ou mais unidades." },
-    { q: "Como saberei se meu pedido foi registrado?", a: "Antes do redirecionamento ao WhatsApp, os dados do pedido são salvos em nosso banco de dados seguro." },
+    { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e podem ter a mesma modelagem, salvo ajuste específico de lote." },
+    { q: "Quais tamanhos estarão disponíveis?", a: "Os tamanhos podem ser disponibilizados em PP, P, M, G, GG e XGG, conforme estoque ou produção definida." },
+    { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp, com Pix ou alinhamento de parcelamento." },
+    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento, o sistema direciona você para o WhatsApp para combinar a melhor forma de pagamento." },
+    { q: "Posso pedir mais de uma unidade?", a: "Sim. O formulário deve permitir escolher a quantidade desejada." },
+    { q: "Como saberei se meu pedido foi registrado?", a: "Antes do redirecionamento ao WhatsApp, os dados do pedido devem ser salvos no Firebase Firestore." },
   ];
 
   const benefits = [
@@ -46,47 +45,53 @@ export default function Home() {
       <Header />
       <Toaster />
 
-      <main className="flex-1 pt-16">
-        {/* HERO SECTION */}
-        <section className="bg-[#efefef] py-20 lg:py-32 overflow-hidden">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="max-w-xl animate-fade-in">
-                <h1 className="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight uppercase">
-                  A camiseta da Comunicação que você precisa
-                </h1>
-                <p className="text-lg lg:text-xl text-[#777777] mb-8 font-light">
-                  Camisetas oficiais da Comunicação por R$ 78,00 cada, com condições especiais no Pix e na compra de 2 ou mais.
-                </p>
-                <div className="flex flex-wrap gap-4 mb-10">
-                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-[#dddddd] shadow-sm">
-                    <BadgePercent className="h-4 w-4 text-accent" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">10% OFF no Pix</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-[#dddddd] shadow-sm">
-                    <BadgePercent className="h-4 w-4 text-accent" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">10% OFF em 2+ camisetas</span>
-                  </div>
-                </div>
-                <Button asChild className="pill-button bg-primary text-white hover:bg-accent h-14">
-                  <a href="#ofertas">Ver ofertas <ArrowRight className="ml-2 h-4 w-4" /></a>
-                </Button>
-                <div className="mt-12 flex gap-4">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <div className="w-2 h-2 rounded-full bg-[#ccc]" />
-                  <div className="w-2 h-2 rounded-full bg-[#ccc]" />
-                </div>
-              </div>
-              <div className="relative aspect-square lg:aspect-[1.2/1] w-full transform hover:scale-[1.02] transition-transform duration-700">
+      <main className="flex-1">
+        {/* EDITORIAL HERO SECTION */}
+        <section className="relative min-h-[760px] h-[90vh] bg-[#f5f5f5] overflow-hidden flex items-center justify-center pt-16">
+          {/* Background Typography Layer */}
+          <div className="absolute inset-0 z-[1] flex flex-col items-center justify-between pointer-events-none select-none py-[2%]">
+            <h2 className="font-headline font-bold uppercase tracking-tighter leading-[0.82] text-[#111111] opacity-95 text-[clamp(72px,22vw,132px)] lg:text-[clamp(140px,18vw,320px)] animate-fade-in">
+              IAP
+            </h2>
+            <h2 className="font-headline font-bold uppercase tracking-tighter leading-[0.82] text-[#111111] opacity-95 text-[clamp(42px,12vw,88px)] lg:text-[clamp(80px,11vw,220px)] animate-fade-in delay-150">
+              BARREIRINHA
+            </h2>
+          </div>
+
+          {/* Foreground Content Container */}
+          <div className="container relative z-[3] max-w-[1400px] px-10 flex flex-col items-center justify-center">
+            {/* Supporting Text (Desktop only - positioned like reference) */}
+            <div className="hidden lg:block absolute left-[7%] top-[48%] -translate-y-1/2 z-[4] space-y-4 max-w-[220px]">
+              <p className="font-body font-medium text-lg leading-tight text-[#111111]">
+                Camiseta oficial da Comunicação
+              </p>
+              <p className="font-body text-sm text-[#666666] leading-relaxed">
+                Preta e branca para o time da IAP Barreirinha
+              </p>
+            </div>
+
+            {/* Central Image Block */}
+            <div className="relative group animate-fade-in delay-300">
+              <div className="bg-[#e8e1da] p-4 border-[10px] border-white/65 shadow-[0_20px_60px_rgba(0,0,0,0.08)] w-[78vw] h-[96vw] lg:w-[420px] lg:h-[520px] relative overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
-                  src="https://picsum.photos/seed/iap-black-hero/1200/1000"
-                  alt="Destaque Camiseta Preta"
+                  src="https://picsum.photos/seed/iap-black/800/1000"
+                  alt="camiseta da Comunicação IAP Barreirinha"
                   fill
-                  className="object-cover rounded-3xl"
+                  className="object-cover grayscale-[0.2]"
                   priority
                   data-ai-hint="black t-shirt"
                 />
               </div>
+              
+              {/* Decorative Bar */}
+              <div className="hidden lg:block absolute -right-24 bottom-12 w-16 h-[2px] bg-[#111111] z-[4]" />
+            </div>
+
+            {/* CTA Area */}
+            <div className="mt-12 z-[5] animate-fade-in delay-500">
+              <Button asChild className="rounded-full bg-[#C62828] text-white font-semibold px-10 py-7 text-base hover:bg-[#111111] transition-all shadow-xl hover:shadow-2xl">
+                <a href="#ofertas">Comprar agora</a>
+              </Button>
             </div>
           </div>
         </section>
@@ -94,10 +99,9 @@ export default function Home() {
         {/* INTRO SECTION */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-6 text-center max-w-3xl">
-            <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-accent mb-6">Identidade IAP</h2>
-            <h3 className="text-3xl lg:text-5xl font-extrabold mb-8 uppercase leading-tight">Muito mais que uma camiseta!</h3>
+            <h2 className="text-3xl lg:text-5xl font-extrabold mb-8 uppercase leading-tight tracking-tight">Muito mais que uma camiseta!</h2>
             <p className="text-lg lg:text-xl text-[#777777] font-light leading-relaxed">
-              As camisetas da Comunicação IAP Barreirinha unem identidade, qualidade e propósito para quem serve com excelência.
+              As camisetas da Comunicação IAP Barreirinha unem identidade, qualidade e propósito.
             </p>
           </div>
         </section>
@@ -108,11 +112,11 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://picsum.photos/seed/iap-detail/800/1000"
-                  alt="Detalhe Produto"
+                  src="https://picsum.photos/seed/iap-white/800/1000"
+                  alt="Camiseta Branca em Destaque"
                   fill
                   className="object-cover"
-                  data-ai-hint="modern t-shirt"
+                  data-ai-hint="white t-shirt"
                 />
               </div>
               <div className="space-y-12">
@@ -137,7 +141,7 @@ export default function Home() {
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
             <h3 className="text-2xl lg:text-4xl font-extrabold mb-4 uppercase tracking-tight">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-[#777777] mb-4">Cada camiseta por R$ 78,00</p>
+            <p className="text-[#777777] mb-2">Cada camiseta por R$ 78,00</p>
             <p className="text-[#777777] mb-12 font-bold uppercase text-xs tracking-widest">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
             
             {/* Countdown */}
@@ -159,18 +163,15 @@ export default function Home() {
 
             {/* Purchase Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto">
-              {/* Individual Card */}
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
-                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden">
+                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                   <Image
-                    src="https://picsum.photos/seed/iap-black/800/1000"
-                    alt="Camisetas"
+                    src="https://picsum.photos/seed/iap-black-white/800/1000"
+                    alt="Camiseta Individual"
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                    data-ai-hint="t-shirts"
                   />
-                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
-                    Destaque
-                  </div>
                 </div>
                 <h4 className="text-lg font-bold uppercase tracking-widest mb-2">LEVE 1 - Camiseta IAP</h4>
                 <p className="text-xs text-[#777777] uppercase tracking-wider mb-6">Escolha preta ou branca</p>
@@ -180,19 +181,19 @@ export default function Home() {
                     <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
                   </div>
                 </div>
-                <Button asChild className="w-full pill-button bg-primary text-white hover:bg-accent h-14">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
 
-              {/* Promo Card */}
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group ring-2 ring-accent/20">
-                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden">
+                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                   <Image
-                    src="https://picsum.photos/seed/iap-kit/800/1000"
-                    alt="Kit Promo"
+                    src="https://picsum.photos/seed/iap-kit-bundle/800/1000"
+                    alt="Kit Promocional"
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                    data-ai-hint="t-shirts bundle"
                   />
                   <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
                     Melhor Oferta
@@ -207,7 +208,7 @@ export default function Home() {
                   </div>
                   <span className="text-xs text-[#777777] font-semibold">R$ 70,20 por unidade</span>
                 </div>
-                <Button asChild className="w-full pill-button bg-primary text-white hover:bg-accent h-14">
+                <Button asChild className="w-full h-14 bg-primary text-white hover:bg-accent rounded-full font-bold uppercase tracking-widest text-sm">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
@@ -223,15 +224,16 @@ export default function Home() {
         </section>
 
         {/* GALLERY SECTION */}
-        <section className="py-12 bg-white border-y border-[#f0f0f0] overflow-hidden">
-          <div className="flex gap-4 overflow-x-auto pb-8 scrollbar-hide px-6">
+        <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden">
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6">
             {[1, 2, 3, 4, 5, 6].map(i => (
-              <div key={i} className="relative min-w-[280px] aspect-square rounded-2xl overflow-hidden group">
+              <div key={i} className="relative min-w-[300px] lg:min-w-[350px] aspect-square rounded-2xl overflow-hidden group snap-center">
                 <Image
-                  src={`https://picsum.photos/seed/iap-gal-${i}/600/600`}
+                  src={`https://picsum.photos/seed/iap-galeria-${i}/800/800`}
                   alt={`Galeria ${i}`}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  data-ai-hint="lifestyle photo"
                 />
               </div>
             ))}
