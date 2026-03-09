@@ -61,7 +61,7 @@ export default function Home() {
               {/* Left Text Block (Desktop Only) */}
               <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
                 <p className="font-body text-[17px] leading-[1.4] text-[#111111] mb-6">
-                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.02em] text-black uppercase mr-2 inline-block">
+                  <span className="font-headline text-[clamp(20px,1.6vw,26px)] leading-none tracking-[-0.02em] text-black uppercase block mb-3">
                     COMUNICAR É MISSÃO.
                   </span>
                   Uma camiseta para quem serve anunciando a mensagem.
@@ -92,7 +92,7 @@ export default function Home() {
             {/* Left Text Block (Mobile Version) */}
             <div className="lg:hidden text-center mt-8 px-4">
               <p className="font-body text-base text-[#111111]">
-                <span className="font-headline text-xl text-black uppercase mr-2 inline-block">
+                <span className="font-headline text-xl text-black uppercase block mb-2">
                   COMUNICAR É MISSÃO.
                 </span>
                 Uma camiseta para quem serve anunciando a mensagem.
