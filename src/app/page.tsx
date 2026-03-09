@@ -101,7 +101,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-30px] xl:mt-[-40px] 
+                mt-4 xl:mt-8 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -139,7 +139,7 @@ export default function Home() {
 
               {/* Bottom Large Wording - Overlays Image from BEHIND */}
               <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-[-20px] mb-[18px] text-[clamp(82px,10vw,138px)]">
+                mt-4 mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
@@ -183,7 +183,7 @@ export default function Home() {
 
               {/* Bottom Text Overlapping Image from BEHIND */}
               <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-[-10px] mb-[18px] text-[clamp(54px,16vw,86px)]"
+                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-8 mb-[18px] text-[clamp(54px,16vw,86px)]"
               >
                 SPEAK
               </h2>
@@ -274,22 +274,24 @@ export default function Home() {
 
             {/* Purchase Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto">
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group">
-                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
-                  <Image
-                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                    alt="Camiseta Individual"
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
-                    data-ai-hint="t-shirts"
-                  />
-                </div>
-                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
-                <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
-                <div className="flex flex-col items-center gap-1 mb-8">
-                  <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 78,00</span>
-                  <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter font-body">
-                    <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+                <div className="w-full">
+                  <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
+                    <Image
+                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                      alt="Camiseta Individual"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      data-ai-hint="t-shirts"
+                    />
+                  </div>
+                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
+                  <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
+                  <div className="flex flex-col items-center gap-1 mb-8">
+                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 78,00</span>
+                    <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter font-body">
+                      <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
+                    </div>
                   </div>
                 </div>
                 <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
@@ -297,27 +299,29 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center hover:shadow-xl transition-all group ring-2 ring-accent/20">
-                <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
-                  <Image
-                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
-                    alt="Kit Promocional"
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
-                    data-ai-hint="t-shirts bundle"
-                  />
-                  <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest font-body">
-                    Melhor Oferta
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
+                <div className="w-full">
+                  <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
+                    <Image
+                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
+                      alt="Kit Promocional"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      data-ai-hint="t-shirts bundle"
+                    />
+                    <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest font-body">
+                      Melhor Oferta
+                    </div>
                   </div>
-                </div>
-                <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção Especial</h4>
-                <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
-                <div className="flex flex-col items-center gap-1 mb-8">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-black/60 line-through font-body">R$ 156,00</span>
-                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
+                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção Especial</h4>
+                  <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
+                  <div className="flex flex-col items-center gap-1 mb-8">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-black/60 line-through font-body">R$ 156,00</span>
+                      <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
+                    </div>
+                    <span className="text-xs text-black font-semibold font-body">R$ 70,20 por unidade</span>
                   </div>
-                  <span className="text-xs text-black font-semibold font-body">R$ 70,20 por unidade</span>
                 </div>
                 <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
                   <a href="#reserva">APROVEITAR KIT</a>
