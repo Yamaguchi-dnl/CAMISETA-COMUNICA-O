@@ -1,4 +1,3 @@
-
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -11,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Plus Jakarta Sans"', 'sans-serif'],
-        headline: ['"Sora"', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
+        headline: ['"Dela Gothic One"', 'cursive'],
         code: ['monospace'],
       },
       colors: {

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 z-[100] w-full transition-all duration-300 ease-in-out",
         isScrolled 
-          ? "bg-white/90 backdrop-blur-md border-b border-black/5 py-4 shadow-sm" 
+          ? "bg-white/92 backdrop-blur-[10px] border-b border-black/5 py-4 shadow-sm" 
           : "bg-transparent py-6 lg:py-8"
       )}
     >
@@ -42,7 +42,7 @@ export function Header() {
             <Link 
               key={item.label} 
               href={item.href} 
-              className="text-[13px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
+              className="text-[14px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
             >
               {item.label}
             </Link>
@@ -54,7 +54,7 @@ export function Header() {
           href="/" 
           className="flex flex-1 lg:flex-none justify-center items-center gap-1.5"
         >
-          <span className="font-headline text-lg lg:text-xl font-bold tracking-tight text-[#111111]">
+          <span className="font-headline text-[18px] lg:text-[20px] font-normal tracking-wider text-[#111111] uppercase">
             IAP <span className="text-accent">CAMISETAS</span>
           </span>
         </Link>
@@ -63,7 +63,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end gap-6">
           <Link 
             href="#reserva" 
-            className="flex items-center gap-2 text-[13px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-[14px] font-medium tracking-wide text-[#111111] hover:text-accent transition-colors"
           >
             <ShoppingBag className="h-4 w-4" />
             <span className="hidden sm:inline">Carrinho <span className="text-accent font-bold">0</span></span>

@@ -110,7 +110,6 @@ export function OrderForm() {
       status: 'Pendente WhatsApp'
     };
 
-    // Non-blocking write to Firestore
     addDoc(collection(db, "pedidos_iap_camisetas"), orderData)
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
@@ -120,7 +119,7 @@ export function OrderForm() {
         }));
       });
 
-    const phoneNumber = '5541999999999'; // Substituir pelo número real
+    const phoneNumber = '5541999999999'; 
     
     const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
 
@@ -145,7 +144,6 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
       description: "Redirecionando para o WhatsApp...",
     });
 
-    // Short delay to allow the toast to be seen before redirect
     setTimeout(() => {
       window.location.href = whatsappUrl;
       setIsSubmitting(false);
@@ -155,8 +153,8 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
   return (
     <div id="reserva" className="bg-white p-8 lg:p-12 rounded-[2rem] border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
       <div className="text-center mb-10">
-        <h3 className="font-headline text-2xl lg:text-3xl font-extrabold mb-2 uppercase tracking-tight">Finalize sua reserva</h3>
-        <p className="text-muted-foreground text-sm">O desconto de 10% será aplicado automaticamente se você escolher Pix ou levar 2+ unidades.</p>
+        <h3 className="font-headline text-2xl lg:text-3xl font-normal mb-2 uppercase tracking-tight">Finalize sua reserva</h3>
+        <p className="text-muted-foreground text-sm font-medium">O desconto de 10% será aplicado automaticamente se você escolher Pix ou levar 2+ unidades.</p>
       </div>
       
       <Form {...form}>
@@ -166,9 +164,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="nome"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Nome completo</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Nome completo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Como podemos te chamar?" className="rounded-xl h-12 border-[#dddddd]" {...field} />
+                  <Input placeholder="Como podemos te chamar?" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -181,9 +179,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="whatsapp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">WhatsApp</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">WhatsApp</FormLabel>
                   <FormControl>
-                    <Input placeholder="(00) 00000-0000" className="rounded-xl h-12 border-[#dddddd]" {...field} />
+                    <Input placeholder="(00) 00000-0000" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -194,10 +192,10 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="produto"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Produto</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Produto</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd]">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body">
                         <SelectValue placeholder="Selecione o modelo" />
                       </SelectTrigger>
                     </FormControl>
@@ -219,10 +217,10 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="tamanho"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Tamanho</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Tamanho</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd]">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body">
                         <SelectValue placeholder="Seu tamanho" />
                       </SelectTrigger>
                     </FormControl>
@@ -241,9 +239,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               name="quantidade"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Quantidade</FormLabel>
+                  <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Quantidade</FormLabel>
                   <FormControl>
-                    <Input type="number" className="rounded-xl h-12 border-[#dddddd]" {...field} />
+                    <Input type="number" className="rounded-xl h-12 border-[#dddddd] font-body" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -256,7 +254,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="pagamento"
             render={({ field }) => (
               <FormItem className="space-y-4">
-                <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Forma de Pagamento</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Forma de Pagamento</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -283,7 +281,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
           />
 
           {/* ORDER SUMMARY */}
-          <div className="bg-[#f9f9f9] rounded-2xl p-6 border border-[#eeeeee] space-y-3">
+          <div className="bg-[#f9f9f9] rounded-2xl p-6 border border-[#eeeeee] space-y-3 font-body">
             <div className="flex items-center gap-2 mb-2 text-primary font-bold text-xs uppercase tracking-widest">
               <Calculator className="h-4 w-4" /> Resumo do Pedido
             </div>
@@ -298,7 +296,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               </div>
             )}
             <Separator className="bg-[#dddddd]" />
-            <div className="flex justify-between font-extrabold text-lg">
+            <div className="flex justify-between font-bold text-lg">
               <span>TOTAL FINAL</span>
               <span>R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
@@ -309,11 +307,11 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             name="observacoes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-xs font-bold uppercase tracking-wider text-[#777777]">Observações (Opcional)</FormLabel>
+                <FormLabel className="text-[14px] font-medium tracking-wide text-[#777777]">Observações (Opcional)</FormLabel>
                 <FormControl>
                   <Textarea 
                     placeholder="Algum detalhe específico?" 
-                    className="resize-none rounded-xl border-[#dddddd] min-h-[100px]" 
+                    className="resize-none rounded-xl border-[#dddddd] min-h-[100px] font-body" 
                     {...field} 
                   />
                 </FormControl>
@@ -324,14 +322,14 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           <Button 
             type="submit" 
-            className="w-full h-14 bg-primary hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-base shadow-lg transition-all font-semibold uppercase tracking-wider"
+            className="w-full h-14 bg-primary hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-[14px] shadow-lg transition-all font-semibold uppercase tracking-[0.04em]"
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />
             {isSubmitting ? 'REGISTRANDO...' : 'IR PARA O WHATSAPP'}
           </Button>
           
-          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-xl text-[10px] text-blue-700 uppercase tracking-widest font-bold border border-blue-100">
+          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-xl text-[12px] text-blue-700 font-medium border border-blue-100">
             <Info className="h-4 w-4 shrink-0" />
             <span>O desconto será calculado automaticamente conforme a forma de pagamento ou quantidade escolhida.</span>
           </div>
