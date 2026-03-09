@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Header } from '@/components/Header';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
@@ -42,25 +41,25 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
-      <Header />
+      {/* Header removed as requested */}
       <Toaster />
 
       <main className="flex-1">
         {/* EDITORIAL CENTRALIZED HERO SECTION */}
-        <section className="relative min-h-[720px] lg:h-screen bg-[#f5f5f5] overflow-hidden flex flex-col items-center justify-center pt-[96px] lg:pt-[110px] pb-12 lg:pb-[80px]">
+        <section className="relative bg-[#f5f5f5] overflow-hidden flex flex-col items-center pt-[60px] lg:pt-[80px] pb-[120px] lg:pb-[160px] min-h-[760px] lg:min-h-[900px]">
           
           {/* Main Editorial Stack */}
-          <div className="container relative z-[3] max-w-[1400px] px-4 lg:px-8 flex flex-col items-center justify-center flex-1">
+          <div className="container relative z-[3] max-w-[1400px] px-4 lg:px-8 flex flex-col items-center justify-center">
             
             {/* Top Graphic Text */}
-            <div className="relative z-[2] -mb-2 lg:-mb-6 pointer-events-none select-none">
-              <h2 className="font-headline font-normal uppercase leading-[0.9] text-[#111111] tracking-[-0.04em] text-center text-[clamp(34px,10vw,62px)] lg:text-[clamp(72px,9vw,170px)]">
-                BE STILL, LET&apos;S
+            <div className="relative z-[2] -mb-4 lg:-mb-10 pointer-events-none select-none">
+              <h2 className="font-headline font-normal uppercase leading-[0.9] text-[#111111] tracking-[-0.04em] text-center text-[clamp(42px,12vw,70px)] lg:text-[clamp(90px,10vw,180px)]">
+                BE STILL
               </h2>
             </div>
 
             {/* Center Image Block */}
-            <div className="relative z-[3] animate-fade-in delay-300">
+            <div className="relative z-[3] animate-fade-in">
               <div className="bg-[#e7e1d9] p-[10px] border-[10px] border-white/72 shadow-[0_18px_42px_rgba(0,0,0,0.08)] w-[82vw] h-[98vw] lg:w-[420px] lg:h-[520px] max-w-[460px] max-height-[560px] relative overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
                 <Image
                   src="https://lh3.googleusercontent.com/pw/AP1GczMCULydqmuzcoaJMzEtt1VV0DTzSH8dLWzJVEBmGrBHl5o9_lE74bS8BLBQ9tFylUF4_pGzHvKz2YtFX5S34rL18g4L2LOsq-pDik8A1WmybflJMzlM-TRRd812mdxPWdO8uB9siPuBDcF9V5YPPNz3SQ=w513-h911-s-no-gm?authuser=0"
@@ -74,14 +73,14 @@ export default function Home() {
             </div>
 
             {/* Bottom Graphic Text - Overlays Image */}
-            <div className="relative z-[4] -mt-5 lg:-mt-16 pointer-events-none select-none">
-              <h2 className="font-headline font-normal uppercase leading-[0.86] text-[#111111] tracking-[-0.05em] text-center text-[clamp(38px,12vw,72px)] lg:text-[clamp(90px,10.6vw,210px)]">
-                CREATIVE SPEAK
+            <div className="relative z-[4] -mt-10 lg:-mt-20 pointer-events-none select-none">
+              <h2 className="font-headline font-normal uppercase leading-[0.86] text-[#111111] tracking-[-0.05em] text-center text-[clamp(50px,14vw,90px)] lg:text-[clamp(110px,12vw,220px)]">
+                LET CREATIVE SPEAK
               </h2>
             </div>
 
             {/* Discreet Support Text - Absolute on Desktop */}
-            <div className="w-full lg:max-w-[240px] text-center lg:text-left mt-8 lg:mt-0 lg:absolute lg:left-[10%] lg:top-[46%] z-[4] animate-fade-in delay-500">
+            <div className="w-full lg:max-w-[240px] text-center lg:text-left mt-8 lg:mt-0 lg:absolute lg:left-[10%] lg:top-[46%] z-[4]">
               <h3 className="font-body font-semibold text-[18px] leading-[1.2] text-[#111111] mb-3">
                 Camiseta oficial da Comunicação
               </h3>
@@ -96,8 +95,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CTA Area - Positioned strictly below to avoid overlap */}
-          <div className="relative z-[5] mt-10 lg:mt-11 animate-fade-in delay-700 px-4">
+          {/* CTA Area */}
+          <div className="relative z-[5] mt-12 lg:mt-16 animate-fade-in delay-200 px-4">
             <Button asChild className="rounded-full bg-[#d93025] text-white font-bold px-10 lg:px-14 py-7 lg:py-8 text-[14px] lg:text-[16px] hover:bg-[#111111] transition-all shadow-[0_10px_24px_rgba(0,0,0,0.12)] hover:shadow-2xl border-none uppercase tracking-[0.04em]">
               <a href="#ofertas">COMPRAR AGORA</a>
             </Button>

@@ -1,4 +1,3 @@
-import { Header } from '@/components/Header';
 import { OrderForm } from '@/components/OrderForm';
 import { getProductBySlug } from '@/lib/products';
 import Image from 'next/image';
@@ -24,9 +23,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+      {/* Header removed as requested */}
       
-      <main className="flex-1 container mx-auto px-4 py-8 pt-24">
+      <main className="flex-1 container mx-auto px-4 py-8 pt-12 lg:pt-16">
         <Link 
           href="/" 
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
