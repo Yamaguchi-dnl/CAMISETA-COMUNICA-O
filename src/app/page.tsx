@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
-                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                       alt="Camiseta Individual"
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
@@ -321,7 +321,7 @@ export default function Home() {
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
-                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
+                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="Kit Promocional"
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
