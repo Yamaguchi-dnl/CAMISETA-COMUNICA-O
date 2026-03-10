@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Instagram, Send, Maximize2 } from 'lucide-react';
+import { CheckCircle2, Instagram, Send, Maximize2, Calculator } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
@@ -13,27 +13,15 @@ import { IntroLoader } from '@/components/IntroLoader';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { cn } from '@/lib/utils';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({ h: 2, m: 45, s: 12 });
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.s > 0) return { ...prev, s: prev.s - 1 };
-        if (prev.m > 0) return { ...prev, m: prev.m - 1, s: 59 };
-        if (prev.h > 0) return { h: prev.h - 1, m: 59, s: 59 };
-        return prev;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const handleIntroComplete = () => {
     setIsIntroFinished(true);
@@ -42,16 +30,12 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current || !isIntroFinished) return;
 
-    // Refresh ScrollTrigger para garantir precisão com SmoothScroll
     ScrollTrigger.refresh();
 
-    // Hero Animations - Revelação em camadas sincronizada com o slide do loader
     const heroTl = gsap.timeline();
     
-    // Torna a seção hero visível (estava opacity-0)
     gsap.to('.hero-section', { opacity: 1, duration: 0.1 });
     
-    // Configura os estados iniciais dos elementos da hero para a revelação suave
     gsap.set(['.hero-title-top', '.hero-image-frame', '.hero-title-bottom', '.hero-support', '.hero-cta'], { 
       opacity: 0,
       y: 20
@@ -83,7 +67,6 @@ export default function Home() {
         '-=0.2'
       );
 
-    // Revelação das outras seções conforme o scroll
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -117,14 +100,52 @@ export default function Home() {
     { title: "Duas opções de cor", text: "Disponível nas versões preta e branca." },
   ];
 
-  const galleryImages = [
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-    "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
+  const mosaicItems = [
+    {
+      id: "image_1",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
+      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-8 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-5 col-span-2",
+    },
+    {
+      id: "image_2",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
+      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-4 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-3 col-span-1",
+    },
+    {
+      id: "image_3",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
+      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-4 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-3 col-span-1",
+    },
+    {
+      id: "image_4",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
+      className: "lg:col-start-7 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-4 md:row-span-2 col-span-1",
+    },
+    {
+      id: "image_5",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
+      className: "lg:col-start-9 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-4 md:row-span-2 col-span-1",
+    },
+    {
+      id: "image_6",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
+      className: "lg:col-start-11 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-6 md:row-span-2 col-span-1",
+    },
+    {
+      id: "image_7",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
+      className: "lg:col-start-1 lg:col-span-4 lg:row-start-9 lg:row-span-4 md:col-start-1 md:col-span-4 md:row-start-6 md:row-span-3 col-span-2",
+    },
+    {
+      id: "image_8",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
+      className: "lg:col-start-5 lg:col-span-4 lg:row-start-9 lg:row-span-4 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2",
+    },
+    {
+      id: "image_9",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
+      className: "lg:col-start-9 lg:col-span-4 lg:row-start-8 lg:row-span-5 md:col-start-5 md:col-span-4 md:row-start-8 md:row-span-3 col-span-2",
+    },
   ];
 
   return (
@@ -133,19 +154,14 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* HERO SECTION - Renderizada por baixo da intro */}
+        {/* HERO SECTION */}
         <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16 min-h-screen">
-          
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
-            
             {/* DESKTOP HERO VERSION */}
             <div className="hidden lg:flex flex-col items-center w-full">
-              <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
-                mb-[-10px] lg:mb-[-15px] xl:mb-[-20px] 
-                text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
+              <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] mb-[-10px] lg:mb-[-15px] xl:mb-[-20px] text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
                 LET CREATIVITY
               </h1>
-
               <div className="hero-image-frame relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
                 <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px] hero-support">
                   <p className="font-body text-black text-[17px] leading-[1.4] mb-6">
@@ -156,33 +172,23 @@ export default function Home() {
                   </p>
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
-
                 <div className="relative z-[3] shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
-                  <div className="bg-white p-0 
-                    w-[680px] h-[510px] xl:w-[820px] xl:h-[615px] 
-                    relative overflow-hidden rounded-none border-none">
+                  <div className="bg-white p-0 w-[680px] h-[510px] xl:w-[820px] xl:h-[615px] relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="IAP Camisetas Campaign"
                       fill
                       className="object-cover"
                       priority
-                      data-ai-hint="fashion models"
                     />
                   </div>
                 </div>
               </div>
-
-              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-4 xl:mt-6 
-                text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
+              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] mt-4 xl:mt-6 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
-
               <div className="hero-cta relative z-[5] mt-12 xl:mt-16">
-                <Button asChild className="pill-button bg-[#ff1f17] text-white font-bold 
-                  px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 
-                  hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
+                <Button asChild className="pill-button bg-[#ff1f17] text-white font-bold px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
                   <a href="#ofertas">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -193,7 +199,6 @@ export default function Home() {
               <h1 className="hero-title-top font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]">
                 LET CREATIVITY
               </h1>
-
               <div className="hero-image-frame relative z-[3] mt-2 mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
                 <div className="bg-white p-0 w-[300px] h-[225px] relative overflow-hidden rounded-none border-none">
                   <Image
@@ -202,21 +207,17 @@ export default function Home() {
                     fill
                     className="object-cover"
                     priority
-                    data-ai-hint="t-shirt model"
                   />
                 </div>
               </div>
-
               <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-8 mb-[18px] text-[clamp(54px,16vw,86px)]">
                 SPEAK
               </h2>
-
               <div className="hero-support flex flex-col items-center text-center px-4 mb-10 mt-1">
                 <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
               </div>
-
               <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
                 <a href="#reserva">COMPRAR AGORA</a>
               </Button>
@@ -257,13 +258,12 @@ export default function Home() {
         {/* OFFER HIGHLIGHT */}
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="mb-4 text-black">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <h3 className="mb-4 text-black uppercase">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
             <p className="text-black mb-12 font-medium">Cada camiseta por R$ 78,00</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              {/* Individual Card */}
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
-                <div className="w-full">
+                <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -285,9 +285,8 @@ export default function Home() {
                 </Button>
               </div>
 
-              {/* Promo Card */}
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
-                <div className="w-full">
+                <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
@@ -323,44 +322,59 @@ export default function Home() {
           </div>
         </section>
 
-        {/* GALLERY SECTION */}
-        <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden gsap-reveal">
-          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6">
-            {galleryImages.map((src, i) => (
-              <Dialog key={i}>
-                <DialogTrigger asChild>
-                  <div className="relative min-w-[300px] lg:min-w-[350px] aspect-square rounded-2xl overflow-hidden group snap-center cursor-pointer">
-                    <Image
-                      src={src}
-                      alt={`Galeria ${i + 1}`}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                       <Maximize2 className="text-white h-8 w-8" />
+        {/* GALLERY MOSAIC SECTION */}
+        <section className="py-24 bg-[#efefef] gsap-reveal">
+          <div className="container mx-auto px-6 max-w-[1400px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 lg:grid-rows-[repeat(12,minmax(0,1fr))] gap-2 md:gap-2 lg:gap-2.5 aspect-auto lg:aspect-square">
+              {mosaicItems.map((item, i) => (
+                <Dialog key={item.id}>
+                  <DialogTrigger asChild>
+                    <div className={cn(
+                      "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 hover:z-10",
+                      "group",
+                      item.className
+                    )}>
+                      <Image
+                        src={item.src}
+                        alt={`Galeria Mosaic ${i + 1}`}
+                        fill
+                        className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.03] group-hover:brightness-[1.02]"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <Maximize2 className="text-white h-8 w-8" />
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl p-0 border-none bg-transparent shadow-none flex items-center justify-center">
-                  <DialogTitle className="sr-only">Foto da Galeria {i + 1}</DialogTitle>
-                  <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
-                    <Image
-                      src={src}
-                      alt={`Galeria Full ${i + 1}`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl p-0 border-none bg-transparent shadow-none flex items-center justify-center">
+                    <DialogTitle className="sr-only">Foto da Galeria {i + 1}</DialogTitle>
+                    <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
+                      <Image
+                        src={item.src}
+                        alt={`Galeria Full ${i + 1}`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              ))}
+            </div>
+            
+            <div className="mt-8 lg:mt-10 flex justify-center">
+              <Button 
+                variant="outline" 
+                className="rounded-none border-[1.5px] border-[#111111] px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.03em] text-[#111111] hover:bg-[#111111] hover:text-white transition-all duration-300 h-auto"
+              >
+                VER TODAS AS FOTOS
+              </Button>
+            </div>
           </div>
         </section>
 
         {/* FAQ SECTION */}
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
-            <h3 className="mb-12 text-center text-black">Perguntas Frequentes</h3>
+            <h3 className="mb-12 text-center text-black uppercase">Perguntas Frequentes</h3>
             <Accordion type="single" collapsible className="w-full space-y-4">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border rounded-2xl px-6 py-1 bg-white">
