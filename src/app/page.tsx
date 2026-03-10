@@ -68,7 +68,7 @@ export default function Home() {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top 20%",
+          start: "top 90%", // Trigger much earlier
           once: true,
           toggleActions: "play none none none",
           invalidateOnRefresh: true,
@@ -166,7 +166,7 @@ export default function Home() {
       );
     });
 
-  }, { scope: containerRef, dependencies: [isIntroFinished] }); // Removed isGalleryExpanded from dependencies
+  }, { scope: containerRef, dependencies: [isIntroFinished] });
 
   const faqItems = [
     { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
@@ -300,7 +300,6 @@ export default function Home() {
                 : "h-[560px] md:h-[600px] grid-rows-6 md:grid-rows-none"
             )}>
               {mosaicItems.map((item, i) => {
-                // All items are always rendered to prevent layout bugs during expansion
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
