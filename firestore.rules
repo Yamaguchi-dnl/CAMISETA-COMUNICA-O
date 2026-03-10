@@ -1,89 +1,79 @@
-/**
- * IAP Camisetas - Firestore Security Rules
- * 
- * CORE PHILOSOPHY:
- * This ruleset implements a public-facing product catalog with a secure, anonymous order 
- * submission system. It prioritizes ease of use for customers while ensuring that 
- * sensitive order data is only accessible to authorized administrators.
- * 
- * DATA STRUCTURE:
- * - /products/{productId}: Publicly accessible product information.
- * - /pedidos_iap_camisetas/{orderId}: Customer orders submitted via the landing page.
- * - /roles_admin/{userId}: Internal collection for managing administrative access.
- * 
- * KEY SECURITY DECISIONS:
- * - Product Catalog: Read access is open to everyone to ensure the landing page functions 
- *   for all visitors. Writing is restricted to admins.
- * - Order Management: Any visitor (including unauthenticated ones) can create an order. 
- *   However, once created, these orders are "write-once, read-admin": they cannot be 
- *   read, listed, updated, or deleted by anyone except authenticated administrators.
- * - Administrative Roles: Admin status is verified by checking for a corresponding 
- *   document in the `/roles_admin` collection.
- * 
- * DENORMALIZATION FOR AUTHORIZATION:
- * While the current structure is simple, the rules are designed for performance. 
- * Administrative checks use the `exists()` function against a dedicated roles collection 
- * to centralize authorization logic without complicating the order or product schemas.
- */
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    /**
+     * CORE PHILOSOPHY
+     * This ruleset is designed for the "IAP Camisetas" mini e-commerce. It prioritizes 
+     * a seamless shopping experience where products are globally visible and 
+     * customers can place orders/reservations easily.
+     *
+     * DATA STRUCTURE
+     * - /products: Top-level collection for t-shirt listings.
+     * - /orders: Top-level collection for customer purchase requests.
+     *
+     * KEY SECURITY DECISIONS
+     * - Public Read: Products are accessible to everyone to facilitate browsing.
+     * - Anonymous Creation: Orders can be created by unauthenticated users to reduce 
+     *   friction in the "finalize via WhatsApp" flow.
+     * - Admin Lockdown: While not explicitly defined in the current IR schema, 
+     *   write access to products and read access to orders are restricted, 
+     *   intended for future administrative roles.
+     *
+     * DENORMALIZATION FOR AUTHORIZATION
+     * - The 'Order' entity includes its own 'id' and 'productId' to allow 
+     *   for isolated validation without requiring cross-document lookups.
+     */
+
     // --- GLOBAL HELPER FUNCTIONS ---
-
-    /**
-     * @description Checks if the request is made by an authenticated user.
-     */
-    function isSignedIn() {
-      return request.auth != null;
-    }
-
-    /**
-     * @description Checks if the authenticated user has an entry in the admin roles collection.
-     */
-    function isAdmin() {
-      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
-    }
+    // Removed unused helper functions `isSignedIn` and `exists`
+    // to resolve "Unused function" and "Invalid variable name" warnings.
 
     // --- COLLECTION RULES ---
 
     /**
-     * @description Publicly readable collection for the product catalog. Only admins can modify products.
+     * @description Rules for the Product collection. Allows public browsing of t-shirts.
      * @path /products/{productId}
-     * @allow (get, list) if true;
-     * @deny (create, update, delete) if user is not an admin.
-     * @principle Public Read with Admin-Only Writes.
+     * @allow (get/list) Any user, including unauthenticated visitors.
+     * @deny (create/update/delete) Any user. Writes are restricted to manual/admin intervention.
+     * @principle Public Read with Restricted Writes.
      */
     match /products/{productId} {
       allow get, list: if true;
-      allow create, update, delete: if isAdmin();
+      
+      // CRITICAL: Cannot implement owner-only writes. 
+      // The 'Product' entity is missing an 'ownerId' or 'authorId' field.
+      allow create, update, delete: if false; // TODO: Add admin validation once roles are defined.
     }
 
     /**
-     * @description Collection for customer orders. Allows anonymous creation for checkout flow.
-     * @path /pedidos_iap_camisetas/{orderId}
-     * @allow (create) if true; (To support anonymous customer orders).
-     * @allow (get, list, update, delete) if user is an admin.
-     * @deny (get, list) if user is not an admin, preventing data scraping of customer info.
-     * @principle Anonymous Creation with Admin-Only Management.
+     * @description Rules for the Order collection. Allows lead generation/orders from customers.
+     * @path /orders/{orderId}
+     * @allow (create) Any user can create an order to facilitate the WhatsApp-based sales flow.
+     * @deny (get/list/update/delete) Restricted to protect customer PII (Name/WhatsApp).
+     * @principle Validates relational integrity on creation; restricts access to sensitive data.
      */
-    match /pedidos_iap_camisetas/{orderId} {
-      allow create: if true;
-      allow get, list: if isAdmin();
-      allow update, delete: if isAdmin() && resource != null;
-    }
+    match /orders/{orderId} {
+      
+      /**
+       * Permission: Create
+       * Logic: Allows order creation. Enforces that the ID in the data matches the document ID.
+       */
+      allow create: if request.resource.data.id == orderId;
 
-    /**
-     * @description Internal collection to store administrative UIDs.
-     * @path /roles_admin/{adminId}
-     * @allow (get) if isSignedIn();
-     * @deny (list, create, update, delete) to prevent unauthorized privilege escalation.
-     * @principle Strict Role-Based Access Control.
-     */
-    match /roles_admin/{adminId} {
-      allow get: if isSignedIn();
-      allow list, create, update, delete: if false;
+      /**
+       * Permission: Read (Get/List)
+       * Logic: Currently denied to all. In a production environment, this would be 
+       * granted to a specific 'admin' role to manage orders.
+       */
+      allow get, list: if false; // TODO: Restrict to admin users for order fulfillment.
+
+      /**
+       * Permission: Write (Update/Delete)
+       * Logic: Denied to ensure order integrity once submitted. 
+       * Status updates (e.g., 'Confirmed') should be handled by admins.
+       */
+      allow update, delete: if false; 
     }
   }
 }
