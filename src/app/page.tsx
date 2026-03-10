@@ -187,11 +187,11 @@ export default function Home() {
               />
             </div>
 
-            {/* BOTTOM BACKGROUND WORD */}
+            {/* BOTTOM BACKGROUND WORD - REPOSICIONADO MAIS PARA BAIXO */}
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center
-              bottom-[168px]
-              md:bottom-[145px]
-              mobile:relative mobile:left-auto mobile:bottom-auto mobile:transform-none mobile:mt-[-28px]">
+              bottom-[110px]
+              md:bottom-[90px]
+              mobile:relative mobile:left-auto mobile:bottom-auto mobile:transform-none mobile:mt-[-10px]">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block
                 text-[176px]
                 md:text-[138px]
