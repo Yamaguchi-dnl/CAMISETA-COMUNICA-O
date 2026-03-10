@@ -11,6 +11,7 @@ interface IntroLoaderProps {
 /**
  * Componente de Loader de Introdução usando GSAP.
  * Exibe uma tipografia impactante antes de carregar a Hero.
+ * Configurado para aparecer em todos os carregamentos de página.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,19 +19,11 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Verifica se a intro já foi exibida nesta sessão
-    if (typeof window !== 'undefined') {
-      const hasPlayed = sessionStorage.getItem('introPlayed');
-      if (!hasPlayed) {
-        setShouldRender(true);
-        // Bloqueia o scroll durante a intro
-        document.body.style.overflow = 'hidden';
-      } else {
-        // Se já foi exibida, sinaliza conclusão imediata
-        onComplete();
-      }
-    }
-  }, [onComplete]);
+    // Sempre renderiza a intro ao carregar o componente
+    setShouldRender(true);
+    // Bloqueia o scroll durante a intro
+    document.body.style.overflow = 'hidden';
+  }, []);
 
   useGSAP(() => {
     if (!shouldRender || !containerRef.current || !textRef.current) return;
@@ -38,9 +31,6 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     // Timeline mestre para a sequência de intro
     const introTimeline = gsap.timeline({
       onComplete: () => {
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('introPlayed', 'true');
-        }
         // Libera o scroll
         document.body.style.overflow = '';
         onComplete();
