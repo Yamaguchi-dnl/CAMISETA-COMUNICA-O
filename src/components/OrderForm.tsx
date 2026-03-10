@@ -105,6 +105,7 @@ export function OrderForm() {
       status: 'Pendente WhatsApp'
     };
 
+    // Salvar no Firestore (não bloqueante)
     addDoc(collection(db, "pedidos_iap_camisetas"), orderData)
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
@@ -114,7 +115,7 @@ export function OrderForm() {
         }));
       });
 
-    const phoneNumber = '5541999999999'; 
+    const phoneNumber = '5541995133604'; 
     
     const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
 
@@ -125,7 +126,6 @@ export function OrderForm() {
 - *Tamanho:* ${values.tamanho}
 - *Quantidade:* ${values.quantidade}
 - *Pagamento:* ${values.pagamento}
-- *Detalhes:* ${summary.label}
 - *Total:* R$ ${summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 - *Observações:* ${values.observacoes || 'Nenhuma'}
 
@@ -135,18 +135,18 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     toast({
-      title: "Dados Registrados!",
-      description: "Redirecionando para o WhatsApp...",
+      title: "Reserva Iniciada!",
+      description: "Abrindo o WhatsApp para finalizar...",
     });
 
     setTimeout(() => {
-      window.location.href = whatsappUrl;
+      window.open(whatsappUrl, '_blank');
       setIsSubmitting(false);
-    }, 1500);
+    }, 1000);
   }
 
   return (
-    <div id="reserva" className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
+    <div className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto">
       <div className="text-center mb-10">
         <h3 className="font-headline text-2xl mb-4 text-black uppercase">RESERVE SUA CAMISETA</h3>
         <p className="text-black text-sm font-medium">Preços promocionais válidos para pagamento no Pix. No crédito, acréscimo de 7%.</p>
@@ -280,7 +280,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               <Calculator className="h-4 w-4" /> Resumo do Pedido
             </div>
             <div className="flex justify-between text-sm text-black">
-              <span>Subtotal (Pix)</span>
+              <span>Subtotal (Base Pix)</span>
               <span>R$ {summary.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
             {summary.extraAmount > 0 && (
@@ -291,7 +291,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             )}
             <Separator className="bg-[#dddddd]" />
             <div className="flex justify-between font-bold text-lg text-black">
-              <span>TOTAL FINAL</span>
+              <span>TOTAL ESTIMADO</span>
               <span>R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
           </div>
@@ -320,12 +320,12 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />
-            {isSubmitting ? 'REGISTRANDO...' : 'IR PARA O WHATSAPP'}
+            {isSubmitting ? 'REGISTRANDO...' : 'FINALIZAR NO WHATSAPP'}
           </Button>
           
           <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-none text-[12px] text-blue-800 font-medium border border-blue-100">
             <Info className="h-4 w-4 shrink-0" />
-            <span>O valor final depende da forma de pagamento selecionada. Pix garante o preço base anunciado.</span>
+            <span>Sua reserva será confirmada pela nossa equipe via WhatsApp. O pagamento final é feito no momento da retirada ou entrega combinada.</span>
           </div>
         </form>
       </Form>

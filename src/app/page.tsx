@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -10,6 +9,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
+import { ManifestoSection } from '@/components/ManifestoSection';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -70,74 +70,66 @@ export default function Home() {
           start: "top 90%",
           once: true,
           toggleActions: "play none none none",
-          invalidateOnRefresh: true,
         }
       });
 
       gsap.set(".gallery-mosaic-item", { 
         opacity: 0, 
-        willChange: "transform, opacity" 
       });
 
-      const staggerTime = 0.08;
-      const baseDuration = 1.8;
+      const staggerTime = 0.15;
+      const baseDuration = 2.4;
       
       galleryTl.fromTo(".gallery-mosaic-item--1", 
-        { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
+        { x: "-100vw", y: "10vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
-        { x: "0vw", y: "-110vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.9, ease: "expo.out" }, 
+        { x: "0vw", y: "-100vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
-        { x: "115vw", y: "-8vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.95, ease: "expo.out" }, 
+        { x: "100vw", y: "0vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 2
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
-        { x: "-70vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "expo.out" }, 
+        { x: "-100vw", y: "50vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 3
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
-        { x: "0vw", y: "115vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "expo.out" }, 
+        { x: "100vw", y: "50vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 4
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
-        { x: "85vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "expo.out" }, 
+        { x: "-50vw", y: "100vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 5
       );
       galleryTl.fromTo(".gallery-mosaic-item--7", 
-        { x: "-110vw", y: "-6vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
+        { x: "50vw", y: "100vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 6
       );
       galleryTl.fromTo(".gallery-mosaic-item--8", 
-        { x: "0vw", y: "112vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
+        { x: "-100vw", y: "20vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 7
       );
       galleryTl.fromTo(".gallery-mosaic-item--9", 
-        { x: "110vw", y: "-10vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
+        { x: "0vw", y: "100vh", opacity: 0 }, 
+        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 8
-      );
-
-      galleryTl.fromTo(".gallery-mosaic-item", 
-        { scale: 1.012 }, 
-        { scale: 1, duration: 0.55, ease: "power2.out" }, 
-        "-=1.2"
       );
     }
 
-    const sections = gsap.utils.toArray('.gsap-reveal');
-    sections.forEach((section: any) => {
-      gsap.fromTo(section, 
+    const reveals = gsap.utils.toArray('.gsap-reveal');
+    reveals.forEach((el: any) => {
+      gsap.fromTo(el, 
         { y: 50, opacity: 0 },
         { 
           y: 0, 
@@ -145,7 +137,7 @@ export default function Home() {
           duration: 1, 
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: section,
+            trigger: el,
             start: 'top 85%',
             toggleActions: 'play none none none'
           }
@@ -162,57 +154,51 @@ export default function Home() {
     { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
   ];
 
-  const benefits = [
-    { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade e identidade do Ministério de Comunicação." },
-    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas e programações especiais." },
-    { title: "Duas opções de cor", text: "Disponível nas versões preta e off-white." },
-  ];
-
   const mosaicItems = [
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-span-6 lg:row-span-8 md:col-span-4 md:row-span-6 col-span-1 row-span-1 gallery-mosaic-item--1",
+      className: "lg:col-span-6 lg:row-span-10 col-span-1 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--2",
+      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--2",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--3",
+      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--3",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--4",
+      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--4",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--5",
+      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--5",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-span-4 lg:row-span-4 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--6",
+      className: "lg:col-span-4 lg:row-span-6 col-span-1 gallery-mosaic-item--6",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-span-4 lg:row-span-4 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--7",
+      className: "lg:col-span-4 lg:row-span-6 col-span-1 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-span-4 lg:row-span-4 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--8",
+      className: "lg:col-span-4 lg:row-span-6 col-span-2 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-span-12 lg:row-span-5 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
+      className: "lg:col-span-12 lg:row-span-7 col-span-2 gallery-mosaic-item--9",
     },
   ];
 
@@ -222,6 +208,7 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
+        {/* Desktop Hero */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             <div className="hero-left-block absolute z-[5] top-[128px] left-[30px] md:top-[120px] md:left-[22px] max-w-none">
@@ -250,6 +237,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Mobile Hero */}
         <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
             <div className="mobile-hero-left-block absolute z-[5] top-[96px] left-[20px]">
@@ -272,9 +260,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-[100vh]">
+        <ManifestoSection />
+
+        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-screen">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[100px] md:auto-rows-[100px] lg:auto-rows-[80px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[80px]">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
@@ -308,35 +298,6 @@ export default function Home() {
                   </Dialog>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-24 bg-black border-t border-white/5 gsap-reveal">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
-                <Image
-                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg"
-                  alt="Camiseta em Destaque"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="space-y-12">
-                {benefits.map((benefit, i) => (
-                  <div key={i} className="flex gap-8 group">
-                    <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-white ring-4 ring-white/10 group-hover:scale-125 transition-transform" />
-                      {i !== benefits.length - 1 && <div className="w-px h-full bg-white/20 mt-4" />}
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold uppercase mb-3 tracking-wide font-headline text-white">{benefit.title}</h4>
-                      <p className="text-white/80 font-normal leading-relaxed">{benefit.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
@@ -398,7 +359,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-24 bg-white gsap-reveal" id="produtos">
+        <section id="reserva" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6">
             <OrderForm />
           </div>

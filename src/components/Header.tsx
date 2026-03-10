@@ -19,10 +19,10 @@ export function Header() {
   }, []);
 
   const menuItems = [
-    { label: 'Início', href: '#' },
-    { label: 'Ver produto', href: '#produtos' },
-    { label: 'Kit promocional', href: '#ofertas' },
-    { label: 'Perguntas frequentes', href: '#faq' },
+    { label: 'Início', href: '/' },
+    { label: 'Ofertas', href: '/#ofertas' },
+    { label: 'Reservar', href: '/#reserva' },
+    { label: 'Dúvidas', href: '/#faq' },
   ];
 
   return (
@@ -36,7 +36,7 @@ export function Header() {
     >
       <div className="container mx-auto max-w-[1400px] flex items-center justify-between px-6 lg:px-10 relative">
         
-        {/* Mobile Menu Trigger - Visible on small screens */}
+        {/* Mobile Menu Trigger */}
         <div className="lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -63,7 +63,7 @@ export function Header() {
           </Sheet>
         </div>
 
-        {/* Desktop Navigation - Centered */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-12 mx-auto">
           {menuItems.map((item) => (
             <Link 
@@ -80,7 +80,6 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Spacer for desktop alignment */}
         <div className="hidden lg:block w-[24px]" />
       </div>
     </header>
