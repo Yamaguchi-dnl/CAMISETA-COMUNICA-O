@@ -328,7 +328,7 @@ export default function Home() {
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
           <div className="container mx-auto px-6 max-w-[1240px]">
             <div className={cn(
-              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-0 overflow-hidden bg-transparent transition-all duration-500 h-auto",
+              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-2 overflow-hidden bg-transparent transition-all duration-500 h-auto",
               isGalleryExpanded 
                 ? "lg:grid-rows-[repeat(12,minmax(0,1fr))] lg:aspect-square md:grid-rows-[repeat(10,minmax(0,1fr))] md:aspect-[8/10]" 
                 : "lg:grid-rows-[repeat(6,minmax(0,1fr))] lg:aspect-[2/1] md:grid-rows-[repeat(6,minmax(0,1fr))] md:aspect-[8/6]"
@@ -372,7 +372,7 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-6 flex justify-center">
+            <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
                 className="pill-button bg-[#111111] text-white hover:bg-[#d93025] transition-all duration-300 px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.02em] rounded-full h-auto border-none shadow-lg"
