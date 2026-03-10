@@ -258,7 +258,7 @@ export default function Home() {
             </div>
             {/* Adicionado de volta para mobile e subido um pouco */}
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(60px,20vw,90px)]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(40px,15vw,75px)]">
                 CREATIVITY
               </h1>
             </div>
@@ -370,7 +370,7 @@ export default function Home() {
 
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
-            <h3 className="mb-12 text-center text-black uppercase">Perguntas Frequentes</h3>
+            <h3 className="text-center text-black uppercase mb-12">Perguntas Frequentes</h3>
             <Accordion type="single" collapsible className="w-full space-y-4">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
