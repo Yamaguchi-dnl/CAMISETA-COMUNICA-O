@@ -80,60 +80,60 @@ export default function Home() {
       gsap.set(".gallery-mosaic-button", { opacity: 0, y: 14, scale: 0.985 });
 
       // Phase 1: Fluid Entry from Outer Edges (Slow and Smooth)
-      const staggerTime = 0.1;
-      const baseDuration = 2.4;
+      const staggerTime = 0.08;
+      const baseDuration = 1.8;
       
       galleryTl.fromTo(".gallery-mosaic-item--1", 
         { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
         { x: "0vw", y: "-110vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.9, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.9, ease: "expo.out" }, 
         staggerTime
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
         { x: "115vw", y: "-8vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.95, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.95, ease: "expo.out" }, 
         staggerTime * 2
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
         { x: "-70vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "expo.out" }, 
         staggerTime * 3
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
         { x: "0vw", y: "115vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "expo.out" }, 
         staggerTime * 4
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
         { x: "85vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "expo.out" }, 
         staggerTime * 5
       );
       // Extra items also animated initially
       galleryTl.fromTo(".gallery-mosaic-item--7", 
         { x: "-110vw", y: "-6vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 6
       );
       galleryTl.fromTo(".gallery-mosaic-item--8", 
         { x: "0vw", y: "112vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 7
       );
       galleryTl.fromTo(".gallery-mosaic-item--9", 
         { x: "110vw", y: "-10vh", scale: 1.05, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 8
       );
 
       // Phase 2: Micro Settle
       galleryTl.fromTo(".gallery-mosaic-item", 
-        { scale: 1.01 }, 
-        { scale: 1, duration: 0.6, ease: "power2.out" }, 
+        { scale: 1.012 }, 
+        { scale: 1, duration: 0.55, ease: "power2.out" }, 
         "-=1.2"
       );
 
@@ -143,7 +143,7 @@ export default function Home() {
         y: 0, 
         scale: 1, 
         ease: "power2.out", 
-        duration: 0.8 
+        duration: 0.75 
       }, "-=0.4");
     }
 
@@ -185,7 +185,7 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--1",
+      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-1 row-span-1 md:row-span-4 md:col-span-4 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
@@ -215,17 +215,17 @@ export default function Home() {
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--7",
+      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-1 row-span-1 md:row-span-4 md:col-span-4 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2 row-span-2 gallery-mosaic-item--8",
+      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-1 row-span-1 md:row-span-2 md:col-span-4 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
+      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-1 row-span-1 md:row-span-4 md:col-span-4 gallery-mosaic-item--9",
     },
   ];
 
@@ -296,8 +296,8 @@ export default function Home() {
             <div className={cn(
               "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent transition-all duration-700 ease-in-out",
               isMounted && isGalleryExpanded 
-                ? "lg:grid-rows-[repeat(12,minmax(0,1fr))] lg:aspect-square md:grid-rows-[repeat(10,minmax(0,1fr))] md:aspect-[8/10] h-auto" 
-                : "h-[560px] md:h-[600px] grid-rows-6 md:grid-rows-none"
+                ? "h-auto" 
+                : "h-[560px] md:h-[600px] grid-rows-none"
             )}>
               {mosaicItems.map((item, i) => {
                 return (
