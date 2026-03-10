@@ -211,7 +211,7 @@ export default function Home() {
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             <div className="hero-left-block absolute z-[5] top-[128px] left-[30px] md:top-[120px] md:left-[22px] max-w-none">
-              <h2 className="font-headline text-[20px] md:text-[18px] lg:text-[20px] text-black uppercase leading-none mb-1.5 tracking-[-0.01em]">
+              <h2 className="font-headline text-[24px] md:text-[22px] lg:text-[28px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
               <p className="font-body text-[16px] md:text-[14px] lg:text-[16px] text-[#222222] leading-[1.35] md:max-w-[200px] lg:max-w-[260px]">
@@ -229,7 +229,7 @@ export default function Home() {
               />
             </div>
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px] md:bottom-[60px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[260px] md:text-[200px]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[320px] md:text-[240px]">
                 CREATIVITY
               </h1>
             </div>
@@ -240,7 +240,7 @@ export default function Home() {
         <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
             <div className="mobile-hero-left-block absolute z-[5] top-[96px] left-[20px]">
-              <h2 className="font-headline text-[18px] text-black uppercase leading-none mb-[6px] tracking-[-0.01em]">
+              <h2 className="font-headline text-[22px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
               <p className="font-body text-[14px] text-[#222222] leading-[1.3] max-w-[220px]">
@@ -256,9 +256,8 @@ export default function Home() {
                 priority
               />
             </div>
-            {/* Adicionado de volta para mobile e subido um pouco */}
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(40px,15vw,75px)]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(60px,20vw,90px)]">
                 CREATIVITY
               </h1>
             </div>
@@ -321,9 +320,9 @@ export default function Home() {
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                     />
                   </div>
-                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
+                  <h4 className="text-2xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
                   <div className="flex flex-col items-center gap-1 mb-8">
-                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 79,90</span>
+                    <span className="text-5xl font-normal tracking-tighter text-black font-headline">R$ 79,90</span>
                     <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
                       <CheckCircle2 className="h-3 w-3" /> Preço no Pix
                     </div>
@@ -347,10 +346,10 @@ export default function Home() {
                       Melhor Oferta
                     </div>
                   </div>
-                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção</h4>
+                  <h4 className="text-2xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 2 - Promoção</h4>
                   <div className="flex flex-col items-center gap-1 mb-8">
-                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 139,90</span>
-                    <span className="text-xs text-black font-semibold">R$ 69,95 cada</span>
+                    <span className="text-5xl font-normal tracking-tighter text-black font-headline">R$ 139,90</span>
+                    <span className="text-sm text-black font-semibold">R$ 69,95 cada</span>
                   </div>
                 </div>
                 <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
@@ -374,7 +373,7 @@ export default function Home() {
             <Accordion type="single" collapsible className="w-full space-y-4">
               {faqItems.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
-                  <AccordionTrigger className="text-left font-medium uppercase text-[14px] tracking-widest hover:no-underline font-body text-black">
+                  <AccordionTrigger className="text-left font-medium uppercase text-[16px] tracking-widest hover:no-underline font-body text-black">
                     {item.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">

@@ -23,11 +23,11 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
       <CardContent className="p-4">
-        <h3 className="font-headline text-lg font-bold leading-tight mb-1">{product.name}</h3>
+        <h3 className="font-headline text-xl font-bold leading-tight mb-1">{product.name}</h3>
         <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
           {product.shortDescription}
         </p>
-        <p className="font-headline text-xl font-black">R$ {product.price}</p>
+        <p className="font-headline text-2xl font-black">R$ {product.price}</p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full" variant="default">

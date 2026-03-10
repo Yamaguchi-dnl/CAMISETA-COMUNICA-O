@@ -3,7 +3,7 @@ import { getProductBySlug } from '@/lib/products';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronLeft, Info, BadgePercent } from 'lucide-react';
+import { ChevronLeft, Info } from 'lucide-react';
 import { Toaster } from '@/components/ui/toaster';
 
 interface ProductPageProps {
@@ -48,13 +48,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           <div className="flex flex-col">
             <div className="mb-6">
-              <h1 className="font-headline text-3xl font-black mb-2 leading-tight uppercase text-black">
+              <h1 className="font-headline text-4xl font-black mb-3 leading-tight uppercase text-black">
                 {product.name}
               </h1>
               <div className="flex flex-col gap-1 mb-6">
                 <div className="flex items-baseline gap-2">
                   <span className="text-sm text-black font-medium">Preço no Pix:</span>
-                  <span className="font-headline text-3xl font-black text-black">R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                  <span className="font-headline text-4xl font-black text-black">R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex items-center gap-2 text-black/60 font-bold text-sm uppercase tracking-tighter">
                    Ou R$ {creditPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} no Crédito (+7%)
