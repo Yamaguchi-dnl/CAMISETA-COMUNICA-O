@@ -43,7 +43,7 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set('.hero-section', { opacity: 1 });
-    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-support'], { 
+    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-label'], { 
       opacity: 0,
       y: 20
     });
@@ -58,7 +58,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
-      .fromTo('.hero-support', 
+      .fromTo('.hero-label', 
         { y: 16, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
         '-=0.5'
@@ -152,37 +152,33 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* PREMIUM EDITORIAL HERO */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-screen flex items-center justify-center pt-20 pb-16">
-          <div className="container relative z-10 max-w-[1600px] px-6 lg:px-10 h-full flex flex-col items-center justify-center">
+        {/* PREMIUM EDITORIAL HERO - FULL REFACTOR */}
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-[620px] md:min-h-[760px] lg:min-h-[920px] flex items-center justify-center py-12 lg:py-24">
+          <div className="container relative z-10 max-w-[1440px] px-4 md:px-6 lg:px-8 h-full flex flex-col items-center justify-center">
             
-            {/* MAIN COMPOSITION */}
-            <div className="relative w-full flex flex-col items-center justify-center py-20 lg:py-32">
-              
-              {/* BACKGROUND TYPOGRAPHY - Fit to width, centered overlap */}
-              <div className="hero-bg-text absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] w-[92%] max-w-[1440px] pointer-events-none text-center">
-                <h1 className="font-headline text-black uppercase leading-[0.88] tracking-[-0.03em] text-[clamp(90px,11vw,220px)] sm:text-[clamp(120px,12vw,320px)] md:text-[clamp(160px,14.8vw,420px)] whitespace-nowrap">
-                  CREATIVITY
-                </h1>
-              </div>
-
-              {/* IMAGE BLOCK - 4:3 horizontal, crosses middle of the word */}
-              <div className="hero-image-wrapper relative z-[4] w-[88vw] md:w-[min(74vw,640px)] lg:w-[min(64vw,760px)] aspect-[4/3] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
-                <Image
-                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                  alt="IAP Camisetas Campaign"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* SUPPORT LABEL (TOP LEFT) */}
-            <div className="hero-support absolute top-24 lg:top-32 left-6 lg:left-10 z-50">
-              <span className="font-body font-medium text-[12px] lg:text-[13px] tracking-[0.08em] uppercase text-[#666666] whitespace-nowrap">
+            {/* INSTITUTIONAL LABEL - TOP LEFT */}
+            <div className="hero-label absolute top-6 left-4 md:top-10 md:left-6 lg:top-[70px] lg:left-8 z-[4]">
+              <span className="font-body font-medium text-[13px] md:text-[18px] lg:text-[22px] tracking-[0.08em] uppercase text-[#6f6f6f] whitespace-nowrap">
                 COMUNICAÇÃO • BARREIRINHA
               </span>
+            </div>
+
+            {/* BACKGROUND TYPOGRAPHY - Centered and Fit-to-Width */}
+            <div className="hero-bg-text absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:top-1/2 lg:top-1/2 z-[1] w-[94%] md:w-[92%] lg:w-[92%] pointer-events-none text-center">
+              <h1 className="font-headline text-black uppercase leading-[0.88] tracking-[-0.025em] text-[clamp(44px,12vw,84px)] md:text-[clamp(82px,11vw,160px)] lg:text-[clamp(120px,13vw,250px)] whitespace-nowrap inline-block">
+                CREATIVITY
+              </h1>
+            </div>
+
+            {/* MAIN IMAGE - Relative and Centered Over Word */}
+            <div className="hero-image-wrapper relative z-[3] w-[min(92vw,400px)] aspect-[4/5] md:w-[min(72vw,640px)] md:aspect-[4/3] lg:w-[min(58vw,760px)] lg:aspect-[4/3] overflow-hidden shadow-none">
+              <Image
+                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                alt="IAP Camisetas Campaign"
+                fill
+                className="object-cover object-center"
+                priority
+              />
             </div>
 
           </div>
@@ -198,7 +194,6 @@ export default function Home() {
                 : "h-[400px] lg:h-[600px]"
             )}>
               {mosaicItems.map((item, i) => {
-                // Initial state: hide items from index 6 onwards if not expanded
                 if (!isGalleryExpanded && i >= 6) return null;
                 
                 return (
@@ -238,7 +233,7 @@ export default function Home() {
             <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black text-white hover:bg-accent min-w-[240px]"
+                className="rounded-full px-10 py-5 transition-all duration-300 font-bold uppercase tracking-[0.05em] text-sm flex items-center justify-center gap-2 h-14 bg-black text-white hover:bg-accent min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -301,7 +296,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="rounded-full px-10 py-5 transition-all duration-300 font-bold uppercase tracking-[0.05em] text-sm flex items-center justify-center gap-2 h-14 bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -325,7 +320,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="rounded-full px-10 py-5 transition-all duration-300 font-bold uppercase tracking-[0.05em] text-sm flex items-center justify-center gap-2 h-14 bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
