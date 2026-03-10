@@ -67,7 +67,7 @@ export default function Home() {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top 92%",
+          start: "top bottom", // Trigger exactly when the top of the section hits the bottom of the viewport
           once: true,
           toggleActions: "play none none none",
           invalidateOnRefresh: true,
@@ -75,7 +75,7 @@ export default function Home() {
       });
 
       // Initial States: Outside the viewport
-      gsap.set(".gallery-mosaic-item", { opacity: 0, willChange: "transform, opacity" });
+      gsap.set(".gallery-mosaic-item", { opacity: 0, WILL_CHANGE: "transform, opacity" });
       gsap.set(".gallery-mosaic-button", { opacity: 0, y: 14, scale: 0.985 });
 
       // Phase 1: Fluid Entry from Outer Edges with significantly longer durations for a slower effect
