@@ -25,7 +25,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Send, Calculator, Info } from 'lucide-react';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
 
@@ -98,18 +98,31 @@ export function OrderForm() {
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     
+    // Gerar um ID único para o documento
+    const orderRef = doc(collection(db, "orders"));
+    const orderId = orderRef.id;
+
+    // Mapear para o esquema definido no backend.json
     const orderData = {
-      ...values,
-      summary,
+      id: orderId,
+      productId: values.produto, // Usando o nome do produto como ID de referência simples
+      customerName: values.nome,
+      customerWhatsapp: values.whatsapp,
+      selectedSize: values.tamanho,
+      quantity: values.quantidade,
+      paymentMethod: values.pagamento,
+      notes: values.observacoes || '',
       createdAt: new Date().toISOString(),
-      status: 'Pendente WhatsApp'
+      status: 'Pendente WhatsApp',
+      // Metadados adicionais para o resumo
+      totalAmount: summary.total
     };
 
-    // Salvar no Firestore (não bloqueante)
-    addDoc(collection(db, "pedidos_iap_camisetas"), orderData)
+    // Salvar no Firestore usando setDoc para garantir que o ID do doc case com o campo 'id' (exigência da regra)
+    setDoc(orderRef, orderData)
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
-          path: 'pedidos_iap_camisetas',
+          path: `orders/${orderId}`,
           operation: 'create',
           requestResourceData: orderData
         }));
