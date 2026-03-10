@@ -187,8 +187,8 @@ export default function Home() {
         <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
             
-            {/* MOBILE LEFT TEXT */}
-            <div className="mobile-hero-left-block absolute z-[5] top-[26px] left-[20px]">
+            {/* MOBILE LEFT TEXT - SHIFTED DOWN FOR HEADER */}
+            <div className="mobile-hero-left-block absolute z-[5] top-[96px] left-[20px]">
               <h2 className="font-headline text-[18px] text-black uppercase leading-none mb-[6px] tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -197,11 +197,11 @@ export default function Home() {
               </p>
             </div>
 
-            {/* MOBILE RIGHT LINE */}
-            <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[48px] right-[26px] w-[82px] h-[3px]" />
+            {/* MOBILE RIGHT LINE - SHIFTED DOWN FOR HEADER */}
+            <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[118px] right-[26px] w-[82px] h-[3px]" />
 
-            {/* MOBILE MAIN IMAGE - BACK VIEW */}
-            <div className="mobile-hero-main-image absolute z-[4] top-[120px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            {/* MOBILE MAIN IMAGE - BACK VIEW - SHIFTED DOWN FOR HEADER */}
+            <div className="mobile-hero-main-image absolute z-[4] top-[190px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
