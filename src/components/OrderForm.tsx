@@ -73,10 +73,9 @@ export function OrderForm() {
     const qty = Number(watchedValues.quantidade) || 0;
     const isCredit = watchedValues.pagamento === 'Parcelado';
 
-    // Pix prices as baseline
     let unitPrice = 79.90;
     if (qty >= 2) {
-      unitPrice = 69.95; // 139.90 / 2
+      unitPrice = 69.95; 
     }
 
     const pixTotal = unitPrice * qty;
@@ -98,14 +97,13 @@ export function OrderForm() {
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     
-    // Gerar um ID único para o documento
+    // Gerar ID para o documento
     const orderRef = doc(collection(db, "orders"));
     const orderId = orderRef.id;
 
-    // Mapear para o esquema definido no backend.json
     const orderData = {
       id: orderId,
-      productId: values.produto, // Usando o nome do produto como ID de referência simples
+      productId: values.produto,
       customerName: values.nome,
       customerWhatsapp: values.whatsapp,
       selectedSize: values.tamanho,
@@ -114,11 +112,10 @@ export function OrderForm() {
       notes: values.observacoes || '',
       createdAt: new Date().toISOString(),
       status: 'Pendente WhatsApp',
-      // Metadados adicionais para o resumo
       totalAmount: summary.total
     };
 
-    // Salvar no Firestore usando setDoc para garantir que o ID do doc case com o campo 'id' (exigência da regra)
+    // Salvar no Firestore de forma não-bloqueante
     setDoc(orderRef, orderData)
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
