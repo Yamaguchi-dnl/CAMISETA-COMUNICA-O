@@ -53,7 +53,7 @@ export function Header() {
                     key={item.label} 
                     href={item.href} 
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-headline text-black uppercase tracking-wider hover:text-accent transition-colors"
+                    className="text-lg font-body font-medium text-black uppercase tracking-[0.05em] hover:text-accent transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -80,7 +80,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Spacer for desktop alignment when cart is removed */}
+        {/* Spacer for desktop alignment */}
         <div className="hidden lg:block w-[24px]" />
       </div>
     </header>
