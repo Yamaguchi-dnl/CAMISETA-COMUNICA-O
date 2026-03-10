@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -9,6 +10,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
+import { ManifestoSection } from '@/components/ManifestoSection';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -151,24 +153,24 @@ export default function Home() {
         <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             
-            {/* LEFT TEXT BLOCK */}
+            {/* LEFT TEXT BLOCK - DIMINUÍDO CONFORME SOLICITADO */}
             <div className="hero-left-block absolute z-[5] 
-              top-[120px] left-[30px]
-              md:top-[112px] md:left-[22px]
+              top-[128px] left-[30px]
+              md:top-[120px] md:left-[22px]
               max-w-[calc(100%-60px)] md:max-w-none
               mobile:relative mobile:top-auto mobile:left-auto mobile:m-[100px_16px_16px_16px]">
-              <h2 className="font-headline text-[24px] md:text-[20px] lg:text-[24px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
+              <h2 className="font-headline text-[20px] md:text-[18px] lg:text-[20px] text-black uppercase leading-none mb-1.5 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
-              <p className="font-body text-[18px] md:text-[16px] lg:text-[18px] text-[#222222] leading-[1.35] max-w-[300px] md:max-w-[240px] lg:max-w-[300px]">
+              <p className="font-body text-[16px] md:text-[14px] lg:text-[16px] text-[#222222] leading-[1.35] max-w-[260px] md:max-w-[200px] lg:max-w-[260px]">
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
 
             {/* RIGHT DECORATIVE LINE */}
             <div className="hero-right-line hidden md:block absolute z-[5] bg-[#111111]
-              top-[138px] right-[48px] w-[72px] h-[3px]
-              md:top-[128px] md:right-[28px] md:w-[64px]" 
+              top-[146px] right-[48px] w-[72px] h-[3px]
+              md:top-[136px] md:right-[28px] md:w-[64px]" 
             />
 
             {/* MAIN IMAGE */}
@@ -200,6 +202,8 @@ export default function Home() {
 
           </div>
         </section>
+
+        <ManifestoSection />
 
         {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
