@@ -212,7 +212,7 @@ export default function Home() {
             </div>
 
             {/* MOBILE INDEPENDENT BOTTOM WORD */}
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[34px] text-center pointer-events-none">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[160px] text-center pointer-events-none">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[70px]">
                 CREATIVITY
               </h1>
