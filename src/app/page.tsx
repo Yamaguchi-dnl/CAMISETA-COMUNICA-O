@@ -208,7 +208,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[160px] text-center pointer-events-none">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[140px] text-center pointer-events-none">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[70px]">
                 CREATIVITY
               </h1>
@@ -311,7 +311,7 @@ export default function Home() {
             <p className="text-black mb-12 font-medium">Cada camiseta por R$ 78,00</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -334,7 +334,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
+              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
