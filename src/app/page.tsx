@@ -99,47 +99,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2",
+      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2 row-span-2",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1",
+      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1",
+      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1",
+      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1",
+      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1",
+      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1 row-span-1",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2",
+      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2 row-span-2",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2",
+      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2 row-span-2",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2",
+      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2 row-span-2",
     },
   ];
 
@@ -149,7 +149,7 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* DESKTOP/TABLET HERO SECTION - UNTOUCHED & FROZEN */}
+        {/* DESKTOP/TABLET HERO SECTION */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             
@@ -183,11 +183,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* MOBILE HERO SECTION - INDEPENDENT RECONSTRUCTION */}
+        {/* MOBILE HERO SECTION */}
         <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
             
-            {/* MOBILE LEFT TEXT - SHIFTED DOWN FOR HEADER */}
             <div className="mobile-hero-left-block absolute z-[5] top-[96px] left-[20px]">
               <h2 className="font-headline text-[18px] text-black uppercase leading-none mb-[6px] tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
@@ -197,10 +196,8 @@ export default function Home() {
               </p>
             </div>
 
-            {/* MOBILE RIGHT LINE - SHIFTED DOWN FOR HEADER */}
             <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[118px] right-[26px] w-[82px] h-[3px]" />
 
-            {/* MOBILE MAIN IMAGE - BACK VIEW - SHIFTED DOWN FOR HEADER */}
             <div className="mobile-hero-main-image absolute z-[4] top-[190px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
@@ -211,7 +208,6 @@ export default function Home() {
               />
             </div>
 
-            {/* MOBILE INDEPENDENT BOTTOM WORD */}
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[160px] text-center pointer-events-none">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[70px]">
                 CREATIVITY
@@ -223,12 +219,12 @@ export default function Home() {
 
         {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
-          <div className="container mx-auto px-6 max-w-[1240px]">
+          <div className="container mx-auto px-4 max-w-[1240px]">
             <div className={cn(
-              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-2 overflow-hidden bg-transparent transition-all duration-500",
+              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent transition-all duration-700 ease-in-out",
               isMounted && isGalleryExpanded 
                 ? "lg:grid-rows-[repeat(12,minmax(0,1fr))] lg:aspect-square md:grid-rows-[repeat(10,minmax(0,1fr))] md:aspect-[8/10] h-auto" 
-                : "h-[400px] lg:h-[600px]"
+                : "h-[560px] md:h-[600px] grid-rows-6 md:grid-rows-none"
             )}>
               {mosaicItems.map((item, i) => {
                 if (!isGalleryExpanded && i >= 6) return null;
@@ -237,17 +233,17 @@ export default function Home() {
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group",
+                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-2xl md:rounded-none",
                         item.className
                       )}>
                         <Image
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.025] group-hover:brightness-[1.03]"
+                          className="object-cover transition-all duration-[350ms] ease-in-out group-hover:scale-[1.05] group-hover:brightness-[1.05]"
                         />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                          <Maximize2 className="text-white h-8 w-8" />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <Maximize2 className="text-white h-8 w-8 scale-75 group-hover:scale-100 transition-transform" />
                         </div>
                       </div>
                     </DialogTrigger>
@@ -267,10 +263,10 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-8 flex justify-center">
+            <div className="mt-10 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black text-white hover:bg-accent min-w-[240px]"
+                className="pill-button bg-black text-white hover:bg-accent min-w-[240px] shadow-lg hover:shadow-accent/20"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
