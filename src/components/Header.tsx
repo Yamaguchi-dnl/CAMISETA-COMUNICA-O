@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -63,7 +63,7 @@ export function Header() {
           </Sheet>
         </div>
 
-        {/* Desktop Navigation - Centered (Logo removed as requested) */}
+        {/* Desktop Navigation - Centered */}
         <nav className="hidden lg:flex items-center gap-12 mx-auto">
           {menuItems.map((item) => (
             <Link 
@@ -80,14 +80,8 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Cart Button - Visible on all screens */}
-        <Link 
-          href="#reserva" 
-          className="flex items-center gap-2 text-black hover:text-accent transition-colors"
-        >
-          <ShoppingBag className="h-6 w-6 lg:h-4 lg:w-4" />
-          <span className="hidden lg:inline text-[14px] font-medium uppercase tracking-[0.02em]">Carrinho 0</span>
-        </Link>
+        {/* Spacer for desktop alignment when cart is removed */}
+        <div className="hidden lg:block w-[24px]" />
       </div>
     </header>
   );
