@@ -7,7 +7,7 @@ import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Maximize2 } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
@@ -23,7 +23,12 @@ if (typeof window !== 'undefined') {
 export default function Home() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const [isGalleryExpanded, setIsGalleryExpanded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleIntroComplete = () => {
     setIsIntroFinished(true);
@@ -64,41 +69,7 @@ export default function Home() {
         '-=0.3'
       );
 
-    // 2. SCROLL REVEAL (LET CREATIVITY SPEAK)
-    const revealLines = gsap.utils.toArray('.reveal-line');
-    const revealTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.scroll-reveal-section',
-        start: 'top 75%',
-        toggleActions: 'play none none none'
-      }
-    });
-
-    revealLines.forEach((line: any, i) => {
-      revealTl.fromTo(line, 
-        { 
-          opacity: 0, 
-          y: i === 1 ? 90 : 70, 
-          clipPath: 'inset(100% 0 0 0)' 
-        },
-        { 
-          opacity: 1, 
-          y: 0, 
-          clipPath: 'inset(0% 0 0 0)', 
-          duration: i === 1 ? 0.95 : 0.8, 
-          ease: 'power4.out' 
-        },
-        i === 0 ? 0 : '-=0.35'
-      );
-    });
-
-    revealTl.fromTo('.reveal-sub-copy',
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
-      '-=0.2'
-    );
-
-    // 3. GENERAL REVEALS
+    // 2. GENERAL REVEALS
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -229,40 +200,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* IMMERSIVE SCROLL REVEAL SECTION */}
-        <section className="scroll-reveal-section relative bg-[#efefef] min-h-[78svh] lg:min-h-screen flex flex-col items-center justify-center py-20 lg:py-32 overflow-hidden">
-          {/* Background Blur Detail */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] lg:w-[380px] lg:h-[380px] bg-[radial-gradient(circle,rgba(217,48,37,0.14)_0%,rgba(217,48,37,0)_70%)] z-1 pointer-events-none" />
-          
-          <div className="container relative z-10 max-w-[1400px] px-6 flex flex-col items-center text-center">
-            <div className="space-y-[-0.2em] mb-8">
-              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
-                LET
-              </h2>
-              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
-                CREATIVITY
-              </h2>
-              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
-                SPEAK
-              </h2>
-            </div>
-            
-            <p className="reveal-sub-copy font-body font-normal text-black/60 text-[15px] lg:text-[18px] leading-relaxed max-w-[640px] px-4">
-              Uma estética que comunica. Uma mensagem que permanece.
-            </p>
-          </div>
-        </section>
-
-        {/* GALLERY MOSAIC SECTION */}
+        {/* GALLERY MOSAIC SECTION - REPOSITIONED BELOW HERO */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
           <div className="container mx-auto px-6 max-w-[1240px]">
             <div className={cn(
               "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-2 overflow-hidden bg-transparent transition-all duration-500",
-              isGalleryExpanded 
-                ? "h-auto" 
+              isMounted && isGalleryExpanded 
+                ? "lg:grid-rows-[repeat(12,minmax(0,1fr))] lg:aspect-square md:grid-rows-[repeat(10,minmax(0,1fr))] md:aspect-[8/10] h-auto" 
                 : "h-[400px] lg:h-[600px]"
             )}>
               {mosaicItems.map((item, i) => {
+                // Initial state: hide items from index 6 onwards if not expanded
                 if (!isGalleryExpanded && i >= 6) return null;
                 
                 return (
@@ -299,7 +247,7 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-8 flex justify-center">
+            <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
                 className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
@@ -365,7 +313,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-5 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -389,7 +337,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-5 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
