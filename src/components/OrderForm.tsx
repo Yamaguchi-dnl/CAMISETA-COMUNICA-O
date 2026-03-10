@@ -125,7 +125,7 @@ export function OrderForm() {
         }));
       });
 
-    const phoneNumber = '5541995133604'; 
+    const phoneNumber = '5541996692392'; 
     
     const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
 
