@@ -11,6 +11,7 @@ interface IntroLoaderProps {
 /**
  * Intro Loader com animação de roleta por letra e saída em slide vertical.
  * O fundo preto sobe como um painel, revelando o conteúdo por baixo.
+ * Fonte Bebas Neue em tamanho gigante para impacto máximo.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -103,17 +104,17 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       ref={containerRef}
       className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
     >
-      <div className="flex flex-col items-center justify-center text-center perspective-[1000px] px-4">
+      <div className="flex flex-col items-center justify-center text-center perspective-[1000px] px-4 w-full">
         
-        {/* Linha 1 */}
-        <div className="line-1 font-headline text-white leading-[0.9] uppercase 
-          text-[clamp(44px,12vw,80px)] md:text-[clamp(72px,10vw,160px)] lg:text-[clamp(100px,14vw,240px)]">
+        {/* Linha 1 - Tamanho GIGANTE */}
+        <div className="line-1 font-headline text-white leading-[0.85] uppercase 
+          text-[clamp(60px,18vw,140px)] md:text-[clamp(120px,15vw,280px)] lg:text-[clamp(180px,20vw,450px)]">
           {renderChars(line1Text)}
         </div>
 
-        {/* Linha 2 */}
-        <div className="line-2 font-headline text-white leading-[0.9] uppercase 
-          text-[clamp(44px,12vw,80px)] md:text-[clamp(72px,10vw,160px)] lg:text-[clamp(100px,14vw,240px)] mt-4 md:mt-2">
+        {/* Linha 2 - Tamanho GIGANTE */}
+        <div className="line-2 font-headline text-white leading-[0.85] uppercase 
+          text-[clamp(60px,18vw,140px)] md:text-[clamp(120px,15vw,280px)] lg:text-[clamp(180px,20vw,450px)] mt-2 md:mt-0">
           {renderChars(line2Text)}
         </div>
 
