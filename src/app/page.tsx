@@ -233,7 +233,7 @@ export default function Home() {
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-2xl md:rounded-none",
+                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-none",
                         item.className
                       )}>
                         <Image
@@ -313,7 +313,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
                 <div className="w-full text-center">
-                  <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
+                  <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="Camiseta Individual"
@@ -336,7 +336,7 @@ export default function Home() {
 
               <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
                 <div className="w-full text-center">
-                  <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
+                  <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                       alt="Kit Promocional"
