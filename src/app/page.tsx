@@ -6,13 +6,21 @@ import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Instagram, Send, Maximize2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { ManifestoSection } from '@/components/ManifestoSection';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ h: 2, m: 45, s: 12 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,6 +33,62 @@ export default function Home() {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    // Hero Animations
+    const heroTl = gsap.timeline();
+    heroTl.from('.hero-title-top', { y: 100, opacity: 0, duration: 1.2, ease: 'power4.out' })
+          .from('.hero-image-frame', { scale: 0.8, opacity: 0, rotate: 5, duration: 1, ease: 'back.out(1.7)' }, '-=0.8')
+          .from('.hero-title-bottom', { y: -100, opacity: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8')
+          .from('.hero-cta', { scale: 0.9, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6');
+
+    // Section Reveals
+    const sections = gsap.utils.toArray('.gsap-reveal');
+    sections.forEach((section: any) => {
+      gsap.fromTo(section, 
+        { y: 50, opacity: 0 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 1, 
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+
+    // Staggered items
+    gsap.from('.benefit-item', {
+      scrollTrigger: {
+        trigger: '.benefits-grid',
+        start: 'top 80%',
+      },
+      y: 30,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+
+    gsap.from('.offer-card', {
+      scrollTrigger: {
+        trigger: '.offers-grid',
+        start: 'top 80%',
+      },
+      scale: 0.95,
+      opacity: 0,
+      stagger: 0.3,
+      duration: 1,
+      ease: 'back.out(1.2)'
+    });
+
+  }, { scope: containerRef });
 
   const faqItems = [
     { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e podem ter a mesma modelagem, salvo ajuste específico de lote." },
@@ -52,7 +116,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div ref={containerRef} className="flex min-h-screen flex-col bg-white">
       <Toaster />
 
       <main className="flex-1">
@@ -61,19 +125,15 @@ export default function Home() {
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
-            {/* DESKTOP HERO VERSION (lg and above) */}
+            {/* DESKTOP HERO VERSION */}
             <div className="hidden lg:flex flex-col items-center w-full">
-              {/* Top Large Wording */}
-              <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
+              <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
                 mb-[-10px] lg:mb-[-15px] xl:mb-[-20px] 
                 text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
                 LET CREATIVITY
               </h1>
 
-              {/* Center Visual Block */}
-              <div className="relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
-                
-                {/* Left Text Block - Desktop Only (xl and above) */}
+              <div className="hero-image-frame relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
                 <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
                   <p className="font-body text-black text-[17px] leading-[1.4] mb-6">
                     <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
@@ -84,8 +144,7 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                {/* The Image Frame - 4:3 HORIZONTAL */}
-                <div className="relative z-[3] transform rotate-[-2deg] xl:rotate-[-2deg] transition-transform duration-700 shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
+                <div className="relative z-[3] transform rotate-[-2deg] shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
                     w-[560px] h-[420px] xl:w-[720px] xl:h-[540px] 
                     relative overflow-hidden rounded-none border-none">
@@ -101,15 +160,13 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Large Wording - Overlays Image from BEHIND */}
-              <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
+              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
                 mt-4 xl:mt-8 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
 
-              {/* CTA Area */}
-              <div className="relative z-[5] mt-12 xl:mt-16">
+              <div className="hero-cta relative z-[5] mt-12 xl:mt-16">
                 <Button asChild className="pill-button bg-[#ff1f17] text-white font-bold 
                   px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 
                   hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
@@ -118,15 +175,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* TABLET ONLY LAYOUT (md to lg) */}
+            {/* TABLET ONLY LAYOUT */}
             <div className="hidden md:flex lg:hidden flex-col items-center w-full">
-               <h1 className="relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
+               <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
                 mb-[-10px] text-[clamp(62px,8vw,108px)]">
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block with Shadow - 4:3 HORIZONTAL */}
-              <div className="relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
+              <div className="hero-image-frame relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
                 <div className="bg-white p-0 w-[400px] h-[300px] relative overflow-hidden max-w-[90vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -139,13 +195,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Large Wording - Overlays Image from BEHIND */}
-              <h2 className="relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
+              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
                 mt-4 mb-[18px] text-[clamp(82px,10vw,138px)]">
                 SPEAK
               </h2>
 
-              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4">
+              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4 hero-cta">
                 <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
@@ -155,22 +210,18 @@ export default function Home() {
                 <div className="w-[110px] h-[4px] bg-black mt-4 mx-auto" />
               </div>
 
-              <Button asChild className="pill-button bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
+              <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
                 <a href="#ofertas">COMPRAR AGORA</a>
               </Button>
             </div>
 
-            {/* MOBILE ONLY HERO VERSION (below md) */}
+            {/* MOBILE ONLY HERO VERSION */}
             <div className="flex md:hidden flex-col items-center w-full pt-10">
-              {/* Top Text */}
-              <h1 
-                className="font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]"
-              >
+              <h1 className="hero-title-top font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]">
                 LET CREATIVITY
               </h1>
 
-              {/* Image Block Inclined with Shadow - 4:3 HORIZONTAL */}
-              <div className="relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
+              <div className="hero-image-frame relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
                 <div className="bg-white p-0 w-[300px] h-[225px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
@@ -183,15 +234,11 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Bottom Text Overlapping Image from BEHIND */}
-              <h2 
-                className="relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-8 mb-[18px] text-[clamp(54px,16vw,86px)]"
-              >
+              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-8 mb-[18px] text-[clamp(54px,16vw,86px)]">
                 SPEAK
               </h2>
 
-              {/* Support Text Block */}
-              <div className="flex flex-col items-center text-center px-4 mb-10 mt-1">
+              <div className="hero-cta flex flex-col items-center text-center px-4 mb-10 mt-1">
                 <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
@@ -200,12 +247,10 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* CTA Button */}
-              <Button asChild className="pill-button bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
+              <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
                 <a href="#reserva">COMPRAR AGORA</a>
               </Button>
             </div>
-
           </div>
         </section>
 
@@ -215,8 +260,8 @@ export default function Home() {
         {/* BENEFITS SECTION */}
         <section className="py-24 bg-white border-t border-[#f0f0f0]">
           <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center benefits-grid">
+              <div className="gsap-reveal relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
                 <Image
                   src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg"
                   alt="Camiseta em Destaque"
@@ -227,7 +272,7 @@ export default function Home() {
               </div>
               <div className="space-y-12">
                 {benefits.map((benefit, i) => (
-                  <div key={i} className="flex gap-8 group">
+                  <div key={i} className="flex gap-8 group benefit-item">
                     <div className="flex flex-col items-center">
                       <div className="w-4 h-4 rounded-full bg-black ring-4 ring-black/10 group-hover:scale-125 transition-transform" />
                       {i !== benefits.length - 1 && <div className="w-px h-full bg-black/20 mt-4" />}
@@ -246,12 +291,12 @@ export default function Home() {
         {/* OFFER HIGHLIGHT */}
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="mb-4 text-black">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-black mb-2 font-medium">Cada camiseta por R$ 78,00</p>
-            <p className="text-black mb-12 font-bold uppercase text-xs tracking-[0.1em]">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
+            <h3 className="mb-4 text-black gsap-reveal">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <p className="text-black mb-2 font-medium gsap-reveal">Cada camiseta por R$ 78,00</p>
+            <p className="text-black mb-12 font-bold uppercase text-xs tracking-[0.1em] gsap-reveal">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
             
             {/* Countdown */}
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-6 gsap-reveal">
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black">Condição especial por tempo limitado</span>
               <div className="flex gap-4">
                 {[
@@ -268,8 +313,8 @@ export default function Home() {
             </div>
 
             {/* Purchase Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto">
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto offers-grid">
+              <div className="offer-card bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
                 <div className="w-full">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -294,7 +339,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
+              <div className="offer-card bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
                 <div className="w-full">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -327,7 +372,7 @@ export default function Home() {
         </section>
 
         {/* ORDER FORM SECTION */}
-        <section className="py-24 bg-white" id="produtos">
+        <section className="py-24 bg-white gsap-reveal" id="produtos">
           <div className="container mx-auto px-6 text-center mb-12">
             <h3 className="uppercase text-black">Reserva Online</h3>
           </div>
@@ -337,7 +382,7 @@ export default function Home() {
         </section>
 
         {/* GALLERY SECTION */}
-        <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden">
+        <section className="py-20 bg-white border-y border-[#f0f0f0] overflow-hidden gsap-reveal">
           <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6">
             {galleryImages.map((src, i) => (
               <Dialog key={i}>
@@ -375,7 +420,7 @@ export default function Home() {
         </section>
 
         {/* FAQ SECTION */}
-        <section id="faq" className="py-24 bg-white scroll-mt-20">
+        <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
             <h3 className="mb-12 text-center text-black">Perguntas Frequentes</h3>
             <Accordion type="single" collapsible className="w-full space-y-4">
