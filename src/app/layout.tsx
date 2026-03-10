@@ -1,9 +1,22 @@
-
 import type { Metadata } from 'next';
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase';
 import { Header } from '@/components/Header';
 import { SmoothScroll } from '@/components/SmoothScroll';
+import { Bebas_Neue, Montserrat } from 'next/font/google';
+
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas-neue',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'IAP Camisetas - Ministério de Comunicação',
@@ -16,13 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body selection:bg-accent selection:text-white">
+    <html lang="pt-BR" className={`${bebasNeue.variable} ${montserrat.variable}`} suppressHydrationWarning>
+      <body className="font-body selection:bg-accent selection:text-white antialiased">
         <FirebaseClientProvider>
           <SmoothScroll />
           <Header />

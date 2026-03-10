@@ -35,13 +35,13 @@
     @apply bg-background text-black font-body antialiased text-[16px] leading-[1.6];
   }
   h1 {
-    @apply font-headline text-[clamp(48px,7vw,120px)] leading-[1.05] tracking-[-0.02em] uppercase;
+    @apply font-headline text-[clamp(48px,7vw,120px)] leading-[1.05] tracking-[0.02em] uppercase;
   }
   h2 {
-    @apply font-headline text-[clamp(32px,4vw,64px)] leading-[1.1] uppercase;
+    @apply font-headline text-[clamp(32px,4vw,64px)] leading-[1.1] uppercase tracking-[0.02em];
   }
   h3 {
-    @apply font-headline text-[26px] lg:text-[26px] uppercase;
+    @apply font-headline text-[26px] lg:text-[26px] uppercase tracking-[0.05em];
   }
 }
 
