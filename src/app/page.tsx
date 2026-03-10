@@ -41,7 +41,7 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
-    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-left-block'], { 
+    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-left-block', '.mobile-hero-bottom-word'], { 
       opacity: 0,
     });
 
@@ -50,7 +50,7 @@ export default function Home() {
         { opacity: 0, scale: 0.94, y: 34 }, 
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
-      .fromTo(['.hero-bottom-word'], 
+      .fromTo(['.hero-bottom-word', '.mobile-hero-bottom-word'], 
         { opacity: 0, y: 80 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
@@ -255,6 +255,12 @@ export default function Home() {
                 className="object-cover object-center"
                 priority
               />
+            </div>
+            {/* Adicionado de volta para mobile */}
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(60px,20vw,90px)]">
+                CREATIVITY
+              </h1>
             </div>
           </div>
         </section>
