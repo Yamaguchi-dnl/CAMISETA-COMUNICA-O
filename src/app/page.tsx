@@ -171,8 +171,8 @@ export default function Home() {
               </div>
 
               {/* BACKGROUND TYPOGRAPHY */}
-              <div className="hero-bg-text absolute left-1/2 bottom-[20px] lg:bottom-[15%] md:bottom-[10%] -translate-x-1/2 z-[2] w-full pointer-events-none text-center">
-                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[18vw] md:text-[18vw] lg:text-[18vw]">
+              <div className="hero-bg-text absolute left-1/2 bottom-[12%] md:bottom-[15%] lg:bottom-[18%] -translate-x-1/2 z-[2] w-full pointer-events-none text-center">
+                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[14.8vw] whitespace-nowrap">
                   CREATIVITY
                 </h1>
               </div>
@@ -238,7 +238,7 @@ export default function Home() {
             <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
+                className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -301,7 +301,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -325,7 +325,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
