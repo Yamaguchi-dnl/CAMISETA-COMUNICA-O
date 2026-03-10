@@ -54,7 +54,7 @@ export default function Home() {
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
       .fromTo('.hero-bg-text', 
-        { opacity: 0, y: 110 }, 
+        { opacity: 0, y: 50 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
@@ -157,10 +157,17 @@ export default function Home() {
           <div className="container relative z-10 max-w-[1600px] px-6 lg:px-10 h-full flex flex-col items-center justify-center">
             
             {/* MAIN COMPOSITION */}
-            <div className="relative w-full flex flex-col items-center justify-center">
+            <div className="relative w-full flex flex-col items-center justify-center py-20 lg:py-32">
               
-              {/* IMAGE BLOCK - Updated for horizontal 4:3 layout on desktop */}
-              <div className="hero-image-wrapper relative z-[4] w-[82vw] md:w-[min(42vw,460px)] lg:w-[min(60vw,860px)] aspect-[4/5] lg:aspect-[4/3] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
+              {/* BACKGROUND TYPOGRAPHY - Fit to width, centered overlap */}
+              <div className="hero-bg-text absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] w-[92%] max-w-[1440px] pointer-events-none text-center">
+                <h1 className="font-headline text-black uppercase leading-[0.88] tracking-[-0.03em] text-[clamp(90px,11vw,220px)] sm:text-[clamp(120px,12vw,320px)] md:text-[clamp(160px,14.8vw,420px)] whitespace-nowrap">
+                  CREATIVITY
+                </h1>
+              </div>
+
+              {/* IMAGE BLOCK - 4:3 horizontal, crosses middle of the word */}
+              <div className="hero-image-wrapper relative z-[4] w-[88vw] md:w-[min(74vw,640px)] lg:w-[min(64vw,760px)] aspect-[4/3] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
                 <Image
                   src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                   alt="IAP Camisetas Campaign"
@@ -168,13 +175,6 @@ export default function Home() {
                   className="object-cover"
                   priority
                 />
-              </div>
-
-              {/* BACKGROUND TYPOGRAPHY */}
-              <div className="hero-bg-text absolute left-1/2 bottom-[12%] md:bottom-[15%] lg:bottom-[18%] -translate-x-1/2 z-[2] w-full pointer-events-none text-center">
-                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[14.8vw] whitespace-nowrap">
-                  CREATIVITY
-                </h1>
               </div>
             </div>
 
@@ -238,7 +238,7 @@ export default function Home() {
             <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
+                className="pill-button bg-black text-white hover:bg-accent min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -301,7 +301,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -325,7 +325,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
