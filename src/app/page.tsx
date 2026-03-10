@@ -9,7 +9,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
-import { ManifestoSection } from '@/components/ManifestoSection';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -77,51 +76,51 @@ export default function Home() {
         opacity: 0, 
       });
 
-      const staggerTime = 0.15;
-      const baseDuration = 2.4;
+      const baseDuration = 1.8;
+      const staggerTime = 0.1;
       
       galleryTl.fromTo(".gallery-mosaic-item--1", 
-        { x: "-100vw", y: "10vh", opacity: 0 }, 
+        { x: "-20vw", y: "10vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
-        { x: "0vw", y: "-100vh", opacity: 0 }, 
+        { x: "0vw", y: "-20vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
-        { x: "100vw", y: "0vh", opacity: 0 }, 
+        { x: "20vw", y: "0vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 2
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
-        { x: "-100vw", y: "50vh", opacity: 0 }, 
+        { x: "-20vw", y: "20vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 3
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
-        { x: "100vw", y: "50vh", opacity: 0 }, 
+        { x: "20vw", y: "20vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 4
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
-        { x: "-50vw", y: "100vh", opacity: 0 }, 
+        { x: "-15vw", y: "30vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 5
       );
       galleryTl.fromTo(".gallery-mosaic-item--7", 
-        { x: "50vw", y: "100vh", opacity: 0 }, 
+        { x: "15vw", y: "30vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 6
       );
       galleryTl.fromTo(".gallery-mosaic-item--8", 
-        { x: "-100vw", y: "20vh", opacity: 0 }, 
+        { x: "-20vw", y: "15vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 7
       );
       galleryTl.fromTo(".gallery-mosaic-item--9", 
-        { x: "0vw", y: "100vh", opacity: 0 }, 
+        { x: "0vw", y: "25vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 8
       );
@@ -158,47 +157,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-span-6 lg:row-span-10 col-span-1 gallery-mosaic-item--1",
+      className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--2",
+      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--3",
+      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--4",
+      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-span-3 lg:row-span-5 col-span-1 gallery-mosaic-item--5",
+      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-span-4 lg:row-span-6 col-span-1 gallery-mosaic-item--6",
+      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-span-4 lg:row-span-6 col-span-1 gallery-mosaic-item--7",
+      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-span-4 lg:row-span-6 col-span-2 gallery-mosaic-item--8",
+      className: "lg:col-span-4 lg:row-span-8 col-span-2 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-span-12 lg:row-span-7 col-span-2 gallery-mosaic-item--9",
+      className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
     },
   ];
 
@@ -260,17 +259,15 @@ export default function Home() {
           </div>
         </section>
 
-        <ManifestoSection />
-
-        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-screen">
+        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[80px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[45px]">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] group rounded-none",
+                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] group rounded-none will-change-transform",
                         item.className
                       )}>
                         <Image
