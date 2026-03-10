@@ -10,7 +10,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
-import { ManifestoSection } from '@/components/ManifestoSection';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -202,8 +201,6 @@ export default function Home() {
 
           </div>
         </section>
-
-        <ManifestoSection />
 
         {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
