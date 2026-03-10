@@ -105,47 +105,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-8 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-5 col-span-2",
+      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-4 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-3 col-span-1",
+      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-4 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-3 col-span-1",
+      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-start-7 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-4 md:row-span-2 col-span-1",
+      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-start-9 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-4 md:row-span-2 col-span-1",
+      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-start-11 lg:col-span-2 lg:row-start-5 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-6 md:row-span-2 col-span-1",
+      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-start-1 lg:col-span-4 lg:row-start-9 lg:row-span-4 md:col-start-1 md:col-span-4 md:row-start-6 md:row-span-3 col-span-2",
+      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-start-5 lg:col-span-4 lg:row-start-9 lg:row-span-4 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2",
+      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-9 lg:col-span-4 lg:row-start-8 lg:row-span-5 md:col-start-5 md:col-span-4 md:row-start-8 md:row-span-3 col-span-2",
+      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2",
     },
   ];
 
@@ -324,18 +324,18 @@ export default function Home() {
         </section>
 
         {/* GALLERY MOSAIC SECTION */}
-        <section className="py-24 bg-[#efefef] gsap-reveal">
-          <div className="container mx-auto px-6 max-w-[1400px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 lg:grid-rows-[repeat(12,minmax(0,1fr))] gap-0 aspect-auto lg:aspect-square overflow-hidden">
+        <section className="py-16 bg-[#efefef] gsap-reveal">
+          <div className="container mx-auto px-6 max-w-[1240px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 lg:grid-rows-[repeat(12,minmax(0,1fr))] gap-[10px] aspect-auto lg:aspect-square overflow-hidden bg-transparent">
               {mosaicItems.map((item, i) => {
-                // Only show first 6 items initially
+                // Show first 6 items initially if not expanded
                 if (!isGalleryExpanded && i >= 6) return null;
                 
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 hover:z-10",
+                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300",
                         "group",
                         item.className
                       )}>
@@ -343,7 +343,7 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.03] group-hover:brightness-[1.02]"
+                          className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.025] group-hover:brightness-[1.03]"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                           <Maximize2 className="text-white h-8 w-8" />
@@ -366,11 +366,10 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-8 lg:mt-10 flex justify-center">
+            <div className="mt-6 flex justify-center">
               <Button 
-                variant="outline" 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="rounded-none border-[1.5px] border-[#111111] px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.03em] text-[#111111] hover:bg-[#111111] hover:text-white transition-all duration-300 h-auto"
+                className="pill-button bg-[#111111] text-white hover:bg-[#d93025] transition-all duration-300 px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.02em] rounded-full h-auto border-none"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
