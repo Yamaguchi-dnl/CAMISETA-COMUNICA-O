@@ -9,7 +9,7 @@ interface IntroLoaderProps {
 }
 
 /**
- * Intro Loader que garante a centralização perfeita do SVG principal na tela.
+ * Intro Loader que garante a centralização perfeita da arte principal.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,8 +35,8 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     // Estado Inicial
     gsap.set(artworkRef.current, {
       opacity: 0,
-      y: 80,
-      rotateX: -60,
+      y: 60,
+      rotateX: -45,
       transformPerspective: 1000,
       transformOrigin: "center center"
     });
@@ -47,34 +47,34 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     });
 
     introTimeline
-      // Passo 1: Revelação da Arte Principal Centralizada
+      // Passo 1: Revelação da Arte Principal
       .to(artworkRef.current, {
         opacity: 1,
         y: 0,
         rotateX: 0,
-        duration: 1.2,
+        duration: 1.4,
         ease: 'power4.out'
       })
       // Passo 2: Referência Bíblica (suavemente abaixo)
       .to(referenceRef.current, {
-        opacity: 1,
+        opacity: 0.5,
         y: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: 'power2.out'
-      }, '-=0.5')
-      // Passo 3: Pausa
-      .to({}, { duration: 1.0 })
-      // Passo 4: Saída
+      }, '-=0.7')
+      // Passo 3: Pausa para impacto
+      .to({}, { duration: 1.2 })
+      // Passo 4: Saída suave
       .to([artworkRef.current, referenceRef.current], {
         opacity: 0,
-        y: -40,
-        duration: 0.6,
+        y: -30,
+        duration: 0.7,
         ease: 'power3.inOut'
       })
-      // Passo 5: Fade out do overlay
+      // Passo 5: Fade out do overlay total
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.4,
+        duration: 0.5,
         ease: 'power2.inOut',
         display: 'none'
       });
@@ -86,22 +86,32 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-[#efefef] flex items-center justify-center overflow-hidden pointer-events-auto"
+      className="fixed inset-0 z-[9999] bg-[#efefef] flex items-center justify-center overflow-hidden pointer-events-none"
     >
-      <div className="relative flex flex-col items-center justify-center w-full h-full px-6">
+      {/* 
+          Este wrapper garante que o artworkRef seja o centro absoluto da tela. 
+          A referência bíblica é posicionada de forma absoluta em relação a este centro 
+          para não deslocar o SVG principal.
+      */}
+      <div className="relative flex items-center justify-center w-full h-full">
         
-        {/* Container da Arte Principal - Este div define o centro exato */}
-        <div ref={artworkRef} className="relative w-[90vw] lg:w-[min(60vw,780px)] flex justify-center">
+        <div 
+          ref={artworkRef} 
+          className="relative w-[85vw] lg:w-[min(65vw,820px)]"
+        >
           <img 
             src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/IDE%20POR%20TODO%20O%20MUNDO.svg" 
             alt="Ide por todo o mundo" 
             className="w-full h-auto block"
           />
           
-          {/* Referência Bíblica - Posicionada de forma absoluta para não afetar o centro da arte principal */}
+          {/* 
+              Referência Bíblica: 
+              Posicionada absolutamente ABAIXO do centro para manter a arte principal no meio exato. 
+          */}
           <div 
             ref={referenceRef} 
-            className="absolute top-full mt-6 lg:mt-8 w-[28vw] lg:w-[min(14vw,160px)] opacity-50"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-8 lg:mt-12 w-[30vw] lg:w-[min(16vw,180px)]"
           >
             <img 
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/MARCOS.svg" 
