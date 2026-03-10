@@ -43,7 +43,7 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set('.hero-section', { opacity: 1 });
-    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-support', '.hero-cta'], { 
+    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-support'], { 
       opacity: 0,
       y: 20
     });
@@ -62,11 +62,6 @@ export default function Home() {
         { y: 16, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
         '-=0.5'
-      )
-      .fromTo('.hero-cta', 
-        { y: 18, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
-        '-=0.3'
       );
 
     // 2. GENERAL REVEALS
@@ -188,13 +183,6 @@ export default function Home() {
               <span className="font-body font-medium text-[12px] lg:text-[13px] tracking-[0.08em] uppercase text-[#666666] whitespace-nowrap">
                 COMUNICAÇÃO • BARREIRINHA
               </span>
-            </div>
-
-            {/* CTA BUTTON */}
-            <div className="hero-cta absolute bottom-[34px] lg:bottom-[48px] md:bottom-[42px] left-1/2 -translate-x-1/2 z-50">
-              <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] min-w-[240px]">
-                <a href="#ofertas">COMPRAR AGORA</a>
-              </Button>
             </div>
 
           </div>
