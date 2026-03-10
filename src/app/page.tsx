@@ -38,20 +38,15 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set('.hero-section', { opacity: 1 });
-    gsap.set(['.hero-micro-copy', '.hero-image-wrapper', '.hero-bg-text', '.hero-support', '.hero-cta'], { 
+    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-support', '.hero-cta'], { 
       opacity: 0,
       y: 20
     });
 
     heroTl
-      .fromTo('.hero-micro-copy', 
-        { y: -16, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
-      )
       .fromTo('.hero-image-wrapper', 
         { opacity: 0, scale: 0.94, y: 34 }, 
-        { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }, 
-        '-=0.3'
+        { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
       .fromTo('.hero-bg-text', 
         { opacity: 0, y: 110 }, 
@@ -195,13 +190,6 @@ export default function Home() {
         <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-screen flex items-center justify-center pt-20 pb-16">
           <div className="container relative z-10 max-w-[1600px] px-6 lg:px-10 h-full flex flex-col items-center justify-center">
             
-            {/* TOP MICRO COPY */}
-            <div className="hero-micro-copy absolute top-8 lg:top-12 left-1/2 -translate-x-1/2 z-50">
-              <span className="font-body font-bold text-[12px] lg:text-[13px] tracking-[0.14em] uppercase text-black">
-                IAP CAMISETAS
-              </span>
-            </div>
-
             {/* MAIN COMPOSITION */}
             <div className="relative w-full flex flex-col items-center justify-center">
               
