@@ -171,8 +171,8 @@ export default function Home() {
               </div>
 
               {/* BACKGROUND TYPOGRAPHY */}
-              <div className="hero-bg-text absolute left-1/2 bottom-[20px] lg:bottom-[-18px] md:bottom-[-8px] -translate-x-1/2 z-[2] w-screen pointer-events-none text-center">
-                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[clamp(64px,18vw,120px)] md:text-[clamp(120px,16vw,260px)] lg:text-[clamp(180px,18vw,430px)]">
+              <div className="hero-bg-text absolute left-1/2 bottom-[20px] lg:bottom-[15%] md:bottom-[10%] -translate-x-1/2 z-[2] w-full pointer-events-none text-center">
+                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[18vw] md:text-[18vw] lg:text-[18vw]">
                   CREATIVITY
                 </h1>
               </div>
