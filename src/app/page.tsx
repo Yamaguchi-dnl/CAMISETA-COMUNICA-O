@@ -41,7 +41,7 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
-    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-bottom-word', '.mobile-hero-left-block'], { 
+    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-left-block'], { 
       opacity: 0,
     });
 
@@ -50,7 +50,7 @@ export default function Home() {
         { opacity: 0, scale: 0.94, y: 34 }, 
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
-      .fromTo(['.hero-bottom-word', '.mobile-hero-bottom-word'], 
+      .fromTo(['.hero-bottom-word'], 
         { opacity: 0, y: 80 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
@@ -76,51 +76,51 @@ export default function Home() {
         opacity: 0, 
       });
 
-      const baseDuration = 1.8;
-      const staggerTime = 0.1;
+      const baseDuration = 1.4;
+      const staggerTime = 0.08;
       
       galleryTl.fromTo(".gallery-mosaic-item--1", 
-        { x: "-20vw", y: "10vh", opacity: 0 }, 
+        { x: "-10vw", y: "5vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
-        { x: "0vw", y: "-20vh", opacity: 0 }, 
+        { x: "0vw", y: "-10vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
-        { x: "20vw", y: "0vh", opacity: 0 }, 
+        { x: "10vw", y: "0vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 2
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
-        { x: "-20vw", y: "20vh", opacity: 0 }, 
+        { x: "-10vw", y: "10vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 3
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
-        { x: "20vw", y: "20vh", opacity: 0 }, 
+        { x: "10vw", y: "10vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 4
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
-        { x: "-15vw", y: "30vh", opacity: 0 }, 
+        { x: "-8vw", y: "15vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 5
       );
       galleryTl.fromTo(".gallery-mosaic-item--7", 
-        { x: "15vw", y: "30vh", opacity: 0 }, 
+        { x: "8vw", y: "15vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 6
       );
       galleryTl.fromTo(".gallery-mosaic-item--8", 
-        { x: "-20vw", y: "15vh", opacity: 0 }, 
+        { x: "-10vw", y: "8vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 7
       );
       galleryTl.fromTo(".gallery-mosaic-item--9", 
-        { x: "0vw", y: "25vh", opacity: 0 }, 
+        { x: "0vw", y: "12vh", opacity: 0 }, 
         { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
         staggerTime * 8
       );
@@ -259,15 +259,15 @@ export default function Home() {
           </div>
         </section>
 
-        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center">
+        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[45px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] group rounded-none will-change-transform",
+                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#111111] group rounded-none will-change-transform",
                         item.className
                       )}>
                         <Image
