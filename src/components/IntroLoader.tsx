@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -9,29 +10,25 @@ interface IntroLoaderProps {
 }
 
 /**
- * Componente de Loader de Introdução com efeito de "roleta" por letra.
- * Cada caractere gira verticalmente antes de formar a frase final.
+ * Intro Loader usando SVGs originais da estampa.
+ * Implementa uma animação estilo roleta/reel editorial por linha.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mainTextRef = useRef<HTMLDivElement>(null);
-  const subTextRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line2Ref = useRef<HTMLDivElement>(null);
+  const referenceRef = useRef<HTMLDivElement>(null);
   const [shouldRender, setShouldRender] = useState(false);
 
-  const mainText = "IDE POR TODO O MUNDO";
-  const subText = "Marcos 16:15";
-
   useEffect(() => {
+    // Verifica se já foi exibido nesta sessão se necessário, 
+    // mas conforme pedido anterior, exibiremos sempre.
     setShouldRender(true);
     document.body.style.overflow = 'hidden';
   }, []);
 
   useGSAP(() => {
     if (!shouldRender || !containerRef.current) return;
-
-    const chars = mainTextRef.current?.querySelectorAll('.char');
-    
-    if (!chars) return;
 
     const introTimeline = gsap.timeline({
       onComplete: () => {
@@ -40,38 +37,57 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       }
     });
 
-    // Estado inicial: letras escondidas abaixo
-    gsap.set(chars, { yPercent: 120, opacity: 0 });
-    gsap.set(subTextRef.current, { opacity: 0, y: 10 });
+    // Estado Inicial (Line 1 & 2 com rotação e deslocamento)
+    gsap.set([line1Ref.current, line2Ref.current], {
+      opacity: 0,
+      y: 90,
+      rotateX: -70,
+      transformPerspective: 1000,
+      transformOrigin: "center center"
+    });
+
+    gsap.set(referenceRef.current, {
+      opacity: 0,
+      y: 26
+    });
 
     introTimeline
-      // Animação de roleta (slot machine) para cada letra
-      .to(chars, {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: 'power4.out',
-        stagger: 0.03,
-      })
-      // Revelação do subtítulo
-      .to(subTextRef.current, {
+      // Step 1: Animate Line 1
+      .to(line1Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-      }, '-=0.3')
-      // Pausa para impacto
-      .to({}, { duration: 1.2 })
-      // Saída elegante
-      .to([mainTextRef.current, subTextRef.current], {
-        y: -40,
+        rotateX: 0,
+        duration: 0.85,
+        ease: 'power4.out'
+      })
+      // Step 2: Animate Line 2 (com overlap)
+      .to(line2Ref.current, {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 0.85,
+        ease: 'power4.out'
+      }, '-=0.45')
+      // Step 3: Animate Reference
+      .to(referenceRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        ease: 'power2.out'
+      })
+      // Step 4: Hold Composition
+      .to({}, { duration: 0.45 })
+      // Step 5: Transition Out
+      .to([line1Ref.current, line2Ref.current, referenceRef.current], {
         opacity: 0,
-        duration: 0.7,
+        y: -40,
+        duration: 0.5,
         ease: 'power3.inOut'
       })
+      // Step 6: Remove Loader Overlay
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.5,
+        duration: 0.3,
         ease: 'power2.inOut',
         display: 'none'
       });
@@ -85,30 +101,36 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       ref={containerRef}
       className="fixed inset-0 z-[9999] bg-[#efefef] flex flex-col items-center justify-center overflow-hidden pointer-events-auto"
     >
-      <div 
-        ref={mainTextRef}
-        className="flex flex-wrap justify-center font-headline text-[#111111] uppercase tracking-normal leading-[0.95] text-center px-6
-          text-[clamp(34px,9vw,64px)] lg:text-[clamp(64px,7vw,130px)]"
-      >
-        {mainText.split("").map((char, index) => (
-          <span 
-            key={index} 
-            className="inline-block overflow-hidden"
-            style={{ minWidth: char === " " ? "0.25em" : "auto" }}
-          >
-            <span className="char inline-block">
-              {char}
-            </span>
-          </span>
-        ))}
-      </div>
-      
-      <div 
-        ref={subTextRef}
-        className="font-body font-semibold text-[#111111] uppercase tracking-[0.08em] mt-6 lg:mt-8
-          text-[12px] lg:text-[14px]"
-      >
-        {subText}
+      <div className="flex flex-col items-center justify-center max-w-full px-6">
+        {/* Main Artwork Group */}
+        <div className="flex flex-col items-center gap-[10px] lg:gap-[14px]">
+          {/* Line 1: IDE POR TODO O */}
+          <div ref={line1Ref} className="relative overflow-visible w-[86vw] lg:w-[min(72vw,860px)]">
+            <img 
+              src="/IDE POR TODO O.svg" 
+              alt="Ide por todo o" 
+              className="w-full h-auto block"
+            />
+          </div>
+          
+          {/* Line 2: mundo */}
+          <div ref={line2Ref} className="relative overflow-visible w-[68vw] lg:w-[min(56vw,620px)]">
+            <img 
+              src="/mundo.svg" 
+              alt="mundo" 
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+
+        {/* Bible Reference */}
+        <div ref={referenceRef} className="mt-[18px] lg:mt-[24px] w-[28vw] lg:w-[min(16vw,170px)]">
+          <img 
+            src="/MARCOS.svg" 
+            alt="Marcos 16:15" 
+            className="w-full h-auto block"
+          />
+        </div>
       </div>
     </div>
   );
