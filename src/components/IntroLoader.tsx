@@ -9,8 +9,8 @@ interface IntroLoaderProps {
 }
 
 /**
- * Intro Loader simplificado e impactante.
- * Fundo vermelho, texto branco e animação de roleta por letra.
+ * Intro Loader com animação de roleta por letra e saída em slide vertical.
+ * O fundo vermelho sobe como um painel, revelando o conteúdo por baixo.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,8 +44,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
 
     const tl = gsap.timeline({
       onComplete: () => {
-        document.body.style.overflow = '';
-        onComplete();
+        // Cleanup final se necessário
       }
     });
 
@@ -61,7 +60,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     });
 
     tl
-      // Animação da primeira linha
+      // Animação da primeira linha (roleta)
       .to(chars1, {
         yPercent: 0,
         rotateX: 0,
@@ -70,7 +69,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
         stagger: 0.035,
         ease: 'power4.out'
       })
-      // Animação da segunda linha (com overlap)
+      // Animação da segunda linha (roleta com overlap)
       .to(chars2, {
         yPercent: 0,
         rotateX: 0,
@@ -79,15 +78,20 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
         stagger: 0.035,
         ease: 'power4.out'
       }, "-=0.45")
-      // Pausa para leitura
-      .to({}, { duration: 0.6 })
-      // Saída do loader
+      // Pausa para leitura (hold)
+      .to({}, { duration: 0.4 })
+      // Saída do loader: Slide para cima (Painel)
       .to(containerRef.current, {
-        opacity: 0,
-        duration: 0.45,
-        ease: 'power2.inOut'
+        yPercent: -100,
+        duration: 0.85,
+        ease: 'power4.inOut',
+        onStart: () => {
+          // Libera o scroll e sinaliza ao componente pai para começar a revelar a Hero
+          document.body.style.overflow = '';
+          onComplete();
+        }
       })
-      // Remove do DOM
+      // Remove da visualização
       .set(containerRef.current, { display: 'none' });
 
   }, { scope: containerRef, dependencies: [shouldRender] });
@@ -97,7 +101,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-[#ff1f17] flex items-center justify-center overflow-hidden pointer-events-none"
+      className="fixed inset-0 z-[9999] bg-[#ff1f17] flex items-center justify-center overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center text-center perspective-[1000px] px-4">
         

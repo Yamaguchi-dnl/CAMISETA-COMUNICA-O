@@ -42,18 +42,19 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current || !isIntroFinished) return;
 
-    // Refresh ScrollTrigger to ensure accuracy with SmoothScroll
+    // Refresh ScrollTrigger para garantir precisão com SmoothScroll
     ScrollTrigger.refresh();
 
-    // Hero Animations - Layered Reveal (Step 5)
+    // Hero Animations - Revelação em camadas sincronizada com o slide do loader
     const heroTl = gsap.timeline();
     
-    // Revela a seção hero que estava oculta inicialmente
+    // Torna a seção hero visível (estava opacity-0)
     gsap.to('.hero-section', { opacity: 1, duration: 0.1 });
     
-    // Configura os estados iniciais dos elementos da hero
+    // Configura os estados iniciais dos elementos da hero para a revelação suave
     gsap.set(['.hero-title-top', '.hero-image-frame', '.hero-title-bottom', '.hero-support', '.hero-cta'], { 
-      opacity: 0 
+      opacity: 0,
+      y: 20
     });
 
     heroTl
@@ -82,7 +83,7 @@ export default function Home() {
         '-=0.2'
       );
 
-    // Section Reveals
+    // Revelação das outras seções conforme o scroll
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -101,48 +102,19 @@ export default function Home() {
       );
     });
 
-    // Staggered items - Benefits
-    gsap.from('.benefit-item', {
-      scrollTrigger: {
-        trigger: '.benefits-grid',
-        start: 'top 80%',
-      },
-      y: 30,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
-
-    // Staggered items - Offers (Cards)
-    gsap.from('.offer-card', {
-      scrollTrigger: {
-        trigger: '.offers-grid',
-        start: 'top 80%',
-      },
-      y: 50,
-      scale: 0.95,
-      opacity: 0,
-      stagger: 0.3,
-      duration: 1,
-      ease: 'back.out(1.2)'
-    });
-
   }, { scope: containerRef, dependencies: [isIntroFinished] });
 
   const faqItems = [
-    { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e podem ter a mesma modelagem, salvo ajuste específico de lote." },
-    { q: "Quais tamanhos estarão disponíveis?", a: "Os tamanhos podem ser disponibilizados em PP, P, M, G, GG e XGG, conforme estoque ou produção definida." },
-    { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp, com Pix ou alinhamento de parcelamento." },
-    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento, o sistema direciona você para o WhatsApp para combinar a melhor forma de pagamento." },
-    { q: "Posso pedir mais de uma unidade?", a: "Sim. O formulário deve permitir escolher a quantidade desejada." },
-    { q: "Como saberei se meu pedido foi registrado?", a: "Antes do redirecionamento ao WhatsApp, os dados do pedido foram salvos no Firebase Firestore." },
+    { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
+    { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
+    { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
+    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento, nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
   ];
 
   const benefits = [
-    { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade, cuidado visual e identidade do Ministério de Comunicação." },
-    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas, coberturas, ensaios, reuniões e programações especial." },
-    { title: "Duas opções de cor", text: "Disponível nas versões preta e branca, para que cada pessoa escolha a opção que melhor combina com seu estilo." },
+    { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade e identidade do Ministério de Comunicação." },
+    { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas e programações especiais." },
+    { title: "Duas opções de cor", text: "Disponível nas versões preta e branca." },
   ];
 
   const galleryImages = [
@@ -161,8 +133,8 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* HERO SECTION */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16">
+        {/* HERO SECTION - Renderizada por baixo da intro */}
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16 min-h-screen">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
@@ -216,48 +188,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* TABLET ONLY LAYOUT */}
-            <div className="hidden md:flex lg:hidden flex-col items-center w-full">
-               <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] 
-                mb-[-10px] text-[clamp(62px,8vw,108px)]">
-                LET CREATIVITY
-              </h1>
-
-              <div className="hero-image-frame relative z-[3] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[480px] h-[360px] relative overflow-hidden max-w-[90vw] rounded-none border-none">
-                  <Image
-                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                    alt="IAP Camisetas Campaign"
-                    fill
-                    className="object-cover"
-                    priority
-                    data-ai-hint="fashion models"
-                  />
-                </div>
-              </div>
-
-              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-4 mb-[18px] text-[clamp(82px,10vw,138px)]">
-                SPEAK
-              </h2>
-
-              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4 hero-support">
-                <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
-                  COMUNICAR É MISSÃO.
-                </h3>
-                <p className="font-body text-black text-[clamp(18px,2vw,22px)] leading-[1.45] mt-2.5 max-w-[520px]">
-                  Uma camiseta para quem serve anunciando a mensagem.
-                </p>
-                <div className="w-[110px] h-[4px] bg-black mt-4 mx-auto" />
-              </div>
-
-              <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-10 py-6 text-[18px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[290px]">
-                <a href="#ofertas">COMPRAR AGORA</a>
-              </Button>
-            </div>
-
             {/* MOBILE ONLY HERO VERSION */}
-            <div className="flex md:hidden flex-col items-center w-full pt-10">
+            <div className="flex lg:hidden flex-col items-center w-full pt-10">
               <h1 className="hero-title-top font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]">
                 LET CREATIVITY
               </h1>
@@ -283,9 +215,6 @@ export default function Home() {
                 <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
-                <p className="font-body text-black text-sm leading-[1.4] mt-2.5 max-w-[340px]">
-                  Uma camiseta para quem serve anunciando a mensagem.
-                </p>
               </div>
 
               <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
@@ -296,21 +225,20 @@ export default function Home() {
         </section>
 
         {/* BENEFITS SECTION */}
-        <section className="py-24 bg-white border-t border-[#f0f0f0]">
+        <section className="py-24 bg-white border-t border-[#f0f0f0] gsap-reveal">
           <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center benefits-grid">
-              <div className="gsap-reveal relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
                 <Image
                   src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg"
                   alt="Camiseta em Destaque"
                   fill
                   className="object-cover"
-                  data-ai-hint="t-shirt lifestyle"
                 />
               </div>
               <div className="space-y-12">
                 {benefits.map((benefit, i) => (
-                  <div key={i} className="flex gap-8 group benefit-item">
+                  <div key={i} className="flex gap-8 group">
                     <div className="flex flex-col items-center">
                       <div className="w-4 h-4 rounded-full bg-black ring-4 ring-black/10 group-hover:scale-125 transition-transform" />
                       {i !== benefits.length - 1 && <div className="w-px h-full bg-black/20 mt-4" />}
@@ -327,32 +255,14 @@ export default function Home() {
         </section>
 
         {/* OFFER HIGHLIGHT */}
-        <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20">
+        <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="mb-4 text-black gsap-reveal">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-black mb-2 font-medium gsap-reveal">Cada camiseta por R$ 78,00</p>
-            <p className="text-black mb-12 font-bold uppercase text-xs tracking-[0.1em] gsap-reveal">Ganhe 10% OFF no Pix ou 10% OFF comprando 2 ou mais</p>
+            <h3 className="mb-4 text-black">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <p className="text-black mb-12 font-medium">Cada camiseta por R$ 78,00</p>
             
-            {/* Countdown */}
-            <div className="flex flex-col items-center gap-6 gsap-reveal">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black">Condição especial por tempo limitado</span>
-              <div className="flex gap-4">
-                {[
-                  { label: 'horas', val: timeLeft.h },
-                  { label: 'minutos', val: timeLeft.m },
-                  { label: 'segundos', val: timeLeft.s }
-                ].map(box => (
-                  <div key={box.label} className="bg-white border border-[#dddddd] w-20 h-24 flex flex-col items-center justify-center rounded-2xl shadow-sm">
-                    <span className="text-2xl font-bold text-black">{String(box.val).padStart(2, '0')}</span>
-                    <span className="text-[10px] uppercase text-black font-bold">{box.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Purchase Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20 max-w-4xl mx-auto offers-grid">
-              <div className="offer-card bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+              {/* Individual Card */}
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
                 <div className="w-full">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -360,15 +270,13 @@ export default function Home() {
                       alt="Camiseta Individual"
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
-                      data-ai-hint="t-shirts"
                     />
                   </div>
                   <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
-                  <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">Escolha preta ou branca</p>
                   <div className="flex flex-col items-center gap-1 mb-8">
                     <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 78,00</span>
-                    <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter font-body">
-                      <CheckCircle2 className="h-3 w-3" /> Por R$ 70,20 no Pix
+                    <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
+                      <CheckCircle2 className="h-3 w-3" /> 10% OFF no Pix
                     </div>
                   </div>
                 </div>
@@ -377,7 +285,8 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="offer-card bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
+              {/* Promo Card */}
+              <div className="bg-white p-8 rounded-[2rem] border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
                 <div className="w-full">
                   <div className="relative aspect-square w-full mb-8 rounded-2xl overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -385,20 +294,15 @@ export default function Home() {
                       alt="Kit Promocional"
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
-                      data-ai-hint="t-shirts bundle"
                     />
-                    <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest font-body">
+                    <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
                       Melhor Oferta
                     </div>
                   </div>
-                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção Especial</h4>
-                  <p className="text-xs text-black uppercase tracking-wider mb-6 font-body">10% OFF comprando 2 camisetas</p>
+                  <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção</h4>
                   <div className="flex flex-col items-center gap-1 mb-8">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-black/60 line-through font-body">R$ 156,00</span>
-                      <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
-                    </div>
-                    <span className="text-xs text-black font-semibold font-body">R$ 70,20 por unidade</span>
+                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
+                    <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
                 <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
@@ -431,13 +335,9 @@ export default function Home() {
                       alt={`Galeria ${i + 1}`}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      data-ai-hint="lifestyle photo"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                       <div className="flex flex-col items-center gap-2">
-                          <Maximize2 className="text-white h-8 w-8" />
-                          <span className="text-white text-[10px] font-bold uppercase tracking-widest">Abrir foto</span>
-                       </div>
+                       <Maximize2 className="text-white h-8 w-8" />
                     </div>
                   </div>
                 </DialogTrigger>
@@ -483,26 +383,8 @@ export default function Home() {
           <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase text-black">
             <span>IAP</span><span className="text-accent">CAMISETAS</span>
           </div>
-          
-          <nav className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-16">
-            {['Meus pedidos', 'Rastrear pedido', 'Falar com a equipe', 'Trocas e devoluções', 'Política de privacidade'].map(link => (
-              <Link key={link} href="#" className="text-[14px] font-medium uppercase tracking-[0.02em] hover:text-accent transition-colors font-body text-black">
-                {link}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex justify-center gap-8 mb-16">
-            <Link href="#" className="p-3 bg-black/5 rounded-full hover:bg-accent transition-colors">
-              <Instagram className="h-5 w-5 text-black" />
-            </Link>
-            <Link href="#" className="p-3 bg-black/5 rounded-full hover:bg-accent transition-colors">
-              <Send className="h-5 w-5 text-black" />
-            </Link>
-          </div>
-
           <div className="border-t border-black/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-black font-body opacity-40">
-            © {new Date().getFullYear()} Igreja Adventista da Promessa Barreirinha. Ministério de Comunicação.
+            © {new Date().getFullYear()} IAP Barreirinha. Ministério de Comunicação.
           </div>
         </div>
       </footer>
