@@ -10,7 +10,7 @@ interface IntroLoaderProps {
 
 /**
  * Intro Loader com animação de roleta por letra e saída em slide vertical.
- * O fundo vermelho sobe como um painel, revelando o conteúdo por baixo.
+ * O fundo preto sobe como um painel, revelando o conteúdo por baixo.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,7 +101,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-[#ff1f17] flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center text-center perspective-[1000px] px-4">
         
