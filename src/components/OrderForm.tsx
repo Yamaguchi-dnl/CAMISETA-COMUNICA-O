@@ -147,9 +147,9 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
   }
 
   return (
-    <div id="reserva" className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
+    <div id="reserva" className="bg-white p-8 lg:p-12 rounded-[2rem] border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
       <div className="text-center mb-10">
-        <h3 className="font-headline text-2xl mb-4 text-black uppercase">Reserve sua camiseta</h3>
+        <h3 className="font-headline text-2xl mb-4 text-black uppercase">RESERVE SUA CAMISETA</h3>
         <p className="text-black text-sm font-medium">Preços promocionais válidos para pagamento no Pix. No crédito, acréscimo de 7%.</p>
       </div>
       
@@ -162,7 +162,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
               <FormItem>
                 <FormLabel className="text-[14px] font-medium tracking-wide text-black">Nome completo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Como podemos te chamar?" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
+                  <Input placeholder="Como podemos te chamar?" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -177,7 +177,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                 <FormItem>
                   <FormLabel className="text-[14px] font-medium tracking-wide text-black">WhatsApp</FormLabel>
                   <FormControl>
-                    <Input placeholder="(00) 00000-0000" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
+                    <Input placeholder="(00) 00000-0000" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -191,7 +191,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                   <FormLabel className="text-[14px] font-medium tracking-wide text-black">Produto</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-none h-12 border-[#dddddd] font-body text-black">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body text-black">
                         <SelectValue placeholder="Selecione o modelo" />
                       </SelectTrigger>
                     </FormControl>
@@ -216,7 +216,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                   <FormLabel className="text-[14px] font-medium tracking-wide text-black">Tamanho</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="rounded-none h-12 border-[#dddddd] font-body text-black">
+                      <SelectTrigger className="rounded-xl h-12 border-[#dddddd] font-body text-black">
                         <SelectValue placeholder="Seu tamanho" />
                       </SelectTrigger>
                     </FormControl>
@@ -237,7 +237,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                 <FormItem>
                   <FormLabel className="text-[14px] font-medium tracking-wide text-black">Quantidade</FormLabel>
                   <FormControl>
-                    <Input type="number" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
+                    <Input type="number" className="rounded-xl h-12 border-[#dddddd] font-body text-black" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -276,7 +276,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
             )}
           />
 
-          <div className="bg-[#f9f9f9] rounded-none p-6 border border-[#eeeeee] space-y-3 font-body">
+          <div className="bg-[#f9f9f9] rounded-2xl p-6 border border-[#eeeeee] space-y-3 font-body">
             <div className="flex items-center gap-2 mb-2 text-black font-bold text-xs uppercase tracking-widest">
               <Calculator className="h-4 w-4" /> Resumo do Pedido
             </div>
@@ -306,7 +306,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                 <FormControl>
                   <Textarea 
                     placeholder="Algum detalhe específico?" 
-                    className="resize-none rounded-none border-[#dddddd] min-h-[100px] font-body text-black" 
+                    className="resize-none rounded-xl border-[#dddddd] min-h-[100px] font-body text-black" 
                     {...field} 
                   />
                 </FormControl>
@@ -317,14 +317,14 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           <Button 
             type="submit" 
-            className="pill-button bg-black hover:bg-accent text-white w-full rounded-none"
+            className="pill-button bg-black hover:bg-accent text-white w-full rounded-full"
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />
             {isSubmitting ? 'REGISTRANDO...' : 'IR PARA O WHATSAPP'}
           </Button>
           
-          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-none text-[12px] text-blue-800 font-medium border border-blue-100">
+          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-xl text-[12px] text-blue-800 font-medium border border-blue-100">
             <Info className="h-4 w-4 shrink-0" />
             <span>O valor final depende da forma de pagamento selecionada. Pix garante o preço base anunciado.</span>
           </div>
