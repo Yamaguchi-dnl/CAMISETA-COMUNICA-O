@@ -37,32 +37,29 @@ export default function Home() {
 
     ScrollTrigger.refresh();
 
-    // 1. HERO LOAD SEQUENCE
     const heroTl = gsap.timeline();
     
     gsap.set('.hero-section', { opacity: 1 });
-    gsap.set(['.hero-image-wrapper', '.hero-bg-text', '.hero-label'], { 
+    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line'], { 
       opacity: 0,
-      y: 20
     });
 
     heroTl
-      .fromTo('.hero-image-wrapper', 
+      .fromTo('.hero-main-image', 
         { opacity: 0, scale: 0.94, y: 34 }, 
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
-      .fromTo('.hero-bg-text', 
+      .fromTo('.hero-bottom-word', 
         { opacity: 0, y: 80 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
-      .fromTo('.hero-label', 
-        { x: -20, opacity: 0 }, 
-        { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 
+      .fromTo(['.hero-left-block', '.hero-right-line'], 
+        { y: -20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 
         '-=0.7'
       );
 
-    // 2. GENERAL REVEALS
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -150,22 +147,35 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* PREMIUM EDITORIAL HERO - REFACTORED */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-[620px] md:min-h-[760px] lg:min-h-[920px] flex items-center justify-center pt-24 pb-12 lg:pt-32 lg:pb-24">
-          <div className="container relative z-10 max-w-[1440px] px-4 md:px-6 lg:px-8 h-full flex flex-col items-center">
+        {/* REBUILT HERO SECTION - STRICT ABSOLUTE LAYOUT */}
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden h-[760px] md:h-[680px] lg:h-[760px]">
+          <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             
-            {/* INSTITUTIONAL LABEL - TOP LEFT */}
-            <div className="hero-label absolute top-0 left-4 md:left-6 lg:left-8 z-[10] max-w-[280px]">
-              <h2 className="font-headline text-[18px] md:text-[22px] lg:text-[24px] text-black uppercase leading-tight mb-1">
+            {/* LEFT TEXT BLOCK */}
+            <div className="hero-left-block absolute z-[5] 
+              top-[40px] left-[30px]
+              md:top-[32px] md:left-[22px]
+              max-w-[calc(100%-60px)] md:max-w-none
+              mobile:relative mobile:top-auto mobile:left-auto mobile:m-[20px_16px_16px_16px]">
+              <h2 className="font-headline text-[24px] md:text-[20px] lg:text-[24px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
-              <p className="font-body text-[11px] md:text-[13px] text-[#6f6f6f] leading-relaxed">
+              <p className="font-body text-[18px] md:text-[16px] lg:text-[18px] text-[#222222] leading-[1.35] max-w-[300px] md:max-w-[240px] lg:max-w-[300px]">
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
 
-            {/* MAIN IMAGE - Centralized and elevated */}
-            <div className="hero-image-wrapper relative z-[3] w-[min(92vw,400px)] aspect-[4/5] md:w-[min(72vw,640px)] md:aspect-[4/3] lg:w-[min(58vw,760px)] lg:aspect-[4/3] overflow-hidden shadow-none mt-12 md:mt-16 lg:mt-20">
+            {/* RIGHT DECORATIVE LINE */}
+            <div className="hero-right-line hidden md:block absolute z-[5] bg-[#111111]
+              top-[58px] right-[48px] w-[72px] h-[3px]
+              md:top-[48px] md:right-[28px] md:w-[64px]" 
+            />
+
+            {/* MAIN IMAGE */}
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)]
+              top-[118px] w-[820px] h-[610px]
+              md:top-[110px] md:w-[700px] md:h-[520px]
+              mobile:relative mobile:top-auto mobile:left-auto mobile:transform-none mobile:m-[0_auto] mobile:w-[calc(100%-32px)] mobile:aspect-[4/5] mobile:h-auto">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -175,9 +185,15 @@ export default function Home() {
               />
             </div>
 
-            {/* BACKGROUND TYPOGRAPHY - Massive and positioned to create overlap at the bottom */}
-            <div className="hero-bg-text absolute left-1/2 bottom-[15%] md:bottom-[10%] lg:bottom-[8%] -translate-x-1/2 z-[1] w-[96%] md:w-[94%] lg:w-[94%] pointer-events-none text-center">
-              <h1 className="font-headline text-black uppercase leading-[0.8] tracking-[-0.03em] text-[clamp(60px,16vw,120px)] md:text-[clamp(110px,16vw,220px)] lg:text-[clamp(180px,18vw,380px)] whitespace-nowrap inline-block">
+            {/* BOTTOM BACKGROUND WORD */}
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center
+              bottom-[168px]
+              md:bottom-[145px]
+              mobile:relative mobile:left-auto mobile:bottom-auto mobile:transform-none mobile:mt-[-28px]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block
+                text-[176px]
+                md:text-[138px]
+                mobile:text-[72px]">
                 CREATIVITY
               </h1>
             </div>
