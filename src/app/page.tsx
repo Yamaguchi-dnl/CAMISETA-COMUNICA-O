@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -67,7 +68,7 @@ export default function Home() {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top 20%", // Ajustado conforme pedido para 20%
+          start: "top 20%",
           once: true,
           toggleActions: "play none none none",
           invalidateOnRefresh: true,
@@ -112,6 +113,22 @@ export default function Home() {
         { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "power3.out" }, 
         staggerTime * 5
       );
+      // Extra items also animated initially
+      galleryTl.fromTo(".gallery-mosaic-item--7", 
+        { x: "-110vw", y: "-6vh", scale: 1.05, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        staggerTime * 6
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--8", 
+        { x: "0vw", y: "112vh", scale: 1.05, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        staggerTime * 7
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--9", 
+        { x: "110vw", y: "-10vh", scale: 1.05, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
+        staggerTime * 8
+      );
 
       // Phase 2: Micro Settle
       galleryTl.fromTo(".gallery-mosaic-item", 
@@ -149,7 +166,7 @@ export default function Home() {
       );
     });
 
-  }, { scope: containerRef, dependencies: [isIntroFinished, isGalleryExpanded] });
+  }, { scope: containerRef, dependencies: [isIntroFinished] }); // Removed isGalleryExpanded from dependencies
 
   const faqItems = [
     { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
@@ -283,8 +300,7 @@ export default function Home() {
                 : "h-[560px] md:h-[600px] grid-rows-6 md:grid-rows-none"
             )}>
               {mosaicItems.map((item, i) => {
-                if (!isGalleryExpanded && i >= 6) return null;
-                
+                // All items are always rendered to prevent layout bugs during expansion
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
@@ -308,7 +324,7 @@ export default function Home() {
                       <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
                         <Image
                           src={item.src}
-                          alt={`Galeria Full {i + 1}`}
+                          alt={`Galeria Full ${i + 1}`}
                           fill
                           className="object-contain"
                         />
