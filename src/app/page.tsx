@@ -23,6 +23,7 @@ export default function Home() {
   const [isGalleryExpanded, setIsGalleryExpanded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const gallerySectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -37,6 +38,7 @@ export default function Home() {
 
     ScrollTrigger.refresh();
 
+    // Hero Animation
     const heroTl = gsap.timeline();
     
     gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
@@ -60,6 +62,61 @@ export default function Home() {
         '-=0.7'
       );
 
+    // Gallery Pinned Scroll Animation
+    // Only run if not expanded to avoid layout conflicts
+    if (!isGalleryExpanded && gallerySectionRef.current) {
+      const isMobile = window.innerWidth < 768;
+      
+      const galleryTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gallerySectionRef.current,
+          start: "top top",
+          end: isMobile ? "+=120%" : "+=220%",
+          scrub: true,
+          pin: !isMobile, // Disable pin on mobile for better accessibility if needed
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+
+      // Initial States
+      gsap.set(".gallery-mosaic-item", { opacity: 0, scale: 1.05, willChange: "transform, opacity" });
+      gsap.set(".gallery-mosaic-button", { opacity: 0, y: 18, scale: 0.98 });
+
+      // Phase 1: Intro In (0 - 45%)
+      galleryTl.to(".gallery-mosaic-item--1", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0);
+      galleryTl.fromTo(".gallery-mosaic-item--1", { xPercent: -35, yPercent: 8 }, { xPercent: 0, yPercent: 0 }, 0);
+      
+      galleryTl.to(".gallery-mosaic-item--2", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.05);
+      galleryTl.fromTo(".gallery-mosaic-item--2", { xPercent: 0, yPercent: -40 }, { xPercent: 0, yPercent: 0 }, 0.05);
+
+      galleryTl.to(".gallery-mosaic-item--3", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.1);
+      galleryTl.fromTo(".gallery-mosaic-item--3", { xPercent: 32, yPercent: -24 }, { xPercent: 0, yPercent: 0 }, 0.1);
+
+      galleryTl.to(".gallery-mosaic-item--4", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.15);
+      galleryTl.fromTo(".gallery-mosaic-item--4", { xPercent: -18, yPercent: 34 }, { xPercent: 0, yPercent: 0 }, 0.15);
+
+      galleryTl.to(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.2);
+      galleryTl.fromTo(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 38 }, { xPercent: 0, yPercent: 0 }, 0.2);
+
+      galleryTl.to(".gallery-mosaic-item--6", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.25);
+      galleryTl.fromTo(".gallery-mosaic-item--6", { xPercent: 26, yPercent: 30 }, { xPercent: 0, yPercent: 0 }, 0.25);
+
+      // Phase 2: Settle Hold & Button Reveal (45% - 63%)
+      galleryTl.to(".gallery-mosaic-button", { opacity: 1, y: 0, scale: 1, ease: "power2.out" }, 0.45);
+
+      // Phase 3: Exit Out (63% - 100%)
+      const exitStart = 0.63;
+      galleryTl.to(".gallery-mosaic-item--1", { xPercent: -42, yPercent: -6, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart);
+      galleryTl.to(".gallery-mosaic-item--2", { xPercent: -8, yPercent: -42, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.05);
+      galleryTl.to(".gallery-mosaic-item--3", { xPercent: 34, yPercent: -30, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.1);
+      galleryTl.to(".gallery-mosaic-item--4", { xPercent: -24, yPercent: 34, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.15);
+      galleryTl.to(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 42, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.2);
+      galleryTl.to(".gallery-mosaic-item--6", { xPercent: 30, yPercent: 34, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.25);
+      galleryTl.to(".gallery-mosaic-button", { opacity: 0, y: 14, ease: "power2.inOut" }, exitStart);
+    }
+
+    // Generic Section Reveal
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -78,7 +135,7 @@ export default function Home() {
       );
     });
 
-  }, { scope: containerRef, dependencies: [isIntroFinished] });
+  }, { scope: containerRef, dependencies: [isIntroFinished, isGalleryExpanded] });
 
   const faqItems = [
     { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
@@ -97,47 +154,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2 row-span-2",
+      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1",
+      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--2",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1",
+      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--3",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1",
+      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--4",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1",
+      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--5",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1 row-span-1",
+      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--6",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2 row-span-2",
+      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2 row-span-2",
+      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-2 row-span-2 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2 row-span-2",
+      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
     },
   ];
 
@@ -203,7 +260,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
+        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-[100vh]">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className={cn(
               "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent transition-all duration-700 ease-in-out",
@@ -218,7 +275,7 @@ export default function Home() {
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-none",
+                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-none",
                         item.className
                       )}>
                         <Image
@@ -248,10 +305,10 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-10 flex justify-center">
+            <div className="gallery-mosaic-button mt-10 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black text-white hover:bg-accent min-w-[240px] shadow-lg hover:shadow-accent/20"
+                className="pill-button bg-black text-white hover:bg-accent min-w-[240px] shadow-lg hover:shadow-accent/20 rounded-full"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -312,7 +369,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -336,7 +393,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 69,95 cada</span>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
