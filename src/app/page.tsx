@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -373,9 +372,6 @@ export default function Home() {
 
       <footer className="bg-white text-black py-24 border-t">
         <div className="container mx-auto px-6 text-center">
-          <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase text-black">
-            <span>IAP</span><span className="text-accent">CAMISETAS</span>
-          </div>
           <div className="border-t border-black/10 pt-12 text-[10px] font-bold uppercase tracking-[0.3em] text-black font-body opacity-40">
             © {new Date().getFullYear()} IAP Barreirinha. Ministério de Comunicação.
           </div>
