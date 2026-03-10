@@ -159,8 +159,8 @@ export default function Home() {
             {/* MAIN COMPOSITION */}
             <div className="relative w-full flex flex-col items-center justify-center">
               
-              {/* IMAGE BLOCK */}
-              <div className="hero-image-wrapper relative z-[4] w-[82vw] md:w-[min(42vw,460px)] lg:w-[min(34vw,560px)] aspect-[4/5] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
+              {/* IMAGE BLOCK - Updated for horizontal layout on desktop */}
+              <div className="hero-image-wrapper relative z-[4] w-[82vw] md:w-[min(42vw,460px)] lg:w-[min(65vw,1000px)] aspect-[4/5] lg:aspect-[16/9] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
                 <Image
                   src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                   alt="IAP Camisetas Campaign"
@@ -238,7 +238,7 @@ export default function Home() {
             <div className="mt-4 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
+                className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -301,7 +301,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -325,7 +325,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
+                <Button asChild className="pill-button bg-black hover:bg-accent text-white rounded-full transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
