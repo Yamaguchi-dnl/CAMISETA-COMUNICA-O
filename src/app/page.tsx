@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -33,41 +34,76 @@ export default function Home() {
 
     ScrollTrigger.refresh();
 
+    // 1. HERO LOAD SEQUENCE
     const heroTl = gsap.timeline();
     
-    gsap.to('.hero-section', { opacity: 1, duration: 0.1 });
-    
-    gsap.set(['.hero-title-top', '.hero-image-frame', '.hero-title-bottom', '.hero-support', '.hero-cta'], { 
+    gsap.set('.hero-section', { opacity: 1 });
+    gsap.set(['.hero-micro-copy', '.hero-image-wrapper', '.hero-bg-text', '.hero-support', '.hero-cta'], { 
       opacity: 0,
       y: 20
     });
 
     heroTl
-      .fromTo('.hero-title-top', 
-        { y: 50, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }
+      .fromTo('.hero-micro-copy', 
+        { y: -16, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
       )
-      .fromTo('.hero-image-frame', 
-        { opacity: 0, scale: 0.94, y: 40 }, 
-        { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power4.out' }, 
-        '-=0.4'
-      )
-      .fromTo('.hero-title-bottom', 
-        { y: 35, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 
-        '-=0.5'
-      )
-      .fromTo('.hero-support', 
-        { y: 20, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
+      .fromTo('.hero-image-wrapper', 
+        { opacity: 0, scale: 0.94, y: 34 }, 
+        { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }, 
         '-=0.3'
       )
-      .fromTo('.hero-cta', 
-        { y: 20, opacity: 0 }, 
+      .fromTo('.hero-bg-text', 
+        { opacity: 0, y: 110 }, 
+        { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
+        '-=0.85'
+      )
+      .fromTo('.hero-support', 
+        { y: 16, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
-        '-=0.2'
+        '-=0.5'
+      )
+      .fromTo('.hero-cta', 
+        { y: 18, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
+        '-=0.3'
       );
 
+    // 2. SCROLL REVEAL (LET CREATIVITY SPEAK)
+    const revealLines = gsap.utils.toArray('.reveal-line');
+    const revealTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.scroll-reveal-section',
+        start: 'top 75%',
+        toggleActions: 'play none none none'
+      }
+    });
+
+    revealLines.forEach((line: any, i) => {
+      revealTl.fromTo(line, 
+        { 
+          opacity: 0, 
+          y: i === 1 ? 90 : 70, 
+          clipPath: 'inset(100% 0 0 0)' 
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          clipPath: 'inset(0% 0 0 0)', 
+          duration: i === 1 ? 0.95 : 0.8, 
+          ease: 'power4.out' 
+        },
+        i === 0 ? 0 : '-=0.35'
+      );
+    });
+
+    revealTl.fromTo('.reveal-sub-copy',
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
+      '-=0.2'
+    );
+
+    // 3. GENERAL REVEALS
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -155,74 +191,77 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* HERO SECTION */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16 min-h-screen">
-          <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
-            {/* DESKTOP HERO VERSION */}
-            <div className="hidden lg:flex flex-col items-center w-full">
-              <h1 className="hero-title-top relative z-[1] font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.04em] mb-[-10px] lg:mb-[-15px] xl:mb-[-20px] text-[clamp(62px,8vw,108px)] xl:text-[clamp(86px,8.6vw,180px)]">
-                LET CREATIVITY
-              </h1>
-              <div className="hero-image-frame relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
-                <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px] hero-support">
-                  <p className="font-body text-black text-[17px] leading-[1.4] mb-6">
-                    <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
-                      COMUNICAR É MISSÃO.
-                    </span>
-                    Uma camiseta para quem serve <br /> anunciando a mensagem.
-                  </p>
-                  <div className="w-[112px] h-[4px] bg-black" />
-                </div>
-                <div className="relative z-[3] shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
-                  <div className="bg-white p-0 w-[680px] h-[510px] xl:w-[820px] xl:h-[615px] relative overflow-hidden rounded-none border-none">
-                    <Image
-                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                      alt="IAP Camisetas Campaign"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                </div>
+        {/* PREMIUM EDITORIAL HERO */}
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-screen flex items-center justify-center pt-20 pb-16">
+          <div className="container relative z-10 max-w-[1600px] px-6 lg:px-10 h-full flex flex-col items-center justify-center">
+            
+            {/* TOP MICRO COPY */}
+            <div className="hero-micro-copy absolute top-8 lg:top-12 left-1/2 -translate-x-1/2 z-50">
+              <span className="font-body font-bold text-[12px] lg:text-[13px] tracking-[0.14em] uppercase text-black">
+                IAP CAMISETAS
+              </span>
+            </div>
+
+            {/* MAIN COMPOSITION */}
+            <div className="relative w-full flex flex-col items-center justify-center">
+              
+              {/* IMAGE BLOCK */}
+              <div className="hero-image-wrapper relative z-[4] w-[82vw] md:w-[min(42vw,460px)] lg:w-[min(34vw,560px)] aspect-[4/5] shadow-[0_20px_60px_rgba(0,0,0,0.10)] overflow-hidden">
+                <Image
+                  src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                  alt="IAP Camisetas Campaign"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
-              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] mt-4 xl:mt-6 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
-                SPEAK
-              </h2>
-              <div className="hero-cta relative z-[5] mt-12 xl:mt-16">
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent min-w-[280px]">
-                  <a href="#ofertas">COMPRAR AGORA</a>
-                </Button>
+
+              {/* BACKGROUND TYPOGRAPHY */}
+              <div className="hero-bg-text absolute left-1/2 bottom-[20px] lg:bottom-[-18px] md:bottom-[-8px] -translate-x-1/2 z-[2] w-screen pointer-events-none text-center">
+                <h1 className="font-headline text-black uppercase leading-[0.78] tracking-[-0.035em] text-[clamp(64px,18vw,120px)] md:text-[clamp(120px,16vw,260px)] lg:text-[clamp(180px,18vw,430px)]">
+                  CREATIVITY
+                </h1>
               </div>
             </div>
 
-            {/* MOBILE ONLY HERO VERSION */}
-            <div className="flex lg:hidden flex-col items-center w-full pt-10">
-              <h1 className="hero-title-top font-headline text-black text-center uppercase leading-[0.9] tracking-[-0.035em] mb-[-6px] text-[clamp(34px, 9.4vw, 56px)] z-[1]">
-                LET CREATIVITY
-              </h1>
-              <div className="hero-image-frame relative z-[3] mt-2 mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
-                <div className="bg-white p-0 w-[300px] h-[225px] relative overflow-hidden rounded-none border-none">
-                  <Image
-                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
-                    alt="Carol costas camiseta IAP"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-              <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.85] tracking-[-0.045em] mt-8 mb-[18px] text-[clamp(54px,16vw,86px)]">
-                SPEAK
-              </h2>
-              <div className="hero-support flex flex-col items-center text-center px-4 mb-10 mt-1">
-                <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
-                  COMUNICAR É MISSÃO.
-                </h3>
-              </div>
-              <Button asChild className="hero-cta pill-button bg-black text-white hover:bg-accent min-w-[240px]">
-                <a href="#reserva">COMPRAR AGORA</a>
+            {/* FLOATING SUPPORT LABEL (DESKTOP: LEFT | MOBILE: CENTERED) */}
+            <div className="hero-support absolute bottom-[148px] lg:bottom-[120px] md:bottom-[110px] left-1/2 lg:left-12 -translate-x-1/2 lg:translate-x-0 z-50">
+              <span className="font-body font-medium text-[12px] lg:text-[13px] tracking-[0.08em] uppercase text-[#666666] whitespace-nowrap">
+                COMUNICAÇÃO • BARREIRINHA
+              </span>
+            </div>
+
+            {/* CTA BUTTON */}
+            <div className="hero-cta absolute bottom-[34px] lg:bottom-[48px] md:bottom-[42px] left-1/2 -translate-x-1/2 z-50">
+              <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-6 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] min-w-[240px]">
+                <a href="#ofertas">COMPRAR AGORA</a>
               </Button>
             </div>
+
+          </div>
+        </section>
+
+        {/* IMMERSIVE SCROLL REVEAL SECTION */}
+        <section className="scroll-reveal-section relative bg-[#efefef] min-h-[78svh] lg:min-h-screen flex flex-col items-center justify-center py-20 lg:py-32 overflow-hidden">
+          {/* Background Blur Detail */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] lg:w-[380px] lg:h-[380px] bg-[radial-gradient(circle,rgba(217,48,37,0.14)_0%,rgba(217,48,37,0)_70%)] z-1 pointer-events-none" />
+          
+          <div className="container relative z-10 max-w-[1400px] px-6 flex flex-col items-center text-center">
+            <div className="space-y-[-0.2em] mb-8">
+              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
+                LET
+              </h2>
+              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
+                CREATIVITY
+              </h2>
+              <h2 className="reveal-line font-headline text-black uppercase leading-[0.86] tracking-[-0.04em] text-[clamp(34px,11vw,74px)] md:text-[clamp(54px,8vw,140px)] lg:text-[clamp(72px,10vw,220px)]">
+                SPEAK
+              </h2>
+            </div>
+            
+            <p className="reveal-sub-copy font-body font-normal text-black/60 text-[15px] lg:text-[18px] leading-relaxed max-w-[640px] px-4">
+              Uma estética que comunica. Uma mensagem que permanece.
+            </p>
           </div>
         </section>
 
@@ -236,7 +275,6 @@ export default function Home() {
                 : "h-[400px] lg:h-[600px]"
             )}>
               {mosaicItems.map((item, i) => {
-                // If not expanded, only show first 6 to keep layout clean
                 if (!isGalleryExpanded && i >= 6) return null;
                 
                 return (
@@ -276,7 +314,7 @@ export default function Home() {
             <div className="mt-8 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black text-white hover:bg-accent min-w-[240px]"
+                className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-10 py-5 h-auto font-body font-bold text-[15px] uppercase tracking-[0.05em] min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -339,7 +377,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-5 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -363,7 +401,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
+                <Button asChild className="rounded-full bg-black text-white hover:bg-accent transition-all duration-300 px-8 py-5 h-auto font-body font-bold text-[14px] uppercase tracking-[0.03em] w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>
