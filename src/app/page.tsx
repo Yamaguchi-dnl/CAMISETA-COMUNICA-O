@@ -21,6 +21,7 @@ if (typeof window !== 'undefined') {
 
 export default function Home() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
+  const [isGalleryExpanded, setIsGalleryExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleIntroComplete = () => {
@@ -325,47 +326,53 @@ export default function Home() {
         {/* GALLERY MOSAIC SECTION */}
         <section className="py-24 bg-[#efefef] gsap-reveal">
           <div className="container mx-auto px-6 max-w-[1400px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 lg:grid-rows-[repeat(12,minmax(0,1fr))] gap-2 md:gap-2 lg:gap-2.5 aspect-auto lg:aspect-square">
-              {mosaicItems.map((item, i) => (
-                <Dialog key={item.id}>
-                  <DialogTrigger asChild>
-                    <div className={cn(
-                      "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 hover:z-10",
-                      "group",
-                      item.className
-                    )}>
-                      <Image
-                        src={item.src}
-                        alt={`Galeria Mosaic ${i + 1}`}
-                        fill
-                        className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.03] group-hover:brightness-[1.02]"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <Maximize2 className="text-white h-8 w-8" />
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 lg:grid-rows-[repeat(12,minmax(0,1fr))] gap-0 aspect-auto lg:aspect-square overflow-hidden">
+              {mosaicItems.map((item, i) => {
+                // Only show first 6 items initially
+                if (!isGalleryExpanded && i >= 6) return null;
+                
+                return (
+                  <Dialog key={item.id}>
+                    <DialogTrigger asChild>
+                      <div className={cn(
+                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 hover:z-10",
+                        "group",
+                        item.className
+                      )}>
+                        <Image
+                          src={item.src}
+                          alt={`Galeria Mosaic ${i + 1}`}
+                          fill
+                          className="object-cover transition-all duration-[220ms] ease-in-out group-hover:scale-[1.03] group-hover:brightness-[1.02]"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <Maximize2 className="text-white h-8 w-8" />
+                        </div>
                       </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-4xl p-0 border-none bg-transparent shadow-none flex items-center justify-center">
-                    <DialogTitle className="sr-only">Foto da Galeria {i + 1}</DialogTitle>
-                    <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
-                      <Image
-                        src={item.src}
-                        alt={`Galeria Full ${i + 1}`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              ))}
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl p-0 border-none bg-transparent shadow-none flex items-center justify-center">
+                      <DialogTitle className="sr-only">Foto da Galeria {i + 1}</DialogTitle>
+                      <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
+                        <Image
+                          src={item.src}
+                          alt={`Galeria Full ${i + 1}`}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                );
+              })}
             </div>
             
             <div className="mt-8 lg:mt-10 flex justify-center">
               <Button 
                 variant="outline" 
+                onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
                 className="rounded-none border-[1.5px] border-[#111111] px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.03em] text-[#111111] hover:bg-[#111111] hover:text-white transition-all duration-300 h-auto"
               >
-                VER TODAS AS FOTOS
+                {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
             </div>
           </div>
