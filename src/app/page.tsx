@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -152,7 +151,7 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* PREMIUM EDITORIAL HERO - FULL REFACTOR */}
+        {/* PREMIUM EDITORIAL HERO */}
         <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden min-h-[620px] md:min-h-[760px] lg:min-h-[920px] flex items-center justify-center py-12 lg:py-24">
           <div className="container relative z-10 max-w-[1440px] px-4 md:px-6 lg:px-8 h-full flex flex-col items-center justify-center">
             
@@ -163,9 +162,9 @@ export default function Home() {
               </span>
             </div>
 
-            {/* BACKGROUND TYPOGRAPHY - Centered and Fit-to-Width */}
-            <div className="hero-bg-text absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:top-1/2 lg:top-1/2 z-[1] w-[94%] md:w-[92%] lg:w-[92%] pointer-events-none text-center">
-              <h1 className="font-headline text-black uppercase leading-[0.88] tracking-[-0.025em] text-[clamp(44px,12vw,84px)] md:text-[clamp(82px,11vw,160px)] lg:text-[clamp(120px,13vw,250px)] whitespace-nowrap inline-block">
+            {/* BACKGROUND TYPOGRAPHY - Larger and Positioned towards the bottom of the image */}
+            <div className="hero-bg-text absolute left-1/2 top-[60%] md:top-[65%] lg:top-[70%] -translate-x-1/2 -translate-y-1/2 z-[1] w-[96%] md:w-[94%] lg:w-[94%] pointer-events-none text-center">
+              <h1 className="font-headline text-black uppercase leading-[0.88] tracking-[-0.025em] text-[clamp(54px,15vw,120px)] md:text-[clamp(100px,14vw,200px)] lg:text-[clamp(160px,16vw,340px)] whitespace-nowrap inline-block">
                 CREATIVITY
               </h1>
             </div>
