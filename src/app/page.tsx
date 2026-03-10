@@ -187,15 +187,15 @@ export default function Home() {
               />
             </div>
 
-            {/* BOTTOM BACKGROUND WORD - REPOSICIONADO MAIS PARA BAIXO */}
+            {/* BOTTOM BACKGROUND WORD - REPOSICIONADO MAIS PARA BAIXO E AUMENTADO */}
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center
               bottom-[110px]
               md:bottom-[90px]
               mobile:relative mobile:left-auto mobile:bottom-auto mobile:transform-none mobile:mt-[-10px]">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block
-                text-[176px]
-                md:text-[138px]
-                mobile:text-[72px]">
+                text-[210px]
+                md:text-[160px]
+                mobile:text-[84px]">
                 CREATIVITY
               </h1>
             </div>
