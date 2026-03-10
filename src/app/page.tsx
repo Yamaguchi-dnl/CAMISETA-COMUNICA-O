@@ -21,7 +21,6 @@ if (typeof window !== 'undefined') {
 
 export default function Home() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
-  const [isGalleryExpanded, setIsGalleryExpanded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const gallerySectionRef = useRef<HTMLElement>(null);
@@ -63,23 +62,20 @@ export default function Home() {
         '-=0.7'
       );
 
-    // Gallery Auto-Assemble Animation (One-time trigger on enter)
+    // Gallery Auto-Assemble Animation
     if (gallerySectionRef.current) {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top 90%", // Trigger much earlier
+          start: "top 90%",
           once: true,
           toggleActions: "play none none none",
           invalidateOnRefresh: true,
         }
       });
 
-      // Initial States: Outside the viewport
       gsap.set(".gallery-mosaic-item", { opacity: 0, WILL_CHANGE: "transform, opacity" });
-      gsap.set(".gallery-mosaic-button", { opacity: 0, y: 14, scale: 0.985 });
 
-      // Phase 1: Fluid Entry from Outer Edges (Slow and Smooth)
       const staggerTime = 0.08;
       const baseDuration = 1.8;
       
@@ -113,7 +109,6 @@ export default function Home() {
         { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "expo.out" }, 
         staggerTime * 5
       );
-      // Extra items also animated initially
       galleryTl.fromTo(".gallery-mosaic-item--7", 
         { x: "-110vw", y: "-6vh", scale: 1.05, opacity: 0 }, 
         { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
@@ -130,21 +125,11 @@ export default function Home() {
         staggerTime * 8
       );
 
-      // Phase 2: Micro Settle
       galleryTl.fromTo(".gallery-mosaic-item", 
         { scale: 1.012 }, 
         { scale: 1, duration: 0.55, ease: "power2.out" }, 
         "-=1.2"
       );
-
-      // Phase 3: Button Reveal
-      galleryTl.to(".gallery-mosaic-button", { 
-        opacity: 1, 
-        y: 0, 
-        scale: 1, 
-        ease: "power2.out", 
-        duration: 0.75 
-      }, "-=0.4");
     }
 
     // Generic Section Reveal
@@ -293,12 +278,7 @@ export default function Home() {
 
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-[100vh]">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className={cn(
-              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent transition-all duration-700 ease-in-out",
-              isMounted && isGalleryExpanded 
-                ? "h-auto" 
-                : "h-[560px] md:h-[600px] grid-rows-none"
-            )}>
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
@@ -332,15 +312,6 @@ export default function Home() {
                   </Dialog>
                 );
               })}
-            </div>
-            
-            <div className="gallery-mosaic-button mt-10 flex justify-center">
-              <Button 
-                onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-black text-white hover:bg-accent min-w-[240px] shadow-lg hover:shadow-accent/20 rounded-full"
-              >
-                {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
-              </Button>
             </div>
           </div>
         </section>
