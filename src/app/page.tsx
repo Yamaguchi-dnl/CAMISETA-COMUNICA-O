@@ -42,7 +42,7 @@ export default function Home() {
     const heroTl = gsap.timeline();
     
     gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
-    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-bottom-word', '.mobile-hero-left-block', '.mobile-hero-right-line'], { 
+    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-bottom-word', '.mobile-hero-left-block'], { 
       opacity: 0,
     });
 
@@ -56,7 +56,7 @@ export default function Home() {
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
-      .fromTo(['.hero-left-block', '.hero-right-line', '.mobile-hero-left-block', '.mobile-hero-right-line'], 
+      .fromTo(['.hero-left-block', '.hero-right-line', '.mobile-hero-left-block'], 
         { y: -20, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 
         '-=0.7'
@@ -258,7 +258,6 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[118px] right-[26px] w-[82px] h-[3px]" />
             <div className="mobile-hero-main-image absolute z-[4] top-[190px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
