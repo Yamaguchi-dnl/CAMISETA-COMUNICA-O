@@ -18,8 +18,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const basePrice = 78.00;
-  const pixPrice = 70.20;
+  const pixPrice = product.price;
+  const creditPrice = pixPrice * 1.07;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -33,9 +33,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Gallery */}
           <div className="space-y-4">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-lg border">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-none shadow-lg border">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -47,7 +46,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           </div>
 
-          {/* Product Info & Form */}
           <div className="flex flex-col">
             <div className="mb-6">
               <h1 className="font-headline text-3xl font-black mb-2 leading-tight uppercase text-black">
@@ -55,24 +53,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </h1>
               <div className="flex flex-col gap-1 mb-6">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-sm text-black font-medium">Preço Base:</span>
-                  <span className="font-headline text-3xl font-black text-black">R$ {basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+                  <span className="text-sm text-black font-medium">Preço no Pix:</span>
+                  <span className="font-headline text-3xl font-black text-black">R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
                 </div>
-                <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
-                  <BadgePercent className="h-4 w-4" /> R$ {pixPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} no Pix (10% OFF)
+                <div className="flex items-center gap-2 text-black/60 font-bold text-sm uppercase tracking-tighter">
+                   Ou R$ {creditPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} no Crédito (+7%)
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-accent/5 border border-accent/10 mb-8">
-                <p className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Promoção Ativa</p>
-                <p className="text-sm text-black font-medium">Na compra de 2 ou mais camisetas, ganhe 10% OFF automaticamente no seu pedido!</p>
+              <div className="p-4 rounded-none bg-accent/5 border border-accent/10 mb-8">
+                <p className="text-accent font-bold text-[10px] uppercase tracking-widest mb-1">Informação de Pagamento</p>
+                <p className="text-sm text-black font-medium">Valores promocionais aplicados para Pix. No cartão de crédito, há um acréscimo de 7%.</p>
               </div>
 
               <p className="text-black leading-relaxed mb-6 font-light">
                 {product.fullDescription}
               </p>
               
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-50 text-blue-800 text-sm mb-8 border border-blue-100">
+              <div className="flex items-start gap-3 p-4 rounded-none bg-blue-50 text-blue-800 text-sm mb-8 border border-blue-100">
                 <Info className="h-5 w-5 shrink-0 mt-0.5" />
                 <p>
                   <strong>Importante:</strong> Este é um sistema de reserva. Seus dados serão enviados para nossa equipe e o pagamento será combinado via WhatsApp.

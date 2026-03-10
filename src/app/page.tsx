@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -40,7 +39,6 @@ export default function Home() {
 
     const heroTl = gsap.timeline();
     
-    // Target both desktop and mobile hero elements for simultaneous reveal
     gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
     gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-bottom-word', '.mobile-hero-left-block', '.mobile-hero-right-line'], { 
       opacity: 0,
@@ -86,7 +84,7 @@ export default function Home() {
     { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
     { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
     { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
-    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento, nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
+    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
   ];
 
   const benefits = [
@@ -149,10 +147,8 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* DESKTOP/TABLET HERO SECTION */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
-            
             <div className="hero-left-block absolute z-[5] top-[128px] left-[30px] md:top-[120px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[20px] md:text-[18px] lg:text-[20px] text-black uppercase leading-none mb-1.5 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
@@ -161,9 +157,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[146px] right-[48px] w-[72px] h-[3px] md:top-[136px] md:right-[28px] md:w-[64px]" />
-
             <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[198px] w-[820px] h-[610px] md:top-[190px] md:w-[700px] md:h-[520px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -173,20 +167,16 @@ export default function Home() {
                 priority
               />
             </div>
-
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px] md:bottom-[60px]">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[260px] md:text-[200px]">
                 CREATIVITY
               </h1>
             </div>
-
           </div>
         </section>
 
-        {/* MOBILE HERO SECTION */}
         <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
-            
             <div className="mobile-hero-left-block absolute z-[5] top-[96px] left-[20px]">
               <h2 className="font-headline text-[18px] text-black uppercase leading-none mb-[6px] tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
@@ -195,9 +185,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-
             <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[118px] right-[26px] w-[82px] h-[3px]" />
-
             <div className="mobile-hero-main-image absolute z-[4] top-[190px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
@@ -207,17 +195,14 @@ export default function Home() {
                 priority
               />
             </div>
-
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[140px] text-center pointer-events-none">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[70px]">
                 CREATIVITY
               </h1>
             </div>
-
           </div>
         </section>
 
-        {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className={cn(
@@ -274,7 +259,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* BENEFITS SECTION - BLACK BACKGROUND */}
         <section className="py-24 bg-black border-t border-white/5 gsap-reveal">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -304,11 +288,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OFFER HIGHLIGHT */}
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 text-center">
             <h3 className="mb-4 text-black uppercase">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-black mb-12 font-medium">Cada camiseta por R$ 78,00</p>
+            <p className="text-black mb-12 font-medium">Cada camiseta por R$ 79,90 (no Pix)</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
               <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
@@ -323,9 +306,9 @@ export default function Home() {
                   </div>
                   <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
                   <div className="flex flex-col items-center gap-1 mb-8">
-                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 78,00</span>
+                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 79,90</span>
                     <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
-                      <CheckCircle2 className="h-3 w-3" /> 10% OFF no Pix
+                      <CheckCircle2 className="h-3 w-3" /> Preço no Pix
                     </div>
                   </div>
                 </div>
@@ -349,8 +332,8 @@ export default function Home() {
                   </div>
                   <h4 className="text-lg font-normal uppercase tracking-widest mb-2 font-headline text-black">LEVE 2 - Promoção</h4>
                   <div className="flex flex-col items-center gap-1 mb-8">
-                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 140,40</span>
-                    <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
+                    <span className="text-4xl font-normal tracking-tighter text-black font-headline">R$ 139,90</span>
+                    <span className="text-xs text-black font-semibold">R$ 69,95 cada</span>
                   </div>
                 </div>
                 <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
@@ -358,10 +341,10 @@ export default function Home() {
                 </Button>
               </div>
             </div>
+            <p className="mt-8 text-sm text-black/60 font-medium">* Pagamentos no cartão de crédito possuem acréscimo de 7%.</p>
           </div>
         </section>
 
-        {/* ORDER FORM SECTION */}
         <section className="py-24 bg-white gsap-reveal" id="produtos">
           <div className="container mx-auto px-6 text-center mb-12">
             <h3 className="uppercase text-black">Reserva Online</h3>
@@ -371,7 +354,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FAQ SECTION */}
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
             <h3 className="mb-12 text-center text-black uppercase">Perguntas Frequentes</h3>
@@ -391,7 +373,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* FOOTER */}
       <footer className="bg-white text-black py-24 border-t">
         <div className="container mx-auto px-6 text-center">
           <div className="font-headline text-[22px] font-normal tracking-wider mb-12 uppercase text-black">
