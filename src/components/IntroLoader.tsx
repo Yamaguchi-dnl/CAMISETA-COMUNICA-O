@@ -107,13 +107,13 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
         
         {/* Linha 1 */}
         <div className="line-1 font-headline text-white leading-[0.9] uppercase 
-          text-[clamp(34px,10vw,64px)] md:text-[clamp(58px,7vw,110px)] lg:text-[clamp(72px,8vw,148px)]">
+          text-[clamp(44px,12vw,80px)] md:text-[clamp(72px,10vw,160px)] lg:text-[clamp(100px,14vw,240px)]">
           {renderChars(line1Text)}
         </div>
 
         {/* Linha 2 */}
         <div className="line-2 font-headline text-white leading-[0.9] uppercase 
-          text-[clamp(34px,10vw,64px)] md:text-[clamp(58px,7vw,110px)] lg:text-[clamp(72px,8vw,148px)] mt-4 md:mt-2">
+          text-[clamp(44px,12vw,80px)] md:text-[clamp(72px,10vw,160px)] lg:text-[clamp(100px,14vw,240px)] mt-4 md:mt-2">
           {renderChars(line2Text)}
         </div>
 
