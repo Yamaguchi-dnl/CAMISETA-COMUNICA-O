@@ -149,6 +149,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
   return (
     <div id="reserva" className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
       <div className="text-center mb-10">
+        <h3 className="font-headline text-2xl mb-4 text-black uppercase">Reserve sua camiseta</h3>
         <p className="text-black text-sm font-medium">Preços promocionais válidos para pagamento no Pix. No crédito, acréscimo de 7%.</p>
       </div>
       
