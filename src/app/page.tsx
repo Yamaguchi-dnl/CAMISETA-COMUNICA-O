@@ -37,6 +37,9 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    // Refresh ScrollTrigger to ensure accuracy with SmoothScroll
+    ScrollTrigger.refresh();
+
     // Hero Animations
     const heroTl = gsap.timeline();
     heroTl.from('.hero-title-top', { y: 100, opacity: 0, duration: 1.2, ease: 'power4.out' })
@@ -63,7 +66,7 @@ export default function Home() {
       );
     });
 
-    // Staggered items
+    // Staggered items - Benefits
     gsap.from('.benefit-item', {
       scrollTrigger: {
         trigger: '.benefits-grid',
@@ -76,11 +79,13 @@ export default function Home() {
       ease: 'power2.out'
     });
 
+    // Staggered items - Offers (Cards)
     gsap.from('.offer-card', {
       scrollTrigger: {
         trigger: '.offers-grid',
         start: 'top 80%',
       },
+      y: 50,
       scale: 0.95,
       opacity: 0,
       stagger: 0.3,
