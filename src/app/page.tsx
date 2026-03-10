@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { ManifestoSection } from '@/components/ManifestoSection';
+import { IntroLoader } from '@/components/IntroLoader';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -20,6 +21,7 @@ if (typeof window !== 'undefined') {
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ h: 2, m: 45, s: 12 });
+  const [isIntroFinished, setIsIntroFinished] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,18 +36,52 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  const handleIntroComplete = () => {
+    setIsIntroFinished(true);
+  };
+
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isIntroFinished) return;
 
     // Refresh ScrollTrigger to ensure accuracy with SmoothScroll
     ScrollTrigger.refresh();
 
-    // Hero Animations
+    // Hero Animations - Layered Reveal (Step 5)
     const heroTl = gsap.timeline();
-    heroTl.from('.hero-title-top', { y: 100, opacity: 0, duration: 1.2, ease: 'power4.out' })
-          .from('.hero-image-frame', { scale: 0.8, opacity: 0, rotate: 5, duration: 1, ease: 'back.out(1.7)' }, '-=0.8')
-          .from('.hero-title-bottom', { y: -100, opacity: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8')
-          .from('.hero-cta', { scale: 0.9, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6');
+    
+    // Revela a seção hero que estava oculta inicialmente
+    gsap.to('.hero-section', { opacity: 1, duration: 0.1 });
+    
+    // Configura os estados iniciais dos elementos da hero
+    gsap.set(['.hero-title-top', '.hero-image-frame', '.hero-title-bottom', '.hero-support', '.hero-cta'], { 
+      opacity: 0 
+    });
+
+    heroTl
+      .fromTo('.hero-title-top', 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }
+      )
+      .fromTo('.hero-image-frame', 
+        { opacity: 0, scale: 0.94, y: 40 }, 
+        { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power4.out' }, 
+        '-=0.4'
+      )
+      .fromTo('.hero-title-bottom', 
+        { y: 35, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, 
+        '-=0.5'
+      )
+      .fromTo('.hero-support', 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
+        '-=0.3'
+      )
+      .fromTo('.hero-cta', 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 
+        '-=0.2'
+      );
 
     // Section Reveals
     const sections = gsap.utils.toArray('.gsap-reveal');
@@ -93,7 +129,7 @@ export default function Home() {
       ease: 'back.out(1.2)'
     });
 
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isIntroFinished] });
 
   const faqItems = [
     { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e podem ter a mesma modelagem, salvo ajuste específico de lote." },
@@ -122,11 +158,12 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="flex min-h-screen flex-col bg-white">
+      <IntroLoader onComplete={handleIntroComplete} />
       <Toaster />
 
       <main className="flex-1">
         {/* HERO SECTION */}
-        <section className="relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16">
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden flex flex-col items-center pt-20 pb-12 lg:pt-32 lg:pb-16">
           
           <div className="container relative z-[10] max-w-[1600px] px-4 lg:px-10 flex flex-col items-center">
             
@@ -139,7 +176,7 @@ export default function Home() {
               </h1>
 
               <div className="hero-image-frame relative w-full flex items-center justify-center z-[3] mt-2 xl:mt-0">
-                <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px]">
+                <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-[10] max-w-[380px] hero-support">
                   <p className="font-body text-black text-[17px] leading-[1.4] mb-6">
                     <span className="font-headline text-[22px] leading-none tracking-[-0.015em] text-black uppercase block mb-3">
                       COMUNICAR É MISSÃO.
@@ -149,9 +186,9 @@ export default function Home() {
                   <div className="w-[112px] h-[4px] bg-black" />
                 </div>
 
-                <div className="relative z-[3] transform rotate-[-2deg] shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
+                <div className="relative z-[3] shadow-[0_35px_70px_rgba(0,0,0,0.15)]">
                   <div className="bg-white p-0 
-                    w-[560px] h-[420px] xl:w-[720px] xl:h-[540px] 
+                    w-[680px] h-[510px] xl:w-[820px] xl:h-[615px] 
                     relative overflow-hidden rounded-none border-none">
                     <Image
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
@@ -166,7 +203,7 @@ export default function Home() {
               </div>
 
               <h2 className="hero-title-bottom relative z-[2] font-headline text-black text-center uppercase leading-[0.86] tracking-[-0.05em] 
-                mt-4 xl:mt-8 
+                mt-4 xl:mt-6 
                 text-[clamp(82px,10vw,138px)] xl:text-[clamp(110px,10vw,250px)]">
                 SPEAK
               </h2>
@@ -187,8 +224,8 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              <div className="hero-image-frame relative z-[3] transform rotate-[-3deg] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
-                <div className="bg-white p-0 w-[400px] h-[300px] relative overflow-hidden max-w-[90vw] rounded-none border-none">
+              <div className="hero-image-frame relative z-[3] mt-4 mb-0 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
+                <div className="bg-white p-0 w-[480px] h-[360px] relative overflow-hidden max-w-[90vw] rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="IAP Camisetas Campaign"
@@ -205,7 +242,7 @@ export default function Home() {
                 SPEAK
               </h2>
 
-              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4 hero-cta">
+              <div className="flex flex-col items-center text-center px-4 mb-8 mt-4 hero-support">
                 <h3 className="font-headline text-black text-[clamp(24px,3vw,34px)] leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
@@ -226,7 +263,7 @@ export default function Home() {
                 LET CREATIVITY
               </h1>
 
-              <div className="hero-image-frame relative z-[3] mt-2 transform rotate-[-8deg] mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
+              <div className="hero-image-frame relative z-[3] mt-2 mb-0 shadow-[0_25px_50px_rgba(0,0,0,0.1)]">
                 <div className="bg-white p-0 w-[300px] h-[225px] relative overflow-hidden rounded-none border-none">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
@@ -243,7 +280,7 @@ export default function Home() {
                 SPEAK
               </h2>
 
-              <div className="hero-cta flex flex-col items-center text-center px-4 mb-10 mt-1">
+              <div className="hero-support flex flex-col items-center text-center px-4 mb-10 mt-1">
                 <h3 className="font-headline text-black text-xl leading-[1.02] tracking-[-0.015em] uppercase">
                   COMUNICAR É MISSÃO.
                 </h3>
