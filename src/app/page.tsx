@@ -9,7 +9,6 @@ import { CheckCircle2, Instagram, Send, Maximize2 } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
-import { ManifestoSection } from '@/components/ManifestoSection';
 import { IntroLoader } from '@/components/IntroLoader';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -295,9 +294,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* MANIFESTO SECTION */}
-        <ManifestoSection />
 
         {/* BENEFITS SECTION */}
         <section className="py-24 bg-white border-t border-[#f0f0f0]">
