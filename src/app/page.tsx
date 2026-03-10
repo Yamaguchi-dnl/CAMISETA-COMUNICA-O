@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -81,7 +82,7 @@ export default function Home() {
   }, { scope: containerRef, dependencies: [isIntroFinished] });
 
   const faqItems = [
-    { q: "Qual a diferença entre a camiseta preta e a branca?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
+    { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
     { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
     { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
     { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
@@ -90,7 +91,7 @@ export default function Home() {
   const benefits = [
     { title: "Visual alinhado e representativo", text: "Uma camiseta pensada para transmitir unidade e identidade do Ministério de Comunicação." },
     { title: "Conforto para cultos e eventos", text: "Modelagem confortável para uso em escalas e programações especiais." },
-    { title: "Duas opções de cor", text: "Disponível nas versões preta e branca." },
+    { title: "Duas opções de cor", text: "Disponível nas versões preta e off-white." },
   ];
 
   const mosaicItems = [

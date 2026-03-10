@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "Product": {
@@ -46,7 +47,7 @@
         },
         "color": {
           "type": "string",
-          "description": "The specific color variant of the t-shirt, if applicable (e.g., 'preta', 'branca'). This field may be null or absent for kits or multi-color products."
+          "description": "The specific color variant of the t-shirt, if applicable (e.g., 'preta', 'off-white'). This field may be null or absent for kits or multi-color products."
         },
         "isKit": {
           "type": "boolean",

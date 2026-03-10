@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -148,7 +149,6 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
   return (
     <div id="reserva" className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto scroll-mt-24">
       <div className="text-center mb-10">
-        <h3 className="font-headline text-2xl lg:text-3xl font-normal mb-2 uppercase tracking-tight text-black">Finalize sua reserva</h3>
         <p className="text-black text-sm font-medium">Preços promocionais válidos para pagamento no Pix. No crédito, acréscimo de 7%.</p>
       </div>
       
@@ -196,7 +196,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
-                      <SelectItem value="Camiseta Comunicação Branca">Camiseta Branca</SelectItem>
+                      <SelectItem value="Camiseta Comunicação Off-White">Camiseta Off-White</SelectItem>
                       <SelectItem value="Kit Promocional (2 Peças)">Promoção Especial (2 Peças)</SelectItem>
                     </SelectContent>
                   </Select>
