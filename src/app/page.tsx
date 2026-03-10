@@ -62,70 +62,67 @@ export default function Home() {
         '-=0.7'
       );
 
-    // Gallery Pinned Scroll Animation (Refined for Cinematic Fluidity)
-    if (!isGalleryExpanded && gallerySectionRef.current) {
-      const isMobile = window.innerWidth < 768;
-      
+    // Gallery Auto-Assemble Animation (One-time trigger on enter)
+    if (gallerySectionRef.current) {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top top",
-          end: isMobile ? "+=180%" : "+=260%",
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
+          start: "top 78%",
+          once: true,
+          toggleActions: "play none none none",
           invalidateOnRefresh: true,
         }
       });
 
-      // Initial States: Completely Hidden and potentially outside
+      // Initial States: Completely Hidden and outside the viewport
       gsap.set(".gallery-mosaic-item", { opacity: 0, willChange: "transform, opacity" });
       gsap.set(".gallery-mosaic-button", { opacity: 0, y: 24, scale: 0.98 });
 
-      // Phase 1: Outer Edge Entry (Total portion: 0.5)
+      // Phase 1: Entry from Outer Edges
       galleryTl.fromTo(".gallery-mosaic-item--1", 
         { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.15, ease: "power3.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
         { x: "0vw", y: "-110vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.05, ease: "power3.out" }, 
         0.03
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
         { x: "115vw", y: "-8vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.1, ease: "power3.out" }, 
         0.06
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
         { x: "-70vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.1, ease: "power3.out" }, 
         0.09
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
         { x: "0vw", y: "115vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.05, ease: "power3.out" }, 
         0.12
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
         { x: "85vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.1, ease: "power3.out" }, 
         0.15
       );
 
-      // Phase 2: Composition Hold & Button (0.5 - 0.68)
-      galleryTl.to(".gallery-mosaic-button", { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 0.18 }, 0.5);
-
-      // Phase 3: Outer Edge Exit (0.68 - 1.0)
-      const exitStart = 0.68;
-      galleryTl.to(".gallery-mosaic-item--1", { x: "-110vw", y: "-6vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart);
-      galleryTl.to(".gallery-mosaic-item--2", { x: "0vw", y: "-105vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.02);
-      galleryTl.to(".gallery-mosaic-item--3", { x: "110vw", y: "-10vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.04);
-      galleryTl.to(".gallery-mosaic-item--4", { x: "-65vw", y: "108vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.06);
-      galleryTl.to(".gallery-mosaic-item--5", { x: "0vw", y: "112vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.08);
-      galleryTl.to(".gallery-mosaic-item--6", { x: "80vw", y: "108vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.1);
-      galleryTl.to(".gallery-mosaic-button", { opacity: 0, y: 16, ease: "power2.inOut", duration: 0.1 }, exitStart);
+      // Phase 2: Final Settle and Button Reveal
+      galleryTl.fromTo(".gallery-mosaic-item", 
+        { scale: 1.01 }, 
+        { scale: 1, duration: 0.28, ease: "power2.out" }, 
+        "-=0.5"
+      );
+      galleryTl.to(".gallery-mosaic-button", { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1, 
+        ease: "power2.out", 
+        duration: 0.5 
+      }, "-=0.2");
     }
 
     // Generic Section Reveal
@@ -306,7 +303,7 @@ export default function Home() {
                       <div className="relative w-[90vw] h-[70vh] sm:h-[85vh]">
                         <Image
                           src={item.src}
-                          alt={`Galeria Full ${i + 1}`}
+                          alt={`Galeria Full {i + 1}`}
                           fill
                           className="object-contain"
                         />
