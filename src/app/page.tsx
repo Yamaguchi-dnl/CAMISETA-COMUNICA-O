@@ -147,16 +147,16 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* REBUILT HERO SECTION - STRICT ABSOLUTE LAYOUT */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden h-[760px] md:h-[680px] lg:h-[760px]">
+        {/* REBUILT HERO SECTION - STRICT ABSOLUTE LAYOUT WITH TOP SPACING FOR HEADER */}
+        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             
             {/* LEFT TEXT BLOCK */}
             <div className="hero-left-block absolute z-[5] 
-              top-[40px] left-[30px]
-              md:top-[32px] md:left-[22px]
+              top-[120px] left-[30px]
+              md:top-[112px] md:left-[22px]
               max-w-[calc(100%-60px)] md:max-w-none
-              mobile:relative mobile:top-auto mobile:left-auto mobile:m-[20px_16px_16px_16px]">
+              mobile:relative mobile:top-auto mobile:left-auto mobile:m-[100px_16px_16px_16px]">
               <h2 className="font-headline text-[24px] md:text-[20px] lg:text-[24px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -167,14 +167,14 @@ export default function Home() {
 
             {/* RIGHT DECORATIVE LINE */}
             <div className="hero-right-line hidden md:block absolute z-[5] bg-[#111111]
-              top-[58px] right-[48px] w-[72px] h-[3px]
-              md:top-[48px] md:right-[28px] md:w-[64px]" 
+              top-[138px] right-[48px] w-[72px] h-[3px]
+              md:top-[128px] md:right-[28px] md:w-[64px]" 
             />
 
             {/* MAIN IMAGE */}
             <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)]
-              top-[118px] w-[820px] h-[610px]
-              md:top-[110px] md:w-[700px] md:h-[520px]
+              top-[198px] w-[820px] h-[610px]
+              md:top-[190px] md:w-[700px] md:h-[520px]
               mobile:relative mobile:top-auto mobile:left-auto mobile:transform-none mobile:m-[0_auto] mobile:w-[calc(100%-32px)] mobile:aspect-[4/5] mobile:h-auto">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
