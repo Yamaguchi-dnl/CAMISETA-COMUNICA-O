@@ -346,9 +346,6 @@ export default function Home() {
         </section>
 
         <section className="py-24 bg-white gsap-reveal" id="produtos">
-          <div className="container mx-auto px-6 text-center mb-12">
-            <h3 className="uppercase text-black">Reserva Online</h3>
-          </div>
           <div className="container mx-auto px-6">
             <OrderForm />
           </div>
