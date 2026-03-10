@@ -183,8 +183,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* FLOATING SUPPORT LABEL (DESKTOP: LEFT | MOBILE: CENTERED) */}
-            <div className="hero-support absolute bottom-[148px] lg:bottom-[120px] md:bottom-[110px] left-1/2 lg:left-12 -translate-x-1/2 lg:translate-x-0 z-50">
+            {/* SUPPORT LABEL (TOP LEFT) */}
+            <div className="hero-support absolute top-24 lg:top-32 left-6 lg:left-10 z-50">
               <span className="font-body font-medium text-[12px] lg:text-[13px] tracking-[0.08em] uppercase text-[#666666] whitespace-nowrap">
                 COMUNICAÇÃO • BARREIRINHA
               </span>
@@ -200,7 +200,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* GALLERY MOSAIC SECTION - REPOSITIONED BELOW HERO */}
+        {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
           <div className="container mx-auto px-6 max-w-[1240px]">
             <div className={cn(
