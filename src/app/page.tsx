@@ -67,7 +67,7 @@ export default function Home() {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top bottom", // Trigger exactly when the top of the section hits the bottom of the viewport
+          start: "top 20%", // Ajustado conforme pedido para 20%
           once: true,
           toggleActions: "play none none none",
           invalidateOnRefresh: true,
@@ -78,7 +78,7 @@ export default function Home() {
       gsap.set(".gallery-mosaic-item", { opacity: 0, WILL_CHANGE: "transform, opacity" });
       gsap.set(".gallery-mosaic-button", { opacity: 0, y: 14, scale: 0.985 });
 
-      // Phase 1: Fluid Entry from Outer Edges with significantly longer durations for a slower effect
+      // Phase 1: Fluid Entry from Outer Edges (Slow and Smooth)
       const staggerTime = 0.1;
       const baseDuration = 2.4;
       
@@ -388,7 +388,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group ring-2 ring-accent/20">
+              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
