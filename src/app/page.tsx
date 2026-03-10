@@ -78,45 +78,46 @@ export default function Home() {
       gsap.set(".gallery-mosaic-item", { opacity: 0, willChange: "transform, opacity" });
       gsap.set(".gallery-mosaic-button", { opacity: 0, y: 14, scale: 0.985 });
 
-      // Phase 1: Fluid Entry from Outer Edges with longer durations
-      const staggerTime = 0.05;
+      // Phase 1: Fluid Entry from Outer Edges with significantly longer durations for a slower effect
+      const staggerTime = 0.1;
+      const baseDuration = 2.4;
       
       galleryTl.fromTo(".gallery-mosaic-item--1", 
         { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.55, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "power3.out" }, 
         0
       );
       galleryTl.fromTo(".gallery-mosaic-item--2", 
         { x: "0vw", y: "-110vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.45, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.9, ease: "power3.out" }, 
         staggerTime
       );
       galleryTl.fromTo(".gallery-mosaic-item--3", 
         { x: "115vw", y: "-8vh", scale: 1.06, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.5, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.95, ease: "power3.out" }, 
         staggerTime * 2
       );
       galleryTl.fromTo(".gallery-mosaic-item--4", 
         { x: "-70vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.48, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "power3.out" }, 
         staggerTime * 3
       );
       galleryTl.fromTo(".gallery-mosaic-item--5", 
         { x: "0vw", y: "115vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.48, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.92, ease: "power3.out" }, 
         staggerTime * 4
       );
       galleryTl.fromTo(".gallery-mosaic-item--6", 
         { x: "85vw", y: "105vh", scale: 1.04, opacity: 0 }, 
-        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 1.5, ease: "power3.out" }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration * 0.94, ease: "power3.out" }, 
         staggerTime * 5
       );
 
       // Phase 2: Micro Settle
       galleryTl.fromTo(".gallery-mosaic-item", 
         { scale: 1.01 }, 
-        { scale: 1, duration: 0.3, ease: "power2.out" }, 
-        "-=0.6"
+        { scale: 1, duration: 0.6, ease: "power2.out" }, 
+        "-=1.2"
       );
 
       // Phase 3: Button Reveal
@@ -125,8 +126,8 @@ export default function Home() {
         y: 0, 
         scale: 1, 
         ease: "power2.out", 
-        duration: 0.45 
-      }, "-=0.2");
+        duration: 0.8 
+      }, "-=0.4");
     }
 
     // Generic Section Reveal
