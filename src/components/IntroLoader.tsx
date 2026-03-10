@@ -9,8 +9,8 @@ interface IntroLoaderProps {
 }
 
 /**
- * Intro Loader refinado para corresponder exatamente à referência visual.
- * Apresenta fundo cinza claro, texto centralizado e globo vermelho sobreposto.
+ * Intro Loader refinado com escala ampliada para máxima presença visual.
+ * Replica a composição editorial da referência: texto dominante e globo integrado.
  */
 export function IntroLoader({ onComplete }: IntroLoaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       }
     });
 
-    // Estado Inicial - Step 1: initial_screen_state
+    // Estado Inicial
     gsap.set(textRef.current, {
       opacity: 0,
       y: 30,
@@ -47,7 +47,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     });
 
     introTimeline
-      // Step 2: reveal_text_artwork
+      // Revelação do Texto
       .to(textRef.current, {
         opacity: 1,
         y: 0,
@@ -55,7 +55,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
         duration: 0.75,
         ease: 'power3.out'
       })
-      // Step 3: reveal_globe_artwork (com overlap de 0.35s)
+      // Revelação do Globo (com overlap para fluidez)
       .to(globeRef.current, {
         opacity: 1,
         y: 0,
@@ -63,19 +63,19 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
         duration: 0.85,
         ease: 'power4.out'
       }, '-=0.35')
-      // Step 4: hold_final_composition
-      .to({}, { duration: 0.6 })
-      // Step 5: exit_loader
+      // Pausa para impacto
+      .to({}, { duration: 0.8 })
+      // Saída sofisticada
       .to([textRef.current, globeRef.current], {
         opacity: 0,
         y: -20,
         duration: 0.45,
         ease: 'power2.inOut'
       })
-      // Step 6: remove_loader_overlay
+      // Remoção do overlay
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.25,
+        duration: 0.3,
         ease: 'power2.inOut',
         display: 'none'
       });
@@ -89,34 +89,34 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       ref={containerRef}
       className="fixed inset-0 z-[9999] bg-[#efefef] flex items-center justify-center overflow-hidden pointer-events-none"
     >
-      <div className="relative flex flex-col items-center justify-center w-full h-full max-w-[1440px]">
+      <div className="relative flex flex-col items-center justify-center w-full h-full max-w-full px-4">
         
         {/* 
-            Glow/Shadow effect container para o Globo 
-            O globo fica visualmente atrás da palavra MUNDO.
+            Arte de Texto Principal (Z-Index 3)
+            Tamanho ampliado para dominar a tela conforme referência.
         */}
         <div 
-          ref={globeRef} 
-          className="absolute z-[1] w-[min(62vw,250px)] md:w-[min(42vw,360px)] lg:w-[min(36vw,420px)] mt-[72px] md:mt-[100px] lg:mt-[110px]"
+          ref={textRef} 
+          className="relative z-[3] w-[min(90vw,420px)] md:w-[min(82vw,820px)] lg:w-[min(78vw,980px)] mb-[-2px] md:mb-[-6px] lg:mb-[-10px]"
         >
           <img 
-            src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/MUNDO%202.svg" 
-            alt="Mundo Globo" 
+            src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/IDE%20POR%20TODO%20O%20MUNDO%202.svg" 
+            alt="Ide por todo o mundo" 
             className="w-full h-auto block"
           />
         </div>
 
         {/* 
-            Arte de Texto Principal
-            Fica na frente do globo (z-index maior).
+            Globo Vermelho (Z-Index 2)
+            Posicionado visualmente atrás e encaixado sob o texto MUNDO.
         */}
         <div 
-          ref={textRef} 
-          className="relative z-[2] w-[min(84vw,360px)] md:w-[min(66vw,560px)] lg:w-[min(58vw,620px)]"
+          ref={globeRef} 
+          className="relative z-[2] w-[min(42vw,210px)] md:w-[min(38vw,340px)] lg:w-[min(34vw,430px)] mt-[-10px] md:mt-[-18px] lg:mt-[-30px]"
         >
           <img 
-            src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/IDE%20POR%20TODO%20O%20MUNDO%202.svg" 
-            alt="Ide por todo o mundo" 
+            src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/MUNDO%202.svg" 
+            alt="Mundo Globo" 
             className="w-full h-auto block"
           />
         </div>
