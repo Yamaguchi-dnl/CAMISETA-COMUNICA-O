@@ -40,22 +40,23 @@ export default function Home() {
 
     const heroTl = gsap.timeline();
     
-    gsap.set('.hero-section', { opacity: 1 });
-    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line'], { 
+    // Target both desktop and mobile hero elements for simultaneous reveal
+    gsap.set(['.hero-section', '.mobile-hero-section'], { opacity: 1 });
+    gsap.set(['.hero-main-image', '.hero-bottom-word', '.hero-left-block', '.hero-right-line', '.mobile-hero-main-image', '.mobile-hero-bottom-word', '.mobile-hero-left-block', '.mobile-hero-right-line'], { 
       opacity: 0,
     });
 
     heroTl
-      .fromTo('.hero-main-image', 
+      .fromTo(['.hero-main-image', '.mobile-hero-main-image'], 
         { opacity: 0, scale: 0.94, y: 34 }, 
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
-      .fromTo('.hero-bottom-word', 
+      .fromTo(['.hero-bottom-word', '.mobile-hero-bottom-word'], 
         { opacity: 0, y: 80 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
-      .fromTo(['.hero-left-block', '.hero-right-line'], 
+      .fromTo(['.hero-left-block', '.hero-right-line', '.mobile-hero-left-block', '.mobile-hero-right-line'], 
         { y: -20, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 
         '-=0.7'
@@ -148,35 +149,22 @@ export default function Home() {
       <Toaster />
 
       <main className="flex-1">
-        {/* REBUILT HERO SECTION - STRICT ABSOLUTE LAYOUT WITH TOP SPACING FOR HEADER */}
-        <section className="hero-section opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
+        {/* DESKTOP/TABLET HERO SECTION - UNTOUCHED & FROZEN */}
+        <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             
-            {/* LEFT TEXT BLOCK - DIMINUÍDO CONFORME SOLICITADO */}
-            <div className="hero-left-block absolute z-[5] 
-              top-[128px] left-[30px]
-              md:top-[120px] md:left-[22px]
-              max-w-[calc(100%-60px)] md:max-w-none
-              mobile:relative mobile:top-auto mobile:left-auto mobile:m-[100px_16px_16px_16px]">
+            <div className="hero-left-block absolute z-[5] top-[128px] left-[30px] md:top-[120px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[20px] md:text-[18px] lg:text-[20px] text-black uppercase leading-none mb-1.5 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
-              <p className="font-body text-[16px] md:text-[14px] lg:text-[16px] text-[#222222] leading-[1.35] max-w-[260px] md:max-w-[200px] lg:max-w-[260px]">
+              <p className="font-body text-[16px] md:text-[14px] lg:text-[16px] text-[#222222] leading-[1.35] md:max-w-[200px] lg:max-w-[260px]">
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
 
-            {/* RIGHT DECORATIVE LINE */}
-            <div className="hero-right-line hidden md:block absolute z-[5] bg-[#111111]
-              top-[146px] right-[48px] w-[72px] h-[3px]
-              md:top-[136px] md:right-[28px] md:w-[64px]" 
-            />
+            <div className="hero-right-line absolute z-[5] bg-[#111111] top-[146px] right-[48px] w-[72px] h-[3px] md:top-[136px] md:right-[28px] md:w-[64px]" />
 
-            {/* MAIN IMAGE */}
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)]
-              top-[198px] w-[820px] h-[610px]
-              md:top-[190px] md:w-[700px] md:h-[520px]
-              mobile:relative mobile:top-auto mobile:left-auto mobile:transform-none mobile:m-[0_auto] mobile:w-[calc(100%-32px)] mobile:aspect-[4/5] mobile:h-auto">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[198px] w-[820px] h-[610px] md:top-[190px] md:w-[700px] md:h-[520px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -186,15 +174,46 @@ export default function Home() {
               />
             </div>
 
-            {/* BOTTOM BACKGROUND WORD - REPOSICIONADO AINDA MAIS PARA BAIXO E AUMENTADO */}
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center
-              bottom-[80px]
-              md:bottom-[60px]
-              mobile:relative mobile:left-auto mobile:bottom-auto mobile:transform-none mobile:mt-[10px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block
-                text-[260px]
-                md:text-[200px]
-                mobile:text-[110px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px] md:bottom-[60px]">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[260px] md:text-[200px]">
+                CREATIVITY
+              </h1>
+            </div>
+
+          </div>
+        </section>
+
+        {/* MOBILE HERO SECTION - INDEPENDENT RECONSTRUCTION */}
+        <section className="mobile-hero-section md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
+          <div className="w-full h-full relative">
+            
+            {/* MOBILE LEFT TEXT */}
+            <div className="mobile-hero-left-block absolute z-[5] top-[26px] left-[20px]">
+              <h2 className="font-headline text-[18px] text-black uppercase leading-none mb-[6px] tracking-[-0.01em]">
+                COMUNICAR É MISSÃO.
+              </h2>
+              <p className="font-body text-[14px] text-[#222222] leading-[1.3] max-w-[220px]">
+                Uma camiseta para quem serve anunciando a mensagem.
+              </p>
+            </div>
+
+            {/* MOBILE RIGHT LINE */}
+            <div className="mobile-hero-right-line absolute z-[5] bg-[#111111] top-[48px] right-[26px] w-[82px] h-[3px]" />
+
+            {/* MOBILE MAIN IMAGE - BACK VIEW */}
+            <div className="mobile-hero-main-image absolute z-[4] top-[120px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+              <Image
+                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
+                alt="IAP Camisetas Campaign Mobile"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </div>
+
+            {/* MOBILE INDEPENDENT BOTTOM WORD */}
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 bottom-[34px] text-center pointer-events-none">
+              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[70px]">
                 CREATIVITY
               </h1>
             </div>
