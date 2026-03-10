@@ -172,47 +172,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-span-6 lg:row-span-12 md:col-span-4 md:row-span-6 col-span-1 row-span-1 gallery-mosaic-item--1",
+      className: "lg:col-span-6 lg:row-span-8 md:col-span-4 md:row-span-6 col-span-1 row-span-1 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--2",
+      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--2",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--3",
+      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--3",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--4",
+      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--4",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--5",
+      className: "lg:col-span-3 lg:row-span-4 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--5",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--6",
+      className: "lg:col-span-4 lg:row-span-4 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--6",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--7",
+      className: "lg:col-span-4 lg:row-span-4 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-span-4 lg:row-span-8 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--8",
+      className: "lg:col-span-4 lg:row-span-4 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-span-12 lg:row-span-10 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
+      className: "lg:col-span-12 lg:row-span-5 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
     },
   ];
 
@@ -274,7 +274,7 @@ export default function Home() {
 
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-[100vh]">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[100px] md:auto-rows-[120px]">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[100px] md:auto-rows-[100px] lg:auto-rows-[80px]">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
@@ -287,7 +287,7 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          className="object-cover transition-all duration-[350ms] ease-in-out group-hover:scale-[1.05] group-hover:brightness-[1.05]"
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                           <Maximize2 className="text-white h-8 w-8 scale-75 group-hover:scale-100 transition-transform" />
