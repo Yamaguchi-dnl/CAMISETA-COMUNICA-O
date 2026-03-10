@@ -192,7 +192,7 @@ export default function Home() {
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-span-4 lg:row-span-8 col-span-2 gallery-mosaic-item--8",
+      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
@@ -256,8 +256,8 @@ export default function Home() {
                 priority
               />
             </div>
-            {/* Adicionado de volta para mobile */}
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px]">
+            {/* Adicionado de volta para mobile e subido um pouco */}
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
               <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(60px,20vw,90px)]">
                 CREATIVITY
               </h1>
