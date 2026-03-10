@@ -36,7 +36,6 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current || !isIntroFinished) return;
 
-    // Refresh ScrollTrigger to account for content shifts after loader
     ScrollTrigger.refresh();
 
     // Hero Animation
@@ -75,7 +74,6 @@ export default function Home() {
         }
       });
 
-      // Initial state for items to prevent flashes
       gsap.set(".gallery-mosaic-item", { 
         opacity: 0, 
         willChange: "transform, opacity" 
@@ -84,7 +82,6 @@ export default function Home() {
       const staggerTime = 0.08;
       const baseDuration = 1.8;
       
-      // We animate each item from its specific starting point
       galleryTl.fromTo(".gallery-mosaic-item--1", 
         { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
         { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: baseDuration, ease: "expo.out" }, 
@@ -131,7 +128,6 @@ export default function Home() {
         staggerTime * 8
       );
 
-      // Final micro-settle for extra premium feel
       galleryTl.fromTo(".gallery-mosaic-item", 
         { scale: 1.012 }, 
         { scale: 1, duration: 0.55, ease: "power2.out" }, 
@@ -139,7 +135,6 @@ export default function Home() {
       );
     }
 
-    // Generic Section Reveal for remaining sections
     const sections = gsap.utils.toArray('.gsap-reveal');
     sections.forEach((section: any) => {
       gsap.fromTo(section, 
@@ -177,47 +172,47 @@ export default function Home() {
     {
       id: "image_1",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--1",
+      className: "lg:col-span-6 lg:row-span-12 md:col-span-4 md:row-span-6 col-span-1 row-span-1 gallery-mosaic-item--1",
     },
     {
       id: "image_2",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--2",
+      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--2",
     },
     {
       id: "image_3",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-1 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--3",
+      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--3",
     },
     {
       id: "image_4",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-start-7 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--4",
+      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--4",
     },
     {
       id: "image_5",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-start-9 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-7 md:col-span-2 md:row-start-3 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--5",
+      className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 row-span-1 gallery-mosaic-item--5",
     },
     {
       id: "image_6",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-start-11 lg:col-span-2 lg:row-start-4 lg:row-span-3 md:col-start-5 md:col-span-2 md:row-start-5 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--6",
+      className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--6",
     },
     {
       id: "image_7",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-start-1 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-5 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--7",
+      className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--7",
     },
     {
       id: "image_8",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-start-5 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-9 md:row-span-2 col-span-1 row-span-1 gallery-mosaic-item--8",
+      className: "lg:col-span-4 lg:row-span-8 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--8",
     },
     {
       id: "image_9",
       src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-start-9 lg:col-span-4 lg:row-start-7 lg:row-span-6 md:col-start-5 md:col-span-4 md:row-start-7 md:row-span-4 col-span-1 row-span-1 gallery-mosaic-item--9",
+      className: "lg:col-span-12 lg:row-span-10 md:col-span-8 md:row-span-4 col-span-2 row-span-2 gallery-mosaic-item--9",
     },
   ];
 
@@ -279,7 +274,7 @@ export default function Home() {
 
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-[#efefef] overflow-hidden flex items-center justify-center min-h-[100vh]">
           <div className="container mx-auto px-4 max-w-[1240px]">
-            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto">
+            <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[100px] md:auto-rows-[120px]">
               {mosaicItems.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
