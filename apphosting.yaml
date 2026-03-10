@@ -1,10 +1,10 @@
-# Settings to manage and configure a Firebase App Hosting backend.
+
+# Configurações para o Firebase App Hosting
 # https://firebase.google.com/docs/app-hosting/configure
 
 runConfig:
-  # Configuração de recursos para garantir performance estável em produção.
   cpu: 1
   memoryMiB: 1024
-  # Escalabilidade automática para lidar com picos de tráfego.
   maxInstances: 10
   minInstances: 0
+  concurrency: 80
