@@ -62,8 +62,7 @@ export default function Home() {
         '-=0.7'
       );
 
-    // Gallery Pinned Scroll Animation
-    // Only run if not expanded to avoid layout conflicts
+    // Gallery Pinned Scroll Animation (Refined for Cinematic Fluidity)
     if (!isGalleryExpanded && gallerySectionRef.current) {
       const isMobile = window.innerWidth < 768;
       
@@ -71,49 +70,62 @@ export default function Home() {
         scrollTrigger: {
           trigger: gallerySectionRef.current,
           start: "top top",
-          end: isMobile ? "+=120%" : "+=220%",
-          scrub: true,
-          pin: !isMobile, // Disable pin on mobile for better accessibility if needed
+          end: isMobile ? "+=180%" : "+=260%",
+          scrub: 1.2,
+          pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         }
       });
 
-      // Initial States
-      gsap.set(".gallery-mosaic-item", { opacity: 0, scale: 1.05, willChange: "transform, opacity" });
-      gsap.set(".gallery-mosaic-button", { opacity: 0, y: 18, scale: 0.98 });
+      // Initial States: Completely Hidden and potentially outside
+      gsap.set(".gallery-mosaic-item", { opacity: 0, willChange: "transform, opacity" });
+      gsap.set(".gallery-mosaic-button", { opacity: 0, y: 24, scale: 0.98 });
 
-      // Phase 1: Intro In (0 - 45%)
-      galleryTl.to(".gallery-mosaic-item--1", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0);
-      galleryTl.fromTo(".gallery-mosaic-item--1", { xPercent: -35, yPercent: 8 }, { xPercent: 0, yPercent: 0 }, 0);
-      
-      galleryTl.to(".gallery-mosaic-item--2", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.05);
-      galleryTl.fromTo(".gallery-mosaic-item--2", { xPercent: 0, yPercent: -40 }, { xPercent: 0, yPercent: 0 }, 0.05);
+      // Phase 1: Outer Edge Entry (Total portion: 0.5)
+      galleryTl.fromTo(".gallery-mosaic-item--1", 
+        { x: "-120vw", y: "4vh", scale: 1.08, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--2", 
+        { x: "0vw", y: "-110vh", scale: 1.06, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0.03
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--3", 
+        { x: "115vw", y: "-8vh", scale: 1.06, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0.06
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--4", 
+        { x: "-70vw", y: "105vh", scale: 1.04, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0.09
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--5", 
+        { x: "0vw", y: "115vh", scale: 1.04, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0.12
+      );
+      galleryTl.fromTo(".gallery-mosaic-item--6", 
+        { x: "85vw", y: "105vh", scale: 1.04, opacity: 0 }, 
+        { x: "0vw", y: "0vh", scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 
+        0.15
+      );
 
-      galleryTl.to(".gallery-mosaic-item--3", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.1);
-      galleryTl.fromTo(".gallery-mosaic-item--3", { xPercent: 32, yPercent: -24 }, { xPercent: 0, yPercent: 0 }, 0.1);
+      // Phase 2: Composition Hold & Button (0.5 - 0.68)
+      galleryTl.to(".gallery-mosaic-button", { opacity: 1, y: 0, scale: 1, ease: "power2.out", duration: 0.18 }, 0.5);
 
-      galleryTl.to(".gallery-mosaic-item--4", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.15);
-      galleryTl.fromTo(".gallery-mosaic-item--4", { xPercent: -18, yPercent: 34 }, { xPercent: 0, yPercent: 0 }, 0.15);
-
-      galleryTl.to(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.2);
-      galleryTl.fromTo(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 38 }, { xPercent: 0, yPercent: 0 }, 0.2);
-
-      galleryTl.to(".gallery-mosaic-item--6", { xPercent: 0, yPercent: 0, scale: 1, opacity: 1, ease: "power3.out" }, 0.25);
-      galleryTl.fromTo(".gallery-mosaic-item--6", { xPercent: 26, yPercent: 30 }, { xPercent: 0, yPercent: 0 }, 0.25);
-
-      // Phase 2: Settle Hold & Button Reveal (45% - 63%)
-      galleryTl.to(".gallery-mosaic-button", { opacity: 1, y: 0, scale: 1, ease: "power2.out" }, 0.45);
-
-      // Phase 3: Exit Out (63% - 100%)
-      const exitStart = 0.63;
-      galleryTl.to(".gallery-mosaic-item--1", { xPercent: -42, yPercent: -6, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart);
-      galleryTl.to(".gallery-mosaic-item--2", { xPercent: -8, yPercent: -42, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.05);
-      galleryTl.to(".gallery-mosaic-item--3", { xPercent: 34, yPercent: -30, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.1);
-      galleryTl.to(".gallery-mosaic-item--4", { xPercent: -24, yPercent: 34, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.15);
-      galleryTl.to(".gallery-mosaic-item--5", { xPercent: 0, yPercent: 42, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.2);
-      galleryTl.to(".gallery-mosaic-item--6", { xPercent: 30, yPercent: 34, scale: 0.98, opacity: 0, ease: "power2.inOut" }, exitStart + 0.25);
-      galleryTl.to(".gallery-mosaic-button", { opacity: 0, y: 14, ease: "power2.inOut" }, exitStart);
+      // Phase 3: Outer Edge Exit (0.68 - 1.0)
+      const exitStart = 0.68;
+      galleryTl.to(".gallery-mosaic-item--1", { x: "-110vw", y: "-6vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart);
+      galleryTl.to(".gallery-mosaic-item--2", { x: "0vw", y: "-105vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.02);
+      galleryTl.to(".gallery-mosaic-item--3", { x: "110vw", y: "-10vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.04);
+      galleryTl.to(".gallery-mosaic-item--4", { x: "-65vw", y: "108vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.06);
+      galleryTl.to(".gallery-mosaic-item--5", { x: "0vw", y: "112vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.08);
+      galleryTl.to(".gallery-mosaic-item--6", { x: "80vw", y: "108vh", scale: 0.98, opacity: 0, ease: "power2.inOut", duration: 0.3 }, exitStart + 0.1);
+      galleryTl.to(".gallery-mosaic-button", { opacity: 0, y: 16, ease: "power2.inOut", duration: 0.1 }, exitStart);
     }
 
     // Generic Section Reveal
