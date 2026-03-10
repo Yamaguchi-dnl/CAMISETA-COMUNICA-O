@@ -226,8 +226,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* BENEFITS SECTION */}
-        <section className="py-24 bg-white border-t border-[#f0f0f0] gsap-reveal">
+        {/* BENEFITS SECTION - BLACK BACKGROUND */}
+        <section className="py-24 bg-black border-t border-white/5 gsap-reveal">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="relative aspect-[3/4] w-full lg:max-w-md mx-auto rounded-none overflow-hidden shadow-2xl">
@@ -242,12 +242,12 @@ export default function Home() {
                 {benefits.map((benefit, i) => (
                   <div key={i} className="flex gap-8 group">
                     <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-black ring-4 ring-black/10 group-hover:scale-125 transition-transform" />
-                      {i !== benefits.length - 1 && <div className="w-px h-full bg-black/20 mt-4" />}
+                      <div className="w-4 h-4 rounded-full bg-white ring-4 ring-white/10 group-hover:scale-125 transition-transform" />
+                      {i !== benefits.length - 1 && <div className="w-px h-full bg-white/20 mt-4" />}
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold uppercase mb-3 tracking-wide font-headline text-black">{benefit.title}</h4>
-                      <p className="text-black font-normal leading-relaxed">{benefit.text}</p>
+                      <h4 className="text-xl font-bold uppercase mb-3 tracking-wide font-headline text-white">{benefit.title}</h4>
+                      <p className="text-white/80 font-normal leading-relaxed">{benefit.text}</p>
                     </div>
                   </div>
                 ))}
