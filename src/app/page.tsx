@@ -219,7 +219,7 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[146px] right-[48px] w-[72px] h-[3px] md:top-[136px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[198px] w-[820px] h-[610px] md:top-[190px] md:w-[700px] md:h-[520px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[150px] w-[820px] h-[610px] md:w-[700px] md:h-[520px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -229,7 +229,7 @@ export default function Home() {
               />
             </div>
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[20px] md:bottom-[10px]">
-              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(300px,35vw,600px)]">
+              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
             </div>
@@ -247,7 +247,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[190px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[250px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -257,7 +257,7 @@ export default function Home() {
               />
             </div>
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[40px]">
-              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(120px,38vw,240px)]">
+              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
             </div>
