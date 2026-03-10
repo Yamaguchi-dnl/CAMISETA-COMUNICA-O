@@ -229,7 +229,7 @@ export default function Home() {
               />
             </div>
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px] md:bottom-[60px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[320px] md:text-[240px]">
+              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(320px,38vw,680px)]">
                 CREATIVITY
               </h1>
             </div>
@@ -257,7 +257,7 @@ export default function Home() {
               />
             </div>
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
-              <h1 className="font-headline text-black uppercase leading-[0.82] tracking-[-0.04em] whitespace-nowrap inline-block text-[clamp(60px,20vw,90px)]">
+              <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(120px,42vw,240px)]">
                 CREATIVITY
               </h1>
             </div>
