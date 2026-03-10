@@ -322,7 +322,7 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
 
           <Button 
             type="submit" 
-            className="w-full h-14 bg-black hover:bg-accent text-white rounded-full flex items-center justify-center gap-3 text-[14px] shadow-lg transition-all font-semibold uppercase tracking-[0.04em]"
+            className="pill-button bg-black hover:bg-accent text-white w-full"
             disabled={isSubmitting}
           >
             <Send className="h-5 w-5" />

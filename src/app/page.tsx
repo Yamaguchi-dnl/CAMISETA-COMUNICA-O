@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -6,8 +5,8 @@ import Link from 'next/link';
 import { OrderForm } from '@/components/OrderForm';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Instagram, Send, Maximize2, Calculator } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { CheckCircle2, Maximize2 } from 'lucide-react';
+import { useState, useRef } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
@@ -105,7 +104,7 @@ export default function Home() {
   const mosaicItems = [
     {
       id: "image_1",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
+      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
       className: "lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-6 md:col-start-1 md:col-span-4 md:row-start-1 md:row-span-4 col-span-2",
     },
     {
@@ -190,7 +189,7 @@ export default function Home() {
                 SPEAK
               </h2>
               <div className="hero-cta relative z-[5] mt-12 xl:mt-16">
-                <Button asChild className="pill-button bg-[#ff1f17] text-white font-bold px-10 py-5 text-[16px] lg:px-12 lg:py-6 lg:text-[18px] xl:px-14 xl:py-8 hover:bg-black transition-all uppercase tracking-[0.02em] shadow-none min-w-[290px]">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent min-w-[280px]">
                   <a href="#ofertas">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -220,32 +219,31 @@ export default function Home() {
                   COMUNICAR É MISSÃO.
                 </h3>
               </div>
-              <Button asChild className="hero-cta pill-button bg-[#ff1f17] text-white font-extrabold px-8 py-6 text-[15px] hover:bg-black transition-all uppercase tracking-[0.01em] shadow-none min-w-[208px]">
+              <Button asChild className="hero-cta pill-button bg-black text-white hover:bg-accent min-w-[240px]">
                 <a href="#reserva">COMPRAR AGORA</a>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* GALLERY MOSAIC SECTION - MOVED BELOW HERO */}
+        {/* GALLERY MOSAIC SECTION */}
         <section className="py-16 bg-[#efefef] gsap-reveal overflow-hidden">
           <div className="container mx-auto px-6 max-w-[1240px]">
             <div className={cn(
-              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-2 overflow-hidden bg-transparent transition-all duration-500 h-auto",
+              "grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-2 overflow-hidden bg-transparent transition-all duration-500",
               isGalleryExpanded 
-                ? "lg:grid-rows-[repeat(12,minmax(0,1fr))] lg:aspect-square md:grid-rows-[repeat(10,minmax(0,1fr))] md:aspect-[8/10]" 
-                : "lg:grid-rows-[repeat(6,minmax(0,1fr))] lg:aspect-[2/1] md:grid-rows-[repeat(6,minmax(0,1fr))] md:aspect-[8/6]"
+                ? "h-auto" 
+                : "h-[400px] lg:h-[600px]"
             )}>
               {mosaicItems.map((item, i) => {
-                // Show first 6 items initially if not expanded
+                // If not expanded, only show first 6 to keep layout clean
                 if (!isGalleryExpanded && i >= 6) return null;
                 
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300",
-                        "group",
+                        "relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group",
                         item.className
                       )}>
                         <Image
@@ -275,10 +273,10 @@ export default function Home() {
               })}
             </div>
             
-            <div className="mt-4 flex justify-center">
+            <div className="mt-8 flex justify-center">
               <Button 
                 onClick={() => setIsGalleryExpanded(!isGalleryExpanded)}
-                className="pill-button bg-[#111111] text-white hover:bg-[#d93025] transition-all duration-300 px-8 py-4 font-body font-bold text-[15px] uppercase tracking-[0.02em] rounded-full h-auto border-none shadow-lg"
+                className="pill-button bg-black text-white hover:bg-accent min-w-[240px]"
               >
                 {isGalleryExpanded ? 'VER MENOS FOTOS' : 'VER TODAS AS FOTOS'}
               </Button>
@@ -341,7 +339,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">COMPRAR AGORA</a>
                 </Button>
               </div>
@@ -365,7 +363,7 @@ export default function Home() {
                     <span className="text-xs text-black font-semibold">R$ 70,20 cada</span>
                   </div>
                 </div>
-                <Button asChild className="w-full h-14 bg-black text-white hover:bg-accent pill-button border-none">
+                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full">
                   <a href="#reserva">APROVEITAR KIT</a>
                 </Button>
               </div>

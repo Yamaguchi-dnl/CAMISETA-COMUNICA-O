@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/lib/products';
@@ -31,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <p className="font-headline text-xl font-black">R$ {product.price}</p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Button asChild className="w-full font-bold" variant="default">
+        <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full" variant="default">
           <Link href={`/produto/${product.slug}`}>Ver Produto</Link>
         </Button>
       </CardFooter>
