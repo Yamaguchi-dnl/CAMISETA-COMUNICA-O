@@ -36,6 +36,7 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current || !isIntroFinished) return;
 
+    // Garante que as posições sejam recalculadas após o loader
     ScrollTrigger.refresh();
 
     // Hero Animation
@@ -74,7 +75,11 @@ export default function Home() {
         }
       });
 
-      gsap.set(".gallery-mosaic-item", { opacity: 0, WILL_CHANGE: "transform, opacity" });
+      // Estado inicial forçado via GSAP para evitar flashes ou bugs de renderização
+      gsap.set(".gallery-mosaic-item", { 
+        opacity: 0, 
+        willChange: "transform, opacity" 
+      });
 
       const staggerTime = 0.08;
       const baseDuration = 1.8;
@@ -283,7 +288,7 @@ export default function Home() {
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
                       <div className={cn(
-                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] transition-all duration-300 group rounded-none",
+                        "gallery-mosaic-item relative overflow-hidden cursor-pointer bg-[#dddddd] group rounded-none",
                         item.className
                       )}>
                         <Image
