@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -47,55 +48,64 @@ const MOSAIC_ITEMS = [
     id: "image_1",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
     className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
-    start: { x: "-110vw", y: "-10vh" }
+    start: { x: "-110vw", y: "-10vh" },
+    sizes: "(min-width: 1200px) 60vw, (min-width: 768px) 50vw, 100vw"
   },
   {
     id: "image_2",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
-    start: { x: "-20vw", y: "-100vh" }
+    start: { x: "-20vw", y: "-100vh" },
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_3",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
-    start: { x: "110vw", y: "-12vh" }
+    start: { x: "110vw", y: "-12vh" },
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_4",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
-    start: { x: "-95vw", y: "90vh" }
+    start: { x: "-95vw", y: "90vh" },
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_5",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
-    start: { x: "0vw", y: "105vh" }
+    start: { x: "0vw", y: "105vh" },
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_6",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
-    start: { x: "95vw", y: "95vh" }
+    start: { x: "95vw", y: "95vh" },
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
   },
   {
     id: "image_7",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
-    start: { x: "105vw", y: "0vh" }
+    start: { x: "105vw", y: "0vh" },
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
   },
   {
     id: "image_8",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
-    start: { x: "-105vw", y: "20vh" }
+    start: { x: "-105vw", y: "20vh" },
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
   },
   {
     id: "image_9",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
     className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
-    start: { x: "0vw", y: "-110vh" }
+    start: { x: "0vw", y: "-110vh" },
+    sizes: "100vw"
   },
 ];
 
@@ -280,10 +290,10 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 50vw"
+                          sizes={item.sizes}
                           className="object-cover"
-                          loading="lazy"
-                          quality={85}
+                          priority={true}
+                          quality={95}
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                           <Maximize2 className="text-white h-8 w-8 scale-75 group-hover:scale-100 transition-transform" />
