@@ -97,7 +97,7 @@ export function PurposeSection() {
               <div className="purpose-reveal flex justify-center md:justify-start">
                 <a 
                   href="#ofertas" 
-                  className="inline-flex items-center gap-2 text-[#b58b2d] font-body font-semibold text-[15px] md:text-[18px] underline underline-offset-8 hover:opacity-80 transition-opacity"
+                  className="inline-flex items-center gap-2 text-accent font-body font-semibold text-[15px] md:text-[18px] underline underline-offset-8 hover:opacity-80 transition-opacity"
                 >
                   Ver camisetas
                   <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
