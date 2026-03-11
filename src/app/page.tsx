@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -342,13 +341,13 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[146px] right-[48px] w-[72px] h-[3px] md:top-[136px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[150px] w-[820px] h-[610px] md:w-[700px] md:h-[520px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[150px] w-[820px] h-[585px] md:w-[700px] md:h-[500px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
                 fill
                 sizes="(min-width: 1600px) 820px, (min-width: 768px) 700px, 100vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
                 priority
                 quality={90}
               />
@@ -372,13 +371,13 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[250px] left-1/2 -translate-x-1/2 w-[292px] h-[424px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[250px] left-1/2 -translate-x-1/2 w-[292px] h-[395px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
                 fill
                 sizes="(min-width: 768px) 600px, 100vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
                 priority
                 quality={90}
               />
