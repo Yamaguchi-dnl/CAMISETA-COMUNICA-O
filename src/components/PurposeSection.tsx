@@ -79,7 +79,7 @@ export function PurposeSection() {
 
           {/* Central Title Block */}
           <div className="md:absolute top-1/2 md:top-[140px] md:left-1/2 md:-translate-x-1/2 w-full md:w-[900px] z-20 text-center md:text-left">
-            <h2 className="purpose-reveal font-body font-[800] text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(38px,10vw,56px)] md:text-[clamp(72px,6.2vw,108px)] uppercase md:normal-case">
+            <h2 className="purpose-reveal font-headline text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(42px,10vw,64px)] md:text-[clamp(82px,6.2vw,124px)] uppercase">
               A MENSAGEM<br />
               PRECISA SER<br />
               OUVIDA
