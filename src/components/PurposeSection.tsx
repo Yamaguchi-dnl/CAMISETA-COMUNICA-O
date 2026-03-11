@@ -77,8 +77,8 @@ export function PurposeSection() {
             />
           </div>
 
-          {/* Central Title Block - Moved to the right with md:left-[58%] */}
-          <div className="md:absolute top-1/2 md:top-[140px] md:left-[58%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-center md:text-left">
+          {/* Central Title Block */}
+          <div className="md:absolute top-1/2 md:top-[140px] md:left-[62%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-center md:text-left">
             <h2 className="purpose-reveal font-headline text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(42px,10vw,64px)] md:text-[clamp(82px,6.2vw,124px)] uppercase">
               A MENSAGEM<br />
               PRECISA SER OUVIDA
