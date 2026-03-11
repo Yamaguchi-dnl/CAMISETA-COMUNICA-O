@@ -113,6 +113,7 @@ export default function Home() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const gallerySectionRef = useRef<HTMLElement>(null);
+  const offerSectionRef = useRef<HTMLElement>(null);
 
   const handleIntroComplete = () => {
     setIsIntroFinished(true);
@@ -158,7 +159,7 @@ export default function Home() {
         }
       });
 
-      // Initial State: Each image fully outside viewport from different directions
+      // Initial State
       MOSAIC_ITEMS.forEach((item, i) => {
         gsap.set(`.gallery-mosaic-item--${i + 1}`, { 
           x: item.start.x, 
@@ -173,7 +174,7 @@ export default function Home() {
         galleryTl.to(`.gallery-mosaic-item--${i + 1}`, {
           x: "0vw",
           y: "0vh",
-          scale: 1.012, // Slight overshoot for settle
+          scale: 1.012,
           opacity: 1,
           duration: 1.4,
           ease: "power3.out"
@@ -186,6 +187,121 @@ export default function Home() {
         duration: 0.32,
         ease: "power2.out"
       }, "-=0.2");
+    }
+
+    // Offer Section Animation
+    if (offerSectionRef.current) {
+      const isMobile = window.innerWidth < 768;
+      const yOffset = isMobile ? 30 : 50;
+
+      const offerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: offerSectionRef.current,
+          start: "top 78%",
+          once: true,
+          toggleActions: "play none none none",
+          invalidateOnRefresh: true,
+        }
+      });
+
+      // Initial State Setup
+      gsap.set('.offer-section-title', { opacity: 0, y: yOffset, clipPath: 'inset(100% 0 0 0)' });
+      gsap.set('.offer-section-subtitle', { opacity: 0, y: 16 });
+      gsap.set(['.offer-card--1', '.offer-card--2'], { opacity: 0, y: yOffset, scale: 0.98 });
+      gsap.set('.offer-card-image', { opacity: 0, scale: 1.03 });
+      gsap.set(['.offer-card-title', '.offer-card-price', '.offer-card-button'], { opacity: 0, y: 18 });
+      gsap.set('.offer-card-badge--best', { opacity: 0, scale: 0.85, y: -10 });
+
+      offerTl
+        // Phase: Title Reveal
+        .to('.offer-section-title', {
+          opacity: 1,
+          y: 0,
+          clipPath: 'inset(0% 0 0 0)',
+          duration: 0.85,
+          ease: 'power4.out'
+        })
+        // Phase: Subtitle Reveal
+        .to('.offer-section-subtitle', {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power2.out'
+        }, '-=0.4')
+        // Phase: Cards Reveal
+        .to('.offer-card--1', {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          ease: 'power3.out'
+        }, '-=0.2')
+        .to('.offer-card--2', {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          ease: 'power3.out'
+        }, '-=0.45')
+        // Phase: Card Details Reveal
+        .to('.offer-card-image', {
+          opacity: 1,
+          scale: 1,
+          duration: 0.65,
+          ease: 'power2.out'
+        }, '-=0.3')
+        .to(['.offer-card-title', '.offer-card-price'], {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, '-=0.4')
+        .to('.offer-card-button', {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, '-=0.3')
+        .to('.offer-card-badge--best', {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.4,
+          ease: 'power2.out'
+        }, '-=0.2');
+
+      // Hover Micro-interactions
+      const cards = document.querySelectorAll('.offer-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { y: -6, duration: 0.25, ease: 'power2.out' });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { y: 0, duration: 0.25, ease: 'power2.out' });
+        });
+
+        const img = card.querySelector('.offer-card-image');
+        if (img) {
+          card.addEventListener('mouseenter', () => {
+            gsap.to(img, { scale: 1.02, duration: 0.25, ease: 'power2.out' });
+          });
+          card.addEventListener('mouseleave', () => {
+            gsap.to(img, { scale: 1, duration: 0.25, ease: 'power2.out' });
+          });
+        }
+
+        const btn = card.querySelector('.offer-card-button');
+        if (btn) {
+          btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, { scale: 1.03, duration: 0.2, ease: 'power2.out' });
+          });
+          btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out' });
+          });
+        }
+      });
     }
 
     const reveals = gsap.utils.toArray('.gsap-reveal');
@@ -320,16 +436,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Purpose Section - Moved below gallery */}
+        {/* Purpose Section */}
         <PurposeSection />
 
-        <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20 gsap-reveal">
+        <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-[#efefef] scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="mb-4 text-black uppercase text-[48px] lg:text-[64px]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="text-black mb-12 font-medium">Cada camiseta por R$ 79,90 (no Pix)</p>
+            <h3 className="offer-section-title mb-4 text-black uppercase text-[48px] lg:text-[64px] will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <p className="offer-section-subtitle text-black mb-12 font-medium will-change-[transform,opacity]">Cada camiseta por R$ 79,90 (no Pix)</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+              <div className="offer-card offer-card--1 bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity]">
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -337,13 +453,13 @@ export default function Home() {
                       alt="Camiseta Individual"
                       fill
                       sizes="(min-width: 768px) 400px, 100vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      className="offer-card-image object-cover p-8 will-change-transform"
                       loading="lazy"
                       quality={85}
                     />
                   </div>
-                  <h4 className="text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
-                  <div className="flex flex-col items-center gap-1 mb-8">
+                  <h4 className="offer-card-title text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black will-change-[transform,opacity]">LEVE 1 - Camiseta IAP</h4>
+                  <div className="offer-card-price flex flex-col items-center gap-1 mb-8 will-change-[transform,opacity]">
                     <span className="text-6xl font-normal tracking-tighter text-black font-headline">R$ 79,90</span>
                     <div className="flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-tighter">
                       <CheckCircle2 className="h-3 w-3" /> Preço no Pix
@@ -351,13 +467,15 @@ export default function Home() {
                   </div>
                 </div>
                 {Button && (
-                  <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
-                    <a href="#reserva">COMPRAR AGORA</a>
-                  </Button>
+                  <div className="offer-card-button w-full will-change-[transform,opacity]">
+                    <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
+                      <a href="#reserva">COMPRAR AGORA</a>
+                    </Button>
+                  </div>
                 )}
               </div>
 
-              <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
+              <div className="offer-card offer-card--2 bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity]">
                 <div className="w-full text-center">
                   <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-[#f5f5f5]">
                     <Image
@@ -365,24 +483,26 @@ export default function Home() {
                       alt="Kit Promocional"
                       fill
                       sizes="(min-width: 768px) 400px, 100vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      className="offer-card-image object-cover p-8 will-change-transform"
                       loading="lazy"
                       quality={90}
                     />
-                    <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
+                    <div className="offer-card-badge--best absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest will-change-[transform,opacity]">
                       Melhor Oferta
                     </div>
                   </div>
-                  <h4 className="text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 2 - Promoção</h4>
-                  <div className="flex flex-col items-center gap-1 mb-8">
+                  <h4 className="offer-card-title text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black will-change-[transform,opacity]">LEVE 2 - Promoção</h4>
+                  <div className="offer-card-price flex flex-col items-center gap-1 mb-8 will-change-[transform,opacity]">
                     <span className="text-6xl font-normal tracking-tighter text-black font-headline">R$ 139,90</span>
                     <span className="text-sm text-black font-semibold">R$ 69,95 cada</span>
                   </div>
                 </div>
                 {Button && (
-                  <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
-                    <a href="#reserva">APROVEITAR KIT</a>
-                  </Button>
+                  <div className="offer-card-button w-full will-change-[transform,opacity]">
+                    <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
+                      <a href="#reserva">APROVEITAR KIT</a>
+                    </Button>
+                  </div>
                 )}
               </div>
             </div>
