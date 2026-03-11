@@ -20,7 +20,16 @@ export function PurposeSection() {
   useGSAP(() => {
     if (!sectionRef.current) return;
 
-    const isMobile = window.innerWidth < 768;
+    const width = window.innerWidth;
+    const isMobile = width < 768;
+    const isTablet = width >= 768 && width < 1024;
+    const isDesktop = width >= 1024;
+
+    const getRotation = (isInitial: boolean) => {
+      if (isMobile) return 0;
+      if (isTablet) return isInitial ? 10 : 5;
+      return isInitial ? 12 : 6;
+    };
 
     // Configuração inicial (Initial State Setup)
     const setInitialState = () => {
@@ -30,14 +39,14 @@ export function PurposeSection() {
         opacity: 0, 
         x: -80, 
         y: 24, 
-        rotation: -12, 
+        rotation: isMobile ? 0 : -12, 
         scale: 0.96 
       });
       gsap.set('.purpose-image--right', { 
         opacity: 0, 
         x: isMobile ? 0 : 80, 
         y: isMobile ? 40 : 24, 
-        rotation: isMobile ? 0 : 12, 
+        rotation: getRotation(true), 
         scale: 0.96 
       });
       gsap.set(['.purpose-title-line-1', '.purpose-title-line-2'], { 
@@ -83,7 +92,7 @@ export function PurposeSection() {
         opacity: 1,
         x: 0,
         y: 0,
-        rotation: -8,
+        rotation: isMobile ? 0 : -8,
         scale: 1,
         duration: 0.95,
         ease: 'power3.out'
@@ -92,7 +101,7 @@ export function PurposeSection() {
         opacity: 1,
         x: 0,
         y: 0,
-        rotation: isMobile ? 0 : 8,
+        rotation: getRotation(false),
         scale: 1,
         duration: 0.95,
         ease: 'power3.out'
