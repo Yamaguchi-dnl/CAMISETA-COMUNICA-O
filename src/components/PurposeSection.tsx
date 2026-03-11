@@ -60,9 +60,9 @@ export function PurposeSection() {
       <div className="container mx-auto px-6 max-w-[1600px] h-full relative">
         
         {/* Decorative Shapes */}
-        <div className="purpose-shape absolute hidden md:block left-[86px] bottom-[86px] w-[88px] h-[88px] bg-[#f3a012] rounded-[10px] -rotate-18 -z-0" />
-        <div className="purpose-shape absolute hidden md:block right-[120px] top-[92px] w-[72px] h-[72px] bg-[#f3a012] rounded-[10px] rotate-14 -z-0" />
-        <div className="purpose-shape absolute md:hidden right-4 top-4 w-10 h-10 bg-[#f3a012] rounded-[6px] rotate-12" />
+        <div className="purpose-shape absolute hidden md:block left-[86px] bottom-[86px] w-[88px] h-[88px] bg-black rounded-[10px] -rotate-18 -z-0" />
+        <div className="purpose-shape absolute hidden md:block right-[120px] top-[92px] w-[72px] h-[72px] bg-black rounded-[10px] rotate-14 -z-0" />
+        <div className="purpose-shape absolute md:hidden right-4 top-4 w-10 h-10 bg-black rounded-[6px] rotate-12" />
 
         <div className="flex flex-col md:block h-full w-full">
           
