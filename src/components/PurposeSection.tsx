@@ -20,12 +20,20 @@ export function PurposeSection() {
   useGSAP(() => {
     if (!sectionRef.current) return;
 
+    const isMobile = window.innerWidth < 768;
+
     // Configuração inicial (Initial State Setup)
     const setInitialState = () => {
       gsap.set('.purpose-square--top-right', { opacity: 0, scale: 0.7, y: -20 });
       gsap.set('.purpose-square--bottom-left', { opacity: 0, scale: 0.7, y: 20 });
       gsap.set('.purpose-image--left', { opacity: 0, x: -80, y: 24, rotation: -10, scale: 0.96 });
-      gsap.set('.purpose-image--right', { opacity: 0, x: 80, y: 24, rotation: 10, scale: 0.96 });
+      gsap.set('.purpose-image--right', { 
+        opacity: 0, 
+        x: isMobile ? 0 : 80, 
+        y: isMobile ? 40 : 24, 
+        rotation: isMobile ? 0 : 10, 
+        scale: 0.96 
+      });
       gsap.set(['.purpose-title-line-1', '.purpose-title-line-2'], { 
         opacity: 0, 
         y: 60, 
@@ -78,7 +86,7 @@ export function PurposeSection() {
         opacity: 1,
         x: 0,
         y: 0,
-        rotation: 6,
+        rotation: isMobile ? 0 : 6,
         scale: 1,
         duration: 0.95,
         ease: 'power3.out'
@@ -163,12 +171,12 @@ export function PurposeSection() {
         <div className="flex flex-col md:block h-full w-full">
           
           {/* Main Campaign Image (Right image in desktop, top image in mobile) */}
-          <div className="purpose-image--right relative md:absolute md:right-[60px] md:top-[365px] w-full max-w-[280px] md:max-w-[300px] aspect-[4/3] md:aspect-[4/3] z-10 mx-auto md:mx-0 will-change-transform order-1">
+          <div className="purpose-image--right relative md:absolute md:right-[60px] md:top-[365px] w-full max-w-[340px] md:max-w-[300px] aspect-[3/4] md:aspect-[4/3] z-10 mx-auto md:mx-0 will-change-transform order-1">
             <Image 
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
               alt="Propósito IAP" 
               fill 
-              sizes="(min-width: 768px) 300px, 280px"
+              sizes="(min-width: 768px) 300px, 340px"
               className="object-cover"
               data-ai-hint="editorial fashion"
               priority
