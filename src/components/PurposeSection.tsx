@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -54,8 +53,9 @@ export function PurposeSection() {
 
   return (
     <section 
+      id="proposito"
       ref={sectionRef} 
-      className="relative bg-[#efefef] min-h-[760px] md:h-[760px] overflow-hidden py-20 md:py-0 flex items-center"
+      className="relative bg-[#efefef] min-h-[760px] md:h-[760px] overflow-hidden py-20 md:py-0 flex items-center scroll-mt-20"
     >
       <div className="container mx-auto px-6 max-w-[1600px] h-full relative">
         
@@ -72,6 +72,7 @@ export function PurposeSection() {
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg" 
               alt="Propósito IAP 1" 
               fill 
+              sizes="(min-width: 768px) 220px, 200px"
               className="object-cover"
               data-ai-hint="editorial fashion"
             />
@@ -108,6 +109,7 @@ export function PurposeSection() {
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
               alt="Propósito IAP 2" 
               fill 
+              sizes="(min-width: 768px) 300px, 260px"
               className="object-cover"
               data-ai-hint="editorial fashion"
             />

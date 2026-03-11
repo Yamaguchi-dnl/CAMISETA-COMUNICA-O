@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -203,7 +202,7 @@ export default function Home() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
                 fill
-                sizes="(min-width: 1600px) 1600px, (min-width: 768px) 80vw, 100vw"
+                sizes="(min-width: 1600px) 820px, (min-width: 768px) 700px, 100vw"
                 className="object-cover object-center"
                 priority
                 quality={90}
@@ -247,9 +246,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Purpose Section - New Editorial Section */}
-        <PurposeSection />
-
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
@@ -265,7 +261,7 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          sizes="(min-width: 1024px) 800px, (min-width: 768px) 50vw, 100vw"
+                          sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 50vw"
                           className="object-cover"
                           loading="lazy"
                           quality={85}
@@ -295,6 +291,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Purpose Section - Moved below gallery */}
+        <PurposeSection />
+
         <section id="ofertas" className="py-24 bg-[#efefef] scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 text-center">
             <h3 className="mb-4 text-black uppercase text-[48px] lg:text-[64px]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
@@ -308,7 +307,7 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                       alt="Camiseta Individual"
                       fill
-                      sizes="(min-width: 768px) 600px, 100vw"
+                      sizes="(min-width: 768px) 400px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                       loading="lazy"
                       quality={85}
@@ -336,7 +335,7 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="Kit Promocional"
                       fill
-                      sizes="(min-width: 768px) 600px, 100vw"
+                      sizes="(min-width: 768px) 400px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                       loading="lazy"
                       quality={90}

@@ -14,6 +14,7 @@ const SheetTitle = dynamic(() => import('@/components/ui/sheet').then(mod => mod
 
 const MENU_ITEMS = [
   { label: 'Início', href: '/' },
+  { label: 'Propósito', href: '/#proposito' },
   { label: 'Ofertas', href: '/#ofertas' },
   { label: 'Reservar', href: '/#reserva' },
   { label: 'Dúvidas', href: '/#faq' },
