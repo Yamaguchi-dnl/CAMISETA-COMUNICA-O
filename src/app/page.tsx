@@ -7,6 +7,7 @@ import { CheckCircle2, Maximize2 } from 'lucide-react';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { IntroLoader } from '@/components/IntroLoader';
+import { PurposeSection } from '@/components/PurposeSection';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -245,6 +246,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Purpose Section - New Editorial Section */}
+        <PurposeSection />
 
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
