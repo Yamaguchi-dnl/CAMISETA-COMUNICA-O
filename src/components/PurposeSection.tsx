@@ -188,7 +188,7 @@ export function PurposeSection() {
           </div>
 
           {/* Central Title Block */}
-          <div className="relative md:absolute top-auto md:top-[140px] md:left-[60%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-center md:text-left mt-12 md:mt-0 order-2">
+          <div className="relative md:absolute top-auto md:top-[140px] md:left-[60%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-left mt-12 md:mt-0 order-2">
             <h2 className="font-headline text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(42px,10vw,64px)] md:text-[clamp(82px,6.2vw,124px)] uppercase">
               <span className="purpose-title-line-1 block will-change-[transform,opacity,clip-path]">A MENSAGEM</span>
               <span className="purpose-title-line-2 block will-change-[transform,opacity,clip-path]">PRECISA SER OUVIDA</span>
@@ -196,14 +196,14 @@ export function PurposeSection() {
 
             {/* Body Text and CTA */}
             <div className="mt-8 md:mt-[60px] max-w-full md:max-w-[520px]">
-              <p className="purpose-body-p1 font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-4 text-center md:text-left will-change-[transform,opacity]">
+              <p className="purpose-body-p1 font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-4 text-left will-change-[transform,opacity]">
                 Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe.
               </p>
-              <p className="purpose-body-p2 font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-8 text-center md:text-left will-change-[transform,opacity]">
+              <p className="purpose-body-p2 font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-8 text-left will-change-[transform,opacity]">
                 Você também contribui para fortalecer o Ministério de Comunicação e ajuda o Evangelho a alcançar mais vidas.
               </p>
               
-              <div className="purpose-cta flex justify-center md:justify-start will-change-[transform,opacity]">
+              <div className="purpose-cta flex justify-start will-change-[transform,opacity]">
                 <a 
                   href="#ofertas" 
                   className="inline-flex items-center gap-2 text-accent font-body font-semibold text-[15px] md:text-[18px] underline underline-offset-8 hover:opacity-80 transition-opacity"
