@@ -103,7 +103,7 @@ export function PurposeSection() {
           </div>
 
           {/* Right Image (Bottom on Mobile) */}
-          <div className="purpose-image relative md:absolute md:right-[150px] md:top-[365px] w-full max-w-[260px] md:max-w-[300px] aspect-[4/3] rotate-4 md:rotate-6 z-10 mt-16 md:mt-0 mx-auto md:mx-0">
+          <div className="purpose-image relative md:absolute md:right-[60px] md:top-[365px] w-full max-w-[260px] md:max-w-[300px] aspect-[4/3] rotate-4 md:rotate-6 z-10 mt-16 md:mt-0 mx-auto md:mx-0">
             <Image 
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
               alt="Propósito IAP 2" 
