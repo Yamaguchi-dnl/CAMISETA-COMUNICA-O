@@ -47,46 +47,55 @@ const MOSAIC_ITEMS = [
     id: "image_1",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
     className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
+    start: { x: "-110vw", y: "-10vh" }
   },
   {
     id: "image_2",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
+    start: { x: "-20vw", y: "-100vh" }
   },
   {
     id: "image_3",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
+    start: { x: "110vw", y: "-12vh" }
   },
   {
     id: "image_4",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
+    start: { x: "-95vw", y: "90vh" }
   },
   {
     id: "image_5",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
     className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
+    start: { x: "0vw", y: "105vh" }
   },
   {
     id: "image_6",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
+    start: { x: "95vw", y: "95vh" }
   },
   {
     id: "image_7",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
+    start: { x: "105vw", y: "0vh" }
   },
   {
     id: "image_8",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
     className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
+    start: { x: "-105vw", y: "20vh" }
   },
   {
     id: "image_9",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
     className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
+    start: { x: "0vw", y: "-110vh" }
   },
 ];
 
@@ -128,7 +137,7 @@ export default function Home() {
         '-=0.7'
       );
 
-    // Gallery Auto-Assemble Animation
+    // Gallery Refined Assembly Animation
     if (gallerySectionRef.current) {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
@@ -139,24 +148,41 @@ export default function Home() {
         }
       });
 
-      gsap.set(".gallery-mosaic-item", { 
-        opacity: 0, 
+      // Initial State: Each image fully outside viewport from different directions
+      MOSAIC_ITEMS.forEach((item, i) => {
+        gsap.set(`.gallery-mosaic-item--${i + 1}`, { 
+          x: item.start.x, 
+          y: item.start.y, 
+          scale: 1.05,
+          opacity: 0 
+        });
       });
 
-      const baseDuration = 1.4;
-      const staggerTime = 0.08;
-      
+      // Phase: Multi-directional Assembly
       MOSAIC_ITEMS.forEach((item, i) => {
-        galleryTl.fromTo(`.gallery-mosaic-item--${i + 1}`, 
-          { 
-            x: i % 2 === 0 ? "-10vw" : "10vw", 
-            y: i < 5 ? "-10vh" : "10vh", 
-            opacity: 0 
-          }, 
-          { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-          staggerTime * i
-        );
+        galleryTl.to(`.gallery-mosaic-item--${i + 1}`, {
+          x: "0vw",
+          y: "0vh",
+          scale: 1.012, // Slight overshoot for settle
+          opacity: 1,
+          duration: 1.4,
+          ease: "power3.out"
+        }, i * 0.04);
       });
+
+      // Phase: Micro Settle
+      galleryTl.to(".gallery-mosaic-item", {
+        scale: 1,
+        duration: 0.32,
+        ease: "power2.out"
+      }, "-=0.2");
+
+      // Phase: Button Reveal
+      galleryTl.fromTo(".gallery-mosaic-button", 
+        { opacity: 0, y: 16, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power2.out" },
+        "-=0.1"
+      );
     }
 
     const reveals = gsap.utils.toArray('.gsap-reveal');
@@ -246,7 +272,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex items-center justify-center">
+        <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
               {MOSAIC_ITEMS.map((item, i) => {
@@ -287,6 +313,12 @@ export default function Home() {
                   </Dialog>
                 );
               })}
+            </div>
+            
+            <div className="gallery-mosaic-button opacity-0 flex justify-center mt-12">
+              <Button asChild variant="outline" className="pill-button border-white text-white hover:bg-white hover:text-black rounded-full h-12 px-8">
+                <a href="#ofertas">VER MAIS DETALHES</a>
+              </Button>
             </div>
           </div>
         </section>
