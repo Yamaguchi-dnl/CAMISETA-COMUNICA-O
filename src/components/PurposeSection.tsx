@@ -26,12 +26,18 @@ export function PurposeSection() {
     const setInitialState = () => {
       gsap.set('.purpose-square--top-right', { opacity: 0, scale: 0.7, y: -20 });
       gsap.set('.purpose-square--bottom-left', { opacity: 0, scale: 0.7, y: 20 });
-      gsap.set('.purpose-image--left', { opacity: 0, x: -80, y: 24, rotation: -10, scale: 0.96 });
+      gsap.set('.purpose-image--left', { 
+        opacity: 0, 
+        x: -80, 
+        y: 24, 
+        rotation: -12, 
+        scale: 0.96 
+      });
       gsap.set('.purpose-image--right', { 
         opacity: 0, 
         x: isMobile ? 0 : 80, 
         y: isMobile ? 40 : 24, 
-        rotation: isMobile ? 0 : 10, 
+        rotation: isMobile ? 0 : 12, 
         scale: 0.96 
       });
       gsap.set(['.purpose-title-line-1', '.purpose-title-line-2'], { 
@@ -77,7 +83,7 @@ export function PurposeSection() {
         opacity: 1,
         x: 0,
         y: 0,
-        rotation: -6,
+        rotation: -8,
         scale: 1,
         duration: 0.95,
         ease: 'power3.out'
@@ -86,7 +92,7 @@ export function PurposeSection() {
         opacity: 1,
         x: 0,
         y: 0,
-        rotation: isMobile ? 0 : 6,
+        rotation: isMobile ? 0 : 8,
         scale: 1,
         duration: 0.95,
         ease: 'power3.out'
