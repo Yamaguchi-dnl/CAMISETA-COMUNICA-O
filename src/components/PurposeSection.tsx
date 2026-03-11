@@ -87,8 +87,11 @@ export function PurposeSection() {
 
             {/* Body Text and CTA */}
             <div className="mt-8 md:mt-[60px] max-w-full md:max-w-[520px]">
+              <p className="purpose-reveal font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-4 text-center md:text-left">
+                Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe.
+              </p>
               <p className="purpose-reveal font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-8 text-center md:text-left">
-                Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe. Você também contribui para fortalecer o Ministério de Comunicação e ajuda o Evangelho a alcançar mais vidas.
+                Você também contribui para fortalecer o Ministério de Comunicação e ajuda o Evangelho a alcançar mais vidas.
               </p>
               
               <div className="purpose-reveal flex justify-center md:justify-start">
