@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -201,9 +202,10 @@ export default function Home() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
                 fill
-                sizes="(min-width: 1600px) 820px, (min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 1600px) 1600px, (min-width: 768px) 80vw, 100vw"
                 className="object-cover object-center"
                 priority
+                quality={90}
               />
             </div>
             <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[20px] md:bottom-[10px]">
@@ -230,9 +232,10 @@ export default function Home() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
                 fill
-                sizes="292px"
+                sizes="(min-width: 768px) 600px, 100vw"
                 className="object-cover object-center"
                 priority
+                quality={90}
               />
             </div>
             <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[40px]">
@@ -258,9 +261,10 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
-                          sizes="(min-width: 1024px) 300px, 50vw"
+                          sizes="(min-width: 1024px) 800px, (min-width: 768px) 50vw, 100vw"
                           className="object-cover"
                           loading="lazy"
+                          quality={85}
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                           <Maximize2 className="text-white h-8 w-8 scale-75 group-hover:scale-100 transition-transform" />
@@ -276,6 +280,7 @@ export default function Home() {
                           fill
                           sizes="90vw"
                           className="object-contain"
+                          quality={95}
                         />
                       </div>
                     </DialogContent>
@@ -299,9 +304,10 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                       alt="Camiseta Individual"
                       fill
-                      sizes="(min-width: 768px) 400px, 100vw"
+                      sizes="(min-width: 768px) 600px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                       loading="lazy"
+                      quality={85}
                     />
                   </div>
                   <h4 className="text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
@@ -326,9 +332,10 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="Kit Promocional"
                       fill
-                      sizes="(min-width: 768px) 400px, 100vw"
+                      sizes="(min-width: 768px) 600px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
                       loading="lazy"
+                      quality={90}
                     />
                     <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
                       Melhor Oferta
