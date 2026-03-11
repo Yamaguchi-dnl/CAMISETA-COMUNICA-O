@@ -23,7 +23,6 @@ export function PurposeSection() {
     const width = window.innerWidth;
     const isMobile = width < 768;
     const isTablet = width >= 768 && width < 1024;
-    const isDesktop = width >= 1024;
 
     const getRotation = (isInitial: boolean) => {
       if (isMobile) return 0;
@@ -33,8 +32,18 @@ export function PurposeSection() {
 
     // Configuração inicial (Initial State Setup)
     const setInitialState = () => {
-      gsap.set('.purpose-square--top-right', { opacity: 0, scale: 0.7, y: -20 });
-      gsap.set('.purpose-square--bottom-left', { opacity: 0, scale: 0.7, y: 20 });
+      gsap.set('.purpose-square--top-right', { 
+        opacity: 0, 
+        scale: 0.7, 
+        y: -20,
+        rotation: isMobile ? 0 : 14
+      });
+      gsap.set('.purpose-square--bottom-left', { 
+        opacity: 0, 
+        scale: 0.7, 
+        y: 20,
+        rotation: isMobile ? 0 : -18
+      });
       gsap.set('.purpose-image--left', { 
         opacity: 0, 
         x: -80, 
@@ -179,13 +188,13 @@ export function PurposeSection() {
     >
       <div ref={containerRef} className="container mx-auto px-6 max-w-[1600px] h-full relative">
         
-        {/* Decorative Shapes (Desktop Only) */}
+        {/* Decorative Shapes */}
         <div className="purpose-square--bottom-left absolute hidden md:block left-[86px] bottom-[86px] w-[88px] h-[88px] bg-black rounded-none -rotate-18 -z-0 will-change-transform" />
         <div className="purpose-square--top-right absolute hidden md:block right-[120px] top-[92px] w-[72px] h-[72px] bg-black rounded-none rotate-14 -z-0 will-change-transform" />
 
         <div className="flex flex-col md:block h-full w-full">
           
-          {/* Main Campaign Image (Right image in desktop, top image in mobile) */}
+          {/* Main Campaign Image (3:4 vertical on mobile, 4:3 on desktop) */}
           <div className="purpose-image--right relative md:absolute md:right-[60px] md:top-[365px] w-full max-w-[340px] md:max-w-[300px] aspect-[3/4] md:aspect-[4/3] z-10 mx-auto md:mx-0 will-change-transform order-1">
             <Image 
               src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg" 
@@ -210,14 +219,14 @@ export function PurposeSection() {
             />
           </div>
 
-          {/* Central Title Block */}
+          {/* Central Title Block - Aligned left on mobile */}
           <div className="relative md:absolute top-auto md:top-[140px] md:left-[60%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-left md:text-left mt-12 md:mt-0 order-2">
             <h2 className="font-headline text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(42px,10vw,64px)] md:text-[clamp(82px,6.2vw,124px)] uppercase">
               <span className="purpose-title-line-1 block will-change-[transform,opacity,clip-path]">A MENSAGEM</span>
               <span className="purpose-title-line-2 block will-change-[transform,opacity,clip-path]">PRECISA SER OUVIDA</span>
             </h2>
 
-            {/* Body Text and CTA */}
+            {/* Body Text and CTA - Aligned left on mobile */}
             <div className="mt-8 md:mt-[60px] max-w-full md:max-w-[520px]">
               <p className="purpose-body-p1 font-body text-[#333333] text-[15px] md:text-[20px] leading-[1.45] font-normal mb-4 text-left will-change-[transform,opacity]">
                 Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe.
