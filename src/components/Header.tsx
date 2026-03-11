@@ -1,10 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+
+// Dynamically import Sheet components for mobile to save initial JS
+const Sheet = dynamic(() => import('@/components/ui/sheet').then(mod => mod.Sheet), { ssr: false });
+const SheetContent = dynamic(() => import('@/components/ui/sheet').then(mod => mod.SheetContent), { ssr: false });
+const SheetTrigger = dynamic(() => import('@/components/ui/sheet').then(mod => mod.SheetTrigger), { ssr: false });
+const SheetTitle = dynamic(() => import('@/components/ui/sheet').then(mod => mod.SheetTitle), { ssr: false });
+
+const MENU_ITEMS = [
+  { label: 'Início', href: '/' },
+  { label: 'Ofertas', href: '/#ofertas' },
+  { label: 'Reservar', href: '/#reserva' },
+  { label: 'Dúvidas', href: '/#faq' },
+];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,16 +27,9 @@ export function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const menuItems = [
-    { label: 'Início', href: '/' },
-    { label: 'Ofertas', href: '/#ofertas' },
-    { label: 'Reservar', href: '/#reserva' },
-    { label: 'Dúvidas', href: '/#faq' },
-  ];
 
   return (
     <header 
@@ -38,34 +44,36 @@ export function Header() {
         
         {/* Mobile Menu Trigger */}
         <div className="lg:hidden">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <button className="p-2 text-black hover:text-accent transition-colors">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Abrir menu</span>
-              </button>
-            </SheetTrigger>
-            <SheetContent side="top" className="w-full bg-white/95 backdrop-blur-lg pt-24 pb-12 border-none">
-              <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
-              <nav className="flex flex-col items-center gap-8">
-                {menuItems.map((item) => (
-                  <Link 
-                    key={item.label} 
-                    href={item.href} 
-                    onClick={() => setIsOpen(false)}
-                    className="text-lg font-body font-medium text-black uppercase tracking-[0.05em] hover:text-accent transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
+          {Sheet && (
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <button className="p-2 text-black hover:text-accent transition-colors">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Abrir menu</span>
+                </button>
+              </SheetTrigger>
+              <SheetContent side="top" className="w-full bg-white/95 backdrop-blur-lg pt-24 pb-12 border-none">
+                <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
+                <nav className="flex flex-col items-center gap-8">
+                  {MENU_ITEMS.map((item) => (
+                    <Link 
+                      key={item.label} 
+                      href={item.href} 
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg font-body font-medium text-black uppercase tracking-[0.05em] hover:text-accent transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-12 mx-auto">
-          {menuItems.map((item) => (
+          {MENU_ITEMS.map((item) => (
             <Link 
               key={item.label} 
               href={item.href} 

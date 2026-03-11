@@ -1,32 +1,98 @@
 'use client';
 
 import Image from 'next/image';
-import { OrderForm } from '@/components/OrderForm';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
+import dynamic from 'next/dynamic';
 import { CheckCircle2, Maximize2 } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Toaster } from '@/components/ui/toaster';
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { IntroLoader } from '@/components/IntroLoader';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 
+// Dynamic imports for components below the fold or interactive only
+const OrderForm = dynamic(() => import('@/components/OrderForm').then(mod => mod.OrderForm), {
+  ssr: false,
+  loading: () => <div className="h-[600px] w-full bg-[#f5f5f5] animate-pulse" />
+});
+
+const Accordion = dynamic(() => import('@/components/ui/accordion').then(mod => mod.Accordion), { ssr: false });
+const AccordionContent = dynamic(() => import('@/components/ui/accordion').then(mod => mod.AccordionContent), { ssr: false });
+const AccordionItem = dynamic(() => import('@/components/ui/accordion').then(mod => mod.AccordionItem), { ssr: false });
+const AccordionTrigger = dynamic(() => import('@/components/ui/accordion').then(mod => mod.AccordionTrigger), { ssr: false });
+
+const Dialog = dynamic(() => import('@/components/ui/dialog').then(mod => mod.Dialog), { ssr: false });
+const DialogContent = dynamic(() => import('@/components/ui/dialog').then(mod => mod.DialogContent), { ssr: false });
+const DialogTrigger = dynamic(() => import('@/components/ui/dialog').then(mod => mod.DialogTrigger), { ssr: false });
+const DialogTitle = dynamic(() => import('@/components/ui/dialog').then(mod => mod.DialogTitle), { ssr: false });
+
+const Button = dynamic(() => import('@/components/ui/button').then(mod => mod.Button), { ssr: false });
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Static data outside the component to prevent re-creation
+const FAQ_ITEMS = [
+  { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
+  { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
+  { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
+  { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
+];
+
+const MOSAIC_ITEMS = [
+  {
+    id: "image_1",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
+    className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
+  },
+  {
+    id: "image_2",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
+    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
+  },
+  {
+    id: "image_3",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
+    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
+  },
+  {
+    id: "image_4",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
+    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
+  },
+  {
+    id: "image_5",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
+    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
+  },
+  {
+    id: "image_6",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
+    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
+  },
+  {
+    id: "image_7",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
+    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
+  },
+  {
+    id: "image_8",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
+    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
+  },
+  {
+    id: "image_9",
+    src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
+    className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
+  },
+];
+
 export default function Home() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const gallerySectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const handleIntroComplete = () => {
     setIsIntroFinished(true);
@@ -79,51 +145,17 @@ export default function Home() {
       const baseDuration = 1.4;
       const staggerTime = 0.08;
       
-      galleryTl.fromTo(".gallery-mosaic-item--1", 
-        { x: "-10vw", y: "5vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        0
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--2", 
-        { x: "0vw", y: "-10vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--3", 
-        { x: "10vw", y: "0vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 2
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--4", 
-        { x: "-10vw", y: "10vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 3
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--5", 
-        { x: "10vw", y: "10vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 4
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--6", 
-        { x: "-8vw", y: "15vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 5
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--7", 
-        { x: "8vw", y: "15vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 6
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--8", 
-        { x: "-10vw", y: "8vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 7
-      );
-      galleryTl.fromTo(".gallery-mosaic-item--9", 
-        { x: "0vw", y: "12vh", opacity: 0 }, 
-        { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
-        staggerTime * 8
-      );
+      MOSAIC_ITEMS.forEach((item, i) => {
+        galleryTl.fromTo(`.gallery-mosaic-item--${i + 1}`, 
+          { 
+            x: i % 2 === 0 ? "-10vw" : "10vw", 
+            y: i < 5 ? "-10vh" : "10vh", 
+            opacity: 0 
+          }, 
+          { x: "0vw", y: "0vh", opacity: 1, duration: baseDuration, ease: "expo.out" }, 
+          staggerTime * i
+        );
+      });
     }
 
     const reveals = gsap.utils.toArray('.gsap-reveal');
@@ -145,61 +177,6 @@ export default function Home() {
     });
 
   }, { scope: containerRef, dependencies: [isIntroFinished] });
-
-  const faqItems = [
-    { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
-    { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
-    { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
-    { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
-  ];
-
-  const mosaicItems = [
-    {
-      id: "image_1",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-      className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
-    },
-    {
-      id: "image_2",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
-    },
-    {
-      id: "image_3",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
-    },
-    {
-      id: "image_4",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
-    },
-    {
-      id: "image_5",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-      className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
-    },
-    {
-      id: "image_6",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
-    },
-    {
-      id: "image_7",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
-    },
-    {
-      id: "image_8",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-      className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
-    },
-    {
-      id: "image_9",
-      src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-      className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
-    },
-  ];
 
   return (
     <div ref={containerRef} className="flex min-h-screen flex-col bg-white">
@@ -224,6 +201,7 @@ export default function Home() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
                 fill
+                sizes="(min-width: 1600px) 820px, (min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"
                 priority
               />
@@ -252,6 +230,7 @@ export default function Home() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
                 fill
+                sizes="292px"
                 className="object-cover object-center"
                 priority
               />
@@ -267,7 +246,7 @@ export default function Home() {
         <section ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
-              {mosaicItems.map((item, i) => {
+              {MOSAIC_ITEMS.map((item, i) => {
                 return (
                   <Dialog key={item.id}>
                     <DialogTrigger asChild>
@@ -279,7 +258,9 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Mosaic ${i + 1}`}
                           fill
+                          sizes="(min-width: 1024px) 300px, 50vw"
                           className="object-cover"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                           <Maximize2 className="text-white h-8 w-8 scale-75 group-hover:scale-100 transition-transform" />
@@ -293,6 +274,7 @@ export default function Home() {
                           src={item.src}
                           alt={`Galeria Full ${i + 1}`}
                           fill
+                          sizes="90vw"
                           className="object-contain"
                         />
                       </div>
@@ -317,7 +299,9 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                       alt="Camiseta Individual"
                       fill
+                      sizes="(min-width: 768px) 400px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      loading="lazy"
                     />
                   </div>
                   <h4 className="text-3xl font-normal uppercase tracking-widest mb-3 font-headline text-black">LEVE 1 - Camiseta IAP</h4>
@@ -328,9 +312,11 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
-                  <a href="#reserva">COMPRAR AGORA</a>
-                </Button>
+                {Button && (
+                  <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
+                    <a href="#reserva">COMPRAR AGORA</a>
+                  </Button>
+                )}
               </div>
 
               <div className="bg-white p-8 rounded-none border border-[#dddddd] flex flex-col items-center justify-between hover:shadow-xl transition-all group">
@@ -340,7 +326,9 @@ export default function Home() {
                       src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                       alt="Kit Promocional"
                       fill
+                      sizes="(min-width: 768px) 400px, 100vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700 p-8"
+                      loading="lazy"
                     />
                     <div className="absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest">
                       Melhor Oferta
@@ -352,9 +340,11 @@ export default function Home() {
                     <span className="text-sm text-black font-semibold">R$ 69,95 cada</span>
                   </div>
                 </div>
-                <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
-                  <a href="#reserva">APROVEITAR KIT</a>
-                </Button>
+                {Button && (
+                  <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
+                    <a href="#reserva">APROVEITAR KIT</a>
+                  </Button>
+                )}
               </div>
             </div>
             <p className="mt-8 text-sm text-black/60 font-medium">* Pagamentos no cartão de crédito possuem acréscimo de 7%.</p>
@@ -370,18 +360,20 @@ export default function Home() {
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
             <h3 className="text-center text-black uppercase mb-12 text-[48px] lg:text-[56px]">Perguntas Frequentes</h3>
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {faqItems.map((item, i) => (
-                <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
-                  <AccordionTrigger className="text-left font-medium uppercase text-[18px] tracking-widest hover:no-underline font-body text-black">
-                    {item.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">
-                    {item.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            {Accordion && (
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {FAQ_ITEMS.map((item, i) => (
+                  <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
+                    <AccordionTrigger className="text-left font-medium uppercase text-[18px] tracking-widest hover:no-underline font-body text-black">
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            )}
           </div>
         </section>
       </main>
