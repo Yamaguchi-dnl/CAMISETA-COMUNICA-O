@@ -176,13 +176,6 @@ export default function Home() {
         duration: 0.32,
         ease: "power2.out"
       }, "-=0.2");
-
-      // Phase: Button Reveal
-      galleryTl.fromTo(".gallery-mosaic-button", 
-        { opacity: 0, y: 16, scale: 0.985 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power2.out" },
-        "-=0.1"
-      );
     }
 
     const reveals = gsap.utils.toArray('.gsap-reveal');
@@ -313,12 +306,6 @@ export default function Home() {
                   </Dialog>
                 );
               })}
-            </div>
-            
-            <div className="gallery-mosaic-button opacity-0 flex justify-center mt-12">
-              <Button asChild variant="outline" className="pill-button border-white text-white hover:bg-white hover:text-black rounded-full h-12 px-8">
-                <a href="#ofertas">VER MAIS DETALHES</a>
-              </Button>
             </div>
           </div>
         </section>
