@@ -171,8 +171,8 @@ export function PurposeSection() {
       <div ref={containerRef} className="container mx-auto px-6 max-w-[1600px] h-full relative">
         
         {/* Decorative Shapes (Desktop Only) */}
-        <div className="purpose-square--bottom-left absolute hidden md:block left-[86px] bottom-[86px] w-[88px] h-[88px] bg-black rounded-[10px] -rotate-18 -z-0 will-change-transform" />
-        <div className="purpose-square--top-right absolute hidden md:block right-[120px] top-[92px] w-[72px] h-[72px] bg-black rounded-[10px] rotate-14 -z-0 will-change-transform" />
+        <div className="purpose-square--bottom-left absolute hidden md:block left-[86px] bottom-[86px] w-[88px] h-[88px] bg-black rounded-none -rotate-18 -z-0 will-change-transform" />
+        <div className="purpose-square--top-right absolute hidden md:block right-[120px] top-[92px] w-[72px] h-[72px] bg-black rounded-none rotate-14 -z-0 will-change-transform" />
 
         <div className="flex flex-col md:block h-full w-full">
           
@@ -202,7 +202,7 @@ export function PurposeSection() {
           </div>
 
           {/* Central Title Block */}
-          <div className="relative md:absolute top-auto md:top-[140px] md:left-[60%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-left mt-12 md:mt-0 order-2">
+          <div className="relative md:absolute top-auto md:top-[140px] md:left-[60%] md:-translate-x-1/2 w-full md:w-[900px] z-20 text-left md:text-left mt-12 md:mt-0 order-2">
             <h2 className="font-headline text-[#111111] leading-[1.02] md:leading-[0.98] tracking-[-0.03em] text-[clamp(42px,10vw,64px)] md:text-[clamp(82px,6.2vw,124px)] uppercase">
               <span className="purpose-title-line-1 block will-change-[transform,opacity,clip-path]">A MENSAGEM</span>
               <span className="purpose-title-line-2 block will-change-[transform,opacity,clip-path]">PRECISA SER OUVIDA</span>
