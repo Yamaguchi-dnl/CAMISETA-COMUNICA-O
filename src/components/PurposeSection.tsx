@@ -111,7 +111,7 @@ export function PurposeSection() {
                 href="#ofertas" 
                 className="pill-button bg-black text-white hover:bg-accent w-full md:w-auto min-w-[200px]"
               >
-                VER CAMISETAS
+                GARANTA JÁ A SUA
               </a>
             </div>
           </div>
