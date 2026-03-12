@@ -89,7 +89,7 @@ export function PurposeSection() {
           </div>
 
           {/* Coluna de Conteúdo de Texto */}
-          <div className="purpose-text-content flex flex-col gap-6 max-w-[460px]">
+          <div className="purpose-text-content flex flex-col gap-6 max-w-[460px] mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left">
             {/* Linha Vermelha Decorativa */}
             <div className="w-16 h-[5px] bg-accent mb-2" />
             
@@ -106,7 +106,7 @@ export function PurposeSection() {
               </p>
             </div>
             
-            <div className="pt-4">
+            <div className="pt-4 w-full md:flex md:justify-center lg:justify-start">
               <a 
                 href="#ofertas" 
                 className="pill-button bg-black text-white hover:bg-accent w-full md:w-auto min-w-[200px]"
