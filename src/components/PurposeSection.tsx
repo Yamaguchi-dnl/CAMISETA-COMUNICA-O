@@ -12,8 +12,7 @@ if (typeof window !== 'undefined') {
 
 /**
  * Seção de Propósito com layout editorial.
- * Imagens sobrepostas com cantos retos e losango decorativo central.
- * Texto lateral com tipografia minimalista e sofisticada.
+ * Imagens sobrepostas com cantos retos e texto lateral com tipografia minimalista.
  */
 export function PurposeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -42,12 +41,6 @@ export function PurposeSection() {
         duration: 1.2, 
         ease: 'power3.out' 
       }, '-=0.8')
-      .from('.purpose-diamond', { 
-        scale: 0, 
-        rotate: 0, 
-        duration: 0.6, 
-        ease: 'back.out(1.7)' 
-      }, '-=0.5')
       .from('.purpose-text-content > *', { 
         opacity: 0, 
         y: 20, 
@@ -80,9 +73,6 @@ export function PurposeSection() {
                 priority
               />
             </div>
-
-            {/* Losango Decorativo (Diamond) */}
-            <div className="purpose-diamond absolute top-[50%] left-[48%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-[#d81f32] rotate-45 z-[4] shadow-md" />
 
             {/* Imagem Secundária (Menor, sobreposta) - Deslocada 70px para baixo no total */}
             <div className="purpose-image-secondary absolute bottom-[-70px] right-0 w-[68%] md:w-[360px] aspect-square z-[3] overflow-hidden">
