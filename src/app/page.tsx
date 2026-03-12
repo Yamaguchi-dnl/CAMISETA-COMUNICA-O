@@ -39,7 +39,7 @@ const FAQ_ITEMS = [
   { q: "Qual a diferença entre a camiseta preta e a off-white?", a: "A principal diferença é a cor. Ambas seguem a mesma proposta visual e material premium." },
   { q: "Quais tamanhos estarão disponíveis?", a: "PP, P, M, G, GG e XGG." },
   { q: "O pagamento é feito no site?", a: "Não. O pedido é iniciado no site e finalizado pelo WhatsApp para sua segurança." },
-  { q: "Como funciona a opção parcelada?", a: "Ao selecionar parcelamento (crédito), há um acréscimo de 7% e nossa equipe entrará em contato via WhatsApp para combinar as parcelas." },
+  { q: "Existe desconto para a compra de mais unidades?", a: "Sim! Temos um kit promocional de 2 camisetas por R$ 139,90 no Pix, garantindo uma economia de R$ 19,90 em relação ao valor unitário original." },
 ];
 
 const MOSAIC_ITEMS = [
