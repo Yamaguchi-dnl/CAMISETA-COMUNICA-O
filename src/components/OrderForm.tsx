@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Minus, Plus, CreditCard, Smartphone } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone, Info } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
@@ -69,7 +69,6 @@ export function OrderForm() {
 
   const watchedValues = useWatch({ control: form.control });
   
-  // Sincroniza o array de itens com a quantidade selecionada
   useEffect(() => {
     const qty = watchedValues.quantidade || 1;
     const currentItemsCount = fields.length;
@@ -90,12 +89,14 @@ export function OrderForm() {
     quantity: 1,
     isPix: true,
     isKit: false,
-    total: 74.90
+    total: 74.90,
+    extraXGG: 0
   });
 
   useEffect(() => {
     const qty = Number(watchedValues.quantidade) || 1;
     const isPix = watchedValues.pagamento === 'pix';
+    const items = watchedValues.items || [];
     
     let total = 0;
     let unit = 0;
@@ -116,16 +117,24 @@ export function OrderForm() {
       }
     }
 
-    total = unit * qty;
+    let extraXGGCount = 0;
+    items.forEach((item) => {
+      if (item?.tamanho === 'XGG') {
+        extraXGGCount += 3;
+      }
+    });
+
+    total = (unit * qty) + extraXGGCount;
 
     setSummary({
       unitPrice: unit,
       quantity: qty,
       isPix: isPix,
       isKit: kitActive,
-      total: total
+      total: total,
+      extraXGG: extraXGGCount
     });
-  }, [watchedValues.quantidade, watchedValues.pagamento]);
+  }, [watchedValues.quantidade, watchedValues.pagamento, watchedValues.items]);
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
@@ -158,7 +167,7 @@ export function OrderForm() {
     const phoneNumber = '5541996692392'; 
     
     const itemsList = values.items.map((item, idx) => 
-      `Camiseta ${idx + 1}: ${item.produto} (${item.tamanho})`
+      `Camiseta ${idx + 1}: ${item.produto} (${item.tamanho}${item.tamanho === 'XGG' ? ' - +R$3,00' : ''})`
     ).join('\n');
 
     const message = `Olá! Quero reservar minha camiseta da IAP Barreirinha.
@@ -191,7 +200,6 @@ ${itemsList}
 
   return (
     <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white">
-      {/* Header Escuro Estilo Editorial */}
       <div className="bg-[#050505] p-10 lg:p-16 text-white">
         <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-4 block">
           FAÇA SUA RESERVA
@@ -204,12 +212,10 @@ ${itemsList}
         </p>
       </div>
 
-      {/* Corpo do Formulário */}
       <div className="p-8 lg:p-16 bg-white">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             
-            {/* Grid de Campos de Contato */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
               <FormField
                 control={form.control}
@@ -248,7 +254,6 @@ ${itemsList}
               />
             </div>
 
-            {/* Seletor de Quantidade Customizado */}
             <FormField
               control={form.control}
               name="quantidade"
@@ -279,7 +284,6 @@ ${itemsList}
               )}
             />
 
-            {/* Detalhes de Cada Camiseta */}
             <div className="space-y-8">
               <span className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase block">DETALHES DAS PEÇAS *</span>
               <div className="grid grid-cols-1 gap-8">
@@ -328,6 +332,14 @@ ${itemsList}
                                 ))}
                               </SelectContent>
                             </Select>
+                            {field.value === 'XGG' && (
+                              <div className="flex items-start gap-2 mt-2 p-2 bg-amber-50 border border-amber-100 animate-in fade-in slide-in-from-top-1 duration-300">
+                                <Info className="h-3 w-3 text-amber-600 shrink-0 mt-0.5" />
+                                <p className="text-[9px] leading-tight text-amber-700 font-bold uppercase tracking-tight">
+                                  O tamanho XGG possui um acréscimo de R$ 3,00 devido à cobrança extra do fornecedor.
+                                </p>
+                              </div>
+                            )}
                             <FormMessage />
                           </FormItem>
                         )}
@@ -338,7 +350,6 @@ ${itemsList}
               </div>
             </div>
 
-            {/* Toggle de Pagamento */}
             <FormField
               control={form.control}
               name="pagamento"
@@ -357,7 +368,7 @@ ${itemsList}
                       )}
                     >
                       <Smartphone className="h-4 w-4" />
-                      Pix (6% desconto)
+                      Pix (Desconto)
                     </button>
                     <button
                       type="button"
@@ -370,7 +381,7 @@ ${itemsList}
                       )}
                     >
                       <CreditCard className="h-4 w-4" />
-                      Crédito (3x s/ juros)
+                      Crédito (Até 3x)
                     </button>
                   </div>
                   <FormMessage />
@@ -378,7 +389,6 @@ ${itemsList}
               )}
             />
 
-            {/* Observações */}
             <FormField
               control={form.control}
               name="observacoes"
@@ -397,7 +407,6 @@ ${itemsList}
               )}
             />
 
-            {/* Card de Resumo */}
             <div className="bg-[#fcfcfc] border border-[#d7d1ca] p-8 space-y-4">
               <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-6">RESUMO DO PEDIDO</h4>
               
@@ -412,6 +421,15 @@ ${itemsList}
                   {summary.isPix ? 'Pix' : 'Crédito'}
                 </span>
               </div>
+
+              {summary.extraXGG > 0 && (
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-[#6f6a63]">Acréscimo XGG</span>
+                  <span className="text-amber-600 font-bold text-[11px]">
+                    + R$ {summary.extraXGG.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              )}
 
               {summary.isPix && (
                 <div className="flex justify-between items-center text-sm">
@@ -432,7 +450,6 @@ ${itemsList}
               </div>
             </div>
 
-            {/* Botão de Finalização */}
             <Button 
               type="submit" 
               className="w-full h-16 bg-[#050505] hover:bg-accent text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-lg hover:shadow-accent/20 active:scale-[0.98]"
