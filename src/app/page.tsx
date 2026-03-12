@@ -322,7 +322,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Desktop Hero */}
-        <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden md:h-[640px] lg:h-[680px]">
+        <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden md:h-[780px] lg:h-[780px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             <div className="hero-left-block absolute z-[5] top-[80px] left-[30px] md:top-[70px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[32px] md:text-[28px] lg:text-[36px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
