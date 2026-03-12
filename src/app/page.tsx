@@ -333,7 +333,7 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[98px] right-[48px] w-[72px] h-[3px] md:top-[88px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[130px] w-[820px] h-[480px] md:w-[700px] md:h-[410px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[130px] md:top-[155px] lg:top-[130px] w-[820px] h-[480px] md:w-[700px] md:h-[410px] lg:w-[820px] lg:h-[480px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -382,7 +382,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="gallery" ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
+        <section id="gallery" className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
               {MOSAIC_ITEMS.map((item, i) => {
