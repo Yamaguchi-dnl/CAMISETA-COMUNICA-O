@@ -46,63 +46,63 @@ const MOSAIC_ITEMS = [
   {
     id: "image_1",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
-    className: "lg:col-span-6 lg:row-span-12 col-span-1 gallery-mosaic-item--1",
+    className: "lg:col-span-6 lg:row-span-12 md:col-span-4 md:row-span-6 col-span-1 gallery-mosaic-item--1",
     start: { x: "-110vw", y: "-10vh" },
     sizes: "(min-width: 1200px) 60vw, (min-width: 768px) 50vw, 100vw"
   },
   {
     id: "image_2",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
-    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--2",
+    className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--2",
     start: { x: "-20vw", y: "-100vh" },
-    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_3",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
-    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--3",
+    className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--3",
     start: { x: "110vw", y: "-12vh" },
-    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_4",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
-    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--4",
+    className: "lg:col-span-3 lg:row-span-6 md:col-span-2 md:row-span-3 col-span-1 gallery-mosaic-item--4",
     start: { x: "-95vw", y: "90vh" },
     sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_5",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
-    className: "lg:col-span-3 lg:row-span-6 col-span-1 gallery-mosaic-item--5",
+    className: "lg:col-span-3 lg:row-span-6 md:col-span-3 md:row-span-3 col-span-1 gallery-mosaic-item--5",
     start: { x: "0vw", y: "105vh" },
-    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
+    sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 37vw, 50vw"
   },
   {
     id: "image_6",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
-    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--6",
+    className: "lg:col-span-4 lg:row-span-8 md:col-span-3 md:row-span-3 col-span-1 gallery-mosaic-item--6",
     start: { x: "95vw", y: "95vh" },
-    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 37vw, 50vw"
   },
   {
     id: "image_7",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
-    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--7",
+    className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--7",
     start: { x: "105vw", y: "0vh" },
-    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_8",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
-    className: "lg:col-span-4 lg:row-span-8 col-span-1 gallery-mosaic-item--8",
+    className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--8",
     start: { x: "-105vw", y: "20vh" },
-    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 33vw, 50vw"
+    sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_9",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
-    className: "lg:col-span-12 lg:row-span-10 col-span-2 gallery-mosaic-item--9",
+    className: "lg:col-span-12 lg:row-span-10 md:col-span-8 md:row-span-4 col-span-2 gallery-mosaic-item--9",
     start: { x: "0vw", y: "-110vh" },
     sizes: "100vw"
   },
@@ -324,7 +324,7 @@ export default function Home() {
         {/* Desktop Hero */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden md:h-[780px] lg:h-[780px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
-            <div className="hero-left-block absolute z-[5] top-[80px] left-[30px] md:top-[70px] md:left-[22px] max-w-none">
+            <div className="hero-left-block absolute z-[5] top-[110px] left-[30px] md:top-[88px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[32px] md:text-[28px] lg:text-[36px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -344,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[40px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[0px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -382,7 +382,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="gallery" className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
+        <section id="gallery" ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
               {MOSAIC_ITEMS.map((item, i) => {
