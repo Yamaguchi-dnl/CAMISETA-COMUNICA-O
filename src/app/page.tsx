@@ -324,7 +324,7 @@ export default function Home() {
         {/* Desktop Hero */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[760px] lg:h-[840px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
-            <div className="hero-left-block absolute z-[5] top-[108px] left-[30px] md:top-[100px] md:left-[22px] max-w-none">
+            <div className="hero-left-block absolute z-[5] top-[90px] left-[30px] md:top-[80px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[32px] md:text-[28px] lg:text-[36px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -332,8 +332,8 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="hero-right-line absolute z-[5] bg-[#111111] top-[126px] right-[48px] w-[72px] h-[3px] md:top-[116px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[70px] w-[820px] h-[550px] md:w-[700px] md:h-[480px]">
+            <div className="hero-right-line absolute z-[5] bg-[#111111] top-[108px] right-[48px] w-[72px] h-[3px] md:top-[98px] md:right-[28px] md:w-[64px]" />
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[50px] w-[820px] h-[520px] md:w-[700px] md:h-[450px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -344,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[110px] md:bottom-[100px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[130px] md:bottom-[120px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -363,7 +363,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[160px] left-1/2 -translate-x-1/2 w-[292px] h-[375px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[140px] left-1/2 -translate-x-1/2 w-[292px] h-[345px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -374,7 +374,7 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[160px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
@@ -432,7 +432,7 @@ export default function Home() {
 
         <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-background scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
-            <h3 className="offer-section-title mb-4 text-black uppercase text-[48px] lg:text-[64px] will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <h3 className="offer-section-title mb-16 text-black uppercase text-[48px] lg:text-[64px] will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
               <div className="offer-card offer-card--1 bg-[#f8f6f2] p-8 rounded-none border border-border flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity]">
@@ -486,7 +486,7 @@ export default function Home() {
                   <h4 className="offer-card-title text-[10px] font-bold tracking-[0.2em] text-[#6d6862] uppercase mb-4 will-change-[transform,opacity]">LEVE 2 — PROMOÇÃO ESPECIAL</h4>
                   <div className="offer-card-price flex flex-col items-center gap-1 mb-8 will-change-[transform,opacity]">
                     <span className="text-[11px] font-bold text-[#6d6862] uppercase tracking-wider mb-1">2 camisetas no cartão</span>
-                    <span className="text-6xl font-black tracking-tighter text-black font-headline">R$ 159,80</span>
+                    <span className="text-6xl font-black tracking-tighter text-black font-headline">R$ 149,90</span>
                     <div className="mt-4 flex flex-col items-center">
                       <span className="text-xl font-bold text-black/80">R$ 139,90 no Pix</span>
                       <span className="text-[10px] text-accent font-black uppercase tracking-[0.15em] mt-1">Economia de R$ 19,90</span>

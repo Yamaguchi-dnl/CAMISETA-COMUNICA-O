@@ -101,15 +101,19 @@ export function OrderForm() {
     let unit = 0;
     let kitActive = false;
 
-    if (isPix) {
-      if (qty >= 2) {
-        unit = 69.95;
-        kitActive = true;
+    if (qty >= 2) {
+      kitActive = true;
+      if (isPix) {
+        unit = 69.95; // 139.90 / 2
       } else {
-        unit = 74.90;
+        unit = 74.95; // 149.90 / 2
       }
     } else {
-      unit = 79.90;
+      if (isPix) {
+        unit = 74.90;
+      } else {
+        unit = 79.90;
+      }
     }
 
     total = unit * qty;
