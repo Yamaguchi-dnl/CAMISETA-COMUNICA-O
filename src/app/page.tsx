@@ -355,7 +355,7 @@ export default function Home() {
         {/* Mobile Hero */}
         <section className="mobile-hero-section mobile-hero-section--refined md:hidden block opacity-0 relative bg-[#efefef] overflow-hidden h-[100svh] min-h-[760px]">
           <div className="w-full h-full relative">
-            <div className="mobile-hero-left-block absolute z-[5] top-[50px] left-[20px]">
+            <div className="mobile-hero-left-block absolute z-[5] top-[110px] left-[20px]">
               <h2 className="font-headline text-[28px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -363,7 +363,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[170px] left-1/2 -translate-x-1/2 w-[320px] h-[400px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[240px] left-1/2 -translate-x-1/2 w-[320px] h-[400px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -374,7 +374,7 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center top-[520px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center top-[590px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
