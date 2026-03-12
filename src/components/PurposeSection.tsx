@@ -102,7 +102,7 @@ export function PurposeSection() {
                 Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe.
               </p>
               <p className="text-[18px] leading-[1.6] text-[#4f4f4f] font-body">
-                Você também contribui para fortalecer o Ministério de Comunicação e ajuda o Evangelho a alcançar mais vidas.
+                Você também contribui para fortalecer o Ministério de Comunicação e ajuda a propagar o evangelho.
               </p>
             </div>
             
