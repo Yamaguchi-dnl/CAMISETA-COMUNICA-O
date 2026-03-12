@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -21,21 +22,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Send, Calculator, Info } from 'lucide-react';
+import { Send, Minus, Plus, CreditCard, Smartphone } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   nome: z.string().min(3, { message: 'Por favor, informe seu nome completo.' }),
   whatsapp: z.string().min(10, { message: 'Informe um WhatsApp válido.' }),
   produto: z.string({ required_error: 'Selecione o produto.' }),
   tamanho: z.string({ required_error: 'Selecione um tamanho.' }),
-  quantidade: z.coerce.number().min(1, { message: 'Mínimo 1 unidade.' }),
-  pagamento: z.enum(['Pix', 'Parcelado'], { required_error: 'Selecione a forma de pagamento.' }),
+  quantidade: z.number().min(1, { message: 'Mínimo 1 unidade.' }),
+  pagamento: z.enum(['pix', 'credito'], { required_error: 'Selecione a forma de pagamento.' }),
   observacoes: z.string().optional(),
 });
 
@@ -54,7 +55,7 @@ export function OrderForm() {
       produto: '',
       tamanho: '',
       quantidade: 1,
-      pagamento: 'Pix',
+      pagamento: 'pix',
       observacoes: '',
     },
   });
@@ -62,42 +63,48 @@ export function OrderForm() {
   const watchedValues = useWatch({ control: form.control });
   
   const [summary, setSummary] = useState({
-    basePrice: 0,
+    unitPrice: 74.90,
     quantity: 1,
-    label: 'Preço no Pix',
-    extraAmount: 0,
-    total: 0
+    isPix: true,
+    isKit: false,
+    total: 74.90
   });
 
   useEffect(() => {
-    const qty = Number(watchedValues.quantidade) || 0;
-    const isCredit = watchedValues.pagamento === 'Parcelado';
+    const qty = Number(watchedValues.quantidade) || 1;
+    const isPix = watchedValues.pagamento === 'pix';
+    
+    let total = 0;
+    let unit = 0;
+    let kitActive = false;
 
-    let unitPrice = 79.90;
-    if (qty >= 2) {
-      unitPrice = 69.95; 
+    if (isPix) {
+      if (qty >= 2) {
+        // Lógica de Kit: 2 por 139.90 (69.95 cada)
+        unit = 69.95;
+        kitActive = true;
+      } else {
+        unit = 74.90;
+      }
+    } else {
+      // Crédito: 79.90 fixo por unidade
+      unit = 79.90;
     }
 
-    const pixTotal = unitPrice * qty;
-    let extra = 0;
-    if (isCredit) {
-      extra = pixTotal * 0.07;
-    }
-    const finalTotal = pixTotal + extra;
+    total = unit * qty;
 
     setSummary({
-      basePrice: pixTotal,
+      unitPrice: unit,
       quantity: qty,
-      label: isCredit ? 'Acréscimo Crédito (7%)' : (qty >= 2 ? 'Promoção (2+ un)' : 'Preço Base'),
-      extraAmount: extra,
-      total: finalTotal
+      isPix: isPix,
+      isKit: kitActive,
+      total: total
     });
   }, [watchedValues.quantidade, watchedValues.pagamento]);
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     
-    // Gerar ID para o documento
     const orderRef = doc(collection(db, "orders"));
     const orderId = orderRef.id;
 
@@ -108,14 +115,13 @@ export function OrderForm() {
       customerWhatsapp: values.whatsapp,
       selectedSize: values.tamanho,
       quantity: values.quantidade,
-      paymentMethod: values.pagamento,
+      paymentMethod: values.pagamento === 'pix' ? 'Pix' : 'Crédito',
       notes: values.observacoes || '',
       createdAt: new Date().toISOString(),
       status: 'Pendente WhatsApp',
       totalAmount: summary.total
     };
 
-    // Salvar no Firestore de forma não-bloqueante
     setDoc(orderRef, orderData)
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
@@ -127,7 +133,7 @@ export function OrderForm() {
 
     const phoneNumber = '5541996692392'; 
     
-    const message = `Olá! Quero comprar uma camiseta da Comunicação da IAP Barreirinha.
+    const message = `Olá! Quero reservar minha camiseta da IAP Barreirinha.
 
 *Dados do Pedido:*
 - *Nome:* ${values.nome}
@@ -135,11 +141,10 @@ export function OrderForm() {
 - *Produto:* ${values.produto}
 - *Tamanho:* ${values.tamanho}
 - *Quantidade:* ${values.quantidade}
-- *Pagamento:* ${values.pagamento}
-- *Total:* R$ ${summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-- *Observações:* ${values.observacoes || 'Nenhuma'}
+- *Pagamento:* ${values.pagamento === 'pix' ? 'Pix (Desconto aplicado)' : 'Crédito (3x s/ juros)'}
+- *Total Estimado:* R$ ${summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 
-${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'Desejo conversar sobre parcelamento.'}`;
+*Observações:* ${values.observacoes || 'Nenhuma'}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -152,193 +157,254 @@ ${values.pagamento === 'Pix' ? 'Desejo receber a chave Pix para pagamento.' : 'D
     setTimeout(() => {
       window.open(whatsappUrl, '_blank');
       setIsSubmitting(false);
-    }, 1000);
+    }, 800);
   }
 
   return (
-    <div className="bg-white p-8 lg:p-12 rounded-none border border-[#dddddd] shadow-sm max-w-2xl mx-auto">
-      <div className="text-center mb-10">
-        <h3 className="font-headline text-3xl mb-4 text-black uppercase">RESERVE SUA CAMISETA</h3>
-        <p className="text-black text-sm font-medium">Preços promocionais válidos para pagamento no Pix. No crédito, acréscimo de 7%.</p>
+    <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-[#f5f3ef]">
+      {/* Header Escuro Estilo Editorial */}
+      <div className="bg-[#050505] p-10 lg:p-16 text-white">
+        <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-4 block">
+          FAÇA SUA RESERVA
+        </span>
+        <h2 className="font-headline text-[clamp(48px,8vw,86px)] leading-[0.9] uppercase mb-8">
+          RESERVE SUA <br /> CAMISETA
+        </h2>
+        <p className="text-[11px] lg:text-[13px] font-medium text-white/70 tracking-tight leading-relaxed">
+          R$ 74,90 no Pix &middot; R$ 79,90 no crédito (até 3x sem juros) &middot; Kit com 2 por R$ 139,90 no Pix
+        </p>
       </div>
-      
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="nome"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[16px] font-medium tracking-wide text-black">Nome completo</FormLabel>
-                <FormControl>
-                  <Input placeholder="Como podemos te chamar?" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="whatsapp"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-[16px] font-medium tracking-wide text-black">WhatsApp</FormLabel>
-                  <FormControl>
-                    <Input placeholder="(00) 00000-0000" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="produto"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-[16px] font-medium tracking-wide text-black">Produto</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+      {/* Corpo do Formulário */}
+      <div className="p-8 lg:p-16 bg-[#f7f4ef]">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+            
+            {/* Grid de Campos Principais */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+              <FormField
+                control={form.control}
+                name="nome"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">NOME COMPLETO *</FormLabel>
                     <FormControl>
-                      <SelectTrigger className="rounded-none h-12 border-[#dddddd] font-body text-black">
-                        <SelectValue placeholder="Selecione o modelo" />
-                      </SelectTrigger>
+                      <Input 
+                        placeholder="Como podemos te chamar?" 
+                        className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus-visible:ring-0 focus-visible:border-black transition-colors placeholder:text-[#d7d1ca]" 
+                        {...field} 
+                      />
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
-                      <SelectItem value="Camiseta Comunicação Off-White">Camiseta Off-White</SelectItem>
-                      <SelectItem value="Kit Promocional (2 Peças)">Promoção Especial (2 Peças)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="tamanho"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-[16px] font-medium tracking-wide text-black">Tamanho</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormField
+                control={form.control}
+                name="whatsapp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">WHATSAPP *</FormLabel>
                     <FormControl>
-                      <SelectTrigger className="rounded-none h-12 border-[#dddddd] font-body text-black">
-                        <SelectValue placeholder="Seu tamanho" />
-                      </SelectTrigger>
+                      <Input 
+                        placeholder="(00) 00000-0000" 
+                        className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus-visible:ring-0 focus-visible:border-black transition-colors placeholder:text-[#d7d1ca]" 
+                        {...field} 
+                      />
                     </FormControl>
-                    <SelectContent>
-                      {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
-                        <SelectItem key={size} value={size}>{size}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="produto"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">PRODUTO *</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus:ring-0 focus:border-black transition-colors">
+                          <SelectValue placeholder="Selecione..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="rounded-none border-[#d7d1ca] bg-[#f7f4ef]">
+                        <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
+                        <SelectItem value="Camiseta Comunicação Off-White">Camiseta Off-White</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="tamanho"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">TAMANHO *</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus:ring-0 focus:border-black transition-colors">
+                          <SelectValue placeholder="Selecione..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="rounded-none border-[#d7d1ca] bg-[#f7f4ef]">
+                        {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
+                          <SelectItem key={size} value={size}>{size}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Seletor de Quantidade Customizado */}
             <FormField
               control={form.control}
               name="quantidade"
               render={({ field }) => (
+                <FormItem className="max-w-[140px]">
+                  <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">QUANTIDADE *</FormLabel>
+                  <div className="flex items-center border border-[#d7d1ca] bg-white h-12">
+                    <button 
+                      type="button"
+                      onClick={() => field.onChange(Math.max(1, field.value - 1))}
+                      className="w-12 h-full flex items-center justify-center hover:bg-black/5 transition-colors border-r border-[#d7d1ca]"
+                    >
+                      <Minus className="h-3 w-3" />
+                    </button>
+                    <div className="flex-1 text-center font-bold text-sm">
+                      {field.value}
+                    </div>
+                    <button 
+                      type="button"
+                      onClick={() => field.onChange(field.value + 1)}
+                      className="w-12 h-full flex items-center justify-center hover:bg-black/5 transition-colors border-l border-[#d7d1ca]"
+                    >
+                      <Plus className="h-3 w-3" />
+                    </button>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Toggle de Pagamento Estilizado */}
+            <FormField
+              control={form.control}
+              name="pagamento"
+              render={({ field }) => (
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">FORMA DE PAGAMENTO *</FormLabel>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => field.onChange('pix')}
+                      className={cn(
+                        "flex items-center justify-center gap-3 h-14 border transition-all text-xs font-bold uppercase tracking-wider",
+                        field.value === 'pix' 
+                          ? "bg-black text-white border-black" 
+                          : "bg-white text-black border-[#d7d1ca] hover:border-black"
+                      )}
+                    >
+                      <Smartphone className="h-4 w-4" />
+                      Pix (6% desconto)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => field.onChange('credito')}
+                      className={cn(
+                        "flex items-center justify-center gap-3 h-14 border transition-all text-xs font-bold uppercase tracking-wider",
+                        field.value === 'credito' 
+                          ? "bg-black text-white border-black" 
+                          : "bg-white text-black border-[#d7d1ca] hover:border-black"
+                      )}
+                    >
+                      <CreditCard className="h-4 w-4" />
+                      Crédito (3x s/ juros)
+                    </button>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Observações */}
+            <FormField
+              control={form.control}
+              name="observacoes"
+              render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[16px] font-medium tracking-wide text-black">Quantidade</FormLabel>
+                  <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">OBSERVAÇÕES</FormLabel>
                   <FormControl>
-                    <Input type="number" className="rounded-none h-12 border-[#dddddd] font-body text-black" {...field} />
+                    <Textarea 
+                      placeholder="Algum detalhe específico? Ex: tamanhos diferentes no kit..." 
+                      className="rounded-none border-[#d7d1ca] bg-white min-h-[120px] focus-visible:ring-black placeholder:text-[#d7d1ca]" 
+                      {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
 
-          <FormField
-            control={form.control}
-            name="pagamento"
-            render={({ field }) => (
-              <FormItem className="space-y-4">
-                <FormLabel className="text-[16px] font-medium tracking-wide text-black">Forma de Pagamento</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-wrap gap-8"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="Pix" />
-                      </FormControl>
-                      <FormLabel className="font-semibold text-sm cursor-pointer text-black">Pix</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="Parcelado" />
-                      </FormControl>
-                      <FormLabel className="font-semibold text-sm cursor-pointer text-black">Crédito (+7%)</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="bg-[#f9f9f9] rounded-none p-6 border border-[#eeeeee] space-y-3 font-body">
-            <div className="flex items-center gap-2 mb-2 text-black font-bold text-xs uppercase tracking-widest">
-              <Calculator className="h-4 w-4" /> Resumo do Pedido
-            </div>
-            <div className="flex justify-between text-sm text-black">
-              <span>Subtotal (Base Pix)</span>
-              <span>R$ {summary.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-            </div>
-            {summary.extraAmount > 0 && (
-              <div className="flex justify-between text-sm text-accent font-semibold">
-                <span>Acréscimo Crédito (7%)</span>
-                <span>+ R$ {summary.extraAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+            {/* Card de Resumo */}
+            <div className="bg-white border border-[#d7d1ca] p-8 space-y-4">
+              <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-6">RESUMO DO PEDIDO</h4>
+              
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-[#6f6a63]">Quantidade</span>
+                <span className="font-bold text-black">{summary.quantity} {summary.quantity === 1 ? 'peça' : 'peças'}</span>
               </div>
-            )}
-            <Separator className="bg-[#dddddd]" />
-            <div className="flex justify-between font-bold text-lg text-black">
-              <span>TOTAL ESTIMADO</span>
-              <span>R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+              
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-[#6f6a63]">Pagamento</span>
+                <span className="font-bold text-black uppercase tracking-wider text-[11px]">
+                  {summary.isPix ? 'Pix' : 'Crédito'}
+                </span>
+              </div>
+
+              {summary.isPix && (
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-[#6f6a63]">Benefício</span>
+                  <span className="text-green-600 font-bold uppercase tracking-wider text-[11px]">
+                    {summary.isKit ? 'Preço de Kit Aplicado' : 'Desconto Pix Ativo'}
+                  </span>
+                </div>
+              )}
+
+              <Separator className="bg-[#d7d1ca] my-6" />
+
+              <div className="flex justify-between items-end">
+                <span className="text-[10px] font-bold tracking-[0.1em] text-black uppercase mb-1">Total estimado</span>
+                <span className="text-4xl font-headline text-black">
+                  R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <FormField
-            control={form.control}
-            name="observacoes"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[16px] font-medium tracking-wide text-black">Observações (Opcional)</FormLabel>
-                <FormControl>
-                  <Textarea 
-                    placeholder="Algum detalhe específico?" 
-                    className="resize-none rounded-none border-[#dddddd] min-h-[100px] font-body text-black" 
-                    {...field} 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button 
-            type="submit" 
-            className="pill-button bg-black hover:bg-accent text-white w-full rounded-full"
-            disabled={isSubmitting}
-          >
-            <Send className="h-5 w-5" />
-            {isSubmitting ? 'REGISTRANDO...' : 'FINALIZAR NO WHATSAPP'}
-          </Button>
-          
-          <div className="flex items-start gap-3 p-4 bg-blue-50/50 rounded-none text-[12px] text-blue-800 font-medium border border-blue-100">
-            <Info className="h-4 w-4 shrink-0" />
-            <span>Sua reserva será confirmada pela nossa equipe via WhatsApp. O pagamento final é feito no momento da retirada ou entrega combinada.</span>
-          </div>
-        </form>
-      </Form>
+            {/* Botão de Finalização */}
+            <Button 
+              type="submit" 
+              className="w-full h-16 bg-[#050505] hover:bg-accent text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-lg hover:shadow-accent/20 active:scale-[0.98]"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'PROCESSANDO...' : 'FINALIZAR NO WHATSAPP'}
+            </Button>
+            
+            <p className="text-[11px] text-[#6f6a63] text-center italic font-medium">
+              Sua reserva será confirmada pela nossa equipe via WhatsApp. <br className="hidden sm:block" />
+              O pagamento é feito no momento da retirada ou entrega combinada.
+            </p>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }
