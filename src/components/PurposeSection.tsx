@@ -66,7 +66,7 @@ export function PurposeSection() {
             {/* Imagem Primária (Maior, fundo) */}
             <div className="purpose-image-primary absolute top-0 left-0 w-[78%] md:w-[420px] aspect-[3/4] z-[2] overflow-hidden">
               <Image 
-                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg" 
+                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg" 
                 alt="Propósito IAP Camiseta Off-White" 
                 fill 
                 className="object-cover rounded-none"
@@ -78,7 +78,7 @@ export function PurposeSection() {
             {/* Imagem Secundária (Menor, sobreposta) - Deslocada 70px para baixo */}
             <div className="purpose-image-secondary absolute bottom-[-70px] right-0 w-[68%] md:w-[360px] aspect-square z-[3] overflow-hidden">
               <Image 
-                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg" 
+                src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg" 
                 alt="Propósito IAP Kit Camisetas" 
                 fill 
                 className="object-cover border-[6px] border-[#f5f3ef] rounded-none"
