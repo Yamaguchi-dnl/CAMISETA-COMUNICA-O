@@ -11,8 +11,8 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Seção de Propósito com layout editorial.
- * Imagens sobrepostas com cantos retos e texto lateral com tipografia minimalista.
+ * Seção de Propósito com layout editorial de duas imagens sobrepostas e texto lateral.
+ * Agora com título expandido e linha vermelha decorativa conforme solicitado.
  */
 export function PurposeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,7 +74,7 @@ export function PurposeSection() {
               />
             </div>
 
-            {/* Imagem Secundária (Menor, sobreposta) - Deslocada 70px para baixo no total */}
+            {/* Imagem Secundária (Menor, sobreposta) */}
             <div className="purpose-image-secondary absolute bottom-[-70px] right-0 w-[68%] md:w-[360px] aspect-square z-[3] overflow-hidden">
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg" 
@@ -88,13 +88,14 @@ export function PurposeSection() {
           </div>
 
           {/* Coluna de Conteúdo de Texto */}
-          <div className="purpose-text-content flex flex-col gap-6 max-w-[420px]">
-            <span className="text-[12px] font-bold tracking-[0.18em] text-[#6f6a63] uppercase font-body">
-              NOSSO PROPÓSITO
-            </span>
-            <h2 className="font-headline text-[clamp(36px,5vw,48px)] font-extrabold text-[#111111] leading-[1.1] uppercase">
+          <div className="purpose-text-content flex flex-col gap-6 max-w-[460px]">
+            {/* Linha Vermelha Decorativa */}
+            <div className="w-16 h-[5px] bg-accent mb-2" />
+            
+            <h2 className="font-headline text-[clamp(42px,8vw,82px)] font-extrabold text-[#111111] leading-[1] uppercase">
               A MENSAGEM PRECISA SER OUVIDA
             </h2>
+            
             <div className="space-y-6">
               <p className="text-[18px] leading-[1.6] text-[#4f4f4f] font-body">
                 Adquirir essa camiseta é mais do que levar uma peça de roupa, é representar pessoas que acreditam que a comunicação pode levar mensagens mais longe.
@@ -104,7 +105,7 @@ export function PurposeSection() {
               </p>
             </div>
             
-            <div className="pt-6">
+            <div className="pt-4">
               <a 
                 href="#ofertas" 
                 className="pill-button bg-black text-white hover:bg-accent w-full md:w-auto min-w-[200px]"
