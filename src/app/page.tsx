@@ -333,7 +333,8 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[98px] right-[48px] w-[72px] h-[3px] md:top-[88px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[130px] w-[820px] h-[480px] md:w-[700px] md:h-[410px]">
+            {/* Imagem Principal Deslocada 70px para baixo (top-[130px] -> top-[200px]) */}
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[200px] w-[820px] h-[480px] md:w-[700px] md:h-[410px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -344,7 +345,8 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[110px] md:bottom-[100px]">
+            {/* Texto CREATIVITY baixado mais 100px (bottom-[110px] -> bottom-[-90px]) */}
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[-90px] md:bottom-[-90px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -432,7 +434,7 @@ export default function Home() {
 
         <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-[#f5f3ef] scroll-mt-20">
           <div className="container mx-auto px-6 max-w-[980px]">
-            <h3 className="offer-section-title mb-16 text-black uppercase text-[clamp(48px,8vw,64px)] text-center will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+            <h2 className="offer-section-title mb-16 text-center will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Card 1 */}
@@ -513,7 +515,7 @@ export default function Home() {
 
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
-            <h3 className="text-center text-black uppercase mb-12 text-[48px] lg:text-[56px]">Perguntas Frequentes</h3>
+            <h2 className="text-center mb-12">Perguntas Frequentes</h2>
             {Accordion && (
               <Accordion type="single" collapsible className="w-full space-y-4">
                 {FAQ_ITEMS.map((item, i) => (

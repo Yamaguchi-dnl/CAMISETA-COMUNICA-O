@@ -13,6 +13,7 @@ if (typeof window !== 'undefined') {
 /**
  * Seção de Propósito com layout editorial de duas imagens sobrepostas e texto lateral.
  * Agora com título expandido e linha vermelha decorativa conforme solicitado.
+ * Título padronizado conforme diretrizes visuais.
  */
 export function PurposeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,19 +69,19 @@ export function PurposeSection() {
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg" 
                 alt="Propósito IAP Camiseta Off-White" 
                 fill 
-                className="object-cover"
+                className="object-cover rounded-none"
                 data-ai-hint="editorial model"
                 priority
               />
             </div>
 
-            {/* Imagem Secundária (Menor, sobreposta) */}
+            {/* Imagem Secundária (Menor, sobreposta) - Deslocada 70px para baixo */}
             <div className="purpose-image-secondary absolute bottom-[-70px] right-0 w-[68%] md:w-[360px] aspect-square z-[3] overflow-hidden">
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg" 
                 alt="Propósito IAP Kit Camisetas" 
                 fill 
-                className="object-cover border-[6px] border-[#f5f3ef]"
+                className="object-cover border-[6px] border-[#f5f3ef] rounded-none"
                 data-ai-hint="editorial model"
                 priority
               />
@@ -92,7 +93,7 @@ export function PurposeSection() {
             {/* Linha Vermelha Decorativa */}
             <div className="w-16 h-[5px] bg-accent mb-2" />
             
-            <h2 className="font-headline text-[clamp(42px,8vw,82px)] font-extrabold text-[#111111] leading-[1] uppercase">
+            <h2 className="font-headline text-[#111111] uppercase">
               A MENSAGEM PRECISA SER OUVIDA
             </h2>
             

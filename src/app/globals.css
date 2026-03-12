@@ -37,11 +37,9 @@
   h1 {
     @apply font-headline text-[clamp(64px,9vw,160px)] leading-[0.95] tracking-[0.01em] uppercase;
   }
-  h2 {
-    @apply font-headline text-[clamp(42px,5vw,82px)] leading-[1] uppercase tracking-[0.01em];
-  }
-  h3 {
-    @apply font-headline text-[32px] lg:text-[44px] uppercase tracking-[0.03em] leading-tight;
+  /* Estilo Padronizado de Título de Seção */
+  h2, h3 {
+    @apply font-headline text-[40px] md:text-[52px] lg:text-[64px] leading-none uppercase tracking-[0.04em] text-[#111111];
   }
 }
 
