@@ -324,7 +324,7 @@ export default function Home() {
         {/* Desktop Hero */}
         <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[720px] lg:h-[800px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
-            <div className="hero-left-block absolute z-[5] top-[90px] left-[30px] md:top-[80px] md:left-[22px] max-w-none">
+            <div className="hero-left-block absolute z-[5] top-[80px] left-[30px] md:top-[70px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[32px] md:text-[28px] lg:text-[36px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
                 COMUNICAR É MISSÃO.
               </h2>
@@ -332,8 +332,8 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="hero-right-line absolute z-[5] bg-[#111111] top-[108px] right-[48px] w-[72px] h-[3px] md:top-[98px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[5px] w-[820px] h-[500px] md:w-[700px] md:h-[430px]">
+            <div className="hero-right-line absolute z-[5] bg-[#111111] top-[98px] right-[48px] w-[72px] h-[3px] md:top-[88px] md:right-[28px] md:w-[64px]" />
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[-10px] w-[820px] h-[480px] md:w-[700px] md:h-[410px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -344,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[190px] md:bottom-[180px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[210px] md:bottom-[200px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -363,7 +363,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[85px] left-1/2 -translate-x-1/2 w-[292px] h-[325px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[75px] left-1/2 -translate-x-1/2 w-[292px] h-[315px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -374,7 +374,7 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[220px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[240px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
@@ -505,6 +505,12 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="reserva" className="py-24 bg-white scroll-mt-20 gsap-reveal">
+          <div className="container mx-auto px-6">
+            <OrderForm />
+          </div>
+        </section>
+
         <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6 max-w-2xl">
             <h3 className="text-center text-black uppercase mb-12 text-[48px] lg:text-[56px]">Perguntas Frequentes</h3>
@@ -522,12 +528,6 @@ export default function Home() {
                 ))}
               </Accordion>
             )}
-          </div>
-        </section>
-
-        <section id="reserva" className="py-24 bg-white scroll-mt-20 gsap-reveal">
-          <div className="container mx-auto px-6">
-            <OrderForm />
           </div>
         </section>
       </main>
