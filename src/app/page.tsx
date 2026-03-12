@@ -205,7 +205,6 @@ export default function Home() {
 
       // Initial State Setup
       gsap.set('.offer-section-title', { opacity: 0, y: yOffset, clipPath: 'inset(100% 0 0 0)' });
-      gsap.set('.offer-section-subtitle', { opacity: 0, y: 16 });
       gsap.set(['.offer-card--1', '.offer-card--2'], { opacity: 0, y: yOffset, scale: 0.98 });
       gsap.set('.offer-card-image', { opacity: 0, scale: 1.03 });
       gsap.set(['.offer-card-title', '.offer-card-price', '.offer-card-button'], { opacity: 0, y: 18 });
@@ -220,13 +219,6 @@ export default function Home() {
           duration: 0.85,
           ease: 'power4.out'
         })
-        // Phase: Subtitle Reveal
-        .to('.offer-section-subtitle', {
-          opacity: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power2.out'
-        }, '-=0.4')
         // Phase: Cards Reveal
         .to('.offer-card--1', {
           opacity: 1,
@@ -341,7 +333,7 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[126px] right-[48px] w-[72px] h-[3px] md:top-[116px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[100px] w-[820px] h-[550px] md:w-[700px] md:h-[480px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[70px] w-[820px] h-[550px] md:w-[700px] md:h-[480px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -352,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[80px] md:bottom-[70px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[110px] md:bottom-[100px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -371,7 +363,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[180px] left-1/2 -translate-x-1/2 w-[292px] h-[375px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[160px] left-1/2 -translate-x-1/2 w-[292px] h-[375px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -382,7 +374,7 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[110px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[140px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
@@ -441,7 +433,6 @@ export default function Home() {
         <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-background scroll-mt-20">
           <div className="container mx-auto px-6 text-center">
             <h3 className="offer-section-title mb-4 text-black uppercase text-[48px] lg:text-[64px] will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
-            <p className="offer-section-subtitle text-black mb-12 font-medium will-change-[transform,opacity]">Cada camiseta por R$ 79,90 no cartão (até 3x)</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
               <div className="offer-card offer-card--1 bg-[#f8f6f2] p-8 rounded-none border border-border flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity]">
