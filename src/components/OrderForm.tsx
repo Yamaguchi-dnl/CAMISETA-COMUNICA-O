@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState, useEffect } from 'react';
@@ -161,7 +160,7 @@ export function OrderForm() {
   }
 
   return (
-    <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-[#f5f3ef]">
+    <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white">
       {/* Header Escuro Estilo Editorial */}
       <div className="bg-[#050505] p-10 lg:p-16 text-white">
         <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-4 block">
@@ -176,7 +175,7 @@ export function OrderForm() {
       </div>
 
       {/* Corpo do Formulário */}
-      <div className="p-8 lg:p-16 bg-[#f7f4ef]">
+      <div className="p-8 lg:p-16 bg-white">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             
@@ -230,7 +229,7 @@ export function OrderForm() {
                           <SelectValue placeholder="Selecione..." />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-none border-[#d7d1ca] bg-[#f7f4ef]">
+                      <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
                         <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
                         <SelectItem value="Camiseta Comunicação Off-White">Camiseta Off-White</SelectItem>
                       </SelectContent>
@@ -252,7 +251,7 @@ export function OrderForm() {
                           <SelectValue placeholder="Selecione..." />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="rounded-none border-[#d7d1ca] bg-[#f7f4ef]">
+                      <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
                         {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
                           <SelectItem key={size} value={size}>{size}</SelectItem>
                         ))}
@@ -355,7 +354,7 @@ export function OrderForm() {
             />
 
             {/* Card de Resumo */}
-            <div className="bg-white border border-[#d7d1ca] p-8 space-y-4">
+            <div className="bg-[#fcfcfc] border border-[#d7d1ca] p-8 space-y-4">
               <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-6">RESUMO DO PEDIDO</h4>
               
               <div className="flex justify-between items-center text-sm">
