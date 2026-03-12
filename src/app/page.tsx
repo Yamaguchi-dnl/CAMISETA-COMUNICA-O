@@ -322,7 +322,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Desktop Hero */}
-        <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden h-[840px] md:h-[720px] lg:h-[800px]">
+        <section className="hero-section hidden md:block opacity-0 relative bg-[#efefef] overflow-hidden md:h-[640px] lg:h-[680px]">
           <div className="mx-auto w-full max-w-[1600px] h-full relative px-0">
             <div className="hero-left-block absolute z-[5] top-[80px] left-[30px] md:top-[70px] md:left-[22px] max-w-none">
               <h2 className="font-headline text-[32px] md:text-[28px] lg:text-[36px] text-black uppercase leading-none mb-2 tracking-[-0.01em]">
@@ -344,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-0">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[40px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
