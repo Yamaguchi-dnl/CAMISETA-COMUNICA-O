@@ -62,9 +62,9 @@ export function PurposeSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Coluna de Composição de Imagem */}
-          <div className="relative w-full max-w-[520px] h-[440px] md:h-[520px] mx-auto lg:mx-0">
+          <div className="relative w-full max-w-[520px] h-[400px] md:h-[520px] mx-auto lg:mx-0">
             {/* Imagem Primária (Maior, fundo) */}
-            <div className="purpose-image-primary absolute top-0 left-0 w-[78%] md:w-[420px] aspect-[3/4] z-[2] overflow-hidden">
+            <div className="purpose-image-primary absolute top-0 left-0 w-[75%] md:w-[420px] aspect-[3/4] z-[2] overflow-hidden">
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg" 
                 alt="Propósito IAP Camiseta Off-White" 
@@ -75,13 +75,13 @@ export function PurposeSection() {
               />
             </div>
 
-            {/* Imagem Secundária (Menor, sobreposta) - Deslocada 70px para baixo */}
-            <div className="purpose-image-secondary absolute bottom-[-70px] right-0 w-[68%] md:w-[360px] aspect-square z-[3] overflow-hidden">
+            {/* Imagem Secundária (Menor, sobreposta) - Sobrepõe no mobile */}
+            <div className="purpose-image-secondary absolute bottom-[-40px] md:bottom-[-70px] right-0 w-[65%] md:w-[360px] aspect-square z-[3] overflow-hidden">
               <Image 
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg" 
                 alt="Propósito IAP Kit Camisetas" 
                 fill 
-                className="object-cover border-[6px] border-[#f5f3ef] rounded-none"
+                className="object-cover border-[4px] md:border-[6px] border-[#f5f3ef] rounded-none shadow-xl"
                 data-ai-hint="editorial model"
                 priority
               />
