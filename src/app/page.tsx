@@ -47,63 +47,63 @@ const MOSAIC_ITEMS = [
     id: "image_1",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg",
     className: "lg:col-span-6 lg:row-span-12 md:col-span-4 md:row-span-6 col-span-1 gallery-mosaic-item--1",
-    start: { x: "-110vw", y: "-10vh" },
+    start: { x: "-110vw", y: "-10vh", rotate: -5 },
     sizes: "(min-width: 1200px) 60vw, (min-width: 768px) 50vw, 100vw"
   },
   {
     id: "image_2",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180209.jpg",
     className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--2",
-    start: { x: "-20vw", y: "-100vh" },
+    start: { x: "-20vw", y: "-100vh", rotate: 10 },
     sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_3",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180506.jpg",
     className: "lg:col-span-3 lg:row-span-6 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--3",
-    start: { x: "110vw", y: "-12vh" },
+    start: { x: "110vw", y: "-12vh", rotate: 5 },
     sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_4",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180553.jpg",
     className: "lg:col-span-3 lg:row-span-6 md:col-span-2 md:row-span-3 col-span-1 gallery-mosaic-item--4",
-    start: { x: "-95vw", y: "90vh" },
+    start: { x: "-95vw", y: "90vh", rotate: -8 },
     sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 25vw, 50vw"
   },
   {
     id: "image_5",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg",
     className: "lg:col-span-3 lg:row-span-6 md:col-span-3 md:row-span-3 col-span-1 gallery-mosaic-item--5",
-    start: { x: "0vw", y: "105vh" },
+    start: { x: "0vw", y: "105vh", rotate: 12 },
     sizes: "(min-width: 1200px) 25vw, (min-width: 768px) 37vw, 50vw"
   },
   {
     id: "image_6",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180801.jpg",
     className: "lg:col-span-4 lg:row-span-8 md:col-span-3 md:row-span-3 col-span-1 gallery-mosaic-item--6",
-    start: { x: "95vw", y: "95vh" },
+    start: { x: "95vw", y: "95vh", rotate: -5 },
     sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 37vw, 50vw"
   },
   {
     id: "image_7",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_175533.jpg",
     className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--7",
-    start: { x: "105vw", y: "0vh" },
+    start: { x: "105vw", y: "0vh", rotate: 3 },
     sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_8",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg",
     className: "lg:col-span-4 lg:row-span-8 md:col-span-4 md:row-span-3 col-span-1 gallery-mosaic-item--8",
-    start: { x: "-105vw", y: "20vh" },
+    start: { x: "-105vw", y: "20vh", rotate: -3 },
     sizes: "(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 50vw"
   },
   {
     id: "image_9",
     src: "https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg",
     className: "lg:col-span-12 lg:row-span-10 md:col-span-8 md:row-span-4 col-span-2 gallery-mosaic-item--9",
-    start: { x: "0vw", y: "-110vh" },
+    start: { x: "0vw", y: "-110vh", rotate: 0 },
     sizes: "100vw"
   },
 ];
@@ -121,7 +121,10 @@ export default function Home() {
   useGSAP(() => {
     if (!containerRef.current || !isIntroFinished) return;
 
-    ScrollTrigger.refresh();
+    // Ensure layout is settled before recalculating ScrollTrigger
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
 
     // Hero Animation
     const heroTl = gsap.timeline();
@@ -152,7 +155,7 @@ export default function Home() {
       const galleryTl = gsap.timeline({
         scrollTrigger: {
           trigger: gallerySectionRef.current,
-          start: "top 90%",
+          start: "top 80%", // Adjusted to trigger earlier
           once: true,
           toggleActions: "play none none none",
         }
@@ -163,29 +166,24 @@ export default function Home() {
         gsap.set(`.gallery-mosaic-item--${i + 1}`, { 
           x: item.start.x, 
           y: item.start.y, 
-          scale: 1.05,
+          rotation: item.start.rotate,
+          scale: 1.15,
           opacity: 0 
         });
       });
 
-      // Phase: Multi-directional Assembly
+      // Phase: Multi-directional Assembly with "Slide" feel
       MOSAIC_ITEMS.forEach((item, i) => {
         galleryTl.to(`.gallery-mosaic-item--${i + 1}`, {
-          x: "0vw",
-          y: "0vh",
-          scale: 1.012,
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
           opacity: 1,
-          duration: 1.4,
-          ease: "power3.out"
-        }, i * 0.04);
+          duration: 1.8,
+          ease: "expo.out"
+        }, i * 0.1); // Increased stagger for complex feel
       });
-
-      // Phase: Micro Settle
-      galleryTl.to(".gallery-mosaic-item", {
-        scale: 1,
-        duration: 0.32,
-        ease: "power2.out"
-      }, "-=0.2");
     }
 
     // Offer Section Animation
@@ -262,37 +260,6 @@ export default function Home() {
           duration: 0.4,
           ease: 'power2.out'
         }, '-=0.2');
-
-      // Hover Micro-interactions
-      const cards = document.querySelectorAll('.offer-card');
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          gsap.to(card, { y: -6, duration: 0.25, ease: 'power2.out' });
-        });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, { y: 0, duration: 0.25, ease: 'power2.out' });
-        });
-
-        const img = card.querySelector('.offer-card-image');
-        if (img) {
-          card.addEventListener('mouseenter', () => {
-            gsap.to(img, { scale: 1.02, duration: 0.25, ease: 'power2.out' });
-          });
-          card.addEventListener('mouseleave', () => {
-            gsap.to(img, { scale: 1, duration: 0.25, ease: 'power2.out' });
-          });
-        }
-
-        const btn = card.querySelector('.offer-card-button');
-        if (btn) {
-          btn.addEventListener('mouseenter', () => {
-            gsap.to(btn, { scale: 1.03, duration: 0.2, ease: 'power2.out' });
-          });
-          btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out' });
-          });
-        }
-      });
     }
 
     const reveals = gsap.utils.toArray('.gsap-reveal');
@@ -382,7 +349,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="gallery" className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
+        <section id="gallery" ref={gallerySectionRef} className="gallery-mosaic-section py-16 lg:py-32 bg-black overflow-hidden flex flex-col items-center justify-center">
           <div className="container mx-auto px-4 max-w-[1240px]">
             <div className="grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-3 overflow-hidden bg-transparent h-auto auto-rows-[120px] md:auto-rows-[100px] lg:auto-rows-[42px]">
               {MOSAIC_ITEMS.map((item, i) => {
