@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -23,18 +23,22 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Send, Minus, Plus, CreditCard, Smartphone } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 
+const itemSchema = z.object({
+  produto: z.string({ required_error: 'Selecione o modelo.' }),
+  tamanho: z.string({ required_error: 'Selecione o tamanho.' }),
+});
+
 const formSchema = z.object({
   nome: z.string().min(3, { message: 'Por favor, informe seu nome completo.' }),
   whatsapp: z.string().min(10, { message: 'Informe um WhatsApp válido.' }),
-  produto: z.string({ required_error: 'Selecione o produto.' }),
-  tamanho: z.string({ required_error: 'Selecione um tamanho.' }),
   quantidade: z.number().min(1, { message: 'Mínimo 1 unidade.' }),
+  items: z.array(itemSchema),
   pagamento: z.enum(['pix', 'credito'], { required_error: 'Selecione a forma de pagamento.' }),
   observacoes: z.string().optional(),
 });
@@ -51,16 +55,36 @@ export function OrderForm() {
     defaultValues: {
       nome: '',
       whatsapp: '',
-      produto: '',
-      tamanho: '',
       quantidade: 1,
+      items: [{ produto: '', tamanho: '' }],
       pagamento: 'pix',
       observacoes: '',
     },
   });
 
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "items",
+  });
+
   const watchedValues = useWatch({ control: form.control });
   
+  // Sincroniza o array de itens com a quantidade selecionada
+  useEffect(() => {
+    const qty = watchedValues.quantidade || 1;
+    const currentItemsCount = fields.length;
+
+    if (qty > currentItemsCount) {
+      for (let i = 0; i < qty - currentItemsCount; i++) {
+        append({ produto: '', tamanho: '' });
+      }
+    } else if (qty < currentItemsCount) {
+      for (let i = 0; i < currentItemsCount - qty; i++) {
+        remove(currentItemsCount - 1 - i);
+      }
+    }
+  }, [watchedValues.quantidade, fields.length, append, remove]);
+
   const [summary, setSummary] = useState({
     unitPrice: 74.90,
     quantity: 1,
@@ -79,14 +103,12 @@ export function OrderForm() {
 
     if (isPix) {
       if (qty >= 2) {
-        // Lógica de Kit: 2 por 139.90 (69.95 cada)
         unit = 69.95;
         kitActive = true;
       } else {
         unit = 74.90;
       }
     } else {
-      // Crédito: 79.90 fixo por unidade
       unit = 79.90;
     }
 
@@ -109,11 +131,10 @@ export function OrderForm() {
 
     const orderData = {
       id: orderId,
-      productId: values.produto,
       customerName: values.nome,
       customerWhatsapp: values.whatsapp,
-      selectedSize: values.tamanho,
       quantity: values.quantidade,
+      items: values.items,
       paymentMethod: values.pagamento === 'pix' ? 'Pix' : 'Crédito',
       notes: values.observacoes || '',
       createdAt: new Date().toISOString(),
@@ -132,14 +153,19 @@ export function OrderForm() {
 
     const phoneNumber = '5541996692392'; 
     
+    const itemsList = values.items.map((item, idx) => 
+      `Camiseta ${idx + 1}: ${item.produto} (${item.tamanho})`
+    ).join('\n');
+
     const message = `Olá! Quero reservar minha camiseta da IAP Barreirinha.
 
 *Dados do Pedido:*
 - *Nome:* ${values.nome}
 - *WhatsApp:* ${values.whatsapp}
-- *Produto:* ${values.produto}
-- *Tamanho:* ${values.tamanho}
 - *Quantidade:* ${values.quantidade}
+- *Itens:*
+${itemsList}
+
 - *Pagamento:* ${values.pagamento === 'pix' ? 'Pix (Desconto aplicado)' : 'Crédito (3x s/ juros)'}
 - *Total Estimado:* R$ ${summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 
@@ -179,7 +205,7 @@ export function OrderForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             
-            {/* Grid de Campos Principais */}
+            {/* Grid de Campos de Contato */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
               <FormField
                 control={form.control}
@@ -212,51 +238,6 @@ export function OrderForm() {
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="produto"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">PRODUTO *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus:ring-0 focus:border-black transition-colors">
-                          <SelectValue placeholder="Selecione..." />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
-                        <SelectItem value="Camiseta Comunicação Preta">Camiseta Preta</SelectItem>
-                        <SelectItem value="Camiseta Comunicação Off-White">Camiseta Off-White</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="tamanho"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">TAMANHO *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-14 px-0 focus:ring-0 focus:border-black transition-colors">
-                          <SelectValue placeholder="Selecione..." />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
-                        {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
-                          <SelectItem key={size} value={size}>{size}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -294,7 +275,66 @@ export function OrderForm() {
               )}
             />
 
-            {/* Toggle de Pagamento Estilizado */}
+            {/* Detalhes de Cada Camiseta */}
+            <div className="space-y-8">
+              <span className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase block">DETALHES DAS PEÇAS *</span>
+              <div className="grid grid-cols-1 gap-8">
+                {fields.map((field, index) => (
+                  <div key={field.id} className="p-6 border border-[#d7d1ca] space-y-6">
+                    <span className="text-[11px] font-bold text-black uppercase tracking-widest">
+                      {fields.length > 1 ? `Camiseta ${index + 1}` : 'Escolha o seu modelo'}
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name={`items.${index}.produto`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[9px] font-bold tracking-[0.1em] text-[#6f6a63] uppercase">COR / MODELO</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-12 px-0 focus:ring-0 focus:border-black transition-colors">
+                                  <SelectValue placeholder="Selecione..." />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
+                                <SelectItem value="Preta">Camiseta Preta</SelectItem>
+                                <SelectItem value="Off-White">Camiseta Off-White</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name={`items.${index}.tamanho`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-[9px] font-bold tracking-[0.1em] text-[#6f6a63] uppercase">TAMANHO</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="rounded-none border-0 border-b border-[#d7d1ca] bg-transparent h-12 px-0 focus:ring-0 focus:border-black transition-colors">
+                                  <SelectValue placeholder="Selecione..." />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
+                                {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
+                                  <SelectItem key={size} value={size}>{size}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Toggle de Pagamento */}
             <FormField
               control={form.control}
               name="pagamento"
@@ -343,7 +383,7 @@ export function OrderForm() {
                   <FormLabel className="text-[10px] font-bold tracking-[0.15em] text-[#111111] uppercase">OBSERVAÇÕES</FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Algum detalhe específico? Ex: tamanhos diferentes no kit..." 
+                      placeholder="Algum detalhe específico?" 
                       className="rounded-none border-[#d7d1ca] bg-white min-h-[120px] focus-visible:ring-black placeholder:text-[#d7d1ca]" 
                       {...field} 
                     />
