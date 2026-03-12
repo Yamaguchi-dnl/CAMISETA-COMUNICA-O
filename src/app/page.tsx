@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -137,7 +138,7 @@ export default function Home() {
         { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: 'power4.out' }
       )
       .fromTo(['.hero-bottom-word', '.mobile-hero-bottom-word'], 
-        { opacity: 0, y: 50 }, 
+        { opacity: 0, y: 30 }, 
         { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 
         '-=0.85'
       )
@@ -207,7 +208,7 @@ export default function Home() {
       gsap.set('.offer-section-title', { opacity: 0, y: yOffset, clipPath: 'inset(100% 0 0 0)' });
       gsap.set(['.offer-card--1', '.offer-card--2'], { opacity: 0, y: yOffset, scale: 0.98 });
       gsap.set('.offer-card-image', { opacity: 0, scale: 1.03 });
-      gsap.set(['.offer-card-title', '.offer-card-price', '.offer-card-button'], { opacity: 0, y: 18 });
+      gsap.set(['.offer-card-eyebrow', '.offer-card-support', '.offer-card-main-price', '.offer-card-secondary-price', '.offer-card-highlight', '.offer-card-button'], { opacity: 0, y: 18 });
       gsap.set('.offer-card-badge--best', { opacity: 0, scale: 0.85, y: -10 });
 
       offerTl
@@ -241,7 +242,7 @@ export default function Home() {
           duration: 0.65,
           ease: 'power2.out'
         }, '-=0.3')
-        .to(['.offer-card-title', '.offer-card-price'], {
+        .to(['.offer-card-eyebrow', '.offer-card-support', '.offer-card-main-price', '.offer-card-secondary-price', '.offer-card-highlight'], {
           opacity: 1,
           y: 0,
           duration: 0.45,
@@ -333,7 +334,7 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[108px] right-[48px] w-[72px] h-[3px] md:top-[98px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[50px] w-[820px] h-[520px] md:w-[700px] md:h-[450px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[30px] w-[820px] h-[520px] md:w-[700px] md:h-[450px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -344,7 +345,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[130px] md:bottom-[120px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[150px] md:bottom-[140px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -363,7 +364,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[140px] left-1/2 -translate-x-1/2 w-[292px] h-[345px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[120px] left-1/2 -translate-x-1/2 w-[292px] h-[345px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -374,7 +375,7 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[160px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[180px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
@@ -430,80 +431,74 @@ export default function Home() {
         {/* Purpose Section */}
         <PurposeSection />
 
-        <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-background scroll-mt-20">
-          <div className="container mx-auto px-6 text-center">
-            <h3 className="offer-section-title mb-16 text-black uppercase text-[48px] lg:text-[64px] will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
+        <section id="ofertas" ref={offerSectionRef} className="offer-section py-24 bg-[#f5f3ef] scroll-mt-20">
+          <div className="container mx-auto px-6 max-w-[980px]">
+            <h3 className="offer-section-title mb-16 text-black uppercase text-[clamp(48px,8vw,64px)] text-center will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              <div className="offer-card offer-card--1 bg-[#f8f6f2] p-8 rounded-none border border-border flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity]">
-                <div className="w-full text-center">
-                  <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-white/50">
-                    <Image
-                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
-                      alt="Camiseta Individual"
-                      fill
-                      sizes="(min-width: 768px) 400px, 100vw"
-                      className="offer-card-image object-cover p-8 will-change-transform"
-                      loading="lazy"
-                      quality={85}
-                    />
-                  </div>
-                  <h4 className="offer-card-title text-[10px] font-bold tracking-[0.2em] text-[#6d6862] uppercase mb-4 will-change-[transform,opacity]">LEVE 1 — CAMISETA IAP</h4>
-                  <div className="offer-card-price flex flex-col items-center gap-1 mb-8 will-change-[transform,opacity]">
-                    <span className="text-[11px] font-bold text-[#6d6862] uppercase tracking-wider mb-1">No cartão (até 3x sem juros)</span>
-                    <span className="text-6xl font-black tracking-tighter text-black font-headline">R$ 79,90</span>
-                    <div className="mt-4 flex flex-col items-center">
-                      <span className="text-xl font-bold text-black/80">R$ 74,90 no Pix</span>
-                      <span className="text-[10px] text-accent font-black uppercase tracking-[0.15em] mt-1">Economize 6% no Pix</span>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+              {/* Card 1 */}
+              <div className="offer-card offer-card--1 bg-[#f8f6f2] rounded-[4px] border border-[#d7d1ca] overflow-hidden flex flex-col will-change-[transform,opacity]">
+                <div className="relative aspect-[4/5] w-full bg-white/50">
+                  <Image
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
+                    alt="Camiseta Individual"
+                    fill
+                    sizes="(min-width: 768px) 490px, 100vw"
+                    className="offer-card-image object-cover will-change-transform"
+                    loading="lazy"
+                    quality={90}
+                  />
                 </div>
-                {Button && (
-                  <div className="offer-card-button w-full will-change-[transform,opacity]">
-                    <Button asChild className="pill-button bg-black text-white hover:bg-accent w-full rounded-full">
-                      <a href="#reserva">COMPRAR AGORA</a>
-                    </Button>
+                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left">
+                  <span className="offer-card-eyebrow text-[12px] font-bold tracking-[0.12em] text-[#6b655f] uppercase mb-[24px]">LEVE 1 — CAMISETA IAP</span>
+                  <p className="offer-card-support text-[16px] font-normal text-[#4f5d73] leading-[1.5] mb-[16px]">No cartão (até 3x sem juros)</p>
+                  <div className="flex flex-col mb-[14px]">
+                    <span className="offer-card-main-price text-[46px] font-extrabold leading-none text-[#111111] font-headline mb-[8px]">R$ 79,90</span>
+                    <span className="offer-card-secondary-price text-[16px] font-normal text-[#4f5d73]">R$ 74,90 no Pix</span>
                   </div>
-                )}
+                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-[56px]">6% DE DESCONTO NO PIX</span>
+                  
+                  <Button asChild className="offer-card-button h-[44px] bg-[#050505] text-white hover:bg-black/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px]">
+                    <a href="#reserva">COMPRAR AGORA</a>
+                  </Button>
+                </div>
               </div>
 
-              <div className="offer-card offer-card--2 bg-[#f8f6f2] p-8 rounded-none border-2 border-accent/20 flex flex-col items-center justify-between hover:shadow-xl transition-shadow group will-change-[transform,opacity] relative">
-                <div className="offer-card-badge--best absolute top-4 right-4 bg-accent text-white text-[10px] font-bold py-1 px-3 rounded-full uppercase tracking-widest z-10 will-change-[transform,opacity]">
+              {/* Card 2 - Featured */}
+              <div className="offer-card offer-card--2 bg-[#f8f6f2] rounded-[4px] border-2 border-[#e01b2f] overflow-hidden flex flex-col will-change-[transform,opacity] relative">
+                <div className="offer-card-badge--best absolute top-[20px] right-[20px] bg-[#e01b2f] text-white text-[12px] font-extrabold py-1 px-[14px] rounded-full uppercase tracking-[0.04em] z-10 will-change-[transform,opacity]">
                   Melhor Oferta
                 </div>
-                <div className="w-full text-center">
-                  <div className="relative aspect-square w-full mb-8 rounded-none overflow-hidden bg-white/50">
-                    <Image
-                      src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
-                      alt="Kit Promocional"
-                      fill
-                      sizes="(min-width: 768px) 400px, 100vw"
-                      className="offer-card-image object-cover p-8 will-change-transform"
-                      loading="lazy"
-                      quality={90}
-                    />
-                  </div>
-                  <h4 className="offer-card-title text-[10px] font-bold tracking-[0.2em] text-[#6d6862] uppercase mb-4 will-change-[transform,opacity]">LEVE 2 — PROMOÇÃO ESPECIAL</h4>
-                  <div className="offer-card-price flex flex-col items-center gap-1 mb-8 will-change-[transform,opacity]">
-                    <span className="text-[11px] font-bold text-[#6d6862] uppercase tracking-wider mb-1">2 camisetas no cartão</span>
-                    <span className="text-6xl font-black tracking-tighter text-black font-headline">R$ 149,90</span>
-                    <div className="mt-4 flex flex-col items-center">
-                      <span className="text-xl font-bold text-black/80">R$ 139,90 no Pix</span>
-                      <span className="text-[10px] text-accent font-black uppercase tracking-[0.15em] mt-1">Economia de R$ 19,90</span>
-                      <span className="text-[10px] text-[#6d6862] font-medium mt-1">ou R$ 69,95 cada no Pix</span>
+                <div className="relative aspect-[4/5] w-full bg-white/50">
+                  <Image
+                    src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
+                    alt="Kit Promocional"
+                    fill
+                    sizes="(min-width: 768px) 490px, 100vw"
+                    className="offer-card-image object-cover will-change-transform"
+                    loading="lazy"
+                    quality={95}
+                  />
+                </div>
+                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left">
+                  <span className="offer-card-eyebrow text-[12px] font-bold tracking-[0.12em] text-[#6b655f] uppercase mb-[24px]">LEVE 2 — PROMOÇÃO ESPECIAL</span>
+                  <p className="offer-card-support text-[16px] font-normal text-[#4f5d73] leading-[1.5] mb-[16px]">2 camisetas no cartão</p>
+                  <div className="flex flex-col mb-[14px]">
+                    <span className="offer-card-main-price text-[46px] font-extrabold leading-none text-[#111111] font-headline mb-[8px]">R$ 149,90</span>
+                    <div className="flex flex-col">
+                      <span className="offer-card-secondary-price text-[16px] font-normal text-[#4f5d73]">R$ 139,90 no Pix</span>
+                      <span className="text-[14px] text-[#6f6a63] font-normal mt-1 italic">ou R$ 69,95 cada no Pix</span>
                     </div>
                   </div>
+                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-[56px]">ECONOMIA DE R$ 19,90</span>
+                  
+                  <Button asChild className="offer-card-button h-[44px] bg-[#e01b2f] text-white hover:bg-[#e01b2f]/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px] border-none">
+                    <a href="#reserva">APROVEITAR KIT</a>
+                  </Button>
                 </div>
-                {Button && (
-                  <div className="offer-card-button w-full will-change-[transform,opacity]">
-                    <Button asChild className="pill-button bg-accent text-white hover:bg-black w-full rounded-full border-none">
-                      <a href="#reserva">APROVEITAR KIT</a>
-                    </Button>
-                  </div>
-                )}
               </div>
             </div>
-            <p className="mt-8 text-sm text-black/60 font-medium">* Os descontos de Pix são calculados sobre o valor unitário de R$ 79,90.</p>
+            <p className="mt-12 text-center text-[13px] text-[#6f6a63] font-medium">* Os descontos de Pix são calculados sobre o valor unitário de R$ 79,90.</p>
           </div>
         </section>
 
