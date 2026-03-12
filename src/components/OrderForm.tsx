@@ -196,7 +196,7 @@ ${itemsList}
         <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-4 block">
           FAÇA SUA RESERVA
         </span>
-        <h2 className="font-headline text-[clamp(48px,8vw,86px)] leading-[0.9] uppercase mb-8">
+        <h2 className="font-headline text-[clamp(48px,8vw,86px)] leading-[0.9] uppercase mb-8 text-white">
           RESERVE SUA <br /> CAMISETA
         </h2>
         <p className="text-[11px] lg:text-[13px] font-medium text-white/70 tracking-tight leading-relaxed">
