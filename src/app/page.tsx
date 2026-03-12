@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -334,7 +333,7 @@ export default function Home() {
               </p>
             </div>
             <div className="hero-right-line absolute z-[5] bg-[#111111] top-[108px] right-[48px] w-[72px] h-[3px] md:top-[98px] md:right-[28px] md:w-[64px]" />
-            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[30px] w-[820px] h-[520px] md:w-[700px] md:h-[450px]">
+            <div className="hero-main-image absolute z-[4] left-1/2 -translate-x-1/2 overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.10)] top-[15px] w-[820px] h-[520px] md:w-[700px] md:h-[450px]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                 alt="IAP Camisetas Campaign"
@@ -345,7 +344,7 @@ export default function Home() {
                 quality={95}
               />
             </div>
-            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[150px] md:bottom-[140px]">
+            <div className="hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[170px] md:bottom-[160px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(150px,35vw,350px)]">
                 CREATIVITY
               </h1>
@@ -364,7 +363,7 @@ export default function Home() {
                 Uma camiseta para quem serve anunciando a mensagem.
               </p>
             </div>
-            <div className="mobile-hero-main-image absolute z-[4] top-[120px] left-1/2 -translate-x-1/2 w-[292px] h-[345px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
+            <div className="mobile-hero-main-image absolute z-[4] top-[105px] left-1/2 -translate-x-1/2 w-[292px] h-[345px] overflow-hidden shadow-[0_10px_24px_rgba(0,0,0,0.10)]">
               <Image
                 src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/Carol%20costas.jpg"
                 alt="IAP Camisetas Campaign Mobile"
@@ -375,11 +374,31 @@ export default function Home() {
                 quality={90}
               />
             </div>
-            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[180px]">
+            <div className="mobile-hero-bottom-word absolute z-[2] left-1/2 -translate-x-1/2 pointer-events-none text-center bottom-[200px]">
               <h1 className="font-headline text-black uppercase leading-[0.75] tracking-[-0.05em] whitespace-nowrap inline-block text-[clamp(80px,38vw,150px)]">
                 CREATIVITY
               </h1>
             </div>
+          </div>
+        </section>
+
+        <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
+          <div className="container mx-auto px-6 max-w-2xl">
+            <h3 className="text-center text-black uppercase mb-12 text-[48px] lg:text-[56px]">Perguntas Frequentes</h3>
+            {Accordion && (
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {FAQ_ITEMS.map((item, i) => (
+                  <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
+                    <AccordionTrigger className="text-left font-medium uppercase text-[18px] tracking-widest hover:no-underline font-body text-black">
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            )}
           </div>
         </section>
 
@@ -435,10 +454,10 @@ export default function Home() {
           <div className="container mx-auto px-6 max-w-[980px]">
             <h3 className="offer-section-title mb-16 text-black uppercase text-[clamp(48px,8vw,64px)] text-center will-change-[transform,opacity,clip-path]">ESCOLHA A MELHOR OPÇÃO PRA VOCÊ</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
               {/* Card 1 */}
-              <div className="offer-card offer-card--1 bg-[#f8f6f2] rounded-[4px] border border-[#d7d1ca] overflow-hidden flex flex-col will-change-[transform,opacity]">
-                <div className="relative aspect-[4/5] w-full bg-white/50">
+              <div className="offer-card offer-card--1 bg-[#f8f6f2] rounded-[4px] border border-[#d7d1ca] overflow-hidden flex flex-col h-full will-change-[transform,opacity]">
+                <div className="relative aspect-[16/10] w-full bg-white/50">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180837.jpg"
                     alt="Camiseta Individual"
@@ -449,27 +468,29 @@ export default function Home() {
                     quality={90}
                   />
                 </div>
-                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left">
+                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left flex-grow">
                   <span className="offer-card-eyebrow text-[12px] font-bold tracking-[0.12em] text-[#6b655f] uppercase mb-[24px]">LEVE 1 — CAMISETA IAP</span>
                   <p className="offer-card-support text-[16px] font-normal text-[#4f5d73] leading-[1.5] mb-[16px]">No cartão (até 3x sem juros)</p>
                   <div className="flex flex-col mb-[14px]">
                     <span className="offer-card-main-price text-[46px] font-extrabold leading-none text-[#111111] font-headline mb-[8px]">R$ 79,90</span>
                     <span className="offer-card-secondary-price text-[16px] font-normal text-[#4f5d73]">R$ 74,90 no Pix</span>
                   </div>
-                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-[56px]">6% DE DESCONTO NO PIX</span>
+                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-8">6% DE DESCONTO NO PIX</span>
                   
-                  <Button asChild className="offer-card-button h-[44px] bg-[#050505] text-white hover:bg-black/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px]">
-                    <a href="#reserva">COMPRAR AGORA</a>
-                  </Button>
+                  <div className="mt-auto w-full">
+                    <Button asChild className="offer-card-button h-[44px] bg-[#050505] text-white hover:bg-black/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px] flex">
+                      <a href="#reserva">COMPRAR AGORA</a>
+                    </Button>
+                  </div>
                 </div>
               </div>
 
               {/* Card 2 - Featured */}
-              <div className="offer-card offer-card--2 bg-[#f8f6f2] rounded-[4px] border-2 border-[#e01b2f] overflow-hidden flex flex-col will-change-[transform,opacity] relative">
+              <div className="offer-card offer-card--2 bg-[#f8f6f2] rounded-[4px] border-2 border-[#e01b2f] overflow-hidden flex flex-col h-full will-change-[transform,opacity] relative">
                 <div className="offer-card-badge--best absolute top-[20px] right-[20px] bg-[#e01b2f] text-white text-[12px] font-extrabold py-1 px-[14px] rounded-full uppercase tracking-[0.04em] z-10 will-change-[transform,opacity]">
                   Melhor Oferta
                 </div>
-                <div className="relative aspect-[4/5] w-full bg-white/50">
+                <div className="relative aspect-[16/10] w-full bg-white/50">
                   <Image
                     src="https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg"
                     alt="Kit Promocional"
@@ -480,7 +501,7 @@ export default function Home() {
                     quality={95}
                   />
                 </div>
-                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left">
+                <div className="p-[30px] lg:p-[32px] pb-[32px] flex flex-col items-start text-left flex-grow">
                   <span className="offer-card-eyebrow text-[12px] font-bold tracking-[0.12em] text-[#6b655f] uppercase mb-[24px]">LEVE 2 — PROMOÇÃO ESPECIAL</span>
                   <p className="offer-card-support text-[16px] font-normal text-[#4f5d73] leading-[1.5] mb-[16px]">2 camisetas no cartão</p>
                   <div className="flex flex-col mb-[14px]">
@@ -490,11 +511,13 @@ export default function Home() {
                       <span className="text-[14px] text-[#6f6a63] font-normal mt-1 italic">ou R$ 69,95 cada no Pix</span>
                     </div>
                   </div>
-                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-[56px]">ECONOMIA DE R$ 19,90</span>
+                  <span className="offer-card-highlight text-[12px] font-extrabold text-[#e01b2f] uppercase tracking-[0.08em] mb-8">ECONOMIA DE R$ 19,90</span>
                   
-                  <Button asChild className="offer-card-button h-[44px] bg-[#e01b2f] text-white hover:bg-[#e01b2f]/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px] border-none">
-                    <a href="#reserva">APROVEITAR KIT</a>
-                  </Button>
+                  <div className="mt-auto w-full">
+                    <Button asChild className="offer-card-button h-[44px] bg-[#e01b2f] text-white hover:bg-[#e01b2f]/90 w-full max-w-[380px] rounded-full mx-auto font-extrabold uppercase tracking-[0.12em] text-[14px] border-none flex">
+                      <a href="#reserva">APROVEITAR KIT</a>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -505,26 +528,6 @@ export default function Home() {
         <section id="reserva" className="py-24 bg-white scroll-mt-20 gsap-reveal">
           <div className="container mx-auto px-6">
             <OrderForm />
-          </div>
-        </section>
-
-        <section id="faq" className="py-24 bg-white scroll-mt-20 gsap-reveal">
-          <div className="container mx-auto px-6 max-w-2xl">
-            <h3 className="text-center text-black uppercase mb-12 text-[48px] lg:text-[56px]">Perguntas Frequentes</h3>
-            {Accordion && (
-              <Accordion type="single" collapsible className="w-full space-y-4">
-                {FAQ_ITEMS.map((item, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="border rounded-none px-6 py-1 bg-white">
-                    <AccordionTrigger className="text-left font-medium uppercase text-[18px] tracking-widest hover:no-underline font-body text-black">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-black font-normal text-base leading-relaxed font-body">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            )}
           </div>
         </section>
       </main>
