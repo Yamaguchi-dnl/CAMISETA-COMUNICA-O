@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm, useWatch, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -388,6 +389,36 @@ ${itemsList}
                 </FormItem>
               )}
             />
+
+            {/* Pix QR Code Section */}
+            {summary.isPix && (
+              <div className="mt-12 p-7 lg:p-10 bg-white border border-[#e6e6e6] rounded-[16px] max-w-[420px] mx-auto text-center shadow-sm animate-in fade-in zoom-in-95 duration-500">
+                <h3 className="text-[22px] font-semibold text-black mb-1 font-body">Pagamento via Pix</h3>
+                <p className="text-[13px] text-[#6f6a63] mb-6 font-medium">Escaneie o QR Code abaixo para realizar o pagamento.</p>
+                
+                <div className="flex flex-col items-center gap-5">
+                  <div className="text-[18px] font-bold text-black font-body">
+                    {summary.quantity === 1 ? 'R$ 74,90' : 'R$ 139,90'}
+                  </div>
+                  
+                  <div className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#fdfbf7] flex items-center justify-center border border-[#f0f0f0] overflow-hidden group">
+                    <Image 
+                      src={summary.quantity === 1 ? '/pix-7490.png' : '/pix-13990.png'} 
+                      alt="QR Code Pix"
+                      fill
+                      className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[10px] font-bold text-accent uppercase tracking-[0.15em]">
+                      {summary.quantity === 1 ? 'PIX - 1 CAMISETA' : 'PIX - 2 CAMISETAS (PROMO)'}
+                    </span>
+                    <p className="text-[9px] text-[#6f6a63] font-bold uppercase tracking-tighter">* Valor sem acréscimo de tamanho XGG</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <FormField
               control={form.control}
