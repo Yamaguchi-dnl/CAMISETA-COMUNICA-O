@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Minus, Plus, CreditCard, Smartphone, Info, Copy } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone, Info, Copy, CheckCircle2, MessageCircle } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
@@ -48,6 +48,8 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function OrderForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [orderData, setOrderData] = useState<any>(null);
   const { toast } = useToast();
   const db = useFirestore();
 
@@ -143,7 +145,7 @@ export function OrderForm() {
     const orderRef = doc(collection(db, "orders"));
     const orderId = orderRef.id;
 
-    const orderData = {
+    const data = {
       id: orderId,
       customerName: values.nome,
       customerWhatsapp: values.whatsapp,
@@ -156,68 +158,159 @@ export function OrderForm() {
       totalAmount: summary.total
     };
 
-    setDoc(orderRef, orderData)
+    setDoc(orderRef, data)
+      .then(() => {
+        setOrderData(data);
+        setIsSubmitted(true);
+        setIsSubmitting(false);
+        window.scrollTo({ top: document.getElementById('reserva')?.offsetTop || 0, behavior: 'smooth' });
+      })
       .catch(async (error) => {
         errorEmitter.emit('permission-error', new FirestorePermissionError({
           path: `orders/${orderId}`,
           operation: 'create',
-          requestResourceData: orderData
+          requestResourceData: data
         }));
+        setIsSubmitting(false);
       });
+  }
+
+  const handleWhatsAppRedirect = () => {
+    if (!orderData) return;
 
     const phoneNumber = '5541996692392'; 
-    
-    const itemsList = values.items.map((item, idx) => 
+    const itemsList = orderData.items.map((item: any, idx: number) => 
       `Camiseta ${idx + 1}: ${item.produto} (${item.tamanho}${item.tamanho === 'XGG' ? ' - +R$3,00' : ''})`
     ).join('\n');
 
-    const message = `Olá! Quero reservar minha camiseta da IAP Barreirinha.
+    const message = `Olá! Quero finalizar minha reserva da IAP Barreirinha.
 
 *Dados do Pedido:*
-- *Nome:* ${values.nome}
-- *WhatsApp:* ${values.whatsapp}
-- *Quantidade:* ${values.quantidade}
+- *ID:* #${orderData.id.substring(0,8)}
+- *Nome:* ${orderData.customerName}
+- *Quantidade:* ${orderData.quantity}
 - *Itens:*
 ${itemsList}
 
-- *Pagamento:* ${values.pagamento === 'pix' ? 'Pix (Desconto aplicado)' : 'Crédito (3x s/ juros)'}
-- *Total Estimado:* R$ ${summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+- *Pagamento:* ${orderData.paymentMethod}
+- *Total:* R$ ${orderData.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
 
-*Observações:* ${values.observacoes || 'Nenhuma'}`;
+*Observações:* ${orderData.notes || 'Nenhuma'}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-    toast({
-      title: "Reserva Iniciada!",
-      description: "Abrindo o WhatsApp para finalizar...",
-    });
-
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
-      setIsSubmitting(false);
-    }, 800);
-  }
+    window.open(whatsappUrl, '_blank');
+  };
 
   const handleCopyPixKey = () => {
     navigator.clipboard.writeText('murilo-sabota@jim.com');
     toast({
       title: "Chave Copiada!",
-      description: "A chave Pix murilo-sabota@jim.com foi copiada para sua área de transferência.",
+      description: "A chave Pix murilo-sabota@jim.com foi copiada.",
     });
   };
 
+  // View de Confirmação e Pagamento
+  if (isSubmitted && orderData) {
+    return (
+      <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="bg-[#050505] p-10 lg:p-16 text-white text-center">
+          <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-6" />
+          <h2 className="font-headline text-[clamp(40px,6vw,72px)] leading-none uppercase mb-4 text-white">
+            RESERVA RECEBIDA!
+          </h2>
+          <p className="text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase">
+            PEDIDO #{orderData.id.substring(0, 8)}
+          </p>
+        </div>
+
+        <div className="p-8 lg:p-16 space-y-12">
+          {orderData.paymentMethod === 'Pix' && (
+            <div className="space-y-8">
+              <div className="text-center space-y-4">
+                <h3 className="text-[24px] font-bold text-black font-headline uppercase tracking-wide">PAGAMENTO VIA PIX</h3>
+                <p className="text-sm text-[#4f4f4f] max-w-[400px] mx-auto">
+                  Sua reserva já está no nosso sistema. Para agilizar a separação, realize o Pix abaixo e envie o comprovante.
+                </p>
+              </div>
+
+              <div className="p-8 lg:p-10 bg-white border border-[#e6e6e6] rounded-[16px] max-w-[420px] mx-auto text-center shadow-sm">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="text-[24px] font-bold text-black font-headline bg-[#f5f3ef] px-8 py-3 rounded-full border border-[#d7d1ca]">
+                    R$ {orderData.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </div>
+                  
+                  <div className="relative w-[240px] h-[240px] bg-[#fdfbf7] flex items-center justify-center border border-[#f0f0f0] overflow-hidden group">
+                    <Image 
+                      src="https://ik.imagekit.io/leosmc2zb/COMUNICA%C3%87%C3%83O/WhatsApp%20Image%202026-03-13%20at%2013.42.58.jpeg" 
+                      alt="QR Code Pix"
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+
+                  <div className="w-full space-y-2">
+                    <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-widest text-left ml-1">Chave Pix (E-mail)</p>
+                    <div className="flex items-center gap-2 p-3 bg-[#f5f3ef] border border-[#d7d1ca] rounded-none">
+                      <code className="flex-1 text-[11px] font-mono text-black truncate text-left">murilo-sabota@jim.com</code>
+                      <button type="button" onClick={handleCopyPixKey} className="p-1.5 hover:bg-black/5 transition-colors">
+                        <Copy className="h-4 w-4 text-black" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-[#fcfcfc] border border-[#d7d1ca] p-8 space-y-6">
+            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase border-b border-[#d7d1ca] pb-4">RESUMO DA RESERVA</h4>
+            <div className="space-y-3">
+              {orderData.items.map((item: any, idx: number) => (
+                <div key={idx} className="flex justify-between text-sm">
+                  <span className="text-[#4f4f4f] uppercase font-medium">{item.produto} - {item.tamanho}</span>
+                  <span className="font-bold">1 UN</span>
+                </div>
+              ))}
+            </div>
+            <Separator className="bg-[#d7d1ca]" />
+            <div className="flex justify-between items-end">
+              <span className="text-[10px] font-bold text-black uppercase">Valor Total</span>
+              <span className="text-4xl font-headline text-black">
+                R$ {orderData.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <Button 
+              onClick={handleWhatsAppRedirect}
+              className="w-full h-20 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-xl flex items-center justify-center gap-4 group"
+            >
+              <MessageCircle className="h-6 w-6 fill-current group-hover:scale-110 transition-transform" />
+              FINALIZAR NO WHATSAPP E ENVIAR COMPROVANTE
+            </Button>
+            <p className="text-[11px] text-[#6f6a63] text-center italic font-medium">
+              Sua reserva foi salva. Clique no botão acima para nos enviar os detalhes e o comprovante.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // View do Formulário
   return (
     <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white">
       <div className="bg-[#050505] p-10 lg:p-16 text-white">
         <span className="text-[10px] lg:text-[12px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-4 block">
-          FAÇA SUA RESERVA
+          ETAPA 1 DE 2
         </span>
         <h2 className="font-headline text-[clamp(48px,8vw,86px)] leading-[0.9] uppercase mb-8 text-white">
-          RESERVE SUA <br /> CAMISETA
+          INICIE SUA <br /> RESERVA
         </h2>
         <p className="text-[11px] lg:text-[13px] font-medium text-white/70 tracking-tight leading-relaxed">
-          R$ 74,90 no Pix &middot; R$ 79,90 no crédito (até 3x sem juros) &middot; Kit com 2 por R$ 139,90 no Pix
+          Preencha os dados abaixo. Na próxima etapa, você verá as informações de pagamento.
         </p>
       </div>
 
@@ -398,58 +491,6 @@ ${itemsList}
               )}
             />
 
-            {/* Pix QR Code Section */}
-            {summary.isPix && (
-              <div className="mt-12 p-7 lg:p-10 bg-white border border-[#e6e6e6] rounded-[16px] max-w-[420px] mx-auto text-center shadow-sm animate-in fade-in zoom-in-95 duration-500">
-                <h3 className="text-[22px] font-semibold text-black mb-1 font-body">Pagamento via Pix</h3>
-                <p className="text-[13px] text-[#6f6a63] mb-6 font-medium leading-relaxed">
-                  Abra o aplicativo do seu banco e escolha a opção <strong>"Pagar via QR Code"</strong>.
-                </p>
-                
-                <div className="flex flex-col items-center gap-5">
-                  <div className="text-[20px] font-bold text-black font-body bg-[#f5f3ef] px-6 py-3 rounded-full border border-[#d7d1ca]">
-                    R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                  </div>
-                  
-                  <div className="relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] bg-[#fdfbf7] flex items-center justify-center border border-[#f0f0f0] overflow-hidden group shadow-inner">
-                    <Image 
-                      src="https://ik.imagekit.io/leosmc2zb/COMUNICA%C3%87%C3%83O/WhatsApp%20Image%202026-03-13%20at%2013.42.58.jpeg" 
-                      alt="QR Code Pix"
-                      fill
-                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="w-full space-y-2 mt-4">
-                    <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest text-left ml-1">Chave Pix (Copia e Cola)</p>
-                    <div className="flex items-center gap-2 p-3 bg-[#f5f3ef] border border-[#d7d1ca] rounded-none group/key">
-                      <code className="flex-1 text-[11px] font-mono text-black truncate text-left">murilo-sabota@jim.com</code>
-                      <button 
-                        type="button"
-                        onClick={handleCopyPixKey}
-                        className="p-1.5 hover:bg-black/5 transition-colors"
-                        title="Copiar Chave"
-                      >
-                        <Copy className="h-4 w-4 text-black" />
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col gap-3 pt-6 border-t border-[#f0f0f0] w-full mt-2">
-                    <div className="flex items-center justify-center gap-2 text-accent">
-                      <Smartphone className="h-4 w-4" />
-                      <p className="text-[11px] font-bold uppercase tracking-tight">
-                        Envie o comprovante pelo WhatsApp.
-                      </p>
-                    </div>
-                    <p className="text-[9px] text-[#6f6a63] font-bold uppercase tracking-tighter">
-                      * O valor acima já inclui todos os descontos e acréscimos.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
             <FormField
               control={form.control}
               name="observacoes"
@@ -470,19 +511,16 @@ ${itemsList}
 
             <div className="bg-[#fcfcfc] border border-[#d7d1ca] p-8 space-y-4">
               <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#6f6a63] uppercase mb-6">RESUMO DO PEDIDO</h4>
-              
               <div className="flex justify-between items-center text-sm">
                 <span className="text-[#6f6a63]">Quantidade</span>
                 <span className="font-bold text-black">{summary.quantity} {summary.quantity === 1 ? 'peça' : 'peças'}</span>
               </div>
-              
               <div className="flex justify-between items-center text-sm">
                 <span className="text-[#6f6a63]">Pagamento</span>
                 <span className="font-bold text-black uppercase tracking-wider text-[11px]">
                   {summary.isPix ? 'Pix' : 'Crédito'}
                 </span>
               </div>
-
               {summary.extraXGG > 0 && (
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-[#6f6a63]">Acréscimo XGG</span>
@@ -491,18 +529,7 @@ ${itemsList}
                   </span>
                 </div>
               )}
-
-              {summary.isPix && (
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-[#6f6a63]">Benefício</span>
-                  <span className="text-green-600 font-bold uppercase tracking-wider text-[11px]">
-                    {summary.isKit ? 'Preço de Kit Aplicado' : 'Desconto Pix Ativo'}
-                  </span>
-                </div>
-              )}
-
               <Separator className="bg-[#d7d1ca] my-6" />
-
               <div className="flex justify-between items-end">
                 <span className="text-[10px] font-bold tracking-[0.1em] text-black uppercase mb-1">Total estimado</span>
                 <span className="text-4xl font-headline text-black">
@@ -513,15 +540,15 @@ ${itemsList}
 
             <Button 
               type="submit" 
-              className="w-full h-16 bg-[#050505] hover:bg-accent text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-lg hover:shadow-accent/20 active:scale-[0.98]"
+              className="w-full h-16 bg-[#050505] hover:bg-accent text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-lg active:scale-[0.98]"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'PROCESSANDO...' : 'FINALIZAR NO WHATSAPP'}
+              {isSubmitting ? 'SALVANDO RESERVA...' : 'FAZER RESERVA AGORA'}
             </Button>
             
             <p className="text-[11px] text-[#6f6a63] text-center italic font-medium">
-              Sua reserva será confirmada pela nossa equipe via WhatsApp. <br className="hidden sm:block" />
-              O pagamento é feito no momento da retirada ou entrega combinada.
+              Ao clicar em "Fazer Reserva", seus dados serão salvos e <br className="hidden sm:block" />
+              você será levado para a tela de pagamento e confirmação via WhatsApp.
             </p>
           </form>
         </Form>
