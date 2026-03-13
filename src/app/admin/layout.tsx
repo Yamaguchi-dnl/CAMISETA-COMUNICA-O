@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminTopbar } from '@/components/admin/AdminTopbar';
@@ -12,6 +13,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const isLoginPage = pathname === '/admin/login';
 
   // Se for página de login, renderiza sem o layout do dashboard
@@ -27,9 +29,9 @@ export default function AdminLayout({
   return (
     <AuthGuard>
       <div className="flex min-h-screen bg-[#f5f3ef] font-body text-black relative z-[2000]">
-        <AdminSidebar />
-        <div className="flex-1 flex flex-col min-w-0">
-          <AdminTopbar />
+        <AdminSidebar isCollapsed={isSidebarCollapsed} />
+        <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
+          <AdminTopbar onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} />
           <main className="flex-1 p-6 lg:p-10 overflow-auto">
             {children}
           </main>
