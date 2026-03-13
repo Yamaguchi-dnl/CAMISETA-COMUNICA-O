@@ -210,7 +210,6 @@ ${itemsList}
     });
   };
 
-  // View de Confirmação e Pagamento
   if (isSubmitted && orderData) {
     const isPix = orderData.paymentMethod === 'Pix';
 
@@ -287,10 +286,12 @@ ${itemsList}
           <div className="space-y-4">
             <Button 
               onClick={handleWhatsAppRedirect}
-              className="w-full h-20 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-xl flex items-center justify-center gap-4 group"
+              className="w-full h-20 bg-accent hover:bg-accent/90 text-white rounded-full font-bold uppercase tracking-[0.15em] text-[10px] sm:text-sm transition-all shadow-xl flex items-center justify-center gap-4 group px-4"
             >
-              <MessageCircle className="h-6 w-6 fill-current group-hover:scale-110 transition-transform" />
-              {isPix ? 'FINALIZAR NO WHATSAPP E ENVIAR COMPROVANTE' : 'CONTINUAR PARA PAGAMENTO PELO WHATSAPP'}
+              <MessageCircle className="h-6 w-6 fill-current group-hover:scale-110 transition-transform shrink-0" />
+              <span className="text-center leading-tight">
+                {isPix ? 'FINALIZAR NO WHATSAPP E ENVIAR COMPROVANTE' : 'CONTINUAR PARA PAGAMENTO PELO WHATSAPP'}
+              </span>
             </Button>
             <p className="text-[11px] text-[#6f6a63] text-center italic font-medium">
               {isPix 
@@ -303,7 +304,6 @@ ${itemsList}
     );
   }
 
-  // View do Formulário
   return (
     <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white">
       <div className="bg-[#050505] p-10 lg:p-16 text-white">
