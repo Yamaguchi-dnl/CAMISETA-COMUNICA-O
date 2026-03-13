@@ -28,26 +28,26 @@
           "description": "A detailed description of the t-shirt, including its characteristics and purpose."
         },
         "price": {
-          "type": "string",
-          "description": "The selling price of the t-shirt. Stored as a string to accommodate varying formats or 'definir' status."
+          "type": "number",
+          "description": "The unit price of the t-shirt."
         },
         "imageUrls": {
           "type": "array",
-          "description": "An array of URLs or paths to images of the product, including a main image and optional additional views.",
+          "description": "An array of URLs or paths to images of the product.",
           "items": {
             "type": "string"
           }
         },
         "availableSizes": {
           "type": "array",
-          "description": "An array of strings representing the sizes available for this t-shirt (e.g., 'PP', 'P', 'M', 'G', 'GG', 'XGG').",
+          "description": "An array of strings representing the sizes available.",
           "items": {
             "type": "string"
           }
         },
         "isActive": {
           "type": "boolean",
-          "description": "A boolean indicating whether the product is currently active and visible in the store."
+          "description": "A boolean indicating whether the product is currently active."
         }
       },
       "required": [
@@ -66,63 +66,70 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Order",
       "type": "object",
-      "description": "Represents a customer's reservation or purchase request for a t-shirt, initiated on the site and finalized via WhatsApp.",
+      "description": "Represents a customer's reservation for t-shirts.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the Order entity."
-        },
-        "productId": {
-          "type": "string",
-          "description": "Reference to the Product entity that was ordered. (Relationship: Product 1:N Order)"
+          "description": "Unique identifier for the Order."
         },
         "customerName": {
           "type": "string",
-          "description": "The full name of the customer placing the order."
+          "description": "The full name of the customer."
         },
         "customerWhatsapp": {
           "type": "string",
-          "description": "The WhatsApp contact number provided by the customer.",
+          "description": "The WhatsApp contact number.",
           "format": "tel"
-        },
-        "selectedSize": {
-          "type": "string",
-          "description": "The specific size of the t-shirt selected by the customer."
         },
         "quantity": {
           "type": "number",
-          "description": "The number of t-shirts of this model ordered by the customer."
+          "description": "Total number of items ordered."
+        },
+        "items": {
+          "type": "array",
+          "description": "List of specific products and sizes selected.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "produto": { "type": "string" },
+              "tamanho": { "type": "string" }
+            }
+          }
         },
         "paymentMethod": {
           "type": "string",
-          "description": "The chosen payment method by the customer (e.g., 'Pix', 'Parcelado')."
+          "description": "Chosen payment method (e.g., 'Pix', 'Crédito')."
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "The total calculated value of the order."
         },
         "notes": {
           "type": "string",
-          "description": "Any additional observations or special requests provided by the customer."
+          "description": "Customer observations."
         },
         "createdAt": {
           "type": "string",
-          "description": "Timestamp indicating when the order was created and saved in the system.",
+          "description": "Timestamp of order creation.",
           "format": "date-time"
         },
         "status": {
           "type": "string",
-          "description": "The current processing status of the order (e.g., 'Pending WhatsApp', 'Confirmed', 'Cancelled')."
+          "description": "Current status (e.g., 'Pendente WhatsApp', 'Pago', 'Concluído')."
         },
         "receiptUrl": {
           "type": "string",
-          "description": "Optional URL to the payment receipt attached by the administrator."
+          "description": "URL link to the payment receipt image attached by the admin."
         }
       },
       "required": [
         "id",
-        "productId",
         "customerName",
         "customerWhatsapp",
-        "selectedSize",
         "quantity",
+        "items",
         "paymentMethod",
+        "totalAmount",
         "createdAt",
         "status"
       ]
@@ -143,11 +150,11 @@
           "schema": {
             "$ref": "#/backend/entities/Product"
           },
-          "description": "Collection storing details for each t-shirt available for sale. All documents in this collection are publicly readable. No denormalized authorization fields are required as products are public. Corresponds to the 'produtos' requirement.",
+          "description": "Collection storing product details.",
           "params": [
             {
               "name": "productId",
-              "description": "Unique identifier for a specific product."
+              "description": "Product ID."
             }
           ]
         }
@@ -159,16 +166,15 @@
           "schema": {
             "$ref": "#/backend/entities/Order"
           },
-          "description": "Collection storing customer order and reservation requests. Documents are created by anonymous users. Each order document is self-contained, including all necessary customer and product reference details. Corresponds to the 'pedidos_ou_reservas' requirement. Includes denormalized 'productId' for direct linkage to the product without requiring parent data for authorization.",
+          "description": "Collection storing customer orders and their payment receipts.",
           "params": [
             {
               "name": "orderId",
-              "description": "Unique identifier for a specific customer order."
+              "description": "Order ID."
             }
           ]
         }
       }
-    ],
-    "reasoning": "The Firestore structure for the 'IAP Camisetas' mini e-commerce application is designed following strict security and scalability principles. Two top-level collections are proposed: `/products` and `/orders`.\n\n**Authorization Independence:**\n*   **Products:** The `/products/{productId}` collection stores public product information. Since all product data is intended to be publicly readable, no complex authorization dependencies or denormalization for authorization is required. Each product document is fully self-contained.\n*   **Orders:** The `/orders/{orderId}` collection stores customer reservation/purchase requests. These orders are created by anonymous users (indicated by `request.auth == null`). The authorization for creation is independent; it only checks if the user is unauthenticated. For any future administrative read access, an admin role would be defined in a separate collection (e.g., `/roles_admin/{uid}`), making order document access independent of other data. The order document itself contains all necessary details (`productId`, `customerName`, `customerWhatsapp`, etc.) without requiring `get()` calls to other documents for authorization purposes.\n\n**Support for QAPs (Queries Are Not Permissions):**\n*   **Products:** The `/products` collection allows `list` operations by all users. Security rules for products would permit all reads (`allow read: if true;`). Client applications are responsible for filtering products (e.g., by `isActive` status) or implementing specific indexes if needed. This design ensures that security rules do not act as filters, maintaining Firestore's efficiency and predictability for queries.\n*   **Orders:** The `/orders` collection is designed for anonymous `create` operations. `list` operations (e.g., for an administrative interface) would be restricted to authorized admin users. This ensures that a `list` query for orders by an admin would retrieve only relevant data based on explicit database roles, rather than filtering results within the rules themselves, adhering to QAP principles. The rule for creation (`allow create: if request.auth == null;`) is simple and doesn't filter data.\n\n**Structural Segregation and Access Modeling:**\n*   `/products` is a global collection for all products, with a homogeneous 'public read' security posture.\n*   `/orders` is a global collection for all orders, with a homogeneous 'anonymous write, admin read' security posture. This segregation simplifies security rules significantly as all documents within a collection share the same access requirements. Paths are descriptive (`{productId}`, `{orderId}`), and entities are self-contained where authorization dictates (e.g., `productId` in `Order` links to `Product` but doesn't require `Product` data for `Order` authorization)."
+    ]
   }
 }
