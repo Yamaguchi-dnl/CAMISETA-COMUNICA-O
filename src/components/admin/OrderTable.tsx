@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { StatusBadge } from './StatusBadge';
-import { Eye, ExternalLink } from 'lucide-react';
+import { Eye, ExternalLink, Image as ImageIcon } from 'lucide-react';
 
 interface OrderTableProps {
   orders: any[];
@@ -39,7 +39,10 @@ export function OrderTable({ orders }: OrderTableProps) {
               </td>
               <td className="px-6 py-5">
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold text-black uppercase tracking-tight">{order.customerName}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-black uppercase tracking-tight">{order.customerName}</span>
+                    {order.receiptUrl && <ImageIcon className="h-3 w-3 text-green-600" title="Possui comprovante" />}
+                  </div>
                   <span className="text-[10px] font-medium text-[#6f6a63]">{order.customerWhatsapp}</span>
                 </div>
               </td>

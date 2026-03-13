@@ -1,4 +1,3 @@
-
 'use client';
 
 import { use, useState } from 'react';
@@ -7,7 +6,7 @@ import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck, FileText, Link as LinkIcon, ExternalLink, X } from 'lucide-react';
+import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck, FileText, Link as LinkIcon, ExternalLink, X, Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 
@@ -41,7 +40,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     setIsUpdating(true);
     try {
       await updateDoc(doc(db, 'orders', id), { receiptUrl: receiptInput.trim() });
-      toast({ title: "Comprovante Salvo", description: "O link do comprovante foi anexado ao pedido." });
+      toast({ title: "Comprovante Salvo", description: "O comprovante foi anexado ao pedido." });
       setShowReceiptInput(false);
       setReceiptInput('');
     } catch (error) {
@@ -64,8 +63,8 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     }
   };
 
-  if (isLoading) return <div className="p-20 text-center animate-pulse text-[#6f6a63] font-bold uppercase tracking-widest">Carregando detalhes...</div>;
-  if (!order) return <div className="p-20 text-center text-[#6f6a63] font-bold uppercase tracking-widest">Pedido não encontrado.</div>;
+  if (isLoading) return <div className="p-20 text-center animate-pulse text-[#6f6a63] font-bold uppercase tracking-widest text-sm">Carregando detalhes...</div>;
+  if (!order) return <div className="p-20 text-center text-[#6f6a63] font-bold uppercase tracking-widest text-sm">Pedido não encontrado.</div>;
 
   return (
     <div className="space-y-10">
@@ -136,21 +135,20 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
             </div>
           </div>
 
-          {/* Seção de Comprovante */}
           <section className="bg-white border border-[#d7d1ca] p-8 lg:p-12">
             <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-8 flex items-center gap-2">
-              <FileText className="h-4 w-4" /> Comprovante de Pagamento
+              <ImageIcon className="h-4 w-4" /> Comprovante de Pagamento
             </h3>
 
             {order.receiptUrl ? (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div className="flex items-center justify-between p-6 bg-[#f5f3ef] border border-[#d7d1ca]">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-white flex items-center justify-center border border-[#d7d1ca]">
-                      <LinkIcon className="h-5 w-5 text-black" />
+                      <ImageIcon className="h-5 w-5 text-black" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Link do Anexo</p>
+                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Visualizar Comprovante</p>
                       <a 
                         href={order.receiptUrl} 
                         target="_blank" 
@@ -163,14 +161,6 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   </div>
                   <div className="flex gap-2">
                     <Button 
-                      asChild
-                      className="bg-black hover:bg-accent text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-10 px-4"
-                    >
-                      <a href={order.receiptUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" /> ABRIR
-                      </a>
-                    </Button>
-                    <Button 
                       variant="ghost"
                       onClick={handleRemoveReceipt}
                       disabled={isUpdating}
@@ -181,32 +171,33 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   </div>
                 </div>
                 
-                {/* Preview simples se for imagem comum */}
-                {(order.receiptUrl.match(/\.(jpeg|jpg|gif|png)$/) != null || order.receiptUrl.includes('imagekit.io')) && (
-                   <div className="relative aspect-video w-full max-w-2xl border border-[#d7d1ca] overflow-hidden bg-[#fafafa]">
-                      <img 
-                        src={order.receiptUrl} 
-                        alt="Comprovante" 
-                        className="w-full h-full object-contain"
-                      />
+                <div className="relative w-full border border-[#d7d1ca] overflow-hidden bg-[#fafafa] group">
+                   <img 
+                     src={order.receiptUrl} 
+                     alt="Comprovante" 
+                     className="w-full h-auto max-h-[800px] object-contain"
+                   />
+                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                      <span className="text-white text-[10px] font-bold uppercase tracking-widest border border-white px-4 py-2">Imagem do Comprovante</span>
                    </div>
-                )}
+                </div>
               </div>
             ) : (
               <div className="space-y-6">
                 {!showReceiptInput ? (
                   <div className="text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa]">
+                    <ImageIcon className="h-12 w-12 text-[#d7d1ca] mx-auto mb-4" />
                     <p className="text-xs text-[#6f6a63] mb-6 font-medium uppercase tracking-widest">Nenhum comprovante anexado</p>
                     <Button 
                       onClick={() => setShowReceiptInput(true)}
                       className="bg-white border border-black text-black hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-8"
                     >
-                      ANEXAR LINK DO COMPROVANTE
+                      ANEXAR COMPROVANTE (LINK)
                     </Button>
                   </div>
                 ) : (
                   <div className="p-8 border border-black space-y-4 animate-in fade-in duration-300">
-                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Insira o Link (WhatsApp, Drive, etc)</label>
+                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Cole o link da imagem (WhatsApp ou Nuvem)</label>
                     <div className="flex gap-3">
                       <Input 
                         placeholder="https://..." 
@@ -229,7 +220,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                         CANCELAR
                       </Button>
                     </div>
-                    <p className="text-[9px] text-[#6f6a63] italic font-medium">Você pode colar o link direto da imagem do WhatsApp ou de um repositório cloud.</p>
+                    <p className="text-[9px] text-[#6f6a63] italic font-medium">Você pode copiar o "link da imagem" diretamente de uma foto enviada no WhatsApp Web ou de qualquer repositório de imagem.</p>
                   </div>
                 )}
               </div>
@@ -238,7 +229,6 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
         </div>
 
         <div className="space-y-8">
-          {/* Ações Rápidas */}
           <section className="bg-white border border-black p-8">
             <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-6">Ações Rápidas</h3>
             <div className="space-y-3">
