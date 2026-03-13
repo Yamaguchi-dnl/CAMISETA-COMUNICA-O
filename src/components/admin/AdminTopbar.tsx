@@ -1,17 +1,18 @@
 'use client';
 
 import { useUser } from '@/firebase';
-import { Menu, User, Bell, PanelLeft, PanelLeftClose } from 'lucide-react';
+import { Menu, User, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { AdminSidebar } from './AdminSidebar';
 import { useState } from 'react';
 
 interface AdminTopbarProps {
+  isSidebarCollapsed?: boolean;
   onToggleSidebar?: () => void;
 }
 
-export function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
+export function AdminTopbar({ isSidebarCollapsed, onToggleSidebar }: AdminTopbarProps) {
   const { user } = useUser();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -37,10 +38,14 @@ export function AdminTopbar({ onToggleSidebar }: AdminTopbarProps) {
             variant="ghost" 
             size="icon" 
             onClick={onToggleSidebar}
-            className="text-black hover:bg-[#f5f3ef]"
-            title="Alternar Sidebar"
+            className="text-black hover:bg-[#f5f3ef] transition-transform active:scale-90"
+            title={isSidebarCollapsed ? "Expandir Sidebar" : "Recolher Sidebar"}
           >
-            <Menu className="h-5 w-5" />
+            {isSidebarCollapsed ? (
+              <ChevronRight className="h-5 w-5" />
+            ) : (
+              <ChevronLeft className="h-5 w-5" />
+            )}
           </Button>
         </div>
 

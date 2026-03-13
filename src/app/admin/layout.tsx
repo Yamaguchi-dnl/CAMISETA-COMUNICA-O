@@ -31,7 +31,10 @@ export default function AdminLayout({
       <div className="flex min-h-screen bg-[#f5f3ef] font-body text-black relative z-[2000]">
         <AdminSidebar isCollapsed={isSidebarCollapsed} />
         <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
-          <AdminTopbar onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} />
+          <AdminTopbar 
+            isSidebarCollapsed={isSidebarCollapsed}
+            onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+          />
           <main className="flex-1 p-6 lg:p-10 overflow-auto">
             {children}
           </main>
