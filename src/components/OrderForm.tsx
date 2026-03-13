@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Minus, Plus, CreditCard, Smartphone, Info, Copy } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone, Info, Copy, QrCode } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
@@ -402,24 +402,26 @@ ${itemsList}
             {summary.isPix && (
               <div className="mt-12 p-7 lg:p-10 bg-white border border-[#e6e6e6] rounded-[16px] max-w-[420px] mx-auto text-center shadow-sm animate-in fade-in zoom-in-95 duration-500">
                 <h3 className="text-[22px] font-semibold text-black mb-1 font-body">Pagamento via Pix</h3>
-                <p className="text-[13px] text-[#6f6a63] mb-6 font-medium">Escaneie o QR Code ou copie a chave abaixo.</p>
+                <p className="text-[13px] text-[#6f6a63] mb-6 font-medium leading-relaxed">
+                  Abra o aplicativo do seu banco e escolha a opção <strong>"Pagar via QR Code"</strong>.
+                </p>
                 
                 <div className="flex flex-col items-center gap-5">
-                  <div className="text-[18px] font-bold text-black font-body">
-                    {summary.quantity === 1 ? 'R$ 74,90' : 'R$ 139,90'}
+                  <div className="text-[20px] font-bold text-black font-body bg-[#f5f3ef] px-6 py-3 rounded-full border border-[#d7d1ca]">
+                    R$ {summary.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </div>
                   
-                  <div className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#fdfbf7] flex items-center justify-center border border-[#f0f0f0] overflow-hidden group">
+                  <div className="relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] bg-[#fdfbf7] flex items-center justify-center border border-[#f0f0f0] overflow-hidden group shadow-inner">
                     <Image 
-                      src={summary.quantity === 1 ? '/pix-7490.png' : '/pix-13990.png'} 
+                      src="https://ik.imagekit.io/leosmc2zb/COMUNICA%C3%87%C3%83O/WhatsApp%20Image%202026-03-13%20at%2013.42.58.jpeg" 
                       alt="QR Code Pix"
                       fill
-                      className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
                   <div className="w-full space-y-2 mt-4">
-                    <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest text-left ml-1">Chave Pix (E-mail)</p>
+                    <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest text-left ml-1">Chave Pix (Copia e Cola)</p>
                     <div className="flex items-center gap-2 p-3 bg-[#f5f3ef] border border-[#d7d1ca] rounded-none group/key">
                       <code className="flex-1 text-[11px] font-mono text-black truncate text-left">murilo-sabota@jim.com</code>
                       <button 
@@ -434,15 +436,15 @@ ${itemsList}
                   </div>
                   
                   <div className="flex flex-col gap-3 pt-6 border-t border-[#f0f0f0] w-full mt-2">
-                    <p className="text-[11px] text-accent font-bold uppercase tracking-tight leading-relaxed">
-                      IMPORTANTE: ENVIE O COMPROVANTE PELO WHATSAPP APÓS O PAGAMENTO.
-                    </p>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-[0.15em]">
-                        {summary.quantity === 1 ? 'PIX - 1 CAMISETA' : 'PIX - 2 CAMISETAS (PROMO)'}
-                      </span>
-                      <p className="text-[9px] text-[#6f6a63] font-bold uppercase tracking-tighter">* Valor sem acréscimo de tamanho XGG</p>
+                    <div className="flex items-center justify-center gap-2 text-accent">
+                      <Smartphone className="h-4 w-4" />
+                      <p className="text-[11px] font-bold uppercase tracking-tight">
+                        Envie o comprovante pelo WhatsApp.
+                      </p>
                     </div>
+                    <p className="text-[9px] text-[#6f6a63] font-bold uppercase tracking-tighter">
+                      * O valor acima já inclui todos os descontos e acréscimos.
+                    </p>
                   </div>
                 </div>
               </div>
