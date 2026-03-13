@@ -1,7 +1,7 @@
 'use client';
 
 import { collection, query, orderBy } from 'firebase/firestore';
-import { useFirestore, useCollection } from '@/firebase';
+import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { OrderTable } from '@/components/admin/OrderTable';
 import { Input } from '@/components/ui/input';
 import { useState, useMemo } from 'react';
@@ -14,7 +14,7 @@ export default function OrdersPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('Todos');
 
-  const ordersQuery = useMemo(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
+  const ordersQuery = useMemoFirebase(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
   const { data: orders, isLoading } = useCollection(ordersQuery);
 
   const filteredOrders = useMemo(() => {

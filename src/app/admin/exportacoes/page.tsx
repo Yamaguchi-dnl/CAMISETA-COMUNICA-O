@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { collection, query, orderBy, where } from 'firebase/firestore';
-import { useFirestore, useCollection } from '@/firebase';
+import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Download, FileText, Table as TableIcon, Filter, AlertCircle } from 'lucide-react';
@@ -15,7 +15,7 @@ export default function ExportPage() {
   const [status, setStatus] = useState('Todos');
   const [period, setPeriod] = useState('Total');
 
-  const ordersQuery = useMemo(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
+  const ordersQuery = useMemoFirebase(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
   const { data: orders, isLoading } = useCollection(ordersQuery);
 
   const filteredOrders = useMemo(() => {

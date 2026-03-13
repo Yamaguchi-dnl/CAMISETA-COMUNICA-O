@@ -1,7 +1,7 @@
 'use client';
 
 import { collection, query, orderBy } from 'firebase/firestore';
-import { useFirestore, useCollection } from '@/firebase';
+import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShoppingBag, Clock, CheckCircle, Truck, XCircle, DollarSign } from 'lucide-react';
 import { OrderTable } from '@/components/admin/OrderTable';
@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 
 export default function DashboardPage() {
   const db = useFirestore();
-  const ordersQuery = useMemo(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
+  const ordersQuery = useMemoFirebase(() => query(collection(db, 'orders'), orderBy('createdAt', 'desc')), [db]);
   const { data: orders, isLoading } = useCollection(ordersQuery);
 
   const stats = useMemo(() => {

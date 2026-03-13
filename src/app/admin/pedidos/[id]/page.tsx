@@ -2,7 +2,7 @@
 
 import { use } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
-import { useFirestore, useDoc } from '@/firebase';
+import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, RefreshCw } from 'lucide-react';
@@ -14,7 +14,10 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
   const { id } = use(params);
   const db = useFirestore();
   const { toast } = useToast();
-  const { data: order, isLoading } = useDoc(doc(db, 'orders', id));
+  
+  const orderRef = useMemoFirebase(() => doc(db, 'orders', id), [db, id]);
+  const { data: order, isLoading } = useDoc(orderRef);
+  
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleStatusChange = async (newStatus: string) => {
