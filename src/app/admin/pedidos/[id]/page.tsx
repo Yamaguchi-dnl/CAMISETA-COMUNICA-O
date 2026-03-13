@@ -6,7 +6,7 @@ import { useFirestore, useDoc, useMemoFirebase, errorEmitter, FirestorePermissio
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { ChevronLeft, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, PackageCheck, Image as ImageIcon, X, Upload, ExternalLink, AlertCircle } from 'lucide-react';
+import { ChevronLeft, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, PackageCheck, Image as ImageIcon, X, Upload, ExternalLink, AlertCircle, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 
@@ -22,6 +22,8 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
   const [isUpdating, setIsUpdating] = useState(false);
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkInput, setLinkInput] = useState('');
+
+  const isPdf = order?.receiptUrl?.startsWith('data:application/pdf') || order?.receiptUrl?.toLowerCase().endsWith('.pdf');
 
   const handleStatusChange = async (newStatus: string) => {
     if (!order) return;
@@ -45,7 +47,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
       toast({
         variant: "destructive",
         title: "Arquivo muito grande",
-        description: "Por favor, anexe uma imagem de até 800KB.",
+        description: "Por favor, anexe um arquivo de até 800KB.",
       });
       return;
     }
@@ -58,7 +60,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
       
       updateDoc(doc(db, 'orders', id), data)
         .then(() => {
-          toast({ title: "Comprovante Anexado", description: "A imagem foi salva com sucesso." });
+          toast({ title: "Arquivo Anexado", description: "O comprovante foi salvo com sucesso." });
         })
         .catch(async (error) => {
           errorEmitter.emit('permission-error', new FirestorePermissionError({
@@ -188,15 +190,17 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 <div className="flex items-center justify-between p-6 bg-[#f5f3ef] border border-[#d7d1ca]">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-white flex items-center justify-center border border-[#d7d1ca]">
-                      <ImageIcon className="h-5 w-5 text-black" />
+                      {isPdf ? <FileText className="h-5 w-5 text-black" /> : <ImageIcon className="h-5 w-5 text-black" />}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Comprovante Anexado</p>
+                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">
+                        {isPdf ? 'Comprovante em PDF' : 'Comprovante Imagem'}
+                      </p>
                       <button 
                         onClick={() => window.open(order.receiptUrl, '_blank')}
-                        className="text-sm font-bold text-black hover:text-accent underline underline-offset-4 decoration-[#d7d1ca] truncate block max-w-md"
+                        className="text-sm font-bold text-black hover:text-accent underline underline-offset-4 decoration-[#d7d1ca] truncate block max-w-md text-left"
                       >
-                        Visualizar Original
+                        Abrir Documento Original
                       </button>
                     </div>
                   </div>
@@ -210,13 +214,26 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   </Button>
                 </div>
                 
-                <div className="relative w-full border border-[#d7d1ca] overflow-hidden bg-[#fafafa] flex justify-center">
-                   <img 
-                     src={order.receiptUrl} 
-                     alt="Comprovante" 
-                     className="max-w-full h-auto max-h-[800px] object-contain"
-                   />
-                </div>
+                {isPdf ? (
+                  <div className="p-12 border border-[#d7d1ca] bg-[#fafafa] flex flex-col items-center justify-center text-center">
+                    <FileText className="h-16 w-16 text-[#d7d1ca] mb-4" />
+                    <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest mb-6">Documento PDF anexado</p>
+                    <Button 
+                      onClick={() => window.open(order.receiptUrl, '_blank')}
+                      className="bg-black text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-10 hover:bg-accent transition-colors"
+                    >
+                      VISUALIZAR PDF COMPLETO
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="relative w-full border border-[#d7d1ca] overflow-hidden bg-[#fafafa] flex justify-center">
+                     <img 
+                       src={order.receiptUrl} 
+                       alt="Comprovante" 
+                       className="max-w-full h-auto max-h-[800px] object-contain"
+                     />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="space-y-6">
@@ -227,12 +244,12 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                       className="cursor-pointer text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa] hover:bg-[#f5f3ef] transition-colors group"
                     >
                       <Upload className="h-12 w-12 text-[#d7d1ca] group-hover:text-black mx-auto mb-4 transition-colors" />
-                      <p className="text-[10px] text-[#6f6a63] font-bold uppercase tracking-widest">Anexar Arquivo Imagem</p>
+                      <p className="text-[10px] text-[#6f6a63] font-bold uppercase tracking-widest">Anexar Imagem ou PDF</p>
                       <input 
                         type="file" 
                         className="hidden" 
                         ref={fileInputRef} 
-                        accept="image/*"
+                        accept="image/*,application/pdf"
                         onChange={handleFileChange}
                       />
                     </div>
@@ -246,7 +263,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   </div>
                 ) : (
                   <div className="p-8 border border-black space-y-4 animate-in fade-in duration-300">
-                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Cole o link da imagem</label>
+                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Cole o link do arquivo (Imagem ou PDF)</label>
                     <div className="flex gap-3">
                       <Input 
                         placeholder="https://..." 
@@ -273,7 +290,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 )}
                 <div className="flex items-center gap-3 p-4 bg-amber-50 border border-amber-100">
                   <AlertCircle className="h-4 w-4 text-amber-600 shrink-0" />
-                  <p className="text-[10px] text-amber-800 font-medium italic">Dica: Se a foto estiver no WhatsApp Web, clique com o botão direito nela, escolha "Copiar link da imagem" e cole aqui no campo de Link.</p>
+                  <p className="text-[10px] text-amber-800 font-medium italic">Dica: Você pode anexar tanto fotos quanto documentos em PDF de até 800KB.</p>
                 </div>
               </div>
             )}
