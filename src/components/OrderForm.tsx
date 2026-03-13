@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Minus, Plus, CreditCard, Smartphone, Info, Copy, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone, Info, Copy, CheckCircle2 } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
@@ -286,9 +286,8 @@ ${itemsList}
           <div className="space-y-4">
             <Button 
               onClick={handleWhatsAppRedirect}
-              className="w-full h-20 bg-accent hover:bg-accent/90 text-white rounded-full font-bold uppercase tracking-[0.15em] text-[11px] sm:text-sm transition-all shadow-xl flex items-center justify-center gap-4 group px-4"
+              className="w-full h-20 bg-accent hover:bg-accent/90 text-white rounded-full font-bold uppercase tracking-[0.15em] text-[11px] sm:text-sm transition-all shadow-xl flex items-center justify-center group px-4"
             >
-              <MessageCircle className="h-6 w-6 fill-current group-hover:scale-110 transition-transform shrink-0" />
               <span className="text-center leading-tight">
                 {isPix ? (
                   <>FINALIZAR NO WHATSAPP <br className="sm:hidden" /> E ENVIAR COMPROVANTE</>
