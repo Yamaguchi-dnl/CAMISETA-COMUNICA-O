@@ -1,12 +1,12 @@
 'use client';
 
-import { use, useState } from 'react';
+import { use, useState, useRef } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
-import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
+import { useFirestore, useDoc, useMemoFirebase, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck, FileText, Link as LinkIcon, ExternalLink, X, Image as ImageIcon } from 'lucide-react';
+import { ChevronLeft, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, PackageCheck, Image as ImageIcon, X, Upload, ExternalLink, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 
@@ -14,13 +14,14 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
   const { id } = use(params);
   const db = useFirestore();
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const orderRef = useMemoFirebase(() => doc(db, 'orders', id), [db, id]);
   const { data: order, isLoading } = useDoc(orderRef);
   
   const [isUpdating, setIsUpdating] = useState(false);
-  const [receiptInput, setReceiptInput] = useState('');
-  const [showReceiptInput, setShowReceiptInput] = useState(false);
+  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [linkInput, setLinkInput] = useState('');
 
   const handleStatusChange = async (newStatus: string) => {
     if (!order) return;
@@ -35,19 +36,61 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     }
   };
 
-  const handleSaveReceipt = async () => {
-    if (!order || !receiptInput.trim()) return;
-    setIsUpdating(true);
-    try {
-      await updateDoc(doc(db, 'orders', id), { receiptUrl: receiptInput.trim() });
-      toast({ title: "Comprovante Salvo", description: "O comprovante foi anexado ao pedido." });
-      setShowReceiptInput(false);
-      setReceiptInput('');
-    } catch (error) {
-      toast({ variant: "destructive", title: "Erro ao salvar", description: "Tente novamente." });
-    } finally {
-      setIsUpdating(false);
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !order) return;
+
+    // Limite de 800KB para persistência em Base64 no Firestore
+    if (file.size > 800 * 1024) {
+      toast({
+        variant: "destructive",
+        title: "Arquivo muito grande",
+        description: "Por favor, anexe uma imagem de até 800KB.",
+      });
+      return;
     }
+
+    setIsUpdating(true);
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64String = reader.result as string;
+      const data = { receiptUrl: base64String };
+      
+      updateDoc(doc(db, 'orders', id), data)
+        .then(() => {
+          toast({ title: "Comprovante Anexado", description: "A imagem foi salva com sucesso." });
+        })
+        .catch(async (error) => {
+          errorEmitter.emit('permission-error', new FirestorePermissionError({
+            path: `orders/${id}`,
+            operation: 'update',
+            requestResourceData: data,
+          }));
+        })
+        .finally(() => setIsUpdating(false));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSaveLink = async () => {
+    if (!order || !linkInput.trim()) return;
+    setIsUpdating(true);
+    const data = { receiptUrl: linkInput.trim() };
+    
+    updateDoc(doc(db, 'orders', id), data)
+      .then(() => {
+        toast({ title: "Link Salvo", description: "O comprovante foi anexado via link." });
+        setShowLinkInput(false);
+        setLinkInput('');
+      })
+      .catch(async (error) => {
+        errorEmitter.emit('permission-error', new FirestorePermissionError({
+          path: `orders/${id}`,
+          operation: 'update',
+          requestResourceData: data,
+        }));
+      })
+      .finally(() => setIsUpdating(false));
   };
 
   const handleRemoveReceipt = async () => {
@@ -148,81 +191,90 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                       <ImageIcon className="h-5 w-5 text-black" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Visualizar Comprovante</p>
-                      <a 
-                        href={order.receiptUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Comprovante Anexado</p>
+                      <button 
+                        onClick={() => window.open(order.receiptUrl, '_blank')}
                         className="text-sm font-bold text-black hover:text-accent underline underline-offset-4 decoration-[#d7d1ca] truncate block max-w-md"
                       >
-                        {order.receiptUrl}
-                      </a>
+                        Visualizar Original
+                      </button>
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <Button 
-                      variant="ghost"
-                      onClick={handleRemoveReceipt}
-                      disabled={isUpdating}
-                      className="text-red-600 hover:bg-red-50 rounded-none h-10 w-10 p-0"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  <Button 
+                    variant="ghost"
+                    onClick={handleRemoveReceipt}
+                    disabled={isUpdating}
+                    className="text-red-600 hover:bg-red-50 rounded-none h-10 w-10 p-0"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
                 </div>
                 
-                <div className="relative w-full border border-[#d7d1ca] overflow-hidden bg-[#fafafa] group">
+                <div className="relative w-full border border-[#d7d1ca] overflow-hidden bg-[#fafafa] flex justify-center">
                    <img 
                      src={order.receiptUrl} 
                      alt="Comprovante" 
-                     className="w-full h-auto max-h-[800px] object-contain"
+                     className="max-w-full h-auto max-h-[800px] object-contain"
                    />
-                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                      <span className="text-white text-[10px] font-bold uppercase tracking-widest border border-white px-4 py-2">Imagem do Comprovante</span>
-                   </div>
                 </div>
               </div>
             ) : (
               <div className="space-y-6">
-                {!showReceiptInput ? (
-                  <div className="text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa]">
-                    <ImageIcon className="h-12 w-12 text-[#d7d1ca] mx-auto mb-4" />
-                    <p className="text-xs text-[#6f6a63] mb-6 font-medium uppercase tracking-widest">Nenhum comprovante anexado</p>
-                    <Button 
-                      onClick={() => setShowReceiptInput(true)}
-                      className="bg-white border border-black text-black hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-8"
+                {!showLinkInput ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div 
+                      onClick={() => fileInputRef.current?.click()}
+                      className="cursor-pointer text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa] hover:bg-[#f5f3ef] transition-colors group"
                     >
-                      ANEXAR COMPROVANTE (LINK)
-                    </Button>
+                      <Upload className="h-12 w-12 text-[#d7d1ca] group-hover:text-black mx-auto mb-4 transition-colors" />
+                      <p className="text-[10px] text-[#6f6a63] font-bold uppercase tracking-widest">Anexar Arquivo Imagem</p>
+                      <input 
+                        type="file" 
+                        className="hidden" 
+                        ref={fileInputRef} 
+                        accept="image/*"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    <div 
+                      onClick={() => setShowLinkInput(true)}
+                      className="cursor-pointer text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa] hover:bg-[#f5f3ef] transition-colors group"
+                    >
+                      <ExternalLink className="h-12 w-12 text-[#d7d1ca] group-hover:text-black mx-auto mb-4 transition-colors" />
+                      <p className="text-[10px] text-[#6f6a63] font-bold uppercase tracking-widest">Anexar via Link</p>
+                    </div>
                   </div>
                 ) : (
                   <div className="p-8 border border-black space-y-4 animate-in fade-in duration-300">
-                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Cole o link da imagem (WhatsApp ou Nuvem)</label>
+                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Cole o link da imagem</label>
                     <div className="flex gap-3">
                       <Input 
                         placeholder="https://..." 
-                        value={receiptInput}
-                        onChange={(e) => setReceiptInput(e.target.value)}
+                        value={linkInput}
+                        onChange={(e) => setLinkInput(e.target.value)}
                         className="rounded-none border-[#d7d1ca] focus-visible:ring-black flex-1 h-12"
                       />
                       <Button 
-                        onClick={handleSaveReceipt}
-                        disabled={isUpdating || !receiptInput.trim()}
+                        onClick={handleSaveLink}
+                        disabled={isUpdating || !linkInput.trim()}
                         className="bg-black hover:bg-accent text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-6"
                       >
                         SALVAR
                       </Button>
                       <Button 
                         variant="ghost"
-                        onClick={() => setShowReceiptInput(false)}
+                        onClick={() => setShowLinkInput(false)}
                         className="rounded-none h-12 px-4"
                       >
                         CANCELAR
                       </Button>
                     </div>
-                    <p className="text-[9px] text-[#6f6a63] italic font-medium">Você pode copiar o "link da imagem" diretamente de uma foto enviada no WhatsApp Web ou de qualquer repositório de imagem.</p>
                   </div>
                 )}
+                <div className="flex items-center gap-3 p-4 bg-amber-50 border border-amber-100">
+                  <AlertCircle className="h-4 w-4 text-amber-600 shrink-0" />
+                  <p className="text-[10px] text-amber-800 font-medium italic">Dica: Se a foto estiver no WhatsApp Web, clique com o botão direito nela, escolha "Copiar link da imagem" e cole aqui no campo de Link.</p>
+                </div>
               </div>
             )}
           </section>
