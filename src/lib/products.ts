@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   slug: string;
@@ -21,7 +20,7 @@ export const PRODUCTS: Product[] = [
     fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor preta. Tecido premium de alta durabilidade e conforto.',
     price: 79.90,
     image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg',
-    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
+    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG'],
     color: 'preta'
   },
   {
@@ -32,7 +31,7 @@ export const PRODUCTS: Product[] = [
     fullDescription: 'Camiseta oficial do Ministério de Comunicação da IAP Barreirinha na cor off-white. Visual clean e elegante.',
     price: 79.90,
     image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/20260307_180559.jpg',
-    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG'],
+    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG'],
     color: 'off-white'
   },
   {
@@ -44,7 +43,7 @@ export const PRODUCTS: Product[] = [
     price: 139.90,
     oldPrice: 159.80,
     image: 'https://ik.imagekit.io/q0yw2qaik/Camiseta%20IAP%20BARREIRINHA/PEDRO%20E%20SARA%20-%20COSTAS%20E%20FRENTE.jpg',
-    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']
+    sizes: ['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG']
   }
 ];
 

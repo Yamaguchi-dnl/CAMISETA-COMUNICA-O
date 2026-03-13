@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Minus, Plus, CreditCard, Smartphone, Info, Copy, QrCode } from 'lucide-react';
+import { Minus, Plus, CreditCard, Smartphone, Info, Copy } from 'lucide-react';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { useFirestore, errorEmitter, FirestorePermissionError } from '@/firebase';
 import { Separator } from '@/components/ui/separator';
@@ -336,7 +336,7 @@ ${itemsList}
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent className="rounded-none border-[#d7d1ca] bg-white">
-                                {['PP', 'P', 'M', 'G', 'GG', 'XGG'].map(size => (
+                                {['PP', 'P', 'M', 'G', 'GG', 'XG', 'XGG'].map(size => (
                                   <SelectItem key={size} value={size}>{size}</SelectItem>
                                 ))}
                               </SelectContent>
