@@ -1,14 +1,13 @@
 'use client';
 
-import { use } from 'react';
+import { use, useState } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, RefreshCw } from 'lucide-react';
+import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck } from 'lucide-react';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
-import { useState } from 'react';
 
 export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -21,6 +20,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleStatusChange = async (newStatus: string) => {
+    if (!order) return;
     setIsUpdating(true);
     try {
       await updateDoc(doc(db, 'orders', id), { status: newStatus });
@@ -32,19 +32,20 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
     }
   };
 
-  if (isLoading) return <div className="p-20 text-center animate-pulse">Carregando detalhes...</div>;
-  if (!order) return <div className="p-20 text-center">Pedido não encontrado.</div>;
+  if (isLoading) return <div className="p-20 text-center animate-pulse text-[#6f6a63] font-bold uppercase tracking-widest">Carregando detalhes...</div>;
+  if (!order) return <div className="p-20 text-center text-[#6f6a63] font-bold uppercase tracking-widest">Pedido não encontrado.</div>;
 
   return (
     <div className="space-y-10">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <Link href="/admin/pedidos" className="flex items-center gap-2 text-[#6f6a63] font-bold text-[10px] uppercase tracking-widest hover:text-black transition-colors">
           <ChevronLeft className="h-4 w-4" /> Voltar para lista
         </Link>
-        <div className="flex gap-4">
+        
+        <div className="flex flex-wrap gap-3">
           <select 
-            className="h-10 border border-[#d7d1ca] rounded-none px-4 text-xs font-bold uppercase tracking-wider bg-white focus:outline-none focus:border-black disabled:opacity-50"
-            defaultValue={order.status}
+            className="h-10 border border-[#d7d1ca] rounded-none px-4 text-[10px] font-bold uppercase tracking-wider bg-white focus:outline-none focus:border-black disabled:opacity-50"
+            value={order.status}
             onChange={(e) => handleStatusChange(e.target.value)}
             disabled={isUpdating}
           >
@@ -83,7 +84,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                       </div>
                       <div className="text-right">
                         <p className="font-headline text-2xl text-black">1 UN</p>
-                        {item.tamanho === 'XGG' && <p className="text-[9px] font-bold text-amber-600 uppercase">+ R$ 3,00</p>}
+                        {item.tamanho === 'XGG' && <p className="text-[9px] font-bold text-accent uppercase tracking-tighter">+ R$ 3,00 (Acréscimo XGG)</p>}
                       </div>
                     </div>
                   ))}
@@ -93,9 +94,9 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
               {order.notes && (
                 <section>
                   <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-4 flex items-center gap-2">
-                    <StickyNote className="h-4 w-4" /> Observações
+                    <StickyNote className="h-4 w-4" /> Observações do Cliente
                   </h3>
-                  <div className="p-6 border border-[#d7d1ca] bg-amber-50/30 text-sm text-[#4f4f4f] italic">
+                  <div className="p-6 border border-[#d7d1ca] bg-[#fdfbf7] text-sm text-[#4f4f4f] italic leading-relaxed">
                     {order.notes}
                   </div>
                 </section>
@@ -105,6 +106,27 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
         </div>
 
         <div className="space-y-8">
+          {/* Ações Rápidas */}
+          <section className="bg-white border border-black p-8">
+            <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-6">Ações Rápidas</h3>
+            <div className="space-y-3">
+              <Button 
+                onClick={() => handleStatusChange('Pago')}
+                disabled={isUpdating || order.status === 'Pago'}
+                className="w-full h-12 bg-green-600 hover:bg-green-700 text-white rounded-none font-bold uppercase tracking-wider text-[10px] flex items-center justify-center gap-2"
+              >
+                <CheckCircle className="h-4 w-4" /> VALIDAR PAGAMENTO
+              </Button>
+              <Button 
+                onClick={() => handleStatusChange('Concluído')}
+                disabled={isUpdating || order.status === 'Concluído'}
+                className="w-full h-12 bg-black hover:bg-accent text-white rounded-none font-bold uppercase tracking-wider text-[10px] flex items-center justify-center gap-2"
+              >
+                <PackageCheck className="h-4 w-4" /> CONFIRMAR ENTREGA
+              </Button>
+            </div>
+          </section>
+
           <section className="bg-white border border-[#d7d1ca] p-8">
             <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-6">Informações do Cliente</h3>
             <div className="space-y-6">
@@ -114,7 +136,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 </div>
                 <div>
                   <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">WhatsApp</p>
-                  <a href={`https://wa.me/${order.customerWhatsapp.replace(/\D/g, '')}`} target="_blank" className="text-sm font-bold text-black hover:text-accent underline underline-offset-4">
+                  <a href={`https://wa.me/${order.customerWhatsapp.replace(/\D/g, '')}`} target="_blank" className="text-sm font-bold text-black hover:text-accent underline underline-offset-4 decoration-[#d7d1ca]">
                     {order.customerWhatsapp}
                   </a>
                 </div>
@@ -124,7 +146,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   <Calendar className="h-4 w-4 text-black" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Data do Pedido</p>
+                  <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Data da Reserva</p>
                   <p className="text-sm font-bold text-black">
                     {new Date(order.createdAt).toLocaleDateString('pt-BR')} às {new Date(order.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                   </p>
@@ -135,7 +157,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   <CreditCard className="h-4 w-4 text-black" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Pagamento</p>
+                  <p className="text-[9px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Forma de Pagamento</p>
                   <p className="text-sm font-bold text-black uppercase tracking-tight">{order.paymentMethod}</p>
                 </div>
               </div>
@@ -146,19 +168,19 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
             <h3 className="text-[10px] font-bold tracking-[0.2em] text-white/50 uppercase mb-8">Resumo Financeiro</h3>
             <div className="space-y-4 mb-8">
               <div className="flex justify-between text-sm text-white/70">
-                <span>Subtotal</span>
+                <span>Subtotal Itens</span>
                 <span>R$ {order.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
               </div>
-              <div className="flex justify-between text-sm text-white/70">
-                <span>Desconto Pix</span>
-                <span className={order.paymentMethod === 'Pix' ? 'text-green-400' : 'text-white/30'}>
-                  {order.paymentMethod === 'Pix' ? '- Aplicado' : 'Não'}
+              <div className="flex justify-between text-[11px] font-bold uppercase tracking-tight">
+                <span className="text-white/40">Status de Pagamento</span>
+                <span className={order.status === 'Pago' || order.status === 'Concluído' ? 'text-green-400' : 'text-amber-400'}>
+                  {order.status === 'Pago' || order.status === 'Concluído' ? 'PAGO' : 'AGUARDANDO'}
                 </span>
               </div>
             </div>
             <div className="border-t border-white/10 pt-6 flex justify-between items-end">
-              <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-white/50 mb-1">Total Final</span>
-              <span className="font-headline text-4xl leading-none">R$ {order.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+              <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-white/50 mb-1">Valor Total</span>
+              <span className="font-headline text-5xl leading-none">R$ {order.totalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
           </section>
         </div>
