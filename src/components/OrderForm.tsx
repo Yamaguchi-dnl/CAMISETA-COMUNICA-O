@@ -212,6 +212,8 @@ ${itemsList}
 
   // View de Confirmação e Pagamento
   if (isSubmitted && orderData) {
+    const isPix = orderData.paymentMethod === 'Pix';
+
     return (
       <div className="max-w-[840px] mx-auto overflow-hidden shadow-2xl bg-white animate-in fade-in slide-in-from-bottom-4 duration-700">
         <div className="bg-[#050505] p-10 lg:p-16 text-white text-center">
@@ -225,7 +227,7 @@ ${itemsList}
         </div>
 
         <div className="p-8 lg:p-16 space-y-12">
-          {orderData.paymentMethod === 'Pix' && (
+          {isPix && (
             <div className="space-y-8">
               <div className="text-center space-y-4">
                 <h3 className="text-[24px] font-bold text-black font-headline uppercase tracking-wide">PAGAMENTO VIA PIX</h3>
@@ -288,10 +290,12 @@ ${itemsList}
               className="w-full h-20 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full font-bold uppercase tracking-[0.2em] text-sm transition-all shadow-xl flex items-center justify-center gap-4 group"
             >
               <MessageCircle className="h-6 w-6 fill-current group-hover:scale-110 transition-transform" />
-              FINALIZAR NO WHATSAPP E ENVIAR COMPROVANTE
+              {isPix ? 'FINALIZAR NO WHATSAPP E ENVIAR COMPROVANTE' : 'CONTINUAR PARA PAGAMENTO PELO WHATSAPP'}
             </Button>
             <p className="text-[11px] text-[#6f6a63] text-center italic font-medium">
-              Sua reserva foi salva. Clique no botão acima para nos enviar os detalhes e o comprovante.
+              {isPix 
+                ? 'Sua reserva foi salva. Clique no botão acima para nos enviar os detalhes e o comprovante.' 
+                : 'Sua reserva foi salva. Clique no botão acima para combinar o pagamento via cartão no WhatsApp.'}
             </p>
           </div>
         </div>
