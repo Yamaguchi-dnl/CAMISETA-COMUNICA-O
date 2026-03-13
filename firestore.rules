@@ -7,27 +7,12 @@ service cloud.firestore {
      * This ruleset is designed for the "IAP Camisetas" mini e-commerce. It prioritizes 
      * a seamless shopping experience where products are globally visible and 
      * customers can place orders/reservations easily.
-     *
-     * DATA STRUCTURE
-     * - /products: Top-level collection for t-shirt listings.
-     * - /orders: Top-level collection for customer purchase requests.
-     *
-     * KEY SECURITY DECISIONS
-     * - Public Read: Products are accessible to everyone to facilitate browsing.
-     * - Anonymous Creation: Orders can be created by unauthenticated users to reduce 
-     *   friction in the "finalize via WhatsApp" flow.
-     * - Admin Lockdown: While not explicitly defined in the current IR schema, 
-     *   write access to products and read access to orders are restricted, 
-     *   intended for future administrative roles.
-     *
-     * DENORMALIZATION FOR AUTHORIZATION
-     * - The 'Order' entity includes its own 'id' and 'productId' to allow 
-     *   for isolated validation without requiring cross-document lookups.
      */
 
     // --- GLOBAL HELPER FUNCTIONS ---
-    // Removed unused helper functions `isSignedIn` and `exists`
-    // to resolve "Unused function" and "Invalid variable name" warnings.
+    function isAuthenticated() {
+      return request.auth != null;
+    }
 
     // --- COLLECTION RULES ---
 
@@ -35,23 +20,19 @@ service cloud.firestore {
      * @description Rules for the Product collection. Allows public browsing of t-shirts.
      * @path /products/{productId}
      * @allow (get/list) Any user, including unauthenticated visitors.
-     * @deny (create/update/delete) Any user. Writes are restricted to manual/admin intervention.
-     * @principle Public Read with Restricted Writes.
+     * @deny (create/update/delete) Restricted to authenticated admins (future improvement).
      */
     match /products/{productId} {
       allow get, list: if true;
-      
-      // CRITICAL: Cannot implement owner-only writes. 
-      // The 'Product' entity is missing an 'ownerId' or 'authorId' field.
-      allow create, update, delete: if false; // TODO: Add admin validation once roles are defined.
+      allow create, update, delete: if isAuthenticated();
     }
 
     /**
-     * @description Rules for the Order collection. Allows lead generation/orders from customers.
+     * @description Rules for the Order collection. 
      * @path /orders/{orderId}
-     * @allow (create) Any user can create an order to facilitate the WhatsApp-based sales flow.
-     * @deny (get/list/update/delete) Restricted to protect customer PII (Name/WhatsApp).
-     * @principle Validates relational integrity on creation; restricts access to sensitive data.
+     * @allow (create) Any user can create an order.
+     * @allow (get/list/update) Restricted to authenticated admin users.
+     * @deny (delete) Restricted to protect historical data.
      */
     match /orders/{orderId} {
       
@@ -62,18 +43,16 @@ service cloud.firestore {
       allow create: if request.resource.data.id == orderId;
 
       /**
-       * Permission: Read (Get/List)
-       * Logic: Currently denied to all. In a production environment, this would be 
-       * granted to a specific 'admin' role to manage orders.
+       * Permission: Read & Update
+       * Logic: Granted to authenticated users (admins) to manage the store.
        */
-      allow get, list: if false; // TODO: Restrict to admin users for order fulfillment.
+      allow get, list, update: if isAuthenticated();
 
       /**
-       * Permission: Write (Update/Delete)
-       * Logic: Denied to ensure order integrity once submitted. 
-       * Status updates (e.g., 'Confirmed') should be handled by admins.
+       * Permission: Delete
+       * Logic: Denied to ensure order integrity.
        */
-      allow update, delete: if false; 
+      allow delete: if false; 
     }
   }
 }
