@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "Product": {
@@ -108,6 +109,10 @@
         "status": {
           "type": "string",
           "description": "The current processing status of the order (e.g., 'Pending WhatsApp', 'Confirmed', 'Cancelled')."
+        },
+        "receiptUrl": {
+          "type": "string",
+          "description": "Optional URL to the payment receipt attached by the administrator."
         }
       },
       "required": [

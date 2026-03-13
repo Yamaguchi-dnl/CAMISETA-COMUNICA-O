@@ -1,11 +1,13 @@
+
 'use client';
 
 import { use, useState } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck } from 'lucide-react';
+import { ChevronLeft, User, Phone, Package, Calendar, CreditCard, StickyNote, CheckCircle, Truck, PackageCheck, FileText, Link as LinkIcon, ExternalLink, X } from 'lucide-react';
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 
@@ -18,6 +20,8 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
   const { data: order, isLoading } = useDoc(orderRef);
   
   const [isUpdating, setIsUpdating] = useState(false);
+  const [receiptInput, setReceiptInput] = useState('');
+  const [showReceiptInput, setShowReceiptInput] = useState(false);
 
   const handleStatusChange = async (newStatus: string) => {
     if (!order) return;
@@ -27,6 +31,34 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
       toast({ title: "Status Atualizado", description: `Pedido marcado como ${newStatus}.` });
     } catch (error) {
       toast({ variant: "destructive", title: "Erro ao atualizar", description: "Tente novamente." });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleSaveReceipt = async () => {
+    if (!order || !receiptInput.trim()) return;
+    setIsUpdating(true);
+    try {
+      await updateDoc(doc(db, 'orders', id), { receiptUrl: receiptInput.trim() });
+      toast({ title: "Comprovante Salvo", description: "O link do comprovante foi anexado ao pedido." });
+      setShowReceiptInput(false);
+      setReceiptInput('');
+    } catch (error) {
+      toast({ variant: "destructive", title: "Erro ao salvar", description: "Tente novamente." });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleRemoveReceipt = async () => {
+    if (!order) return;
+    setIsUpdating(true);
+    try {
+      await updateDoc(doc(db, 'orders', id), { receiptUrl: null });
+      toast({ title: "Comprovante Removido", description: "O anexo foi removido do pedido." });
+    } catch (error) {
+      toast({ variant: "destructive", title: "Erro ao remover", description: "Tente novamente." });
     } finally {
       setIsUpdating(false);
     }
@@ -103,6 +135,106 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
               )}
             </div>
           </div>
+
+          {/* Seção de Comprovante */}
+          <section className="bg-white border border-[#d7d1ca] p-8 lg:p-12">
+            <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#111111] uppercase mb-8 flex items-center gap-2">
+              <FileText className="h-4 w-4" /> Comprovante de Pagamento
+            </h3>
+
+            {order.receiptUrl ? (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between p-6 bg-[#f5f3ef] border border-[#d7d1ca]">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-white flex items-center justify-center border border-[#d7d1ca]">
+                      <LinkIcon className="h-5 w-5 text-black" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-wider mb-1">Link do Anexo</p>
+                      <a 
+                        href={order.receiptUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm font-bold text-black hover:text-accent underline underline-offset-4 decoration-[#d7d1ca] truncate block max-w-md"
+                      >
+                        {order.receiptUrl}
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      asChild
+                      className="bg-black hover:bg-accent text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-10 px-4"
+                    >
+                      <a href={order.receiptUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4" /> ABRIR
+                      </a>
+                    </Button>
+                    <Button 
+                      variant="ghost"
+                      onClick={handleRemoveReceipt}
+                      disabled={isUpdating}
+                      className="text-red-600 hover:bg-red-50 rounded-none h-10 w-10 p-0"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                
+                {/* Preview simples se for imagem comum */}
+                {(order.receiptUrl.match(/\.(jpeg|jpg|gif|png)$/) != null || order.receiptUrl.includes('imagekit.io')) && (
+                   <div className="relative aspect-video w-full max-w-2xl border border-[#d7d1ca] overflow-hidden bg-[#fafafa]">
+                      <img 
+                        src={order.receiptUrl} 
+                        alt="Comprovante" 
+                        className="w-full h-full object-contain"
+                      />
+                   </div>
+                )}
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {!showReceiptInput ? (
+                  <div className="text-center p-12 border-2 border-dashed border-[#d7d1ca] bg-[#fafafa]">
+                    <p className="text-xs text-[#6f6a63] mb-6 font-medium uppercase tracking-widest">Nenhum comprovante anexado</p>
+                    <Button 
+                      onClick={() => setShowReceiptInput(true)}
+                      className="bg-white border border-black text-black hover:bg-black hover:text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-8"
+                    >
+                      ANEXAR LINK DO COMPROVANTE
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="p-8 border border-black space-y-4 animate-in fade-in duration-300">
+                    <label className="text-[10px] font-bold text-[#6f6a63] uppercase tracking-widest block">Insira o Link (WhatsApp, Drive, etc)</label>
+                    <div className="flex gap-3">
+                      <Input 
+                        placeholder="https://..." 
+                        value={receiptInput}
+                        onChange={(e) => setReceiptInput(e.target.value)}
+                        className="rounded-none border-[#d7d1ca] focus-visible:ring-black flex-1 h-12"
+                      />
+                      <Button 
+                        onClick={handleSaveReceipt}
+                        disabled={isUpdating || !receiptInput.trim()}
+                        className="bg-black hover:bg-accent text-white rounded-none font-bold uppercase tracking-wider text-[10px] h-12 px-6"
+                      >
+                        SALVAR
+                      </Button>
+                      <Button 
+                        variant="ghost"
+                        onClick={() => setShowReceiptInput(false)}
+                        className="rounded-none h-12 px-4"
+                      >
+                        CANCELAR
+                      </Button>
+                    </div>
+                    <p className="text-[9px] text-[#6f6a63] italic font-medium">Você pode colar o link direto da imagem do WhatsApp ou de um repositório cloud.</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
         </div>
 
         <div className="space-y-8">
